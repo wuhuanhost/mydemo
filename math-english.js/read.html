@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1 user-scalable=0" />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="ajax.js"></script>
+<script type="text/javascript" src="jquery.json-2.4.js"></script>
+
+
+  <link rel="alternate icon" type="image/png" href="http://a.static.amazeui.org/assets/2.x/i/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" href="http://a.static.amazeui.org/assets/2.x/i/app-icon72x72@2x.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amazeui.min.css?v=i5hjvvbk" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amaze.min.css?v=i5hjvvbk" />
+  <link rel="canonical" href="http://amazeui.org/widgets/header/default/0?_ver=2.x" />
+  <script src="http://a.static.amazeui.org/assets/2.x/js/handlebars.min.js?v=i5hjvvbk"></script>
+  <script src="http://a.static.amazeui.org/assets/2.x/js/amazeui.min.js?v=i5hjvvbk"></script>
+
+
+
+
+<style type="text/css">
+html,body {
+	margin: 0px;
+	padding: 0px;
+}
+
+a,li {
+	cursor: pointer;
+}
+
+
+
+#bottomDiv {
+	position: fixed;
+	z-index: 100000;
+	bottom: 45px;
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #dd514c;
+}
+</style>
+
+
+<link type="text/css" rel="stylesheet" href="lrc.css" />
+<script type="text/javascript" src="lrc.js"></script>
+
+
+</head>
+
+<body>
+  <div class="page pg-demo" id="header">
+   <div id="demo-view" >
+    <header  class="am-header am-header-default">
+     <div class="am-header-left am-header-nav">
+      <a class="" id="home" href="englishList.html"><i class="am-header-icon am-icon-chevron-left"></i></a>
+     </div>
+     <h1 class="am-header-title"><a href="#title-link" id="title"></a></h1>
+     <div class="am-header-right am-header-nav">
+      <a href="#right-link" class="" data-am-modal="{target: '#my-actions'}"></i></a>
+     </div>
+    </header>
+   </div>
+
+
+	<audio id="id1407853633923">你的浏览器不支持audio
+	</audio>
+<!--
+
+<script type="text/javascript" src="http://blogparts.giffy.me/0013/parts.js"></script>
+
+	<div id="bottomDiv">
+		<a id="loop" class="am-icon-list-ol"></a> 
+		<a id="last" class="am-icon-backward"></a> 
+		<a id="play" class="am-icon-play"></a> 
+		<a id="next" class="am-icon-forward"></a>
+		<a id="stop" class="am-icon-pause">dsd</a> 
+		<p>
+			音频长度：<span id="lengthMusic">daddsada</span>
+		</p>
+	</div>
+-->
+<div id="bottomDiv">点击文本进行点读</div>
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+id="">
+  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+    <li>
+      <a  id="loop">
+        <span   class="am-icon-list-ol"></span>
+      </a>
+    </li>
+    <li id="last">
+      <a  class="">
+        <span  class="am-icon-backward"></span>
+       
+      </a>
+    </li>
+    <li id="play">
+      <a  class="">
+        <span  class="am-icon-play"></span>
+      
+      </a>
+    </li>
+
+    <li>
+      <a  id="next">
+        <span  class="am-icon-forward"></span>
+      
+      </a>
+    </li>
+
+    <li>
+      <a  id="stop">
+        <span class="am-icon-pause"></span>
+      
+      </a>
+    </li>
+  </ul>
+</div>
+
+	<div class="lrc_box">
+		<ul id="id1407853633923lrc" class="lrc">
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+
+
+		$(document).ready(function() {
+
+			var audio = $("#id1407853633923")[0];//jquery对象要转换为Dom对象，因为jquery对象没有play()方法
+
+			var list = [ '1.mp3' ,'2.mp3','3.mp3','4.mp3'];//系统后台返回的播放列表
+
+			var listTxt = [ '1.txt' ,'2.txt','3.txt','4.txt'];//歌词列表
+
+			var currentMusic = 0;//当前播放的音乐序号，默认为列表的第一首歌曲
+
+            var url=window.location.href;
+
+            var index=url.substr(url.indexOf("?")+1,url.length);//获取歌曲序号
+
+			audio.src="/demo/mp3/"+list[index];
+			
+			//上一曲
+			$("#last").click(function() {
+				// currentMusic = currentMusic - 1;
+				// audio.src = list[currentMusic];
+				if(index==0){
+					index=1;
+				}
+					window.location.href="/demo/read.html?"+(parseInt(index)-1)+"";
+				playMusic();
+
+				//alert(audio.duration);
+
+			});
+
+			//下一曲
+			$("#next").click(function() {
+				// currentMusic = currentMusic + 1;
+				// audio.src = list[currentMusic];
+				if(index==3){
+					index=2;
+				}
+				window.location.href="/demo/read.html?"+(parseInt(index)+1)+"";
+				playMusic();
+
+			});
+
+			//播放音乐
+			$("#play").click(function() {
+
+				playMusic();
+
+				//alert(audio.currentTime)
+
+		
+
+			});
+
+			//暂停播放
+			$("#stop").click(function() {
+
+				audio.pause();
+
+			});
+
+			//单曲循环
+			$("#loop").click(function() {
+
+				window.location.href="/demo/englishList.html";
+
+			});
+
+			//重新加载歌曲并且播放
+			function playMusic() {
+				audio.load();
+				audio.play();
+
+			}
+
+			$("#lengthMusic").click(function() {
+
+				$("#lengthMusic").text(audio.duration);
+
+			});
+
+
+
+
+			playMusic();
+
+
+              
+            $("body").removeClass("am-with-fixed-navbar");
+
+
+
+			var id1407853633923 = load_lrc('id1407853633923');
+							
+			     $.get("/demo/lrc/"+listTxt[index],function(data){
+
+			     	var obj=$.evalJSON(data);
+
+			          	for(var i=0;i<obj.data.length;i++){
+							
+							var time=obj.data[i].time;
+							var content=obj.data[i].content;
+							
+									id1407853633923.add_lrc(time,content);
+
+
+                            if(i==0){
+
+                            	$("#title").html("正在播放"+obj.data[i].content);
+
+                            }
+
+							
+							}
+
+						id1407853633923.init();
+			     });
+
+
+
+
+
+
+
+
+
+		});
+
+
+        
+
+	
+	
+
+		
+		
+		
+		
+		
+
+		
+	</script>
+
+</body>
+</html>
+

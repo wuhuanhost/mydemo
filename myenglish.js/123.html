@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="js/libraries/jquery-1.11.2.min.js"></script>
+		<style type="text/css">
+			input,
+			button,
+			select,
+			textarea {
+				outline: none;
+			}
+			.trueorfalse {
+				outline: none;
+				border: 1px solid #21bbff;
+				width: 660px;
+				font-family: 'lucida grande', 'lucida sans unicode', lucida, helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
+				;
+			}
+			.trueorfalse span {
+				display: block;
+			}
+			.trueorfalse .index {
+				line-height: 60px;
+				height: 60px;
+				padding-left: 2em;
+			}
+			.write {
+				line-height: 30px;
+				width: 60px;
+				height: 30px;
+				border-bottom: 1px solid #999999;
+				border-left: 1px solid #FFFFFF;
+				border-right: 1px solid #FFFFFF;
+				border-top: 1px solid #FFFFFF;
+				text-align: center;
+				display: block;
+				float: left;
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class='trueorfalse'>
+			<span class='index'>
+				<input type="text" class='write'/><label for="">dddddddddddddddd</label>
+			</span> <span class='index'>
+				<input type="text" class='write'/><label for="">dddddddddddddddd</label>
+			</span>
+		</div>
+	</body>
+
+	<!--<br />
+	<p style='width:100%;background-color:red;'>
+		<img src="img/1-1.jpg" style='display:block;margin:0 auto;' />
+		<img src="img/1-1.jpg" style='display:block;margin:0 auto;' />
+		<img src="img/1-1.jpg" style='display:block;margin:0 auto;' />
+	</p>-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#abc").click(function() {
+				$("#abc").addClass("afterInput");
+				$("#abc").removeClass("beforeInput");
+				$("#abc").removeAttr("readonly");
+				$("#abc").onfocus;
+			});
+		});
+	</script>
+
+</html>

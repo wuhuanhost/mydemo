@@ -1,0 +1,66 @@
+
+#kewens{
+	width:720px;
+	font-size:14px;
+
+}
+
+.kewen{
+	
+	line-height:30px;
+
+}
+
+.kewen img {
+	cursor: pointer;
+	margin-bottom:-5px;
+}
+.kewen span {
+	height: 20px;
+	line-height: 20px;
+}
+.describe-style {
+	color: #EEEEEE;
+	font-family: "楷体";
+	cursor:pointer;
+}
+.describe-style:hover{
+	border:1px solid #F05183;
+	
+}
+
+.kewen-style {
+	font-family: "楷体";
+}
+#duoluojiexi {
+	font-family: "楷体";
+	background: #FCD7DA;
+	min-height: 60px;
+	border-radius: 5px;
+	margin-top: 10px;
+	line-height: 20px;
+}
+#duoluojiexi img {
+	height: 20px;
+	line-height: 20px;
+	margin-top: 5px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+#duoluojiexi label {
+	display: none;
+}
+#suitangdianping {
+	background-color: #75C3DF;
+	min-height: 60px;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-family: "楷体";
+	line-height: 20px;
+}
+#remark {
+	margin-top: 10px;
+	color: green;
+	font-family: "楷体";
+	line-height: 20px;
+}

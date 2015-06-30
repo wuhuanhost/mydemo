@@ -1,0 +1,94 @@
+html {
+	font-size: 14px;
+}
+a {
+	cursor: pointer;
+}
+.block {
+	margin: 0 auto;
+	width: 100%;
+	border-bottom: 1px solid #e2e0e0;
+	border-left: 1px solid #e2e0e0;
+	border-right: 1px solid #e2e0e0;
+	border-top: 1px solid #e2e0e0;
+	
+}
+
+
+.block:hover{
+	
+	border-bottom: 1px solid #0095D9;
+	border-left: 1px solid #0095D9;
+	border-right: 1px solid #0095D9;
+	border-top: 1px solid #0095D9;
+	
+}
+
+
+.block .title {
+	height: 30px;
+	background-color: #0095D9;
+	line-height: 30px;
+	padding-left: 10px;
+	color: #F5F5F5;
+}
+.block .describe {
+	padding-left: 10px;
+}
+.block .describe span {
+	text-indent: 2em;
+	display: block;
+	line-height: 20px;
+	letter-spacing: 1px;
+}
+.block .content {
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.block .answer {
+	padding-left: 30px;
+}
+.block .answer span {
+	display: block;
+	line-height: 30px;
+}
+.block .action {
+	padding-left: 30px;
+	background-color: #e2e0e0;
+	height: 36px;
+	line-height: 36px;
+	color: #f05183;
+}
+.action button {
+	background-color: #0095D9;
+	border-top: 0px solid #0095D9;
+	border-bottom: 0px solid #0095D9;
+	border-left: 0px solid #0095D9;
+	border-right: 0px solid #0095D9;
+	color: #FFFFFF;
+	height:22px;
+	line-height: 22px;
+}
+
+
+
+.block .action123 {
+	padding-left: 22px;
+	bottom: 0px;
+	display: none;
+	padding-right: 22px;
+}
+.action123 span {
+	display: block;
+	line-height: 22px;
+}
+.labelClass {
+	color: green;
+	font-weight: bold;
+}
+/**去掉按钮默认的边框**/
+:focus{
+    outline: 0;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>demo</title>
+		<link href="image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+		<link rel="stylesheet" type="text/css" href="css/Normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/choice-style.css" />
+		<link rel="stylesheet" type="text/css" href="css/dtree.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/drawChoice.js"></script>
+		<script type="text/javascript" src="js/dtree.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#hide").click(function() {
+					$("#nav").css("margin-left", "-30%");
+					$("#contents").css("width", "100%");
+					$("#contents").css("margin-left", "-30px");
+					$("#show").show();
+					$("#hide").hide();
+					$("#content").css("width", "70%");
+					$("#content").css("margin-left", "-60%");
+				});
+				$("#show").click(function() {
+					$("#nav").css("margin-left", "0px");
+					$("#contents").css("width", "70%");
+					$("#contents").css("margin-left", "0px");
+					$("#show").hide();
+					$("#hide").show();
+					$("#content").css("width", "100%");
+					$("#content").css("margin-left", "-50%");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<div id="nav">
+			<span id="hide">隐藏目录</span>
+			<div class="dtree">
+
+				<p><a href="javascript: d.openAll();">展开全部</a> | <a href="javascript: d.closeAll();">关闭全部</a>
+				</p>
+
+				<script type="text/javascript">
+					 <!--
+					d = new dTree('d');
+					d.add(0, -1, '第-单元人类文明的开端');
+					d.add(1, 0, '课堂导学.自学提示', '#one');
+					d.add(2, 0, '典型精析.合作探究', '#two');
+					d.add(3, 0, '课后达标.基础训练', '#three');
+					d.add(4, 0, '中考链接.真题在线', '#four');
+					document.write(d);
+					 //-->
+				</script>
+
+			</div>
+		</div>
+		<div id="contents">
+			<div id="content">
+				<div id="title"><span class="unit">第-单元	人类文明的开端</span>
+				</div>
+				<div id="page">
+
+					<div id="contentss">
+
+						<h2>dsd</h2>
+						<h3 id="one"><img src="img/one.png" width="220px"/></h3>
+						<p>1.目前，大部分人类学家认为，现代人类可能是从 <u class="placeholder1-1"><img src="http://latex.codecogs.com/gif.latex?P(x|c)=\frac{P(c|x)\cdot P(x)}{P(x)}" /></u> <span class="placeholder1">________</span>南方古猿中的一支发展而来的。南方古猿属于 <u class="placeholder1-1">" 正在形成中的人 "</u><span class="placeholder1">________</span>。人类在距今约 <u class="placeholder1-1">三四百万 </u>
+							<span class="placeholder1">________</span>年前形成，人 与 动 物 的 本 质 区 别 是<u class="placeholder1-1"> 会 不 会 制 造 工具</u><span class="placeholder1">________</span>。
+							<button onclick="show(1,this)">显示答案</button>
+						</p>
+
+					</div>
+					<div style="width:90%;margin: 0 auto;">
+
+						<h3 id="four"><img src="img/four.png" width="220px"/></h3>
+
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+					<span id="show">显示目录</span>
+					<a href="#content"><span id="top">返回顶部</span></a>
+
+				</div>
+				<script type="text/javascript">
+					$("#contentss").append("<h3 id='two'><img src='img/two.png' width='220px'/></h3>");
+					var data = {
+						'title': '知识点一:人类的出现',
+						'content': '例1 下列说法错误的是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.人类形成于距今约三四百万年前'
+						}, {
+							'opt': 'B.南方古猿是世界上最早的人类'
+						}, {
+							'opt': 'C.由于自然地理环境的不同，人种的差异显现了出来'
+						}, {
+							'opt': 'D.直立行走是人类进化史上具有决定意义的一步'
+						}],
+						'answer': 'B',
+						'expositiom': '实际上，南方古猿还属于"正在形成中的人"， 还不能算作真正意义上的人类。它经过浸长的发展阶 段，发展到"完全形成的人"的时候，人类才最终与猿类 分道汤锅，人类才真正形成。所以 B 选项的说法是错 误的。',
+						'index': '123'
+					};
+					new drawChoice.gen(data, "contentss");
+
+					function callback(index, dom) {
+						if ($(dom).html() == "显示答案与解析") {
+							$(dom).html("隐藏答案与解析");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							$(dom).html("显示答案与解析");
+							dom.style.backgroundColor = '#0095D9';
+						}
+						$("#" + index).toggle();
+					}
+
+					function show(num, dom) {
+						if ($(dom).html() == "显示答案") {
+							$(".placeholder" + num).hide();
+							$(".placeholder" + num + "-" + num).show();
+							$(dom).html("隐藏答案");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							$(".placeholder" + num).show();
+							$(".placeholder" + num + "-" + num).hide();
+							$(dom).html("显示答案");
+							dom.style.backgroundColor = '#0095D9';
+						}
+					}
+
+					function showAnswer(id, dom) {
+						if ($(dom).html() == "显示答案") {
+							$(dom).html("隐藏答案");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							dom.style.backgroundColor = '#0095D9';
+							$(dom).html("显示答案");
+						}
+						$("#" + id).toggle();
+						$("#" + id + "-1").toggle();
+					}
+				</script>
+	</body>

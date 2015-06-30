@@ -1,0 +1,17 @@
+{
+  "name": "语文Demo",
+  "description": "语文Demo",
+  "version": "0.1",
+  "main": "chinese.html",
+  "window": {
+	"title": "语文demo",
+    "toolbar": false,
+    "width": 1920,
+    "height": 1080,
+    "min_width":1366,
+    "min_height":768,
+    "frame":true
+  },"webkit": {
+    "plugin": true
+  }
+}

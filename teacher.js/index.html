@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>demo</title>
+		<link href="image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+		<link rel="stylesheet" type="text/css" href="css/Normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/choice-style.css" />
+		<link rel="stylesheet" type="text/css" href="css/dtree.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/drawChoice.js"></script>
+		<script type="text/javascript" src="js/dtree.js">
+		</script>
+		<style type="text/css">
+			
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#hide").click(function() {
+					$("#nav").css("margin-left", "-30%");
+					$("#contents").css("width", "100%");
+					$("#contents").css("margin-left", "-30px");
+					$("#show").show();
+					$("#hide").hide();
+					$("#content").css("width", "70%");
+					$("#content").css("margin-left", "-60%");
+				});
+				$("#show").click(function() {
+					$("#nav").css("margin-left", "0px");
+					$("#contents").css("width", "70%");
+					$("#contents").css("margin-left", "0px");
+					$("#show").hide();
+					$("#hide").show();
+					$("#content").css("width", "100%");
+					$("#content").css("margin-left", "-50%");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<div id="nav">
+			<span id="hide">隐藏目录</span>
+			<div class="dtree">
+
+				<p><a href="javascript: d.openAll();">展开全部</a> | <a href="javascript: d.closeAll();">关闭全部</a>
+				</p>
+
+				<script type="text/javascript">
+					 <!--
+					d = new dTree('d');
+					d.add(0, -1, '第-单元人类文明的开端');
+					d.add(1, 0, '课堂导学.自学提示', '#one');
+					d.add(2, 0, '典型精析.合作探究', '#two');
+					d.add(3, 0, '课后达标.基础训练', '#three');
+					d.add(4, 0, '中考链接.真题在线', '#four');
+					document.write(d);
+					 //-->
+				</script>
+
+			</div>
+		</div>
+		<div id="contents">
+			<div id="content">
+				<div id="title"><span class="unit">第-单元	人类文明的开端</span>
+				</div>
+				<div id="page">
+
+					<div id="contentss">
+
+						<h2>第1课	人类的形成</h2>
+						<h3 id="one"><img src="img/one.png" width="220px"/></h3>
+						<p>1.目前，大部分人类学家认为，现代人类可能是从 <u class="placeholder1-1">非洲</u> <span class="placeholder1">________</span>南方古猿中的一支发展而来的。南方古猿属于 <u class="placeholder1-1">" 正在形成中的人 "</u><span class="placeholder1">________</span>。人类在距今约 <u class="placeholder1-1">三四百万 </u>
+							<span class="placeholder1">________</span>年前形成，人 与 动 物 的 本 质 区 别 是<u class="placeholder1-1"> 会 不 会 制 造 工具</u><span class="placeholder1">________</span>。
+							<button onclick="show(1,this)">显示答案</button>
+						</p>
+
+						<p>2.世界上的人类分为三大主要人种，即我们通常所说 的 <u class="placeholder2-2">黄种</u><span class="placeholder2">________</span> 人、 <u class="placeholder2-2">白种</u><span class="placeholder2">________</span> 人和 <u class="placeholder2-2">黑种</u><span class="placeholder2">________</span>							人。人种的 差异是不同
+							<u class="placeholder2-2">自然地理环境</u><span class="placeholder2">________</span> 等众多因素长期影响 的结果。
+							<button onclick="show(2,this)">显示答案</button>
+						</p>
+
+						<p>3.人类最初经历的社会是 <u class="placeholder3-3">原 始 社 会</u> <span class="placeholder3">________</span>。随着<u class="placeholder3-3"> 生 产 力</u><span class="placeholder3">________</span> 的发展和社会的进步，出现了氏族，两个或几个 氏族又组成 <u class="placeholder3-3">部落</u><span class="placeholder3">________</span>							。
+							<button onclick="show(3,this)">显示答案</button>
+						</p>
+
+						<p>4.在 <u class="placeholder4-4">母 系 </u><span class="placeholder4">________</span>氏 族 社 会 里，由 于 群 婚 的 缘 故，人 们 <u class="placeholder4-4">" 只知其母，不知其父 "</u><span class="placeholder4">________</span>。 妇 女 在 <u class="placeholder4-4">采 集</u><span class="placeholder4">________</span>和
+							<u class="placeholder4-4">家务劳动</u><span class="placeholder4">________</span> 中举足轻重，在社会中占主导地位。
+							<button onclick="show(4,this)">显示答案</button>
+						</p>
+
+						<p>5.在 <u class="placeholder5-5">父系</u><span class="placeholder5">________</span> 氏族社会里，男子在 <u class="placeholder5-5">经济</u><span class="placeholder5">________</span> 中占主导地位， 婚姻关系相对 <u class="placeholder5-5">固定</u><span class="placeholder5">________</span>							，人们开始"既知其母，又知其所以然"。
+							<button onclick="show(5,this)">显示答案</button>
+						</p>
+
+					</div>
+					<div style="width:90%;margin: 0 auto;">
+
+						<h3 id="four"><img src="img/four.png" width="220px"/></h3>
+
+						<p class="title"> 13.看下图回答问题。</p>
+						<img src="img/1-1.png" alt="" width="200px" height="100px" />
+						<p class="title">从左到右分别指出图中的人种分类，并说明影响人 种形成的主要因素是什么。
+							<button onclick="showAnswer(15,this)">显示答案</button>
+						</p>
+						<p class="answers" id="15">答:图1是黄种人，图2是黑种人，图3是白种人。 主要因素是长期生活在不同的自然地理环境中。</p>
+
+						<p class="title">14.诗歌《我骄傲，我是中国人》这样写道 "我骄傲，我是 中国人，我有着宝石般黑色的眼睛;我骄傲，我是中国人，我有着大地般黄色的皮肤……"请回答</p>
+						<p class="title">(1)"黑色的眼睛……黄色的皮肤"说明中国人是什 么人种?
+							<button onclick="showAnswer(16,this)">显示答案</button>
+						</p>
+						<p class="answers" id="16">答:黄种人。</p>
+						<p class="title">(2)目前世界上有几大主要人种? 人种的差异是在 什么时候形成的? 人种的差异产生的主要原因 是什么?
+							<button onclick="showAnswer(17,this)">显示答案</button>
+						</p>
+						<p class="answers" id="17">答:主要有黄种人、白种人和黑种人三大人种;晚期 智人;不同自然地理环境等众多因素长期影响 的结果。</p>
+						<p class="title">(3)你是否觉得染成像欧洲人那样的金黄色头发是 一道很美的风景? 你认为白种人是天生的优等 种族吗? 为什么?
+							<button onclick="showAnswer(18,this)">显示答案</button>
+						</p>
+						<p class="answers" id="18">答:对染友看法并不强求一致，言之有理即可;不认 为，因为人种主要存在外貌特征的差异，各人种 在体质和智力上并无优劣之分。</p>
+
+						<p class="title">15.阅读下列材料，回答问题。</p>
+						<p>材料一 观察下图《早期人类的生产活动》</p>
+						<img src="img/1-2.png" alt="" width="200px" height="100px" />
+						<p>材料二 为增加劳动人手，生产更多的剩余产品，</p>
+						<p class="title">人们不再杀死战俘而是把他们变为奴隶。 (1)材料一反映的是人类社会哪一历史时期?
+							<button onclick="showAnswer(19,this)">显示答案</button>
+						</p>
+						<p class="answers" id="19">答:原始社会早期。</p>
+
+						<p class="title">(2)从材料一到材料二反映了什么问题?
+							<button onclick="showAnswer(20,this)">显示答案</button>
+						</p>
+						<p class="answers" id="20">答:反映社会生产力水平提高了。</p>
+
+						<p class="title">(3)材料二反映的是人 类 社 会 发 展 的 哪 一 历 史 时 期? 人们为什么不再杀死战俘? 它会有什么积 极作用?
+							<button onclick="showAnswer(21,this)">显示答案</button>
+						</p>
+						<p class="answers" id="21">答:父系氏族后期;为了增加劳动人手;保存了劳动 力，有利于社会生产的友展。</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+					<span id="show">显示目录</span>
+					<a href="#content"><span id="top">返回顶部</span></a>
+
+				</div>
+				<script type="text/javascript">
+					$("#contentss").append("<h3 id='two'><img src='img/two.png' width='220px'/></h3>");
+					var data = {
+						'title': '知识点一:人类的出现',
+						'content': '例1 下列说法错误的是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.人类形成于距今约三四百万年前'
+						}, {
+							'opt': 'B.南方古猿是世界上最早的人类'
+						}, {
+							'opt': 'C.由于自然地理环境的不同，人种的差异显现了出来'
+						}, {
+							'opt': 'D.直立行走是人类进化史上具有决定意义的一步'
+						}],
+						'answer': 'B',
+						'expositiom': '实际上，南方古猿还属于"正在形成中的人"， 还不能算作真正意义上的人类。它经过浸长的发展阶 段，发展到"完全形成的人"的时候，人类才最终与猿类 分道汤锅，人类才真正形成。所以 B 选项的说法是错 误的。',
+						'index': '123'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '知识点二:氏族公社',
+						'content': '例2 促使原始社会由母系氏族社会向系氏族社会过渡的根本原因是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.妇女在氏族中地位的变化'
+						}, {
+							'opt': 'B.生产力水平的提高'
+						}, {
+							'opt': 'C.婚姻关系的变革'
+						}, {
+							'opt': 'D.男子在氏族中地位的提高'
+						}],
+						'answer': 'B',
+						'expositiom': '本题的四个选项看起来好像都有道理，但 A c、D 三个选项都是母系氏族社会向父系氏族社会过渡过程中的表面现象，而所有这一切变化的根本原因都 是生产力水平的提高。经济基础决定上层建筑，生产 力决定生产关系，人类社会的发展都是以生产力水平 的提高为基础的。所以只有B项才是母系氏族社会向 父系氏族社会过渡的根本原因',
+						'index': '456'
+					};
+					new drawChoice.gen(data, "contentss");
+					$("#contentss").append("<h3 id='three'><img src='img/three.png' width='220px'/></h3>");
+					var data = {
+						'title': '',
+						'content': '1.人类的起源是一个谜，现代人类学家一般认为人类的始祖是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.南方古猿'
+						}, {
+							'opt': 'B.亚当'
+						}, {
+							'opt': 'C.亚洲元谋人'
+						}, {
+							'opt': 'D.非洲腊玛古猿'
+						}],
+						'answer': 'A',
+						'expositiom': '',
+						'index': '789'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '2.古猿是人类与黑猩猩、大猩猩共同的远祖。那么人类与猿类分道扬镇距今约多少年 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.二三百万年'
+						}, {
+							'opt': 'B.三四百万年'
+						}, {
+							'opt': 'C.四五百万年'
+						}, {
+							'opt': 'D.五六百万年'
+						}],
+						'answer': 'B',
+						'expositiom': '',
+						'index': '7DADAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '3.古猿演变成人经历了一个非常漫长的过程。而其中具有决定意义的一步是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.使用天然工具'
+						}, {
+							'opt': 'B.直立行走'
+						}, {
+							'opt': 'C.语言产生'
+						}, {
+							'opt': 'D.火的使用'
+						}],
+						'answer': 'B',
+						'expositiom': '',
+						'index': '7DAFSDFDSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '4.黑猩猩、大猩猩是人类的远亲。看外貌还真和人有 几分相像，但终究不过是动物。那么人和动物的根 本区别在于 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.会不会使用天然工具'
+						}, {
+							'opt': 'B.会不会使用火'
+						}, {
+							'opt': 'C.会不会制造工具'
+						}, {
+							'opt': 'D.能否用语言表达'
+						}],
+						'answer': 'C',
+						'expositiom': '',
+						'index': '7DSADAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '5.人类形成不同的人种，在肤色、发型、眼型、鼻型和身材等外形方面表现出一些差异的主要影响因素是 ( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.智力因素'
+						}, {
+							'opt': 'B.血统因素'
+						}, {
+							'opt': 'C.自然环境因素'
+						}, {
+							'opt': 'D.家庭因素'
+						}],
+						'answer': 'C',
+						'expositiom': '',
+						'index': '7DSA2132DAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '6. 歌曲《龙的传人》唱道 "古老的东方有一群人，他们 全都是龙的传人。黑眼睛黑头发黄皮肤，永永远远 是龙的传人。"居住在地球东方的"龙的传人"属于()',
+						'description': '',
+						'options': [{
+							'opt': 'A.黄种人'
+						}, {
+							'opt': 'B.白种人'
+						}, {
+							'opt': 'C.黑种人'
+						}, {
+							'opt': 'D.棕种人'
+						}],
+						'answer': 'A',
+						'expositiom': '',
+						'index': '7DSADDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '7. 你认为下列事件不可能发生在母系氏族公社里的是()',
+						'description': '',
+						'options': [{
+							'opt': 'A.人们"只知其母，不知其父"'
+						}, {
+							'opt': 'B.财产公有'
+						}, {
+							'opt': 'C.妇女在采集和家务劳动中举足轻重'
+						}, {
+							'opt': 'D.家族长和氏族首领都是男性'
+						}],
+						'answer': 'A',
+						'expositiom': '',
+						'index': '7DSADSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '8. 希腊神话中厄瑞斯矶的故事表明了当时的社会是( )',
+						'description': '',
+						'options': [{
+							'opt': 'A.母权制衰落和父权制兴起'
+						}, {
+							'opt': 'B.刚刚进入母系氏族社会'
+						}, {
+							'opt': 'C.已进入父系氏族社会'
+						}, {
+							'opt': 'D.父系氏族社会开始解体'
+						}],
+						'answer': 'A',
+						'expositiom': '',
+						'index': '7DS2312DSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '9. 男子在氏族社会中逐渐占据主导地位的根本原因() ',
+						'description': '',
+						'options': [{
+							'opt': 'A.于工业的进步'
+						}, {
+							'opt': 'B.农业的出现'
+						}, {
+							'opt': 'C.部落间的产品交换和以交换为目的的商品生产 的出现'
+						}, {
+							'opt': 'D.生产力的发展'
+						}],
+						'answer': 'D',
+						'expositiom': '',
+						'index': '7DSSDADSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '10. 下列关于母系氏族时期社会状况的描述，正确的是()',
+						'description': '①人们"只知其母，不知其父" ② 妇女在社会中 占主导地位 ③生产劳动主要是从事农业和畜牧 业 ④财产公有，共同劳动，平均分配',
+						'options': [{
+							'opt': 'A.①②③④'
+						}, {
+							'opt': 'B.①②③'
+						}, {
+							'opt': 'C.①②④'
+						}, {
+							'opt': 'D.②③④'
+						}],
+						'answer': 'C',
+						'expositiom': '',
+						'index': '7DSSDADSSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '11.原始人类的生活古老而又神奇。课后同学们仍意犹 未 尽，议 论 纷 纷。现 摘 录 如 下，请 找 出 正 确 的观点 () ',
+						'description': '',
+						'options': [{
+							'opt': 'A.原始人共同劳动，是因为人们有朴素的集体主 义思想'
+						}, {
+							'opt': 'B.原始社会没有国家，没有人剥削人、人压迫人的 现象，是最理想的社会'
+						}, {
+							'opt': 'C.原始社会生产力水平低下，几乎没 有 什 么 科 学 文化，是人类发展的最初阶段'
+						}, {
+							'opt': 'D.残暴的奴隶制国家的产生是历史的倒退'
+						}],
+						'answer': 'C',
+						'expositiom': '',
+						'index': '7DSSDADSDASSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var data = {
+						'title': '',
+						'content': '12.下列有关父系氏族时期社会状况的叙述，错误的一项是 ( )  ',
+						'description': '',
+						'options': [{
+							'opt': 'A.适合于男子的犁耕农业和畜牧业的不断发展， 使男子在经济生活中占主导地位'
+						}, {
+							'opt': 'B.父系氏族公社成员共同消费，共同生产'
+						}, {
+							'opt': 'C.人们"不知其母，只知其父"'
+						}, {
+							'opt': 'D..血缘关系按父系计算'
+						}],
+						'answer': 'C',
+						'expositiom': '',
+						'index': '7DSSDADADSSSDAS'
+					};
+					new drawChoice.gen(data, "contentss");
+					var datas = {
+						'title': 'abc',
+						'questions': [{
+							'question': 'ccc',
+							'answer': 'bbb'
+						}, {
+							'question': 'ccc',
+							'answer': 'bbb'
+						}, {
+							'question': 'ccc',
+							'answer': 'bbb'
+						}],
+						'qwe': 'eqw'
+					};
+
+					function callback(index, dom) {
+						if ($(dom).html() == "显示答案与解析") {
+							$(dom).html("隐藏答案与解析");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							$(dom).html("显示答案与解析");
+							dom.style.backgroundColor = '#0095D9';
+						}
+						$("#" + index).toggle();
+					}
+
+					function show(num, dom) {
+						if ($(dom).html() == "显示答案") {
+							$(".placeholder" + num).hide();
+							$(".placeholder" + num + "-" + num).show();
+							$(dom).html("隐藏答案");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							$(".placeholder" + num).show();
+							$(".placeholder" + num + "-" + num).hide();
+							$(dom).html("显示答案");
+							dom.style.backgroundColor = '#0095D9';
+						}
+					}
+
+					function showAnswer(id, dom) {
+						if ($(dom).html() == "显示答案") {
+							$(dom).html("隐藏答案");
+							dom.style.backgroundColor = '#F05183';
+						} else {
+							dom.style.backgroundColor = '#0095D9';
+							$(dom).html("显示答案");
+						}
+						$("#" + id).toggle();
+						$("#" + id + "-1").toggle();
+					}
+				</script>
+	</body>

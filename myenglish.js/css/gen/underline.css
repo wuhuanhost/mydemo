@@ -1,0 +1,32 @@
+.underline {
+	outline: none;
+	border: 1px solid #21bbff;
+	width: 800px;
+
+
+}
+.underline span {
+	display: block;
+}
+.underline .question {
+	padding-left: 2em;
+	line-height: 30px;
+	font-weight: bold;
+	display: block;
+	font-size: 14px;
+}
+.underline .option {
+	line-height: 36px;
+	height: 36px;
+	padding-left: 4em;
+	font-size: 14px;
+}
+.beforeInput {
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	width: 200px;
+	height: 20px;
+	text-align: left;
+}

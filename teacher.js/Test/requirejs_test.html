@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script data-main="../js/plugins-js/main" src="../js/plugins-js/require.js" defer async="true"></script>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<style>
+			.circle {
+				position: relative;
+				display: block;
+				width: 16px;
+				height: 16px;
+				border: 1px solid #f05183;
+				border-radius: 8px;
+			}
+			.circle>span {
+				height: 16px;
+				line-height: 16px;
+				display: block;
+				color: #f05183;
+				text-align: center;
+			}
+		</style>
+		<script>
+			function Person() {
+				var private_name = "小明"; //私有属性
+				var private_age = 10; //私有属性
+				this.privilege_name = "小红"; //特权属性
+				this.privilege_age = 9; //特权属性
+				//定义一个特权方法
+				　
+				this.showPrivilegeName = function() {　　　　
+					console.log("私有属性可以在特权方法中访问			:" + private_name); // private_name is not defined .说明私有属性可以在特权方法中访问.　
+					console.log("特权属性可以在特权方法中访问			:" + this.privilege_name); //输出:"小红"。说明特权属性可以在特权方法中访问　　　
+					console.log("共有属性可以在特权方法中访问			:" + this.public_name); //输出："小芳"。说明共有属性可以在特权方法中访问
+					console.log("静态属性可以在特权方法中访问			:" + Person.static_name); //输出:"小李"。说明类的静态属性可以在特权方法中访问
+					　　
+				}
+			}
+			Person.prototype.public_name = "小芳"; //公有属性
+			Person.prototype.public_age = 8; //共有属性
+			Person.static_name = "小李"; //静态属性
+			Person.static_age = 7; //静态属性
+			var pp = new Person();
+			pp.name = '小王'; //静态属性
+			pp.age = 6; //静态属性
+			 //定义一个原型方法
+			Person.prototype.showName = function() {　　 //console.log(private_name);         // private_name is not defined .说明私有属性不能在原型方法中访问.
+				　　
+				console.log("特权属性可以在原型方法中访问                    :" + this.privilege_name); //输出:"小红"。说明特权属性可以在原型方法中访问
+				　　
+				console.log("共有属性可以在原型方法中访问                    :" + this.public_name); //输出："小芳"。说明共有属性可以在原型方法中访问
+				　　
+				console.log("静态属性可以在原型方法中访问                    :" + Person.static_name); //输出:"小李"。说明类的静态属性可以在原型方法中访问
+			}
+			pp.showPrivilegeName();
+			pp.showName();
+			console.log("私有属性不能在实例化的对象中访问                    :" + pp.private_name); //undefined 私有属性不能在实例化的对象中访问 
+			console.log("特权属性可以在原型方法中访问                    :" + pp.privilege_name); //输出:"小红"。说明""特权属性可以在原型方法中访问""
+			console.log("共有属性可以在原型方法中访问                    :" + pp.public_name); //输出："小芳"。说明共有属性可以在原型方法中访问
+			console.log("类的静态属性可以在原型方法中访问                    :" + Person.static_name); //输出:"小李"。说明类的静态属性可以在原型方法中访问
+			console.log("实例对象的静态属性可以在原型方法中访问                    :" + pp.name); //输出:"小王"。说明实例对象的静态属性可以在原型方法中访问
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<div class='circle'>
+				<span>1</span>
+			</div>
+			<span style='margin-top:-20px;'>hello world!!!</span>
+		</div>
+	</body>
+	<script>
+		function car(c, k, g, name) {
+			this.c = c;
+			this.k = k;
+			this.g = g;
+			this.name = name;
+			var type = "车";
+		}
+		car.prototype = {
+			'getType': function() {
+				console.log("dddddddddd");
+			},
+			'sayHello': function() {
+				var _this = this;
+				console.log(_this);
+				console.log("我是" + this.name + "汽车 长：" + this.c + " 宽：" + this.k + " 高：" + this.g);
+			}
+		}
+		var c1 = new car(5, 2, 2, "擎天柱");
+		c1.sayHello();
+		c1.getType();
+		var c2 = new car(5, 2, 2, "大黄蜂");
+		c2.sayHello();
+		console.log(132);
+		var abc = "<img src='d:/abc/img/ab_-ca.jpg'><img src='d:/abc/img/ab_-ca.png'><img src='d:/abc/img/ab_-ca.jpg'>";
+		var cde = '/tt';
+		abc.replace(/(img[\S]*?.jpg)/g, function(acccc) {
+			console.log(acccc);
+		});
+
+		function Class10() {
+			this.showSub = function(a, b) {
+				alert(a - b);
+			}
+		}
+
+		function Class11() {
+			this.showAdd = function(a, b) {
+				alert(a + b);
+			}
+		}
+
+		function Class2() {
+				alert(this.constructor + "    " + Class2.prototype);
+				Class10.call(this);
+				Class11.call(this);
+			}
+			//		var c2222=new Class2();
+			//		c2222.showSub(1,1);
+			//		c2222.showAdd(1,1);
+		Class10.prototype.show = function() {}
+		var cccccc10 = new Class10();
+		 //	alert(cccccc10.constructor + "   " + cccccc10.__proto__ + "     " + Class10.prototype);
+		console.log(cccccc10.__proto__);
+		console.log(Class10.prototype);
+		var cccccc11 = new Class11();
+		 //		alert(cccccc11.constructor);
+		 //------------------------------------------------------------------------------------------
+		function toobar() {
+			this.width = 100;
+			this.height = 16;
+			this.color = "orange";
+			this.id = "toobar_id";
+		}
+		toobar.prototype = {
+			'init': function() {
+				this.draw();
+				document.getElementById(this.id).addEventListener("click", this.start, false);
+			},
+			'draw': function() {
+				var html = "<br/><div style='width:900px;height:" + this.height + "px;border:1px solid #999;'><div id='" + this.id + "' style='width:" + this.width + "px;height:" + this.height + "px;background-color:" + this.color + ";'></div></div>";
+				$("body").append(html);
+			},
+			'start': function() {
+				//alert("点击了开始");
+				var _this = this;
+				var dom = document.getElementById(_this.id);
+				var inv = 0;
+				var timer = null;
+				dom.style.webkitTransform = "rotate(60deg)";
+				timer = setInterval(function() {
+					if (inv < 900) {
+						inv += 3;
+						dom.style.width = inv + "px";
+					} else {
+						clearInterval(timer);
+					}
+				}, 30)
+			},
+			'stop': function() {
+				console.log("close...............");
+			}
+		};
+		var t = new toobar();
+		t.init();
+		 //------------------------------------------------
+		function drawAbc(i) {
+			console.log(i);
+		}
+		var tttt = 0;
+		var t1 = setInterval(function() {
+			if (tttt < 20) {
+				tttt += 1;
+				drawAbc(tttt);
+			} else {
+				clearInterval(t1);
+			}
+		}, 1000)
+	</script>
+
+</html>

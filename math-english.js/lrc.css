@@ -1,0 +1,77 @@
+.lrc {
+	overflow:hidden;
+	padding-top: -36px;
+	margin: 0;	
+	height: 560px;
+	text-align: center;
+
+}
+
+.lrc li {
+	display: block;
+	color: #555;
+	line-height: 20px;
+	margin: 2px 0 3px 0;
+	min-height: 20px;
+    font-size: 20px;  line-height: 36px;    text-align: left;
+
+}
+
+.lrc .current {
+	color: #FD5B78;
+	font-weight: bold;
+    font-size: 20px;
+    line-height: 36px;    text-align: left;
+}
+
+.lrc, .lrc * {
+	-webkit-transition-duration: 0.25s;
+	-moz-transition-duration: 0.25s;
+	transition-duration: 0.25s;
+}
+
+.lrc::selection {
+	background: transparent;
+	background: #F8F8F8;
+}
+
+.lrc_box {
+	position:fixed;
+	width: 100%;
+	height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    background-color: #eee;
+    bottom:0px;
+    top:-10px;
+    z-index:-1;
+
+
+}
+
+.lrc_box:before {
+	content: '.';
+	overflow: hidden;
+	text-indent: -9999px;
+	width: 100%;
+	height: 30px;
+	z-index: 1;
+	display: block;
+	position: absolute;
+	/* background: url(../image/cover.png) repeat-x 0 0; */
+	top: 0;
+	pointer-events: none;
+}
+
+.lrc_box:after {
+	content: '.';
+	overflow: hidden;
+	text-indent: -9999px;
+	width: 100%;
+	height: 30px;
+	z-index: 1;
+	display: block;
+	position: absolute;
+	/* background: url(../image/cover.png) repeat-x 0 100%; */
+	bottom: 0;
+	pointer-events: none;
+}

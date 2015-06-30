@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="../js/plugins-js/jsrender.js"></script>
+	</head>
+
+	<body>
+		<script id="UserTemplate" type="text/x-jsrender">
+			<div>
+				<p>{{:#index+1}}: 姓名:{{>Name}} &nbsp;年龄:{{>Age}}</p>
+				<ul>
+					{{for Friends tmpl='#FriendTemplate'/}}
+				</ul>
+				<div>
+		</script>
+		<script id="FriendTemplate" type="text/x-jsrender">
+			<li>{{>Name}}</li>
+		</script>
+		<div id="div_Mother"></div>
+
+		<script type="text/javascript">
+			var data = [{
+				"Name": "许当麻",
+				"Age": 29,
+				"Friends": [{
+					"Name": "朋友 1-1",
+					"Age": 18,
+					"Friends": null
+				}, {
+					"Name": "朋友 1-2",
+					"Age": 34,
+					"Friends": null
+				}]
+			}, {
+				"Name": "不二当",
+				"Age": 27,
+				"Friends": [{
+					"Name": "朋友 2-1",
+					"Age": 19,
+					"Friends": null
+				}, {
+					"Name": "朋友 2-2",
+					"Age": 19,
+					"Friends": null
+				}]
+			}];
+			$("#div_Mother").html(
+				$("#UserTemplate").render(data)
+			);
+		</script>
+	</body>
+
+</html>

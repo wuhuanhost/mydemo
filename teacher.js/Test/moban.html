@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Template</title>
+	</head>
+
+	<body>
+		<div id="results"></div>
+		<script type="text/html" id="user_tmpl">
+			<ul>
+				<% for ( var i=0 ; i < users.length; i++ ) { %>
+					<li>
+						<a href="<%=users[i].url%>">
+							<%=users[i].name%>
+						</a>
+					</li>
+					<% } %>
+			</ul>
+		</script>
+		<script type="text/javascript">
+			var results = document.getElementById("results");
+			var users = [{
+				"name": "Byron",
+				"url": "http://localhost"
+			}, {
+				"name": "Casper",
+				"url": "http://localhost"
+			}, {
+				"name": "Frank",
+				"url": "http://localhost"
+			}];
+
+			function tmpl(id, data) {
+				var html = document.getElementById(id).innerHTML;
+				var result = "var p=[];with(obj){p.push('" + html.replace(/[\r\n\t]/g, " ").replace(/<%=(.*?)%>/g, "');p.push($1);p.push('").replace(/<%/g, "');").replace(/%>/g, "p.push('") + "');}return p.join('');";
+				var fn = new Function("obj", result);
+				return fn(data);
+			}
+			results.innerHTML = tmpl("user_tmpl", users);
+
+	
+			
+		</script>
+	</body>
+
+</html>

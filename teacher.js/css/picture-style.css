@@ -1,0 +1,41 @@
+.imgContent {
+	width: 606px;
+	height: 469px;
+	padding: 10px 10px 10px 10px;
+	margin-left: -20px;
+}
+.imgBlock {
+	width: 160px;
+	height: 150px;
+	float: left;
+	margin: 0px 20px 10px 20px;
+}
+.imgTop {
+	height: 120px;
+	width: 160px;
+	border-radius: 10px;
+	background: url("../img/chinese/pic.png") no-repeat;
+}
+.imgTitle:hover {
+	border: 1px solid #F05183;
+}
+.imgTop img {
+	width: 160px;
+	height: 120px;
+	border-radius: 10px;
+	display: none;
+}
+.imgTitle {
+	height: 30px;
+	font-size: 18px;
+	line-height: 30px;
+	text-align: center;
+	font-family: "楷体";
+	color: #000000;
+	cursor: pointer;
+}
+.buttonStyle {
+	top: -20px;
+	position: relative;
+	left: 36px;
+}

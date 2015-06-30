@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/common/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/gen/picture_one.css" />
+		<link rel="stylesheet" type="text/css" href="css/gen/choice.css" />
+		<link rel="stylesheet" type="text/css" href="css/gen/underline.css" />
+		<link rel="stylesheet" type="text/css" href="css/gen/trueorfalse.css" />
+		<script type="text/javascript" src="js/libraries/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/common/utils.js"></script>
+		<script type="text/javascript" src="js/common/count_result.js"></script>
+		<script type="text/javascript" src="js/gen/progress.js"></script>
+		<script type="text/javascript" src="js/gen/titles.js"></script>
+		<script type="text/javascript " src="js/gen/picture_one.js"></script>
+		<script type="text/javascript" src="js/gen/controller.js"></script>
+		<script type="text/javascript" src="js/gen/choice.js"></script>
+		<script type="text/javascript" src="js/gen/underline.js"></script>
+		<script type="text/javascript" src="js/gen/trueorfalse.js"></script>
+		<script type="text/javascript" src="js/gen/subject.js"></script>
+		<script type="text/javascript" src="js/gen/write.js"></script>
+		<style>
+			::-webkit-scrollbar {
+				width: 15px;
+			}
+			/* 这是针对缺省样式 (必须的) */
+			
+			html {
+				overflow: hidden;
+			}
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+			#time {
+				color: #E2E0E0;
+				height: 30px;
+				line-height: 30px;
+				margin-left: 123px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			#result {
+				position: fixed;
+				float: right;
+				top: 0px;
+				margin-left: 820px;
+				width: 300px;
+				border-top: 6px solid #999;
+				border-left: 1px solid #999;
+				border-right: 1px solid #999;
+				border-bottom: 1px solid #999;
+				min-height: 200px;
+				font-size: 14px;
+				padding: 0em 2em 0em 2em;
+				height: 100%;
+				overflow-y: auto;
+			}
+			button {
+				height: 30px;
+			}
+			#content {
+				width: 820px;
+				float: left;
+				height: 960px;
+				overflow-y: auto;
+			}
+			#timeline {
+				position: fixed;
+				top: 0px;
+				width: 802px;
+				height: 6px;
+				background-color: #999999;
+			}
+			#line {
+				width: 0px;
+				height: 6px;
+				background-color: #f05183;
+			}
+			#nav {
+				position: fixed;
+				background-color: #dd514c;
+				bottom: 0px;
+				width: 802px;
+				height: 36px;
+				line-height: 36px;
+				z-index: 1000;
+			}
+			button {
+				cursor: pointer;
+			}
+			#showDiv {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				bottom: 0px;
+				filter: alpha(opacity=35);
+				/* IE */
+				
+				-moz-opacity: 0.35;
+				/* Moz + FF */
+				
+				opacity: 0.35;
+				background-color: black;
+				z-index: 9998;
+				cursor: pointer;
+				display: none;
+			}
+			#showDivss {
+				position: fixed;
+				width: 200px;
+				height: 100px;
+				top: 50%;
+				left: 50%;
+				margin-left: -100px;
+				margin-top: -50px;
+				background-color: #FFFFFF;
+				border: 2px solid #522d24;
+				z-index: 9999;
+				font-size: 20px;
+				line-height: 50px;
+				text-align: center;
+				cursor: pointer;
+				color: #522d24;
+				font-weight: bold;
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="showDiv"></div>
+		<div id="showDivss">wait......
+			<br/>点击继续答题</div>
+		<div style='width:1180px;margin:0 auto;'>
+			<div id='top' style='position:absolute;top:0px;'></div>
+			<div id='content'>
+				<div id='nav'>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id='start'>开始答题</button>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id='wait'>暂停答题</button>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id='show'>提交试卷</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="" id='time'></label>
+					<input type="hidden" value="" id="usetime" />
+				</div>
+				<div id='timeline'>
+					<audio src="" id="audio"></audio>
+					<div id="line"></div>
+				</div>
+
+				<div style='margin-top:20px;'></div>
+			</div>
+			<div id='result'>
+			</div>
+			<div style='clear: both;'></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		controller.init(data);
+		$("#content").append(controller.html);
+		$(document).ready(function() {
+			var flag = false;
+			$("#wait").click(function() {
+				if (flag) {
+					$("#showDiv").show();
+					$("#showDivss").show();
+					clearInterval(timer);
+					timer = null;
+				}else{
+					alert("点击开始答题按钮之后才能使用暂停功能");
+				}
+			});
+			$("#showDivss").click(function() {
+				$("#showDiv").hide();
+				$("#showDivss").hide();
+				clearInterval(timer);
+				console.log(timer + "   " + countTime);
+				timer = null;
+				if (timer == null) {
+					timer = setInterval(function() {
+						var h, m, s;
+						h = parseInt(countTime / 3600);
+						if (h >= 1) {
+							h = "0" + h;
+						} else {
+							h = "00";
+						}
+						m = parseInt((countTime - 3600 * h) / 60);
+						if (10 <= m < 60) {
+							m = m;
+						}
+						if (0 <= m && m <= 9) {
+							m = "0" + m;
+						}
+						s = countTime - 3600 * h - 60 * m;
+						if (s == 0) {
+							s = "00";
+						}
+						if (0 < s && s <= 9) {
+							s = "0" + s;
+						}
+						$("#time").html("距本次测试结束还有【 <label style='color:#522d24;'>" + h + ":" + m + ":" + s + "</label> 】");
+						$("#usetime").val(usetime);
+						usetime++;
+						countTime--;
+						if (iii % 4 == 0) {
+							$("#line").width($("#line").width() + 1);
+						}
+						iii++;
+					}, 1000);
+				}
+			});
+			progress.init(); //初始化答题进度卡
+			var timer = null,
+				countTime = 0,
+				usetime = 0,
+				iii = 1;
+			$("#start").click(function() {
+				flag = true;
+				$('input[type!=hidden]').val("");
+				$('input').css("border-bottom", "1px solid #999999");
+				countTime = 90 * 60;
+				cr.html = "";
+				progress.init();
+				$('input').removeAttr("readonly");
+				$('input').removeAttr("disabled");
+				if (timer == null) {
+					timer = setInterval(function() {
+						var h, m, s;
+						h = parseInt(countTime / 3600);
+						if (h >= 1) {
+							h = "0" + h;
+						} else {
+							h = "00";
+						}
+						m = parseInt((countTime - 3600 * h) / 60);
+						if (10 <= m < 60) {
+							m = m;
+						}
+						if (0 <= m && m <= 9) {
+							m = "0" + m;
+						}
+						s = countTime - 3600 * h - 60 * m;
+						if (s == 0) {
+							s = "00";
+						}
+						if (0 < s && s <= 9) {
+							s = "0" + s;
+						}
+						$("#time").html("距本次测试结束还有【 <label style='color:#522d24;'>" + h + ":" + m + ":" + s + "</label> 】");
+						$("#usetime").val(usetime);
+						usetime++;
+						countTime--;
+						if (iii % 4 == 0) {
+							$("#line").width($("#line").width() + 1);
+						}
+						iii++;
+					}, 1000);
+				}
+			});
+			$("#show").click(function() {
+				flag = false;
+				var con = confirm("你确认提交试卷");
+				if (con) {
+					$("#result").html("");
+					$("#result").hide();
+					cr.init();
+					clearInterval(timer);
+					$("#time").html("");
+					timer = null;
+					countTime = 90 * 60;
+					usetime = 0;
+					$('input').attr("readonly", "readonly");
+					cr.html = "";
+					$("#line").width(0);
+					$("#result").show();
+					window.location.href = '#top';
+					$('input[type!=hidden]').val("");
+					$('input').css("border-bottom", "1px solid #999999");
+				}
+			});
+		});
+	</script>
+
+
+
+
+
+
+</html>

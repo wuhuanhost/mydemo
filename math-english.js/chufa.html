@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="no-js demo">
+ <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="renderer" content="webkit" />
+  <title>随机10道除法</title>
+  <meta name="description" content="" />
+  <link rel="alternate icon" type="image/png" href="http://a.static.amazeui.org/assets/2.x/i/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" href="http://a.static.amazeui.org/assets/2.x/i/app-icon72x72@2x.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amazeui.min.css?v=i5hjvvbk" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amaze.min.css?v=i5hjvvbk" />
+  <link rel="canonical" href="http://amazeui.org/widgets/header/default/0?_ver=2.x" />
+  <script src="http://a.static.amazeui.org/assets/2.x/js/jquery.min.js?v=i5hjvvbk"></script>
+  <script src="http://a.static.amazeui.org/assets/2.x/js/handlebars.min.js?v=i5hjvvbk"></script>
+  <script src="http://a.static.amazeui.org/assets/2.x/js/amazeui.min.js?v=i5hjvvbk"></script>
+  <script src="generator.js"></script>
+<style type="text/css">
+  
+ul li{
+
+  padding-left: 20px;
+}
+
+
+</style>
+
+  <script type="text/javascript">
+
+
+            $(window).load(function(){
+
+               var item=Action._init();
+               var html="";
+               for(var i=0;i<item.length;i++){
+             html+= "<li><a href='#'>"+
+                    "<span class='am-badge am-badge-danger am-text-default am-round'>"+(i+1)+"</span>   "+
+                    "<span class='am-text-default'> "+item[i].number1+" </span>"+
+                    "<span class='am-text-default'> ÷</span>"+
+                    "<span class='am-text-default'> "+item[i].number2+" </span>"+
+                    "<span class='am-text-default'> =</span> "+
+                    "<span class='am-text-default'> ? </span>"+
+                    "</a></li>";
+               }
+
+                $("#list").html(html);
+
+            });
+
+
+      
+  </script>
+ </head>
+ <body>
+  <div class="page pg-demo" id="header">
+   <div id="demo-view" >
+    <header  class="am-header am-header-default">
+     <div class="am-header-left am-header-nav">
+      <a class="" id="home" href="history.html"><i class="am-header-icon am-icon-chevron-left"></i></a>
+     </div>
+     <h1 class="am-header-title"><a href="#title-link" class="">随机10道除法</a></h1>
+     <div class="am-header-right am-header-nav">
+      <a href="#right-link" class="" data-am-modal="{target: '#my-actions'}"><i class="am-header-icon am-icon-bars"></i></a>
+     </div>
+    </header>
+   </div>
+<div class="am-g am-g-fixed" id="content">
+  <ul class="am-list" id="list">
+
+</ul>
+</div>
+
+
+
+
+
+</div>
+</div>
+
+<footer data-am-widget='footer' class='am-footer am-footer-default' id="footer">
+  <div class="am-footer-miscs">
+    <p>由 <a href="#" title="马上网络" target="_blank" >马上网络</a> 提供技术支持</p>
+    <p>CopyRight&copy;2014 AllMobilize Inc.</p>
+  </div>
+</footer>
+
+<div class="am-modal-actions" id="my-actions">
+  <div class="am-modal-actions-group">
+    <ul class="am-list">
+      <li><a href="chufa.html" class="am-modal-actions-header">重新生成</a></li>
+      <li><a href="chengfa.html"  class="am-modal-actions-danger">随机10道乘法</a></li>
+    </ul>
+  </div>
+  <div class="am-modal-actions-group">
+    <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+  </div>
+</div>
+ </body>
+</html>

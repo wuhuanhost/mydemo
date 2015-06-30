@@ -1,0 +1,14 @@
+/**去除浏览器默认样式**/
+input,
+button,
+select,
+textarea {
+	outline: none;
+}
+html {
+	font-family: 'lucida grande', 'lucida sans unicode', lucida, helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
+}
+
+.h3-title{
+	font-size:16px;
+}

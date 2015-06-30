@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>demo</title>
+		<link href="image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+		<link rel="stylesheet" type="text/css" href="css/Normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/picture-style.css" />
+		<link rel="stylesheet" type="text/css" href="css/dtree.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/kewen.css" />
+		<link rel="stylesheet" type="text/css" href="css/plugins-css/brush.css" />
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/plugins-js/draw.js"></script>
+		<script type="text/javascript" src="js/dtree.js"></script>
+		<script type="text/javascript" src="js/picture.js"></script>
+		<script type="text/javascript" src="js/zuozhe.js"></script>
+		<script type="text/javascript" src="js/shengziquanxi.js"></script>
+		<script type="text/javascript" src="js/xincijieshi.js"></script>
+		<script type="text/javascript" src="js/ciyu.js"></script>
+		<script type="text/javascript" src="js/fanyici.js"></script>
+		<script type="text/javascript" src="js/ciyujijing.js"></script>
+		<script type="text/javascript" src="js/jingyicibianxi.js"></script>
+		<script type="text/javascript" src="js/tingxieleyuan.js"></script>
+		<script type="text/javascript" src="js/meiduzhidao.js"></script>
+		<script type="text/javascript" src="js/kewendaoxue.js"></script>
+		<script type="text/javascript" src="js/duoyingzi.js"></script>
+		<script type="text/javascript" src="js/kewen-new.js"></script>
+		<script type="text/javascript" src="js/kewenjiegou.js"></script>
+		<script type="text/javascript" src="js/hudongtiwen.js"></script>
+		<script type="text/javascript" src="js/xitizhidao.js"></script>
+		<script type="text/javascript" src="js/xueximubiao.js"></script>
+		<script type="text/javascript" src="js/ketijiexi.js"></script>
+		<script type="text/javascript" src="js/yicuofanghuoqiang.js"></script>
+		<script type="text/javascript" src="js/plugins-js/jquery.mousewheel.js"></script>
+		</script>
+		<style type="text/css">
+			.chinese {
+				text-indent: 2em;
+				line-height: 30px;
+				font-family: "楷体";
+				font-size: 16px;
+				margin-top: 30px;
+				width: 700px;
+			}
+			.chinese-bottom {
+				text-indent: 2em;
+				line-height: 0px;
+				font-family: "楷体";
+				font-size: 16px;
+				margin-top: 30px;
+				width: 700px;
+			}
+			.chinese-bottom1 {
+				text-indent: 2em;
+				line-height: 20px;
+				font-family: "楷体";
+				font-size: 16px;
+				margin-top: 30px;
+				width: 700px;
+			}
+			.chinese-1 {
+				text-indent: 2em;
+				line-height: 10px;
+				font-size: 14px;
+			}
+			.chinese-1 label {
+				color: red;
+			}
+			#showDivss {
+				position: fixed;
+				display: none;
+				width: 800px;
+				height: 600px;
+				top: 50%;
+				left: 50%;
+				margin-left: -306px;
+				margin-top: -300px;
+				background-color: #FFFFFF;
+				border: 6px solid #045a36;
+				z-index: 10000000000000000000;
+			}
+			#showDivBtn {
+				position: fixed;
+				width: 100px;
+				height: 36px;
+				top: 50%;
+				left: 50%;
+				margin-left: 400px;
+				margin-top: -340px;
+				background-color: #f05183;
+				z-index: 100000000000000000000000;
+				text-align: center;
+				font-size: 20px;
+				color: #FFFFFF;
+				font-weight: bold;
+				line-height: 36px;
+				display: none;
+				cursor: pointer;
+			}
+			#showDiv {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				bottom: 0px;
+				display: none;
+				filter: alpha(opacity=100);
+				/* IE */
+				
+				-moz-opacity: 0.75;
+				/* Moz + FF */
+				
+				opacity: 0.55;
+				background-color: black;
+				z-index: 99999999;
+				cursor: pointer;
+			}
+			.word {
+				float: left;
+				width: 360px;
+				min-height: 100px;
+				background-color: red;
+			}
+			.word span {
+				text-align: center;
+				display: block;
+				line-height: 36px;
+			}
+			* {
+				outline: none;
+			}
+			.jingyicibianxi {
+				/*	display: none;*/
+				
+				color: #EEEEEE;
+			}
+			#bianji {
+				font-size: 16px;
+				position: fixed;
+				top: 300px;
+				width: 30px;
+				height: 138px;
+				background-color: #0095d9;
+				text-align: center;
+				line-height: 23px;
+				cursor: pointer;
+				color: #FFFFFF;
+			}
+			#bianji1 {
+				display: none;
+				font-size: 16px;
+				position: fixed;
+				top: 300px;
+				width: 30px;
+				height: 92px;
+				background-color: #f05183;
+				text-align: center;
+				line-height: 23px;
+				cursor: pointer;
+				color: #FFFFFF;
+			}
+			#brush {
+				display: none;
+			}
+			
+			#show1 {
+				font-size: 16px;
+				position: fixed;
+				left: 0px;
+				top: 200px;
+				width: 30px;
+				height: 92px;
+				background-color: #f05183;
+				text-align: center;
+				line-height: 23px;
+				display: none;
+				cursor: pointer;
+				color: #FFFFFF;
+			}
+						
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#hide").click(function() {
+					$("#nav").css("margin-left", "-30%");
+					$("#contents").css("width", "100%");
+					$("#contents").css("margin-left", "-30%");
+					$("#show").show();
+					$("#hide").hide();
+					$("#content").css("width", "70%");
+					$("#content").css("margin-left", "-35%");
+					$("html").css("background-color", "#EEEEEE");
+				});
+				$("#show").click(function() {
+					$("#nav").css("margin-left", "0px");
+					$("#contents").css("width", "70%");
+					$("#contents").css("margin-left", "0px");
+					$("#show").hide();
+					$("#hide").show();
+					$("#content").css("width", "100%");
+					$("#content").css("margin-left", "-50%");
+					$("#bianji").show();
+				});
+				$("#showDiv").click(function() {
+					$("#showDiv").hide();
+					$("#showDivss").hide();
+					$("#showDivBtn").hide();
+				});
+				$("#showDivBtn").click(function() {
+					$("#showDiv").hide();
+					$("#showDivss").hide();
+					$("#showDivBtn").hide();
+				});
+				$("#bianji").click(function() {
+					isScorll = false;
+					$("#brush").show();
+					$("#bianji").hide();
+					$("#bianji1").show();
+				});
+				$("#exitbianji").click(function() {
+					isScorll = true;
+					$("#brush").hide();
+					$("#bianji").show();
+					$("#bianji1").hide();
+					clearContext('1'); //清理屏幕
+					$("#color").hide();
+				});
+				var color = "";
+				$("button[class!='noHover']").hover(function() {
+					color = $(this).css("background-color");
+					$(this).css("background-color", "#efc851");
+				}, function() {
+					$(this).css("background-color", color);
+				});
+			});
+
+			function showBtn(id) {
+				//$('param movie').attr("value", "swf/" + id + '.swf');
+				$("object").attr("data", id);
+				$("#showDiv").show();
+				$("#showDivss").show();
+				$("#showDivBtn").show();
+			}
+		</script>
+	</head>
+
+	<body>
+		<div style="position:fixed;width:100%;z-index:100000000000000000;" id="brush">
+			<canvas id="canvas">
+				浏览器不支持哦，亲
+			</canvas>
+
+			<canvas id="canvas_bak"></canvas>
+
+			<div id="drawController">
+				<img src='img/plugins-img/pencil.png' width='20px;' height='20px;' class="img" onclick="draw_graph('pencil',this)" class='border_nochoose' title='铅笔' />
+
+				<img src='img/plugins-img/line.png' width='20px;' height='20px;' class="img" onclick="draw_graph('line',this);" class='border_nochoose' title='画直线' />
+
+				<img src='img/plugins-img/cancel.png' width='20px;' height='20px;' class="img" onclick="cancel(this)" class='border_nochoose' title='撤销上一个操作' />
+
+				<img src='img/plugins-img/next.png' width='20px;' height='20px;' class="img" onclick="next(this)" class='border_nochoose' title='重做上一个操作' />
+
+				<img src='img/plugins-img/square.png' width='20px;' height='20px;' class="img" onclick="draw_graph('square',this)" class='border_nochoose' title='方形' />
+
+				<img src='img/plugins-img/circle.png' width='20px;' height='20px;' class="img" onclick="draw_graph('circle',this)" class='border_nochoose' title='圆' />
+
+				<img src='img/plugins-img/handwriting.png' width='20px;' height='20px;' class="img" onclick="draw_graph('handwriting',this)" class='border_nochoose' title='涂鸦' />
+
+				<img src='img/plugins-img/rubber.png' width='20px;' height='20px;' class="img" onclick="draw_graph('rubber',this)" class='border_nochoose' title='橡皮擦' />
+
+				<img src='img/plugins-img/xx.png' width='20px;' height='20px;' class="img" onclick="clearContext('1')" class='border_nochoose' title='清屏' />
+
+				<!--				<img src='img/plugins-img/line_size_1.png' id="chooseSize" width='20px;' height='20px;' class="img" onclick="showLineSize(this)" class='border_nochoose' title='线条大小' />
+
+			
+				<img src='img/plugins-img/save.png' width='20px;' height='20px;' class="img" onclick="save()" class='border_nochoose' title='保存' />
+-->
+				<a href="#" download="picture.png" id="downloadImage_a">
+					<img src='img/plugins-img/download.png' width='20px;' height='20px;' class="img" class='border_nochoose' title='下载' onclick="downloadImage();" />
+				</a>&nbsp;&nbsp;&nbsp;
+				<input id="chooseColor" type="button" class='i1 border_nochoose' onclick="showColor(this)" title='选择颜色' /> &nbsp;
+				<!--	<div style="clear: both;"></div>-->
+				<br />
+				<br />
+				<button style="background-color: #f05183;" id="exitbianji">退出编辑模式</button><span style="color:#F05183;background-color:#999;"> 注意：编辑模式下屏幕将不能滚动</span>
+			</div>
+
+		</div>
+		<div id="color" class="color">
+			<input class="i1" type="button" />
+			<input class="i2" type="button" />
+			<input class="i3" type="button" />
+			<input class="i4" type="button" />
+			<input class="i5" type="button" />
+			<input class="i6" type="button" />
+			<input class="i7" type="button" />
+			<input class="i8" type="button" />
+			<input class="i9" type="button" />
+			<input class="i10" type="button" />
+			<input class="i11" type="button" />
+			<input class="i12" type="button" />
+			<input class="i13" type="button" />
+			<input class="i14" type="button" />
+		</div>
+		<div id="showDivBtn">关闭窗口</div>
+		<div id="showDiv"></div>
+		<div id="showDivss">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="800" height="600" id="allgames" align="middle">
+				<param name="movie" value="swf/font-1.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<param name="play" value="true" />
+				<param name="loop" value="true" />
+				<param name="wmode" value="window" />
+				<param name="scale" value="showall" />
+				<param name="menu" value="true" />
+				<param name="devicefont" value="false" />
+				<param name="salign" value="" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="swf/font-1.swf" width="800" height="600">
+					<param name="movie" value="swf/font-1.swf" />
+					<param name="quality" value="high" />
+					<param name="bgcolor" value="#ffffff" />
+					<param name="play" value="true" />
+					<param name="loop" value="true" />
+					<param name="wmode" value="window" />
+					<param name="scale" value="showall" />
+					<param name="menu" value="true" />
+					<param name="devicefont" value="false" />
+					<param name="salign" value="" />
+					<param name="allowScriptAccess" value="sameDomain" />
+					<!--<![endif]-->
+					<a href="https://www.adobe.com/go/getflash">
+						<img src="https://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获得 Adobe Flash Player" />
+					</a>
+					<!--[if !IE]>-->
+				</object>
+				<!--<![endif]-->
+			</object>
+		</div>
+
+		<div id="nav">
+			<span id="hide">隐藏目录</span>
+			<span id="bianji">进入编辑模式</span>
+			<span id="bianji1">编辑模式</span>
+			<div class="dtree" style="overflow-y: auto;">
+
+				<p><a href="javascript: d.openAll();">展开全部</a> | <a href="javascript: d.closeAll();">关闭全部</a>
+				</p>
+
+				<script type="text/javascript">
+					 <!--
+					d = new dTree('d');
+					d.add(0, -1, '第一组、我爱读书', 'index_success.html');
+					d.add(1, 0, '第一课、窃读记', '#contentss');
+					d.add(2, 1, '图解新词', '#one');
+					d.add(3, 1, '课题解析', '#two');
+					d.add(4, 1, '学习目标', '#three');
+					d.add(5, 1, '作者简介', '#four');
+					d.add(6, 1, '生字全析', '#five');
+					d.add(7, 1, '易错防火墙', '#six');
+					d.add(8, 1, '词语集锦', '#seven');
+					d.add(9, 1, '课文全析', '#eight');
+					d.add(10, 1, '课文结构', '#nine');
+					d.add(11, 1, '互动提问', '#ten');
+					d.add(12, 1, '习题指导', '#eleven');
+		
+					document.write(d);
+					 //-->
+				</script>
+
+			</div>
+		</div>
+		<div id="contents">
+			<div id="content">
+				<div id="title"><span class="unit">第一课　窃读记</span>
+				</div>
+				<div id="page">
+
+					<div id="contentss">
+						<!--
+                        	作者：mr.ziqiang@qq.com
+                        	时间：2015-05-18
+                        	描述：<h2>第1课			窃读记</h2>
+                        -->
+						<br />
+					</div>
+					<span id="show">显示目录</span>
+					<span id="show1">进入编辑模式</span>
+			
+					<!--<a href="#content"><span id="top">返回顶部</span></a>-->
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+				<script type="text/javascript" src="js/gen.js"></script>
+				<script>
+					gen.init(data);
+					gen.allHtml();
+					$("#contentss").append(gen.html);
+					$(".unit").append(gen.title);
+				</script>
+
+</html>

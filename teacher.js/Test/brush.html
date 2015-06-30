@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/plugins-css/brush.css" />
+		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="../js/plugins-js/draw.js"></script>
+	</head>
+
+	<script>
+
+	</script>
+
+	</head>
+
+	<body>
+		<div id="drawController">
+			<img src='../img/plugins-img/pencil.png' width='20px;' height='20px;' class="img" onclick="draw_graph('pencil',this)" class='border_nochoose' title='铅笔' />
+			
+			<img src='../img/plugins-img/line.png' width='20px;' height='20px;' class="img" onclick="draw_graph('line',this);" class='border_nochoose' title='画直线' />
+			
+			<img src='../img/plugins-img/cancel.png' width='20px;' height='20px;' class="img" onclick="cancel(this)" class='border_nochoose' title='撤销上一个操作' />
+			
+			<img src='../img/plugins-img/next.png' width='20px;' height='20px;' class="img" onclick="next(this)" class='border_nochoose' title='重做上一个操作' />
+					
+			<img src='../img/plugins-img/square.png' width='20px;' height='20px;' class="img" onclick="draw_graph('square',this)" class='border_nochoose' title='方形' />
+			
+			<img src='../img/plugins-img/circle.png' width='20px;' height='20px;' class="img" onclick="draw_graph('circle',this)" class='border_nochoose' title='圆' />
+		
+			<img src='../img/plugins-img/handwriting.png' width='20px;' height='20px;' class="img" onclick="draw_graph('handwriting',this)" class='border_nochoose' title='涂鸦' />
+			
+			<img src='../img/plugins-img/rubber.png' width='20px;' height='20px;' class="img" onclick="draw_graph('rubber',this)" class='border_nochoose' title='橡皮擦' />
+		
+			<img id="chooseSize" src='../img/plugins-img/line_size_1.png' width='20px;' height='20px;' class="img" onclick="showLineSize(this)" class='border_nochoose' title='线条大小' />
+		
+			<img src='../img/plugins-img/xx.png' width='20px;' height='20px;' class="img" onclick="clearContext('1')" class='border_nochoose' title='清屏' />
+			
+			<img src='../img/plugins-img/save.png' width='20px;' height='20px;' class="img" onclick="save()" class='border_nochoose' title='保存' />
+		
+			<a href="#" download="picture.png" id="downloadImage_a">
+				<img src='../img/plugins-img/download.png' width='20px;' height='20px;' class="img" class='border_nochoose' title='下载' onclick="downloadImage();" />
+			</a>&nbsp;
+			<input id="chooseColor" type="button" class='i1 border_nochoose' onclick="showColor(this)" title='选择颜色' />
+			<div style="clear: both;"></div>
+			
+			&nbsp;
+		</div>
+		<div style="float:left;width:100%;">
+			<canvas id="canvas">
+				浏览器不支持哦，亲
+			</canvas>
+
+			<canvas id="canvas_bak"></canvas>
+		</div>
+
+
+
+		<div id="color" class="color">
+			<input class="i1" type="button" />
+			<input class="i2" type="button" />
+			<input class="i3" type="button" />
+			<input class="i4" type="button" />
+			<input class="i5" type="button" />
+			<input class="i6" type="button" />
+			<input class="i7" type="button" />
+			<input class="i8" type="button" />
+			<input class="i9" type="button" />
+		</div>
+
+		<div id="line_size" class="border_nochoose" style="z-index:99">
+			<!--<img src="../img/plugins-img/line_size_1.png" width='80px;' height='12px;' onclick="chooseLineSize(1)">
+			<br/>
+			<img src="../img/plugins-img/line_size_3.png" width='80px;' height='12px;' onclick="chooseLineSize(3)">
+			<br/>
+			<img src="../img/plugins-img/line_size_5.png" width='80px;' height='12px;' onclick="chooseLineSize(5)">
+			<br/>
+			<img src="../img/plugins-img/line_size_7.png" width='80px;' height='12px;' onclick="chooseLineSize(7)">-->
+		</div>
+
+	</body>
+
+</html>

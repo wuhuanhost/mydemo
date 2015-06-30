@@ -1,0 +1,33 @@
+.class1 {
+	width: 800px;
+	border: 1px solid #21BBFF;
+	padding-bottom: 20px;
+}
+.clear {
+	clear: both;
+}
+.class1-div {
+	width: 76px;
+	height: 100px;
+	float: left;
+	margin-left: 36px;
+	margin-top: 20px;
+}
+.class1-div img {
+	width: 76px;
+	height: 76px;
+}
+.class1-div input {
+	margin-top: 10px;
+	width: 74px;
+	height: 20px;
+	text-align: center;
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+}
+.img_div {
+	width: 100%;
+	height: 76px
+}

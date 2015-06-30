@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="css/inbox.css"/>
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	</head>
+
+	<body>
+		
+		
+		<ul class="menu">
+			<li tabindex="1"> <span class="title">语文</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">数学</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">英语</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">历史</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">地理</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">生物</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">物理</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">化学</span>
+				<div class="content"></div>
+			</li>
+			<li tabindex="1"> <span class="title">其它</span>
+				<div class="content"></div>
+			</li>
+			<div id="search"><input type="text" name="" id="" value="" /><input type="button" value="搜索"/></div>
+		</ul>
+	
+		<script>
+			(function() {
+				// Append a close trigger for each block
+				$('.menu .content').append('<span class="close">x</span>');
+				// Show window
+				function showContent(elem) {
+						hideContent();
+						elem.find('.content').addClass('expanded');
+						elem.addClass('cover');
+					}
+					// Reset all
+
+				function hideContent() {
+						$('.menu .content').removeClass('expanded');
+						$('.menu li').removeClass('cover');
+					}
+					// When a li is clicked, show its content window and position it above all
+				$('.menu li').click(function() {
+					showContent($(this));
+				});
+				// When tabbing, show its content window using ENTER key
+				$('.menu li').keypress(function(e) {
+					if (e.keyCode == 13) {
+						showContent($(this));
+					}
+				});
+				// When right upper close element is clicked  - reset all
+				$('.menu .close').click(function(e) {
+					e.stopPropagation();
+					hideContent();
+				});
+				// Also, when ESC key is pressed - reset all
+				$(document).keyup(function(e) {
+					if (e.keyCode == 27) {
+						hideContent();
+					}
+				});
+			})();
+		</script>
+
+	</body>
+
+</html>

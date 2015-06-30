@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="no-js demo">
+ <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="renderer" content="webkit" />
+  <title>Home</title>
+  <meta name="description" content="" />
+  <link rel="alternate icon" type="image/png" href="http://a.static.amazeui.org/assets/2.x/i/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" href="http://a.static.amazeui.org/assets/2.x/i/app-icon72x72@2x.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amazeui.min.css?v=i5hjvvbk" />
+  <link rel="stylesheet" href="http://a.static.amazeui.org/assets/2.x/css/amaze.min.css?v=i5hjvvbk" />
+  <link rel="canonical" href="http://amazeui.org/widgets/header/default/0?_ver=2.x" />
+  <script src="http://a.static.amazeui.org/assets/2.x/js/jquery.min.js?v=i5hjvvbk"></script>
+  <script src="http://a.static.amazeui.org/assets/2.x/js/handlebars.min.js?v=i5hjvvbk"></script>
+  <script src="http://a.static.amazeui.org/assets/2.x/js/amazeui.min.js?v=i5hjvvbk"></script>
+  <script src="generator.js"></script>
+  <style type="text/css">
+    #bottom {
+        width:100%;
+        font-size:2em;
+        text-align: center;
+        line-height: 100px;
+        height:130px;
+        color:#FFFFFF;
+    }
+
+    #d1 {       
+        margin-top:0px;
+        float:right;
+        width: 20%;
+        height: 100px;
+        background-color:#5eb95e; 
+        border-radius: 0px;
+    }
+    #d2 {
+        margin-top:0px;
+        float:right;
+        width: 10%;
+        height: 100px;
+        color:#999;
+    }
+    #d3 {
+        margin-top:0px;
+        float:right;
+        width: 30%;
+        height: 100px;
+        background-color:#f37b1d;
+        border-radius: 0px;
+
+    }
+    #d4 {
+
+        margin-top:0px;
+        float:right;
+        width: 10%;
+        height: 100px;
+        color:#999;
+        
+    }
+    #d5 {
+
+        margin-top:0px;
+        float:right;
+        width: 30%;
+        height: 100px;
+        background-color:#dd514c;
+        border-radius: 0px;
+
+    }
+  </style>
+
+  <script type="text/javascript">
+
+          var item;//题目数组
+          var index=0;//题目编号
+          var answer=0;
+          var rege = new RegExp("^[0-9]*$"); 
+          var store = $.AMUI.store;
+
+          $(window).load(function(){
+
+              console.log(Action._init().length);
+
+              item=Action._init();
+
+              for(var i=0;i<item.length;i++){
+
+                 console.log(item[i]);
+
+              }
+             Action._chengfa(item[0].number1,item[0].number2,item[0].result,10,index+1);//进入当前页面显示第一题
+             index=1;
+
+          });
+      
+
+        $(document).ready(function(){
+            
+            $(document).on( "click", "#next", function() {
+
+              console.log(index+">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+
+              if(index==item.length-1){
+
+                 $("#next").html(" 提交测试 ");
+
+                 $("#next").removeClass('am-btn am-btn-secondary')
+
+                 $("#next").addClass("am-btn am-btn-danger");
+
+              
+                 
+
+              }
+            
+                     if(index<item.length){                 
+
+                                          if($(".answer").val()!=""&&rege.test($(".answer").val())){
+
+                                              //存储答案
+                                              item[index-1].answer=$(".answer").val();
+                                              console.log(index+">>>>>>>>>>>>>>>>>>>>>>>>>>>>tert");
+                                              index+=1;      
+                                           
+                                              if(index%2!=0){
+
+                                                  Action._chengfa(item[index-1].number1,item[index-1].number2,item[index-1].result,10,index);
+                                                 
+                                              }else{
+
+                                                  Action._chufa(item[index-1].number1,item[index-1].number2,item[index-1].result,10,index);
+                                                  
+                                              }
+                                                  $(".answer").val("");
+                                          
+                                          }else{
+
+                                          
+                                                alert("请输入答案，答案为数字类型");                                        
+
+                                          }
+                        
+
+                      }else{
+
+
+                          if(index==item.length){//保存最后一道题的答案
+
+                              item[index-1].answer=$(".answer").val();
+                              store.set('result',item);
+                              window.location.href="result.html";
+
+
+                          }
+
+
+                      }
+
+
+
+            });
+
+
+            $("#last").click(function(){
+
+              console.log(index+"<<<<<<<<<<<<<<<<<<<<<<");
+              index-=1;   
+
+              if(index==item.length-1){
+
+                 $("#next").html("下一题 &raquo;");
+
+                 $("#next").removeClass('am-btn am-btn-danger')
+
+                 $("#next").addClass("am-btn am-btn-secondary");
+                 
+
+              }
+
+
+              if(index>0){
+                  
+
+                if(index%2!=0){
+
+                    Action._chengfa(item[index-1].number1,item[index-1].number2,item[index-1].result,10,index);
+                     $(".answer").val(item[index-1].answer);
+
+                }else{
+
+                    Action._chufa(item[index-1].number1,item[index-1].number2,item[index-1].result,10,index);
+                     $(".answer").val(item[index-1].answer);
+                }
+                           
+              }else{
+
+                alert("没有上一题了");
+                index=1;
+
+              }
+
+           });
+
+      /**点击home键全屏**/
+       $('#home').on('click', function () {
+
+
+           for(var i=0;i<10;i++){
+
+            console.log(item[i])
+
+           }
+ 
+
+            // if ($.AMUI.fullscreen.enabled) {
+            // $.AMUI.fullscreen.request();
+
+            // } else {
+            //     // Ignore or do something else
+            // }
+        });
+
+
+        });
+
+
+
+
+
+
+
+  </script>
+ </head>
+ <body>
+  <div class="page pg-demo" id="header">
+   <div id="demo-view" >
+    <header  class="am-header am-header-default">
+     <div class="am-header-left am-header-nav">
+      <a class="" id="home" href="index.html"><i class="am-header-icon am-icon-chevron-left"></i></a>
+     </div>
+     <h1 class="am-header-title"><a href="#title-link" class="">数学测试</a></h1>
+     <div class="am-header-right am-header-nav">
+      <a href="#right-link" class="" data-am-modal="{target: '#my-actions'}"><i class="am-header-icon am-icon-bars"></i></a>
+     </div>
+    </header>
+   </div>
+<div class="am-g am-g-fixed" id="content">
+   <div id="bottom" style="color:#999;height: 80px;text-align: center;font-size:1.5em;line-height:80px;">
+   共<label style="color:#0e90d2;font-weight:bold;" id="sum">10</label>题当前第<label style="color:#0e90d2;font-weight:bold;" id="cur">6</label>题
+  </div>
+  <div class="am-u-sm-12">
+    <div id="bottom">
+        <div id="d1" class="div1">?</div>
+        <div id="d2" class="div2">=</div>
+        <div id="d3" class="div3">312</div>
+        <div id="d4" class="div4">×</div>
+        <div id="d5" class="div5">12345</div>
+  </div>
+
+  <form class="am-form">
+   <div class="am-form-group">
+      <label for="doc-ipt-email-1" id="express">答案</label>
+      <input type="email" class="answer" id="doc-ipt-email-1" placeholder="输入你的答案">
+      <input type="text" id="result" style="display:none">
+    </div>
+</form>
+
+
+   <ul class="am-pagination">
+    <li class="am-pagination-prev"><button type="button" class="am-btn am-btn-secondary" id="last">&laquo;上一题</button></a></li>
+    <li class="am-pagination-next"><button type="button" class="am-btn am-btn-secondary" id="next">下一题 &raquo;</button></a></li>
+   </ul>
+
+</div>
+</div>
+
+
+
+
+<div class="am-modal-actions" id="my-actions">
+  <div class="am-modal-actions-group">
+    <ul class="am-list">
+      <li class="am-modal-actions-header">更多功能敬请期待......</li>
+      <li><a href="chengfa.html"><span class="am-icon-wechat."></span>随机10道乘法题...</a></li>
+      <li class="am-modal-actions-danger">
+        <a href="chufa.html"><i class="am-icon-twitter."></i>随机10道除法法题...</a>
+      </li>
+    </ul>
+  </div>
+  <div class="am-modal-actions-group">
+    <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+  </div>
+</div>
+
+
+ </body>
+</html>

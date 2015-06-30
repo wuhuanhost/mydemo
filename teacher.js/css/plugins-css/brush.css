@@ -1,0 +1,137 @@
+body {
+	font-size: 12px;
+}
+canvas {
+	border-width: 1px;
+	border-style: dashed;
+	border-color: rgba(20, 126, 239, 0.50);
+	position: fixed;
+	z-index: 0;
+	cursor: crosshair;
+}
+#chooseColor{
+	height:21px;
+	width: 21px;
+	border:0px solid #FFFFFF;
+}
+
+
+#drawController {
+	position: fixed;
+	left: 0px;
+	bottom: 30px;
+	border: 1px solid #f05183;
+	height: 36px;
+	z-index: 1000000000000000000000000;
+	background-color: orange;
+}
+#drawController img {
+	float: left;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.border_nochoose {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(20, 126, 239, 0.5);
+	margin-top: 6px;
+}
+.border_choose {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(230, 69, 4);
+	margin-top: 6px;
+}
+table tr td a {
+	disabled: disabled;
+}
+table tr td img {
+	border-width: 2px;
+	border-style: dashed;
+	border-color: rgba(20, 126, 239, 0.5);
+	margin-top: 5px;
+}
+.i1 {
+
+	width: 21px;
+	height:21px;
+	background: #000000;
+}
+.i2 {	width: 21px;
+	height:21px;
+	background: #FF0000
+}
+.i3 {	width: 21px;
+	height:21px;
+	background: #80FF00;
+}
+.i4 {	width: 21px;
+	height:21px;
+	background: #00FFFF;
+}
+.i5 {	width: 21px;
+	height:21px;
+	background: #808080;
+}
+.i6 {	width: 21px;
+	height:21px;
+	background: #FF8000;
+}
+.i7 {	width: 21px;
+	height:21px;
+	background: #408080;
+}
+.i8 {	width: 21px;
+	height:21px;
+	background: #8000FF;
+}
+.i9 {	width: 21px;
+	height:21px;
+	background: #CCCC00;
+}
+.i10 {	width: 21px;
+	height:21px;
+	background: #ef0eef;
+}
+.i11 {	width: 21px;
+	height:21px;
+	background: #0b07f7;
+}
+.i12 {	width: 21px;
+	height:21px;
+	background: #099cf2;
+}.i13 {	width: 21px;
+	height:21px;
+	background: #0a7038;
+}.i14 {	width: 21px;
+	height:21px;
+	background: #591807;
+}
+.color {
+	padding-top: 6px;
+	width: 359px;
+	height: 36px;
+	position: fixed;
+	bottom: 67px;
+	left: 0px;
+	display: none;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #f05183;
+	line-height: 36px;
+	z-index: 1000000000000000000000000;
+}
+
+input{
+	border:0px;
+}
+#showHistory {
+	width: 780px;
+	float: right;
+	left: 700px;
+	position: absolute;
+}
+#line_size {
+	position: absolute;
+	display: none;
+}
