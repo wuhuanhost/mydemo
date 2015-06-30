@@ -42,12 +42,10 @@
 				var rege = /(\#[0-9a-zA-Z]{0,100}\#)/;
 				$("#edit").keydown(function() {
 					//console.log($("#edit").val());
-					
 					console.log($("#edit").val());
 					if (rege.test($("#edit").val().trim())) {
-						$("#left").html("<h1>"+$("#edit").val()+"</h1>");
-						$("#edit").val().replace(rege,"<h1>"+$("#edit").val()+"</h1>")
-						
+						$("#left").html("<h1>" + $("#edit").val() + "</h1>");
+						$("#edit").val().replace(rege, "<h1>" + $("#edit").val() + "</h1>")
 					} else {
 						$("#left").html($("#edit").val());
 					}
@@ -57,7 +55,6 @@
 	</head>
 
 	<body>
-
 		<div id="content">
 			<div id="left"></div>
 
@@ -66,9 +63,6 @@
 
 				</textarea>
 			</div>
-
 		</div>
-
 	</body>
-
 </html>
