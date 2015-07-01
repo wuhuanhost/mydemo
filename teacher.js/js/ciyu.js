@@ -69,7 +69,6 @@ var ciyu = (function($) {
 
 	ciyu.genHtml = function(id) {
 
-
 		var html = "";
 
 		for (var i = 0; i < this.arr.length; i++) {

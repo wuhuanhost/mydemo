@@ -35,24 +35,23 @@ var kewen = (function($) {
 			c.css("color", "#EEEEEE");
 		}
 	};
+
 	kewen.myClicks = function(id) {
 		$("#" + id + "-jiexi").toggle();
 	};
+	
 	kewen.genKenWenHtml = function() {
 		var keWenHtml = "";
 		var duanluoHtml = "";
 		var html = "";
 		for (var i = 0; i < this.arr.length; i++) {
 			for (var j = 0; j < this.arr[i].kewenArr.length; j++) {
-
 				if (this.arr[i].kewenArr[j].describe != "") {
 					keWenHtml += "<span class='kewen-style'>" + this.arr[i].kewenArr[j].kewen + "</span>" +
 						"<img src='img/chinese/icon_luobo.jpg' alt='' class='clickImg'   id='" + i + "-" + j + "-'  onclick='kewen.myClick(id)'/><span class='describe-style' id='" + i + "-" + j + "-kewen'>" + this.arr[i].kewenArr[j].describe + "</span>";
 				} else {
 					keWenHtml += "<span class='kewen-style'>" + this.arr[i].kewenArr[j].kewen + "</span>";
 				}
-
-
 			}
 			if (this.arr[i].duanluojiexi == "") {
 				duanluoHtml += "";

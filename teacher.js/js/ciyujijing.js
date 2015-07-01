@@ -5,6 +5,7 @@ var ciyujijing = (function() {
 	ciyujijing.init = function(data) {
 
 
+
 		this.xincijieshi = data.xincijieshi;
 		this.jingyici = data.jinyici;
 		this.fanyici = data.fanyici;
@@ -21,20 +22,27 @@ var ciyujijing = (function() {
 	//新词解释
 	ciyujijing.fun_xincijieshi = function() {
 
+		if(this.xincijieshi!=null){
+				xcjs.init(this.xincijieshi);
+				xcjs.genHtmls();
+				ciyujijing.html += xcjs.html;
+
+		}
 
 
-		xcjs.init(this.xincijieshi);
-		xcjs.genHtmls();
-		ciyujijing.html += xcjs.html;
 
 	};
 
 	//近义词
 	ciyujijing.fun_jingyici = function() {
 
-		ciyu.init(this.jingyici);
-		ciyu.genHtmls();
-		ciyujijing.html += ciyu.html;
+		if(this.jingyici!=null){
+			ciyu.init(this.jingyici);
+			ciyu.genHtmls();
+			ciyujijing.html += ciyu.html;
+		}
+
+
 
 	};
 
@@ -42,21 +50,23 @@ var ciyujijing = (function() {
 	//反义词
 	ciyujijing.fun_fanyici = function() {
 
-		fanyici.init(this.fanyici);
-		fanyici.genHtmls();
-		ciyujijing.html += fanyici.html;
-
-
-
+		if(this.fanyici!=null){
+			fanyici.init(this.fanyici);
+			fanyici.genHtmls();
+			ciyujijing.html += fanyici.html;
+		}
 
 	};
 
 	//多音字
 	ciyujijing.fun_duoyingzi = function() {
+			if(this.duoyingzi!=null){
 
-		duoyingzi.init(this.duoyingzi);
-		duoyingzi.genHtml();
-		ciyujijing.html += duoyingzi.html;
+				duoyingzi.init(this.duoyingzi);
+				duoyingzi.genHtml();
+				ciyujijing.html += duoyingzi.html;
+
+			}
 
 	};
 
@@ -65,18 +75,27 @@ var ciyujijing = (function() {
 	//近义词辨析
 	ciyujijing.fun_jingyicibianxi = function() {
 
-		jingyicibianxi.init(this.jingyicibianxi);
-		jingyicibianxi.genHtml();
-		ciyujijing.html += jingyicibianxi.html;
+		if(this.jingyicibianxi!=null){
+			jingyicibianxi.init(this.jingyicibianxi);
+			jingyicibianxi.genHtml();
+			ciyujijing.html += jingyicibianxi.html;
+
+		}
+
+
 
 	};
 
 	//听写乐园
 	ciyujijing.fun_tingxieleyuan = function() {
+			if(this.tingxieleyuan!=null){
 
-		tingxieleyuan.init(this.tingxieleyuan);
-		tingxieleyuan.genHtml();
-		ciyujijing.html += tingxieleyuan.html;
+					tingxieleyuan.init(this.tingxieleyuan);
+					tingxieleyuan.genHtml();
+					ciyujijing.html += tingxieleyuan.html;
+
+
+			}
 
 
 	}
@@ -85,9 +104,14 @@ var ciyujijing = (function() {
 	//美读指导
 	ciyujijing.fun_meiduzhidao = function() {
 
-		meiduzhidao.init(this.meiduzhidao);
-		meiduzhidao.genHtml();
-		ciyujijing.html += meiduzhidao.html;
+		if(this.meiduzhidao!=null){
+			meiduzhidao.init(this.meiduzhidao);
+			meiduzhidao.genHtml();
+			ciyujijing.html += meiduzhidao.html;
+
+		}
+
+
 
 
 
@@ -99,9 +123,12 @@ var ciyujijing = (function() {
 	ciyujijing.fun_kewendaoxue = function() {
 
 
-		kewendaoxue.init(this.kewendaoxue);
-		kewendaoxue.genHtml();
-		ciyujijing.html += kewendaoxue.html;
+			if(this.kewendaoxue!=null){
+					kewendaoxue.init(this.kewendaoxue);
+					kewendaoxue.genHtml();
+					ciyujijing.html += kewendaoxue.html;
+
+			}
 
 
 
@@ -115,7 +142,7 @@ var ciyujijing = (function() {
 		ciyujijing.fun_fanyici();
 		ciyujijing.fun_duoyingzi();
 		ciyujijing.fun_jingyicibianxi();
-		//ciyujijing.fun_tingxieleyuan();
+		ciyujijing.fun_tingxieleyuan();
 		ciyujijing.fun_meiduzhidao();
 		ciyujijing.fun_kewendaoxue();
 	}

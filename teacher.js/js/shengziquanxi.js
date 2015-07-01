@@ -24,7 +24,7 @@ var shengziquanxi = (function() {
 
 
 
-			one = "<h4><img src='" + this.oneData.titleImg + "' width='21px'/>" + this.oneData.title + "</h3>";
+			one = "<h4><img src='" + this.oneData.titleImg + "' width='21px'/>" + this.oneData.title + "</h4>";
 
 			for (var i = 0; i < this.oneData.contents.length; i++) {
 
@@ -40,7 +40,7 @@ var shengziquanxi = (function() {
 
 
 
-			two = "<h4><img src='" + this.twoData.titleImg + "' width='21px'/>" + this.twoData.title + "</h3>";
+			two = "<h4><img src='" + this.twoData.titleImg + "' width='21px'/>" + this.twoData.title + "</h4>";
 
 			ul = "<ul>";
 			for (var j = 0; j < this.twoData.contents.length; j++) {
