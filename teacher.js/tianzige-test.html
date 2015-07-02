@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.content {
+				width: 600px;
+				height: 600px;
+				position: absolute;
+				top: 12px;
+				left: 50%;
+				margin-left: -300px;
+			}
+			.hanzi-block {
+				width: 60px;
+				height: 60px;
+				background-color: red;
+				float: left;
+				z-index: 100000;
+				margin-left: -1px;
+				margin-top: -1px;
+			}
+			.tianzige_bk {
+				position: absolute;
+				width: 60px;
+				height: 60px;
+			}
+			.hanzi {
+				position: absolute;
+				color: red;
+				width: 60px;
+				height: 60px;
+				line-height: 60px;
+				text-align: center;
+				font-size: 46px;
+				font-weight: bold;
+				font-family: '楷体'
+			}
+			img {
+				width: 60px;
+				height: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class='' style='width:185px;height: 185px;'>
+			<div class='tianzige_bk' style='width:185px;height: 185px;'>
+				<img src="tianzige.jpg" alt="" style='width:185px;height: 185px;' />
+			</div>
+			<div class='hanzi' style='width:185px;height: 185px;line-height: 185px;font-size:185px;'>简</div>
+		</div>
+		<br />
+		<div class='' style='width:185px;height: 185px;'>
+			<div class='tianzige_bk' style='width:185px;height: 185px;'>
+				<img src="mizige.jpg" alt="" style='width:185px;height: 185px;' />
+			</div>
+			<div class='hanzi' style='width:185px;height: 185px;line-height: 185px;font-size:185px;color:#000000'>简</div>
+		</div>
+
+		<div class='content'>
+			<div class='hanzi-block'>
+				<div class='tianzige_bk'>
+					<img src="tianzige.jpg" alt="" />
+				</div>
+				<div class='hanzi'>简</div>
+			</div>
+			<div class='hanzi-block'>
+				<div class='tianzige_bk'>
+					<img src="tianzige.jpg" alt="" />
+				</div>
+				<div class='hanzi'>介</div>
+			</div>
+			<div class='hanzi-block'>
+				<div class='tianzige_bk'>
+					<img src="tianzige.jpg" alt="" />
+				</div>
+				<div class='hanzi'>-</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var hanziArr = ["百", "度", "百", "科", "旨", "在", "创", "造", "一", "个", "涵", "盖", "各", "个", "领", "域", "知", "识", "的", "中", "文", "信", "息", "收", "集", "平", "台"];
+		(function() {
+			var html = "";
+			for (var i = 0; i < hanziArr.length; i++) {
+				html += "<div class='hanzi-block'><div class='tianzige_bk'><img src='tianzige.jpg'/></div><div class='hanzi'>" + hanziArr[i] + "</div></div>";
+			}
+			html += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>";
+			for (var i = 0; i < hanziArr.length; i++) {
+				html += "<div class='hanzi-block'><div class='tianzige_bk'><img src='mizige.jpg'/></div><div class='hanzi' style='color:#000000'>" + hanziArr[i] + "</div></div>";
+			}
+			$(".content").append(html);
+		})();
+	</script>
+
+</html>
