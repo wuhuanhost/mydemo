@@ -44,6 +44,26 @@
 				height: 60px;
 			}
 		</style>
+
+		<script type="text/javascript">
+			function person(name, age) {
+				this.name = name;
+				this.age = age;
+			}
+			person.prototype = {
+					getName: function() {
+						console.log(this.name);
+						return this;
+					},
+					getAge: function() {
+						console.log(this.age);
+						return this;
+					}
+				}
+				//javascript链式写法，只要每个方法返回调用对象本身就可以使用链式写法
+			new person("李明", 18).getAge().getName();
+		</script>
+
 	</head>
 
 	<body>
