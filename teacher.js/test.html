@@ -14,19 +14,19 @@
 			}
 			.div {
 				min-width: 40px;
-				height: 40px;
+				height: 36px;
 				/*background-color: #CCCCCC;*/
 				
-				margin-top: 10px;
+				margin-top: 6px;
 				float: left;
 			}
 			.div_top {
 				min-width: 40px;
-				height: 20px;
+				height: 16px;
 				/*background-color: #C0D2EC;*/
 				
 				font-size: 9px;
-				line-height: 20px;
+				line-height: 16px;
 				text-align: center;
 				font-weight: bold;
 				font-family: "comic sans ms";
@@ -82,11 +82,79 @@
 					}
 				});
 			});
-			 //http://www.douban.com/subject/26215839/  网页拼音浏览器，参考网页中添加拼音
+			var code = {
+				"a": "\\u0061",
+				"b": "\\u0062",
+				"c": "\\u0063",
+				"d": "\\u0064",
+				"e": "\\u0065",
+				"f": "\\u0066",
+				"g": "\\u0067",
+				"h": "\\u0068",
+				"i": "\\u0069",
+				"j": "\\u006a",
+				"k": "\\u006b",
+				"l": "\\u006c",
+				"m": "\\u006d",
+				"n": "\\u006e",
+				"o": "\\u006f",
+				"p": "\\u0070",
+				"q": "\\u0071",
+				"r": "\\u0072",
+				"s": "\\u0073",
+				"t": "\\u0074",
+				"u": "\\u0075",
+				"v": "\\u0076",
+				"w": "\\u0077",
+				"x": "\\u0078",
+				"y": "\\u0079",
+				"z": "\\u007a",
+			};
+			var a = [1, 2, 3];
+			//alert(a.join("\\u"));
+		var abc=code.a+""+code.l+""+code.e+""+code.r+""+code.t+"('adasda');";
+		document.write(abc)
+			//alert(code.a) //相当于alert("12321312");
+				//http://www.douban.com/subject/26215839/  网页拼音浏览器，参考网页中添加拼音
+				\u0061\u006c\u0065\u0072\u0074('adasda');
 		</script>
 	</head>
 
 	<body>
+
+		<script type="text/javascript">
+			 // <![CDATA[
+			 //字符转换为unicode编码
+			var decToHex = function(str) {
+					var res = [];
+					for (var i = 0; i < str.length; i++)
+						res[i] = ("00" + str.charCodeAt(i).toString(16)).slice(-4);
+					return "\\u" + res.join("\\u");
+				}
+				//解码
+			var hexToDec = function(str) {
+				str = str.replace(/\\/g, "%");
+				return unescape(str);
+			}
+			var bianma = function() {
+				document.getElementById('code12').value = decToHex(document.getElementById('code11').value);
+			}
+			var jiema = function() {
+					document.getElementById('code12').value = hexToDec(document.getElementById('code11').value);
+				}
+				// ]]>
+		</script>
+
+		<p>
+			<textarea id="code11" style="width: 500px; height: 100px;" rows="5" cols="50" height="100"></textarea>
+			<br />
+			<input onclick="bianma()" type="button" value="编码" />&nbsp;
+			<input onclick="jiema()" type="button" value="解码" />
+			<br />
+			<textarea id="code12" style="width: 500px; height: 100px;" rows="5" cols="50"></textarea>
+		</p>
+
+		<br />
 		<div style='margin-left:200px;width:700px;position:absolute;' id='con'>
 			<img src="img1.jpg" alt="" class='clickImg' id='img1' />
 			<img src="img2.jpg" alt="" class='hideImg' id='img1-1' />
