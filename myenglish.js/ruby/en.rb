@@ -1,4 +1,3 @@
-
 require 'json'
 @arr=[];
 #图片题文本解析
