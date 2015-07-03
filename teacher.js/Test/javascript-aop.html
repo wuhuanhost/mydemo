@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			 //javascript aop对象模型
+			var aspect = {
+				before: function(context, targetName, fn) {
+					var target = context[targetName];
+					context[targetName] = function() {
+						return target.apply(context, fn.apply(context, arguments));
+					};
+				},
+				after: function(context, targetName, fn) {
+					var target = context[targetName];
+					context[targetName] = function() {
+						return fn.apply(context, target.apply(context, arguments));
+					};
+				}
+			};
+			 //绑定按钮事件
+			function voice() {
+				alert("执行voice方法");
+			}
+			aspect.after(window, 'voice', function() {
+				alert("voice方法执行【后】执行");
+			});
+			aspect.before(window, 'voice', function() {
+				alert("voice方法执行【前】执行");
+			});
+			/**------------------------------------------------------------------------------------分割线---------------------------------------------------------------------------------**/
+			 //绑定方法测试
+			function hello() {
+				for (var i = 0; i < arguments.length; i++) {
+					arguments[i] += "[hello]";
+				}
+				return arguments;
+			}
+			aspect.before(window, 'hello', function() {
+				for (var i = 0; i < arguments.length; i++) {
+					arguments[i] += "[before]";
+				}
+				return arguments;
+			});
+			aspect.after(window, 'hello', function() {
+				for (var i = 0; i < arguments.length; i++) {
+					arguments[i] += "[after]";
+				}
+				return arguments;
+			});
+			var args = hello('World', 'JavaScript');
+			console.log(Array.prototype.join.apply(args, [' ']));
+		</script>
+	</head>
+
+	<body>
+
+		<input type="button" id="btn" value="动我就叫人来" onclick="voice()">
+	</body>
+
+</html>
