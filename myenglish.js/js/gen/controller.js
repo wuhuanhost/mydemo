@@ -3,7 +3,7 @@ var controller = (function() {
 	var controller = {};
 
 	controller.init = function(data) {
-		this.arr = data.arr;
+		this.arr = data;
 		this.title = data.title;
 		this.genHtml();
 	};

@@ -1,0 +1,31 @@
+#pageflip {
+	right: 0px;
+	float: right;
+	position: absolute;
+	top: 0px
+}
+#pageflip img {
+	z-index: 99;
+	right: 0px;
+	width: 50px;
+	position: absolute;
+	top: 0px;
+	height: 52px;
+	ms-interpolation-mode: bicubic
+}
+#pageflip .msg_block {
+	right: 0px;
+	/*background: url(http://www.17sucai.com/preview/102609/2014-03-25/jQuery+css%E5%B8%A6%E9%98%B4%E5%BD%B1%E7%9A%84%E6%92%95%E9%A1%B5%E5%B9%BF%E5%91%8A%E4%BB%A3%E7%A0%81/images/subscribe.png) no-repeat right top;*/
+	overflow: hidden;
+	width: 50px;
+	position: absolute;
+	top: 0px;
+	height: 50px
+}
+#bottom {
+	position: fixed;
+	bottom: 0px;
+	height: 36px;
+	width: 100%;
+	background-color: #EEEEEE;
+	line-height: 36px;

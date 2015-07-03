@@ -3,6 +3,7 @@ var choice = (function() {
 	var choice = {};
 
 	choice.init = function(data) {
+		console.log(data)
 		this.index = data.index;
 		this.type = data.type;
 		this.title = data.title;
@@ -14,17 +15,17 @@ var choice = (function() {
 		this.scores = data.scores / data.data.length; //每个小题的分数
 		this.genHtml(this.scores);
 	};
-//	choice.choice = function(dom) {
-//		alert(123);
-//
-//		var idArr = dom.class.split("-");
-//
-//		$("#" + $(dom).attr("class")).val($(dom).val());
-//
-//		$("#" + idArr[0] + "-" + idArr[1] + "-progress").css("background-color", "green");
-//
-//
-//	};
+	//	choice.choice = function(dom) {
+	//		alert(123);
+	//
+	//		var idArr = dom.class.split("-");
+	//
+	//		$("#" + $(dom).attr("class")).val($(dom).val());
+	//
+	//		$("#" + idArr[0] + "-" + idArr[1] + "-progress").css("background-color", "green");
+	//
+	//
+	//	};
 
 	choice.inputClick = function(dom) {
 		var idArr = $(dom).attr("class").split("-");
@@ -32,7 +33,7 @@ var choice = (function() {
 		if ($(dom).attr("disabled") == "disabled") {
 			alert("请先点击开始答题按钮，然后开始作答！");
 		} else {
-			
+
 			$("#" + $(dom).attr("class")).val($(dom).val());
 
 			$("#" + idArr[0] + "-" + idArr[1] + "-progress").css("background-color", "#227218");
@@ -57,14 +58,17 @@ var choice = (function() {
 
 			var html = "";
 
-			html += "<div class='choice' id='"+this.index+"-"+(c+1)+"'>";
+			html += "<div class='choice' id='" + this.index + "-" + (c + 1) + "'>";
 
 			//循环question
-			for (var i = 0; i < this.data[c].question.length; i++) {
+			if (this.data[c].question != null) {
+				for (var i = 0; i < this.data[c].question.length; i++) {
 
-				html = html.concat("<span class='question'>" + this.data[c].question[i] + "</span>");
+					html = html.concat("<span class='question'>" + this.data[c].question[i] + "</span>");
 
+				}
 			}
+
 			var span = "<span class='test'><label class='label'>请选择答案：</label>";
 
 			for (var j = 0; j < this.data[c].option.length; j++) {
