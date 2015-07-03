@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			@keyframes myfirst {
+				from {
+					background: #21bbff;
+				}
+				to {
+					background: #f05183;
+				}
+			}
+			@-moz-keyframes myfirst
+			/* Firefox */
+			
+			{
+				from {
+					background: #21bbff;
+				}
+				to {
+					background:;
+				}
+			}
+			@-webkit-keyframes myfirst
+			/* Safari 和 Chrome */
+			
+			{
+				from {
+					background: #21bbff;
+				}
+				to {
+					background: #f05183;
+				}
+			}
+			@-o-keyframes myfirst
+			/* Opera */
+			
+			{
+				from {
+					background: #21bbff;
+				}
+				to {
+					background: #f05183;
+				}
+			}
+			div {
+				width: 100px;
+				height: 100px;
+				background:#21bbff;
+				animation: myfirst 5s;
+				-moz-animation: myfirst 5s;
+				/* Firefox */
+				
+				-webkit-animation: myfirst 5s;
+				/* Safari 和 Chrome */
+				
+				-o-animation: myfirst 5s;
+				/* Opera */
+			}
+		</style>
+	</head>
+
+	<body>
+		<div></div>
+	</body>
+
+</html>
