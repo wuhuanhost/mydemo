@@ -4,43 +4,90 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
-			var flag = null; //脚本加载成功的表示
+			/**
+			 *js加载单个js文件
+			 * @param {Object} uri
+			 */
 			function loadScript(uri) {
-					var head = document.getElementsByTagName('head')[0];
-					var script = document.createElement('script');
-					script.type = 'text/javascript';
-					script.onload = script.onreadystatechange = function() {
-						if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
-							console.log("_>:[" + uri + "]库加载完成......<br/>")
-							init();
-							// Handle memory leak in IE 
-							script.onload = script.onreadystatechange = null;
-						}
-					};
-					script.src = uri;
-					head.appendChild(script);
-				}
-				//动态加载jquery
+				var head = document.getElementsByTagName('head')[0];
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.onload = script.onreadystatechange = function() {
+					if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+						console.log("_>:[" + uri + "]库加载完成......<br/>")
+						init();
+						// Handle memory leak in IE 
+						script.onload = script.onreadystatechange = null;
+					}
+				};
+				script.src = uri;
+				head.appendChild(script);
+			};
+			 //动态加载jquery
 			loadScript("../js/jquery-1.11.2.min.js");
 			 //加载完成后执行的回调函数
 			function init() {
 				$("#abc").append("_>:动态加载jquery库测试");
 			}
-			$(document).ready(function() {
-				//需要加载的脚本数组
-				var script = ["../js/jquery-1.11.2.min.js", "../js/jquery-1.11.2.min.js", "../js/jquery-1.11.2.min.js"];
-				//为数组赋值，默认全部为false
-				for (var i = 0; i < script.length; i++) {
-					flag.push(false);
-				}
-			});
 		</script>
 	</head>
 
 	<body>
-		<div id="abc">qqqqqqqqqqqq</div>
+		<div id="abc" class="describe-style">qqqqqqqqqqqq</div>
 	</body>
+	<script type="text/javascript">
+		/**
+		 *js动态加载多个js或者css脚本
+		 * @param {Object} arr
+		 * @param {Object} callback
+		 */
+		function loadJsCss(arr, callback) {
+			var len = arr.length,
+				num = 0,
+				ref = null;
+			if (len == 0) {
+				return false;
+			}
+			for (var i in arr) {
+				///创建节点
+				if (arr[i].type == "js") {
+					ref = document.createElement("script");
+					ref.setAttribute("type", "text/javascript");
+					ref.setAttribute("src", arr[i].url);
+				} else {
+					ref = document.createElement("link");
+					ref.setAttribute("rel", "stylesheet");
+					ref.setAttribute("type", "text/css");
+					ref.setAttribute("href", arr[i].url);
+				}
+				if (typeof ref != "undefined") {
+					//将创建的节点插入document
+					document.getElementsByTagName("head")[0].appendChild(ref);
+					ref.onload = ref.onreadystatechane = function() {
+						if (ref.readyState && ref.readyState != "loaded" && ref.readyState != "complete") {
+							return;
+						}
+						num = num + 1;
+						//判断加载的个数是否等于总个数，执行回调
+						if (num == len && typeof(callback) === "function") {
+							callback();
+						}
+					}
+				}
+			}
+		};
+		 //js或者css列表
+		var files = [{
+			type: "js",
+			url: "../js/jquery-1.11.2.min.js"
+		}];
+		 //加载方法和或调函数
+		loadJsCss(files, function() {
+			//这里是加载成功回调
+			alert("加载成功！");
+			alert($("#abc").html())
+		});
+	</script>
 
 </html>
