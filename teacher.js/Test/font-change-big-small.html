@@ -5,10 +5,12 @@
 		<meta charset="utf-8">
 		<title></title>
 		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
-		<script type="text/javascript" src="../js/plugins-js/jQuery.Hz2Py-min.js" ></script>
+		<script type="text/javascript" src="../js/plugins-js/jQuery.Hz2Py-min.js"></script>
 		<style type="text/css">
 			body {
-				font-size: 30px;
+				width: 100%;
+				height：100%;
+				font-size: 14px;
 			}
 			#test-font {
 				height: 200px;
@@ -18,52 +20,74 @@
 				line-height: 200px;
 				font-size：12px;
 			}
-			rt{
-				font-size:12px;
+			rt {
+				font-size: 12px;
+			}
+			#content {
+				width: 600px;
+				height: 600px;
+				margin: 0 auto;
 			}
 		</style>
 		<script>
 			$(document).ready(function() {
+				var size = 1;
 				$("#big").click(function() {
-					var ccc="你"
-					$("body").css("font-size", "2em");
-					alert($(ccc).toPinyin())
+					if (size < 2) {
+						size += 0.1;
+					}
+					$("#content").css('-webkit-transform', 'scale(' + size + ',' + size + ')');
+				});
+				$("#small").click(function() {
+					if (size > 1) {
+						size -= 0.1;
+					}
+					$("#content").css('-webkit-transform', 'scale(' + size + ',' + size + ')');
 				});
 			});
 		</script>
 	</head>
 
 	<body>
-		<div id='test-font' contenteditable="true">
-			javascript动态改变字体大小测试。
+		<div id="content">
+			<div id='test-font' contenteditable="false" class='tests'>
+				javascript动态改变字体大小测试。
+			</div>
+			<button id='big'>字体变大</button>
+			<button id='small'>字体变小</button>
+			<br />
+			<br />
+			<br />
+			<!--html5汉字拼音-->
+			<p>
+				<ruby>
+					中
+					<rt>zhong</rt>
+					国
+					<rt>guo</rt>
+					文
+					<rt>wen</rt>
+					字
+					<rt>zi</rt>
+					博
+					<rt>bo</rt>
+					大
+					<rt>da</rt>
+					精
+					<rt>jing</rt>
+					深
+					<rt>shen</rt>
+				</ruby>
+				<ruby>
+					<rb>博远电子</rb>
+					<rt>bo yuan dian zi</rt>
+				</ruby>
+				<br />
+				<br />
+				<br />
+				<!--<ruby>今日<rt>きょう</ruby>-->
+			</p>
 		</div>
-		<button id='big'>字体变大</button>
-		<button id='small'>字体变小</button>
-		<br />
-		<br />
-		<br />
-		<!--html5汉字拼音-->
-		<p>
-			<ruby>
-				中<rt>zhong</rt>
-				国<rt>guo</rt>
-				文<rt>wen</rt>
-				字<rt>zi</rt>
-				博<rt>bo</rt>
-				大<rt>da</rt>
-				精<rt>jing</rt>
-				深<rt>shen</rt>
-			</ruby>
-			<ruby>
-				<rb>博远电子</rb>
-				<rt>IT xue xi zhe</rt>
-			</ruby>
-			<br />
-			<br />
-			<br />
-			<ruby>今日<rt>きょう</ruby>
-			
-		</p>
 	</body>
 
 </html>

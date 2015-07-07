@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript">
+			var flag = null; //脚本加载成功的表示
+			function loadScript(uri) {
+					var head = document.getElementsByTagName('head')[0];
+					var script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.onload = script.onreadystatechange = function() {
+						if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+							console.log("_>:[" + uri + "]库加载完成......<br/>")
+							init();
+							// Handle memory leak in IE 
+							script.onload = script.onreadystatechange = null;
+						}
+					};
+					script.src = uri;
+					head.appendChild(script);
+				}
+				//动态加载jquery
+			loadScript("../js/jquery-1.11.2.min.js");
+			 //加载完成后执行的回调函数
+			function init() {
+				$("#abc").append("_>:动态加载jquery库测试");
+			}
+			$(document).ready(function() {
+				//需要加载的脚本数组
+				var script = ["../js/jquery-1.11.2.min.js", "../js/jquery-1.11.2.min.js", "../js/jquery-1.11.2.min.js"];
+				//为数组赋值，默认全部为false
+				for (var i = 0; i < script.length; i++) {
+					flag.push(false);
+				}
+			});
+		</script>
 	</head>
+
 	<body>
+		<div id="abc">qqqqqqqqqqqq</div>
 	</body>
+
 </html>
