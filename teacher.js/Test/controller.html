@@ -12,13 +12,14 @@
 			}
 			controller.prototype.callback = function() {
 				console.log("脚本加载完成......");
+				var html = ''
 				for (var i = 0; i < this.data.length; i++) {
-					if (this.data[i].type == "picture") {
-						console.log("调用picture渲染器渲染");
-					} else if (this.data[i].type == "choice") {
-						console.log("调用choice渲染器渲染");
-					} else if (this.data[i].type == "underline") {
-						console.log("调用underline渲染器渲染");
+					for (var j = 0; j < check.length; j++) {
+						if (this.data[i].type == check[j].type) {
+							window[this.check[i].use].init(this.data[i])
+							window[this.check[i].use].genHtml()
+							html.concat(window[this.check[i].use].html);
+						}
 					}
 				}
 			};
@@ -43,11 +44,11 @@
 			function buildObj(list, use) {
 				var obj = {};
 				obj.type = "js";
-				obj.url = "../js/" + use + ".js";
+				obj.url = "../../js/" + use + ".js";
 				list.push(obj);
 				var obj1 = {};
 				obj1.type = "css";
-				obj1.url = "../css/" + use + ".css";
+				obj1.url = "../../css/" + use + ".css";
 				list.push(obj1);
 			};
 			 //加载js和css的方法
@@ -73,14 +74,11 @@
 					if (typeof ref != "undefined") {
 						//将创建的节点插入document
 						document.getElementsByTagName("head")[0].appendChild(ref);
-						
 						if (ref.src != null) {
 							console.log(ref.src + "     加载完成");
 						} else {
 							console.log(ref.href + "     加载完成");
 						}
-						
-						
 						ref.onload = ref.onreadystatechane = function() {
 							if (ref.readyState && ref.readyState != "loaded" && ref.readyState != "complete") {
 								return;
@@ -99,25 +97,11 @@
 				"type": "choice",
 				"title": "选择题",
 				"data": ""
-			}, {
-				"type": "underline",
-				"title": "下划线题目",
-				"data": ""
-			}, {
-				"type": "picture",
-				"title": "选择题",
-				"data": ""
 			}];
 			 //模拟用户指定的渲染器[picture类型的数据使用picture-1渲染器渲染]
 			var check = [{
 				"type": "choice",
 				"use": "kewen"
-			}, {
-				"type": "underline",
-				"use": "dtree"
-			}, {
-				"type": "picture",
-				"use": "dtree"
 			}];
 			 //测试
 			var abc = new controller(data);

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			var abc = (function() {
+				var abc = {};
+				abc.getName = function() {
+					
+					return "123";
+				}
+				return abc;
+			})();
+			
+			
+			alert(this["abc"].getName());
+			
+			
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>
