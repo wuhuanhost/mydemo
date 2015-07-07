@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript">
+			 //渲染方法总控制器
+			function controller(data) {
+				this.data = data;
+			}
+			controller.prototype.callback = function() {
+				console.log("脚本加载完成......");
+				for (var i = 0; i < this.data.length; i++) {
+					if (this.data[i].type == "picture") {
+						console.log("调用picture渲染器渲染");
+					} else if (this.data[i].type == "choice") {
+						console.log("调用choice渲染器渲染");
+					} else if (this.data[i].type == "underline") {
+						console.log("调用underline渲染器渲染");
+					}
+				}
+			};
+			 //加载需要的js和css文件
+			controller.prototype.control = function() {
+				var files = new Array();
+				//循环渲染数据	
+				for (var i = 0; i < this.data.length; i++) {
+					//循环用户指定的渲染器
+					for (var j = 0; j < check.length; j++) {
+						if (this.data[i].type == check[j].type) {
+							buildObj(files, check[j].use);
+						}
+					}
+				}
+				for (var k = 0; k < files.length; k++) {
+					console.log(files[k]);
+				}
+				loadJsCss(files, abc.callback);
+			};
+			 //组装加载对象的方法
+			function buildObj(list, use) {
+				var obj = {};
+				obj.type = "js";
+				obj.url = "../js/" + use + ".js";
+				list.push(obj);
+				var obj1 = {};
+				obj1.type = "css";
+				obj1.url = "../css/" + use + ".css";
+				list.push(obj1);
+			};
+			 //加载js和css的方法
+			function loadJsCss(arr, callback) {
+				var len = arr.length,
+					num = 0,
+					ref = null;
+				if (len == 0) {
+					return false;
+				}
+				for (var i in arr) {
+					///创建节点
+					if (arr[i].type == "js") {
+						ref = document.createElement("script");
+						ref.setAttribute("type", "text/javascript");
+						ref.setAttribute("src", arr[i].url);
+					} else {
+						ref = document.createElement("link");
+						ref.setAttribute("rel", "stylesheet");
+						ref.setAttribute("type", "text/css");
+						ref.setAttribute("href", arr[i].url);
+					}
+					if (typeof ref != "undefined") {
+						//将创建的节点插入document
+						document.getElementsByTagName("head")[0].appendChild(ref);
+						
+						if (ref.src != null) {
+							console.log(ref.src + "     加载完成");
+						} else {
+							console.log(ref.href + "     加载完成");
+						}
+						
+						
+						ref.onload = ref.onreadystatechane = function() {
+							if (ref.readyState && ref.readyState != "loaded" && ref.readyState != "complete") {
+								return;
+							}
+							num = num + 1;
+							//判断加载的个数是否等于总个数，执行回调
+							if (num == len && typeof(callback) === "function") {
+								callback();
+							}
+						}
+					}
+				}
+			};
+			 //模拟数据
+			var data = [{
+				"type": "choice",
+				"title": "选择题",
+				"data": ""
+			}, {
+				"type": "underline",
+				"title": "下划线题目",
+				"data": ""
+			}, {
+				"type": "picture",
+				"title": "选择题",
+				"data": ""
+			}];
+			 //模拟用户指定的渲染器[picture类型的数据使用picture-1渲染器渲染]
+			var check = [{
+				"type": "choice",
+				"use": "kewen"
+			}, {
+				"type": "underline",
+				"use": "dtree"
+			}, {
+				"type": "picture",
+				"use": "dtree"
+			}];
+			 //测试
+			var abc = new controller(data);
+			abc.control();
+		</script>
+
+	</head>
+
+	<body>
+	</body>
+
+</html>
