@@ -10,14 +10,15 @@ var Animal = function(obj) {
 		console.log("小狗旺旺......");
 	}
 };
+
 //鸭子抽象类
 function Durk(name) {
 	this.name = name;
 };
+
 //小狗抽象类 
 function Dog(name) {
 	this.name = name;
-
 };
 
 Animal(new Durk("123"));
@@ -37,6 +38,7 @@ function Taxi(color, speed) {
 	this.speed = speed; //Taxi新增加的属性
 	Car.call(this, color);
 };
+
 //继承Car的方法
 for (var i in Car.prototype) {
 	/**
