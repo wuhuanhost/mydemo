@@ -15,16 +15,16 @@
 				background-color: blue;
 			}
 			#left {
-				width: 630px;
+				width: 634px;
 				height: 800px;
 				float: left;
 				border: 1px solid red;
 				background-color: #FFFFFF;
 			}
 			#right {
-				width: 630px;
+				width: 634px;
 				height: 800px;
-				float: right;
+				float: left;
 				border: 1px solid green;
 				background-color: #FFFFFF;
 			}
@@ -35,6 +35,14 @@
 				width: 628px;
 				height: 795px;
 				font-size: 20px;
+			
+			}
+			#center{
+				width:6px;
+				background-color: orange;
+				float: left;
+				height:100%;	cursor:col-resize
+				
 			}
 		</style>
 		<script type="text/javascript">
@@ -50,6 +58,11 @@
 						$("#left").html($("#edit").val());
 					}
 				});
+				$("#center").mousedown(function(e) {
+					$(this).mousemove(function(e) {
+						console.log(e);
+					});
+				});
 			});
 		</script>
 	</head>
@@ -57,10 +70,9 @@
 	<body>
 		<div id="content">
 			<div id="left">
-				
-				
-			</div>
 
+			</div>
+			<div id="center" style=""></div>
 			<div id="right">
 				<textarea name="" rows="" cols="" id="edit">
 

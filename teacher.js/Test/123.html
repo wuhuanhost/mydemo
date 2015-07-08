@@ -1,27 +1,232 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<script>
-			var abc = (function() {
-				var abc = {};
-				abc.getName = function() {
-					
-					return "123";
-				}
-				return abc;
-			})();
-			
-			
-			alert(this["abc"].getName());
-			
-			
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>mootools实现可以左右拖动的分栏 - 分享JavaScript-www.websbook.com</title>
+		<meta name="Copyright" content="JavaScript分享网 http://www.websbook.com/" />
+		<meta name="description" content="mootools实现可以左右拖动的分栏,JavaScript分享网" />
+		<meta content="JavaScript,分享,JavaScript代码,Ajax" name="keywords" />
+		<script type="text/javascript" src="../js/common/mootools-1.2.3-core-yc.js"></script>
+		<script type="text/javascript" src="../js/common/mootools-1.2.3.1-more.js"></script>
+		<style type="text/css">
+			.clear {
+				clear: both;
+			}
+			p {
+				padding: 10px;
+			}
+			#message {
+				border: 1px solid #DDD;
+				background: #FFFFEE;
+				text-align: center;
+				padding: 4px;
+				min-height: 20px;
+				margin-bottom: 10px;
+				-moz-border-radius: 6px;
+				-webkit-border-radius: 6px;
+			}
+			#col_wrapper {
+				border: 1px solid #0066cc;
+				position: relative;
+				min-height: 300px;
+				margin-top: 30px;
+			}
+			.column {
+				position: relative;
+				min-height: 300px;
+			}
+			#col_1 {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 200px;
+				background: #ECECEC;
+			}
+			#col_2 {
+				position: absolute;
+				top: 0px;
+				left: 200px;
+				width: 558px;
+				border-right: 1px dotted #0066cc;
+				border-left: 1px dotted #0066cc;
+				background: #EEEEEE;
+			}
+			#col_3 {
+				position: absolute;
+				top: 0px;
+				left: 760px;
+				width: 200px;
+				background: #EDEDED;
+			}
+			.column .col_title {
+				padding: 4px;
+				background: #0066cc;
+				border-bottom: 1px solid #FFF;
+				color: #FFF;
+			}
+			.column .col_msg {
+				float: right;
+				font-size: 90%;
+				color: #FFF;
+			}
+			.resize {
+				position: absolute;
+				top: 26px;
+				right: -3px;
+				height: 30px;
+				width: 3px;
+				background: #666 url("../img/common/handle.gif");
+				cursor: col-resize;
+				z-index: 200;
+				-moz-border-radius: 2px;
+				-webkit-border-radius: 2px;
+				border: 1px solid #666;
+			}
+		</style>
+
+		<script type="text/javascript">
+			window.addEvent('domready', function() {
+				//	define column elemnts
+				var col_wrap = $('col_wrapper'); //	define the column wrapper so as to be able to get the total width via mootools
+				var col_left = $('col_1');
+				var col_center = $('col_2');
+				var col_right = $('col_3');
+				//	define padding (seperator line widths) for column borders as defined in css
+				var pad = 1;
+				//	define snap if required - set to 0 for no snap
+				var w_snap = 5;
+				var w_total = col_wrap.getWidth() - (pad * 2); // total width of wrapper
+				var w_min = 120; //	minimum width for columns
+				var w_min_c = w_min - (2 * pad);
+				//	define message output elements (not essential to script)
+				var col_1_msg = $("col_1_msg");
+				var col_2_msg = $("col_2_msg");
+				var col_3_msg = $("col_3_msg");
+				//show column start widths in col headers (just for show)
+				col_1_msg.innerHTML = col_left.getWidth() + "px";
+				col_2_msg.innerHTML = col_center.getWidth() + "px";
+				col_3_msg.innerHTML = col_right.getWidth() + "px";
+				//	left column - affects center column position and width
+				col_left.makeResizable({
+					handle: col_left.getChildren('.resize'),
+					grid: w_snap,
+					modifiers: {
+						x: 'width',
+						y: false
+					},
+					limit: {
+						x: [w_min, null]
+					},
+					onStart: function(el) {
+						//	get available width - total width minus right column - minimum col with
+						w_avail = (w_total - col_right.getWidth()) - w_min;
+					},
+					onDrag: function(el) {
+						if (el.getWidth() >= w_avail) {
+							//	max width reached - stop drag (force max widths)
+							el.setStyle("width", w_avail);
+						}
+						//	set center col left position
+						col_center.setStyle("left", col_left.getWidth());
+						//	define and set center col width (total minus left minus right)
+						w_center = w_total - col_left.getWidth() - col_right.getWidth();
+						col_center.setStyle("width", w_center.toInt() - (pad * 2));
+						//	messages
+						col_1_msg.innerHTML = " " + col_left.getWidth() + "px";
+						col_2_msg.innerHTML = " " + col_center.getWidth() + "px";
+						col_3_msg.innerHTML = " " + col_right.getWidth() + "px";
+					},
+					onComplete: function() {
+						//could add final width to form field here
+					}
+				});
+				// mootools can't resize to the left so we have to resize the center column rather than the right-hand column
+				col_center.makeResizable({
+					handle: col_center.getChildren('.resize'),
+					grid: w_snap,
+					modifiers: {
+						x: 'width',
+						y: false
+					},
+					limit: {
+						x: [w_min_c, null]
+					},
+					onStart: function(el) {
+						//	get start width so as to be able to adjust center column width
+						w_start = el.getWidth();
+						//	get available width - total width minus left column - minimum col with
+						w_avail = w_total - col_left.getWidth() - w_min - (pad * 2);
+					},
+					onDrag: function(el) {
+						if (el.getWidth() >= w_avail) {
+							//	max width reached - stop drag (force max widths)
+							el.setStyle("width", w_avail);
+						} else if (el.getWidth() == w_min_c) {
+							//	ensure that right col has complete available width
+							el.setStyle("width", w_min_c);
+						}
+						// define new left position
+						l_new = col_left.getWidth() + col_center.getWidth(); //	force left space for right col
+						col_right.setStyle("left", l_new.toInt());
+						//	define and set right column width -  will always be result of left and center columns
+						w_new = w_total - col_left.getWidth() - col_center.getWidth();
+						col_right.setStyle("width", w_new.toInt());
+						//	show messages
+						col_1_msg.innerHTML = " " + col_left.getWidth() + "px";
+						col_2_msg.innerHTML = " " + col_center.getWidth() + "px";
+						col_3_msg.innerHTML = " " + col_right.getWidth() + "px";
+					},
+					onComplete: function() {
+						//could add final width to form field here
+					}
+				});
+			});
 		</script>
 	</head>
 
 	<body>
+		<div id="col_wrapper">
+			<div id="col_1" class="column drag_width">
+				<div id="col_1_title" class="col_title">&nbsp;<span id="col_1_msg" class="col_msg"></span>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				<div class="resize"></div>
+			</div>
+			<div id="col_2" class="column drag_width">
+				<div id="col_1_title" class="col_title">&nbsp;<span id="col_2_msg" class="col_msg"></span>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				<div class="resize"></div>
+			</div>
+			<div id="col_3" class="column">
+				<div id="col_1_title" class="col_title">&nbsp;<span id="col_3_msg" class="col_msg"></span>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<p>
+			<ul>
+				<li>Drag the column handles to adjust the column widths.</li>
+				<li>Uses <a href="http://www.mootools.net" title="Mootools" target="_blank">Mootools</a> v1.2.3</li>
+				<li>See source code for implementation</li>
+				<li>How to use at <a href="http://blog.cbolson.com/mootools-expandable-columns/" title="Back to blog">the blog</a>
+				</li>
+				<li>Help and Suggestions on the <a href="http://forum.cbolson.com/viewforum.php?f=15" title="Need Help">forum</a>
+				</li>
+			</ul>
+		</p>
+		</div>
+
+		<br>
+		<br>
+		<div align="center">
+
+			<br>
+			<br> 更多JS代码下载请访问websbook.com <a href="http://www.websbook.com">http://www.websbook.com</a>
+			<br> 转载请注明出处，本代码仅供学习交流，不可用于任何商业用途！
+		</div>
 	</body>
 
 </html>
