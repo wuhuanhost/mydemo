@@ -92,22 +92,22 @@
 	<script type="text/javascript">
 		var list = [{
 				"title": "javascript面向对象编程3",
-				"href": "page/abc.html",
+				"href": "abc.html",
 				"date": "2015-06-30"
 			}, {
 				"title": "javascript面向对象编程2",
-				"href": "page/abc.html",
+				"href": "abc.html",
 				"date": "2015-06-30"
 			}, {
 				"title": "javascript面向对象编程1",
-				"href": "page/abc.html",
+				"href": "abc.html",
 				"date": "2015-06-30"
 			}]
 			// list.reverse(); //倒叙输出
 		 $(window).load(function() {
 			var html = "";
 			for (var i = 0; i < list.length; i++) {
-				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
+				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='page/" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
 			}
 			html += "<div style='height:36px;'></div>"
 			$("#content").append(html);
