@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-<!--		<meta meta http-equiv="Refresh" content="3"/>-->
+		<!--		<meta meta http-equiv="Refresh" content="3"/>-->
 		<title></title>
 		<script type="text/javascript" src="js/tips/oop.js"></script>
 	</head>
@@ -11,5 +11,23 @@
 	<body>
 		javascript练习尝试和学习的项目
 	</body>
+
+	<script type="text/javascript">
+		var aQuery = function(selector, context) {
+			return new aQuery.prototype.init();
+		}
+		aQuery.prototype = {
+			init: function() {
+				console.log(arguments[0]);
+				return this;
+			},
+			getName: function() {
+				return this.name;
+			},
+			name: "liming"
+		}
+		aQuery.prototype.init.prototype = aQuery.prototype;
+		console.log(aQuery().getName());
+	</script>
 
 </html>

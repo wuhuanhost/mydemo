@@ -70,11 +70,31 @@ c.run("小轿车");
 function Bird() {
 	this.wing = 2;
 	this.fly = function() {
-		alert("我是鸟，我会飞");
+		console.log("我是鸟，我会飞");
 		return this;
 	}
 }
 Bird.prototype.jiao = function() {
-	alert('我的叽叽喳喳的叫')
+	console.log('我的叽叽喳喳的叫')
 };
 new Bird().fly().jiao(); //链式调用
+
+
+//4、Jquery源码写法
+var aQuery = function(selector, context) {
+	return new aQuery.prototype.init();
+}
+aQuery.prototype = {
+	init: function() {
+		return this;
+	},
+	getName: function() {
+		return this.name;
+	},
+	name: "liming"
+}
+aQuery.prototype.init.prototype = aQuery.prototype;
+//console.log(aQuery().getName()); //输出liming
+
+
+
