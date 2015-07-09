@@ -1,0 +1,71 @@
+/**
+ * 目录页面css样式
+ */
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: #522D24;
+}
+#content {
+	width: 800px;
+	margin: 0 auto;
+	font-family: 'lucida grande', 'lucida sans unicode', lucida, helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
+	background-color: #EEEEEE;
+	padding-right: 40px;
+	padding-left: 40px;
+	padding-top: 40px;
+}
+#content h3 {
+	text-align: center;
+	font-size: 30px;
+}
+.list {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	margin-top: 3px;
+}
+.list a {
+	text-decoration: none;
+	color: #522d24;
+}
+.list label {
+	color: pink;
+}
+.list a:hover {
+	color: #f05183;
+}
+.index {
+	display: block;
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #dd514c;
+	float: left;
+	text-align: center;
+	color: #EEEEEE;
+}
+.title {
+	display: block;
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	padding-left: 20px;
+	background-color: #e2e0e0;
+}
+.date {
+	display: block;
+	width: 320px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	text-align: left;
+	padding-left: 20px;
+	background-color: #e2e0e0;
+	color: #0095d9;
+}
+.clean {
+	clear: both;
+}
