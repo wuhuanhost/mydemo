@@ -1,6 +1,7 @@
 /**
  * 目录页面css样式
  */
+
 body {
 	margin: 0px;
 	padding: 0px;
@@ -68,4 +69,16 @@ body {
 }
 .clean {
 	clear: both;
+}
+#footer {
+	width: 800px;
+	margin: 0 auto;
+	font-family: 'lucida grande', 'lucida sans unicode', lucida, helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
+	background-color: #EEEEEE;
+	padding-right: 40px;
+	padding-left: 40px;
+	line-height: 90px;
+	height:90px;
+	text-align: center;
+	font-size:14px;
 }
