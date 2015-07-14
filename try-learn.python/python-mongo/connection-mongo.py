@@ -1,6 +1,15 @@
 #coding=utf-8
 import pymongo
+from bson import BSON 
+from bson import json_util as jsonb
 import json
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+
+print sys.getdefaultencoding()
+
 
 def dadasd():
 	##连接mongo服务
@@ -11,15 +20,33 @@ def dadasd():
 	data=db.person.find();
 
 	arr=[];
-
+	filewrite=open("test.txt","w+")
 	for _dict in data:
 		##_dict是dict类型
 		arr.append(_dict);
 
+		for x in _dict.keys():
+			if x!='_id':
+				print  _dict[x].decode('utf8')
+				filewrite.write(_dict[x])
+		
+			
+			
+			
 
 
 
-	print (str(arr).decode('utf-8'))
+ 
+
+	abc=jsonb.dumps(list(arr)) 
+
+	# print abc.decode('utf-8')
+
+	# print type(json.dumps(eval(abc),ensure_ascii=False,indent=2))
+	
+	# print type(eval(abc))
+
+	# print (str(arr).decode('utf-8'))
 	
 
 
