@@ -18,7 +18,7 @@ def dadasd():
 	db = client.test;
 	##查询所有的数据
 	data=db.person.find();
-
+	
 	arr=[];
 	filewrite=open("test.txt","w+")
 	for _dict in data:
