@@ -2,15 +2,15 @@
 
 ##读取文件
 def readFile(path):
-	fileRead=open(path);
+	fileRead=open(path)
 	try:
-		text=fileRead.read();
-		print text;
+		text=fileRead.read()
+		print text
 	finally:
-		fileRead.close();
+		fileRead.close()
 
 
-readFile("E:\\mydemo\\try-learn.python\\python-mongo\\test.txt");
+readFile("E:\\mydemo\\try-learn.python\\python-mongo\\test.txt")
 
 
 
