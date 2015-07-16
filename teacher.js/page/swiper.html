@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Swiper demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<!-- Link Swiper's CSS -->
+		<link rel="stylesheet" href="http://www.swiper.com.cn/dist/css/swiper.min.css">
+
+		<!-- Demo styles -->
+		<style>
+			html,
+			body {
+				position: relative;
+				height: 100%;
+				font-size: 62.5%;
+			}
+			body {
+				background: #eee;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				color: #000;
+				margin: 0;
+				padding: 0;
+			}
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+			.swiper-slide {
+				text-align: center;
+				font-size: 18px;
+				background: #fff;
+				overflow-y: auto;
+			}
+			.swiper-pagination {
+				display: none;
+			}
+			ul {
+				margin-top: 0px;
+			}
+			ul>li {
+				float: left;
+				width: 12%;
+				list-style: none;
+				line-height: 36px;
+				text-align: center;
+				color: #EEEEEE;
+				height: 36px;
+				font-size: 1.6rem;
+				font-weight: bold;
+			}
+			#page1 {
+				margin-left: -10px;
+				background-color: #0095d9;
+				cursor: pointer;
+			}
+			#page2 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page3 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page4 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page5 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page6 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page7 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+			#page8 {
+				background-color: #dd514c;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Swiper -->
+		<div style='position:fixed;top:0px;height:36px;z-index:10000000000000000000000000;width:100%;background-color:#dd514c;'>
+			<ul>
+				<li id='page1' class='subject'>语文</li>
+				<li id='page2' class='subject'>数学</li>
+				<li id='page3' class='subject'>英语</li>
+				<li id='page4' class='subject'>历史</li>
+				<li id='page5' class='subject'>政治</li>
+				<li id='page6' class='subject'>地理</li>
+				<li id='page7' class='subject'>物理</li>
+				<li id='page8' class='subject'>化学</li>
+			</ul>
+			<div style='clear:both'></div>
+		</div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>
+							<button id='big'>放大字体</button>
+							<button id='small'>缩小字体</button>
+						</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+						<p>1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>2测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>3测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>4测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>5测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>6测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>7测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div style='padding-left:20px;padding-right:20px;padding-top:20px;'>
+						<p>8测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试1测试测试测试</p>
+					</div>
+				</div>
+
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<!-- Swiper JS -->
+		<script src="http://www.swiper.com.cn/dist/js/swiper.min.js"></script>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<!-- Initialize Swiper -->
+		<script>
+			function changeStyle(id) {
+				$("li").css("background-color", "#dd514c");
+				$("#page" + id).css("background-color", "#0095d9");
+			}
+
+			function switchs(swiper) {
+					switch (swiper.activeIndex + 1) {
+						case 1:
+							changeStyle(1);
+							break;
+						case 2:
+							changeStyle(2);
+							break;
+						case 3:
+							changeStyle(3);
+							break;
+						case 4:
+							changeStyle(4);
+							break;
+						case 5:
+							changeStyle(5);
+							break;
+						case 6:
+							changeStyle(6);
+							break;
+						case 7:
+							changeStyle(7);
+							break;
+						case 8:
+							changeStyle(8);
+							break;
+					}
+				}
+				//滑动对象
+			var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				paginationClickable: true,
+				onSlideChangeEnd: function(swiper) {
+					switchs(swiper);
+				}
+			});
+			 //循环绑定事件
+			$(".subject").each(function() {
+					$(this).click(function() {
+						var index = this.id.replace("page", "");
+						swiper.slideTo(index - 1, 1000, false);
+						switchs(swiper);
+					})
+				})
+				//放大字体
+			 $("#big").click(function() {
+				var fontSize = $("li").css("font-size");
+				size = parseInt(fontSize.replace("px")) / 10;
+				size += 0.2;
+				$("li").css("font-size", size + "rem");
+				var fontSize1 = $("p").css("font-size");
+				size1 = parseInt(fontSize1.replace("px")) / 10;
+				size1 += 0.2;
+				$("p").css("font-size", size1 + "rem");
+			});
+			 //缩小字体
+			$("#small").click(function() {
+				var fontSize = $("li").css("font-size");
+				size = parseInt(fontSize.replace("px")) / 10;
+				size -= 0.2;
+				$("li").css("font-size", size + "rem");
+				var fontSize1 = $("p").css("font-size");
+				size1 = parseInt(fontSize1.replace("px")) / 10;
+				size1 -= 0.2;
+				$("p").css("font-size", size1 + "rem");
+			})
+		</script>
+
+	</body>
+
+</html>
