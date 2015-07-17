@@ -50,55 +50,59 @@
 				height: 36px;
 				font-size: 1.6rem;
 				font-weight: bold;
+
+	
+			
 			}
-			#page1 {
+			#button1 {
 				margin-left: -10px;
 				background-color: #0095d9;
 				cursor: pointer;
 			}
-			#page2 {
+			#button2 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page3 {
+			#button3 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page4 {
+			#button4 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page5 {
+			#button5 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page6 {
+			#button6 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page7 {
+			#button7 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
-			#page8 {
+			#button8 {
 				background-color: #dd514c;
 				cursor: pointer;
 			}
 		</style>
+
 	</head>
 
 	<body>
 		<!-- Swiper -->
 		<div style='position:fixed;top:0px;height:36px;z-index:10000000000000000000000000;width:100%;background-color:#dd514c;'>
 			<ul>
-				<li id='page1' class='subject'>语文</li>
-				<li id='page2' class='subject'>数学</li>
-				<li id='page3' class='subject'>英语</li>
-				<li id='page4' class='subject'>历史</li>
-				<li id='page5' class='subject'>政治</li>
-				<li id='page6' class='subject'>地理</li>
-				<li id='page7' class='subject'>物理</li>
-				<li id='page8' class='subject'>化学</li>
+				<li id='button1' class='subject'>语文</li>
+				<li id='button2' class='subject'>数学</li>
+				<li id='button3' class='subject'>英语</li>
+				<li id='button4' class='subject'>历史</li>
+				<li id='button5' class='subject'>政治</li>
+				<li id='button6' class='subject'>地理</li>
+				<li id='button7' class='subject'>物理</li>
+				<li id='button8' class='subject'>化学</li>
 			</ul>
 			<div style='clear:both'></div>
 		</div>
@@ -194,8 +198,9 @@
 		<!-- Initialize Swiper -->
 		<script>
 			function changeStyle(id) {
+				$("li").css("border-bottom", "#dd514c");
 				$("li").css("background-color", "#dd514c");
-				$("#page" + id).css("background-color", "#0095d9");
+				$("#button" + id).css("background-color", "#0095d9");
 			}
 
 			function switchs(swiper) {
@@ -237,7 +242,7 @@
 			 //循环绑定事件
 			$(".subject").each(function() {
 					$(this).click(function() {
-						var index = this.id.replace("page", "");
+						var index = this.id.replace("button", "");
 						swiper.slideTo(index - 1, 1000, false);
 						switchs(swiper);
 					})
@@ -263,7 +268,9 @@
 				size1 = parseInt(fontSize1.replace("px")) / 10;
 				size1 -= 0.2;
 				$("p").css("font-size", size1 + "rem");
-			})
+			});
+			
+		
 		</script>
 
 	</body>

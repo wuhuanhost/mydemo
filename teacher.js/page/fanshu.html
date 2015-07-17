@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>jQuery 图片翻页展示效果 Awesome flipping page gallery 网页设计爱好者www.html.org.cn整理</title>
+		<link rel="stylesheet" href="http://www.jscode.cn/js/demo/16719/style.css">
+		<!--[if IE]><script type="text/javascript" src="excanvasX.js"></script><![endif]-->
+		<script type="text/javascript" src="http://www.jscode.cn/js/demo/16719/jquery-1.2.6.min.js"></script>
+		<script type="text/javascript" src="http://www.jscode.cn/js/demo/16719/jquery.jflip-0.4.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				$(function() {
+					$("#g1").jFlip(800, 600, {
+						background: "green",
+						cornersTop: false
+					}).
+					bind("flip.jflip", function(event, index, total) {
+						$("#l1").html("Image " + (index + 1) + " of " + total);
+					});
+	
+				});
+			})(jQuery);
+		</script>
+
+	</head>
+
+	<body>
+		
+
+		<ul id="g1" style='width:100%;height:100%;'>
+			<li>
+				<img src="http://www.jscode.cn/js/demo/16719/img1.jpg" />
+			</li>
+			<li>
+				<img src="http://www.jscode.cn/js/demo/16719/img1.jpg" />
+			</li>
+		</ul>
+		
+	</body>
+
+</html>
