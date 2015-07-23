@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>常用颜色收集</title>
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #0095D9;
+			}
+			#content {
+				width: 976px;
+				margin: 0 auto;
+				background-color: #EEEEEE;
+			}
+			.color-block {
+				width: 36px;
+				height: 36px;
+				background-color: red;
+				float: left;
+				margin-left: 10px;
+				margin-top: 10px;
+				cursor: pointer;
+			}
+			.title {
+				display: block;
+				height: 36px;
+				line-height: 36px;
+				margin-left: 10px;
+				font-size: 18px;
+				border-bottom: 1px solid orange;
+				margin-right: 10px;
+			}
+			.clear {
+				clear: both;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="content">
+		</div>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/utils/jquery.zclip.js"></script>
+		<script type="text/javascript">
+			var data = [{
+				"title": "常用颜色2",
+				"colors": [{
+					"remark": "颜色描述",
+					"color": "#789456"
+				}, {
+					"remark": "红色",
+					"color": "red"
+				}, {
+					"remark": "绿色",
+					"color": "green"
+				}, {
+					"remark": "黄色",
+					"color": "yellow"
+				}, {
+					"remark": "蓝色",
+					"color": "blue"
+				}]
+			}, {
+				"title": "常用颜色1",
+				"colors": [{
+					"remark": "颜色描述",
+					"color": "#789456"
+				}, {
+					"remark": "红色",
+					"color": "red"
+				}, {
+					"remark": "绿色",
+					"color": "green"
+				}, {
+					"remark": "黄色",
+					"color": "yellow"
+				}, {
+					"remark": "蓝色",
+					"color": "blue"
+				}]
+			}];
+			var html = "";
+			(function() {
+				for (var i = data.length - 1; i >= 0; i--) {
+					html += "</div><span class='title' style='border-bottom:1px solid " + data[i].colors[0].color + "'>" + data[i].title + "</span>"
+					for (var j = 0; j < data[i].colors.length; j++) {
+						html += "<div class='color-block' id='" + (i + 1) + "-" + (j + 1) + "' style='background-color:" + data[i].colors[j].color + "' title='" + data[i].colors[j].remark + " : " + data[i].colors[j].color + "'></div>";
+					}
+					html += "<div class='clear'>";
+				}
+				html += "<div style='height:36px;'></div>"
+				document.getElementById("content").innerHTML = html;
+			})();
+			 //
+			$(document).ready(function() {
+				$.each($(".color-block"), function() {
+					$("#" + this.id).zclip({
+						path: '../swf/utils/ZeroClipboard.swf',
+						copy: $("#" + this.id).attr("title").split(":")[1],
+						afterCopy: function() {
+							alert("你复制了颜色>>> [ "+this.title+" ]");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>
