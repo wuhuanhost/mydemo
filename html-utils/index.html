@@ -10,8 +10,12 @@
 		<script type="text/javascript">
 			 //目录结构，新添加页面在数组中添加一个新的对象
 			var list = [{
+				"title": "字符转换为unicode编码",
+				"href": "encoding/unicode.html",
+				"date": "2015-07-23"
+			},{
 				"title": "json格式化",
-				"href": "format.html",
+				"href": "json-format/format.html",
 				"date": "2015-07-17"
 			}]
 		</script>
@@ -34,7 +38,7 @@
 		$(window).load(function() {
 			var html = "";
 			for (var i = 0; i < list.length; i++) {
-				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='json-format/" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
+				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
 			}
 			html += "<div style='height:36px;'></div>"
 			$("#content").append(html);
