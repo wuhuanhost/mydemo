@@ -29,7 +29,7 @@ def dadasd():
 			if x!='_id':
 				print  _dict[x].decode('utf8')
 				filewrite.write(_dict[x])
-		
+	    		
 			
 			
 			

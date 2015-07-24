@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>javascript函数式编程</title>
+	</head>
+	<body>
+	</body>
+	<script>
+	//1、函数柯里化，柯里化就是预先将某些参数传入，得到一个简单的函数。但是预先传入的参数被保存在闭包中，因此会有一些奇特的特性
+		var adder = function(num) {
+			return function(y) {
+				return num + y;
+			}
+		}
+		var inc = adder(1);
+		var dec = adder(-1);
+		 //inc, dec现在是两个新的函数，作用是将传入的参数值（+/-）1
+		console.log(inc(99)); //100
+		console.log(dec(101)); //100
+		
+		
+		
+		console.log(Math.random().toString(16).substring(2))
+		
+		eval("console.log(1+2)")
+	</script>
+</html>
+
