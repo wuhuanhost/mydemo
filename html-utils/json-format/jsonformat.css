@@ -1,13 +1,13 @@
 @charset "utf-8";
 /* CSS Document */
 div.ControlsRow,div.HeadersRow {
-	font-family: Georgia;
+	font-family: Tahoma,arial,simsun,Lucida Console,Georgia;
 	font-size: 14px;
 }
 
 div.Canvas {
 position:relative;
-	font-family: Lucida Console, Georgia;
+	font-family: Tahoma,arial,simsun,Lucida Console,Georgia;
 	font-size: 14px;
 	background-color: #ECECEC;
 	color: #000000;
@@ -15,10 +15,13 @@ position:relative;
 	overflow:auto;
 	height:720px;
 	width:100%;
-
-
-
 }
+
+pre{
+	font-family: Lucida Console,Georgia;
+	line-height:20px;
+}
+
 
 .ObjectBrace {
 	color: #00AA00;
