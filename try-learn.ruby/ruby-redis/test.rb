@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'redis'
+require 'json'
 
 
 #1、【gem install redis】 安装redis的ruby驱动
@@ -36,15 +37,27 @@ end
 #查找key对应的value
 def queryByKey(key)
 	value=$redis.get:"#{key}"
-	puts value.encoding
-	puts "#{key}==================#{value}"
+	# puts value.encoding
+	return value;
 end
 
-add("name","李明")
 
-queryByKey("name");
+json={'name'=>'李明','age'=>18,'birthday'=>'1997-01-01'};
 
-delete("list1")
+add("person",json.to_json())#json
+
+aabbcc=queryByKey("person")#获取保存的json
+
+aa=JSON.parse aabbcc  #获取到的json字符串转换为json对象
+
+puts "======person信息======="
+puts aa['name'].encode!("GBK")
+puts aa['age']
+puts aa['birthday']
+puts "======================="
+
+
+delete("person")
 
 #显示当前数据库中key的数量
 puts $redis.dbsize
