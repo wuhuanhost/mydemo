@@ -10,13 +10,13 @@
 		<script type="text/javascript">
 			 //目录结构，新添加页面在数组中添加一个新的对象
 			var list = [{
-				"title": "javascript面向对象编程3",
-				"href": "abc.html",
-				"date": "2015-06-30"
+				"title": "HTML5的【contenteditable='true'】属性实现简单网页编辑器",
+				"href": "page/edit.html",
+				"date": "2015-07-30"
 			}, {
-				"title": "javascript面向对象编程2",
-				"href": "abc.html",
-				"date": "2015-06-30"
+				"title": "javascript函数式编程---函数柯里化",
+				"href": "page/functional_programming.html",
+				"date": "2015-07-20"
 			}, {
 				"title": "javascript面向对象编程1",
 				"href": "abc.html",
@@ -42,7 +42,7 @@
 		$(window).load(function() {
 			var html = "";
 			for (var i = 0; i < list.length; i++) {
-				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='page/" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
+				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
 			}
 			html += "<div style='height:36px;'></div>"
 			$("#content").append(html);
