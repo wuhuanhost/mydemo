@@ -27,17 +27,16 @@ Dir.open('E:\\数学\\img') do |dir|
 			   s.gsub!("【滚动练习】","gdlx")
 
 			elsif s=="【答案】"
-			   s.gsub!("【答案】","da")				   			   
+			   s.gsub!("【答案】","da")	
+
 			else
 			   s.gsub!(/【滚动练习/,"gdlx").gsub!("】","")   
 			end
 		}
 		 # puts file
-		
 		if name !="." and name !=".."
 			   FileUtils.cp("E:\\数学\\img\\#{name}", "E:\\数学\\images\\#{file}")	
 		end
-		
 	end
 end
 puts "--------------end-------------------------"

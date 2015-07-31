@@ -6,7 +6,7 @@ require 'json'
 #1、【gem install redis】 安装redis的ruby驱动
 #redis的连接对象
 $redis=Redis.new(:host => "localhost", :port => 6379)
-puts "TEST REDIS LIST"
+puts "测试redis......"
 
 
 #添加
