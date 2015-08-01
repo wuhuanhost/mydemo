@@ -19,7 +19,7 @@ def add(key,value)
 	end
 end
 
-#删除
+#删除```
 def delete(key)
 	flag=$redis.del:"#{key}"
 	if flag==1
@@ -27,7 +27,7 @@ def delete(key)
 	else
 		puts "key=#{key}的对象                        删除失败"
 	end
-end
+endP
 
 #修改【修改方法可以通过添加的形式的修改】
 def update(key)
@@ -37,7 +37,7 @@ end
 #查找key对应的value
 def queryByKey(key)
 	value=$redis.get:"#{key}"
-	# puts value.encoding
+	# puts value.encodingP
 	return value;
 end
 

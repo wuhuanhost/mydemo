@@ -23,3 +23,9 @@ puts 'Code = ' + resp.code    ##请求状态码
 puts 'Message = ' + resp.message  
 puts "------------------------------------------------------------"
 resp.each {|key, val| puts key + ' = ' + val}  ##遍历所有http响应头
+
+
+
+
+
+
