@@ -76,7 +76,7 @@
 		<div id="content">
 		</div>
 		<script src="../_Resources/libs/jquery-1.11.2.min.js"></script>
-		<script src="jquery.zclip.js"></script>
+		<script src="../_Resources/libs/jquery.plugins/jquery.zclip.js"></script>
 		<script type="text/javascript">
 			var html = "";
 			(function() {
@@ -94,7 +94,7 @@
 			$(document).ready(function() {
 				$.each($(".color-block"), function() {
 					$("#" + this.id).zclip({
-						path: 'ZeroClipboard.swf',
+						path: '../_Resources/libs/jquery.plugins/ZeroClipboard.swf',
 						copy: $("#" + this.id).attr("title").split(":")[1],
 						afterCopy: function() {
 							alert("你复制了颜色>>> [ "+this.title+" ]");

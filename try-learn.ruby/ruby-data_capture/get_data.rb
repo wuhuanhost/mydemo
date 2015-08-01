@@ -6,7 +6,6 @@ http = Net::HTTP.new('www.baidu.com', 80)
 http.use_ssl = false
 path = '/'
 
-
 resp, data = http.get(path)
 cookies = resp.response['set-cookie'].split(', ')  #获取cookies
 puts cookies
