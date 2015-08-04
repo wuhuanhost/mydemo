@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>文字竖排</title>
+	<style type="text/css">
+		*{
+		  font-family:Georgia;
+		}
+		#content{
+		   position:absolute;
+		   width:1200px;
+		   height:300px;
+		   left:50%;
+		   top:50%;
+		   margin-top:-300px;
+		   margin-left:-600px;
+		   border:1px dashed  #2f96b4;
+		   padding-top:50px;
+		   border-radius:20px;
+		}
+		#contentRemark{
+		   position:absolute;
+		   width:1200px;
+		   height:300px;
+		   left:50%;
+		   top:56%;
+		   margin-left:-600px;
+		   padding-top:50px;
+		   text-indent:2em;
+		   font-size:20px;
+		   line-height:2em;
+		}
+		.PoetryName{
+			font-size:xx-large;font-weight:bold;line-height:1.5em;width:1.5em; 
+			float:right;font-size:36px;padding-top:10px;
+			padding-right:20px;
+		}
+		.PoetryPerson{
+			width:1.5em; float:right;line-height:2em;padding-top:70px;
+			font-size:18px;
+			color:#d3524e;
+		}
+		.PoetryContent{
+			width:1.5em; float:right;line-height:1.5em;padding-top:30px;
+			font-size:20px;
+		}
+
+		.PoetryContent:hover{
+			width:1.5em; float:right;line-height:1.5em;padding-top:30px;
+			font-size:20px;
+			cursor:pointer;
+			color:#d3524e;
+		}
+	</style>
+
+</head>
+<body>
+<!--<center style="font-size:40px;">网页文字竖排测试</center>-->
+	<div id="content">
+		<div class="PoetryName">水調歌頭</div> 
+		<div style="width:1.5em; float:right;">&nbsp;</div> 
+		<div class="PoetryPerson">蘇  軾</div> 
+		<div style="width:1.5em; float:right;">&nbsp;</div> 
+		<div class="PoetryContent">明月幾時有　</div> 
+		<div class="PoetryContent">把酒問青天　</div> 
+		<div class="PoetryContent">不知天上宮闕　</div> 
+		<div class="PoetryContent">今夕是何年　</div> 
+		<div class="PoetryContent">我欲乘風歸去　</div> 
+		<div class="PoetryContent">又恐瓊樓玉宇　</div> 
+		<div class="PoetryContent">高處不勝寒　</div> 
+		<div class="PoetryContent">起舞弄清影　</div> 
+		<div class="PoetryContent">何似在人間　</div> 
+		<div style="width:1.5em; float:right;">&nbsp;</div> 
+		<div class="PoetryContent">轉朱閣　</div> 
+		<div class="PoetryContent">低綺戶　</div> 
+		<div class="PoetryContent">照無眠　</div> 
+		<div class="PoetryContent">不應有恨　</div> 
+		<div class="PoetryContent">何事長向別時圓　</div> 
+		<div class="PoetryContent">人有悲歡離合　</div> 
+		<div class="PoetryContent">月有陰晴圓缺　</div> 
+		<div class="PoetryContent">此事古難全　</div> 
+		<div class="PoetryContent">但願人長久　</div> 
+		<div class="PoetryContent">千里共嬋娟　</div>
+		<div style="margin-left:40px;margin-top:-20px;"><img src="../img/hehua.jpg" alt="" /></div>
+	</div>
+	<div id="contentRemark"></div>
+</body>
+<script type="text/javascript">
+		var max = 0;
+		function textlist() {
+			max = textlist.arguments.length;//获取参数的长度
+			for (i = 0; i < max; i++)
+
+				this[i] = textlist.arguments[i];//将参数作为this对象的属性
+
+		}
+		tl = new textlist("明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间？转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。——苏轼《水调歌头 丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。》");//创建一个tl对象    textlist {0: "在此输入要输出的文字"} 
+
+		var x = 0;
+		pos = 0;
+		var l = tl[0].length;//输入字符串的长度
+
+		function textticker() {
+
+			document.getElementById("contentRemark").innerHTML = tl[x]
+					.substring(0, pos)
+					+ "_";
+			if (pos++ == l) {
+				pos = 0;
+				setTimeout("textticker()", 10000);
+				if (++x == max)
+					x = 0;
+				l = tl[x].length;
+			} else {
+				setTimeout("textticker()", 100);
+			}
+		}
+		textticker();
+	</script>
+</html>

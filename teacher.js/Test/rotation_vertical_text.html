@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<style>
+			#content {
+				width: 600px;
+				height：300px border: 1px solid #999999;
+				margin: 0 auto;
+				margin-top: 300px;
+				letter-spacing: 6px;
+				background-color: #EEEEEE;
+				min-height: 360px;
+						-webkit-transform: rotate(90deg);
+			}
+			span {
+				float: left;
+				display: block;
+				width: 20px;
+				height: 20px;
+
+				vertical-align: middle;
+			}
+			.chinese {
+				text-align: center;
+				line-height: 20px;
+		
+				padding-left:5px;
+				-webkit-transform: rotate(-90deg);
+			}
+			.english {
+				width: 66px;
+				text-align: center;
+				line-height: 20px;
+				margin-left:5px;
+				margin-right:5px;
+			
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="content">
+			<span class="chinese">欢</span>
+			<span class="chinese">迎</span>
+			<span class="chinese">来</span>
+			<span class="chinese">到</span>
+			<span class="english">HTML5</span>
+			<span class="chinese">编</span>
+			<span class="chinese">程</span>
+			<span class="chinese">世</span>
+			<span class="chinese">界</span>
+			<span class="english">......</div>
+<span>你好,欢迎来到hello world!!!编程世界</span>
+			<span>你好,欢迎来到hello world!!!编程世界</span>
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("span").css("-webkit-transform", "-90deg");
+		});
+	</script>
+
+</html>

@@ -37,75 +37,17 @@
         }]
     }];
     </script>
+    <!-- 页面布局等通用样式 -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- 调色器spectrum的样式 -->
     <link rel='stylesheet' href='spectrum.css' />
-    <style type="text/css">
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #0095D9;
-        font-family: "微软雅黑"
-    }
-    #switch-color{
-    	position:relative;
-    	width: 976px;
-        margin: 0 auto;
-        background-color: #EEEEEE;
-        min-height: 100px;
-
-
-    }
-    #content {
-    	position:relative;
-    	top:10px;
-        width: 976px;
-        margin: 0 auto;
-        background-color: #EEEEEE;
-    }
-    
-    .color-block {
-        width: 36px;
-        height: 36px;
-        background-color: red;
-        float: left;
-        margin-left: 10px;
-        margin-top: 10px;
-        cursor: pointer;
-    }
-    
-    .title {
-        display: block;
-        height: 36px;
-        line-height: 36px;
-        margin-left: 10px;
-        font-size: 16px;
-        margin-right: 10px;    
-        color:#434343;
-    }
-    
-    .clear {
-        clear: both;
-    }
-    .sp-replacer{
-    	position:relative;
-    	left:126px;
-    	top:10px;
-    }
-    #text{
-    	display:block;
-    	position:relative;
-    	left:10px;
-    	top:36px;
-    	font-weight:bold;
-    	font-size:16px;
-    	color:#434343;
-    }
-
-    </style>
+	
 </head>
 
 <body>
     <div id="switch-color">
-        <span id="text">打开调色板：</span><input type="jquery.spectrum-zh-cn.js" id="full" style='display:none;'/>
+        <span id="text">打开调色板：</span>
+        <input type="jquery.spectrum-zh-cn.js" id="full" style='display:none;'/>
     </div>
     <div id="content">
     </div>
@@ -128,6 +70,7 @@
     })();
     //循环绑定复制事件
     $(document).ready(function() {
+    	//给颜色块绑定复制操作
         $.each($(".color-block"), function() {
             $("#" + this.id).zclip({
                 path: '../_Resources/libs/jquery.plugins/ZeroClipboard.swf',
@@ -173,9 +116,6 @@
                     // alert("你复制了颜色>>> [ " + color.toHexString() + " ]");
                 }
             });	
-
-
-
         },
         palette: [
             ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
