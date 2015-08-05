@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>HTML网页PPT</title>
+		<link rel="stylesheet" href="../css/libs/reveal/reveal.css" />
+		<link rel="stylesheet" href="../css/libs/reveal/moon.css" />
+		<style type="text/css">
+			h5{text-align:left;
+			padding-left:100px;
+			padding-right:100px;
+			background-color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>欢迎使用网页PPT</h1></section>
+				<section>
+					<section>
+						<h2>关于PPT方式显示数据</h2>
+						<h5 class="fragment">1、在页面添加需要的元素</h5>
+						<h5 class="fragment">2、在元素的class加上【fragment】元素就默认隐藏掉了</h5>
+						<h5 class="fragment">3、点击下一步，每点击一下显示一个元素</h5>
+					</section>
+					<section>
+						<h1>---演示完毕---</h1></section>
+				</section>
+				<section>
+					<h1>---谢谢欣赏---</h1>
+				<p>李老师 2015-02-18</p></section>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="../js/libs/reveal/reveal.js"></script>
+	<script type="text/javascript">
+		/**
+		**使用心得
+		**1、给元素加【class="fragment"】就可以默认隐藏，然后就可以点击一下显示一条
+		**/
+		Reveal.initialize({
+		
+		    // Display controls in the bottom right corner
+		    controls: true,
+		
+		    // Display a presentation progress bar
+		    progress: true,
+		
+		    // Display the page number of the current slide
+		    slideNumber: false,
+		
+		    // Push each slide change to the browser history
+		    history: false,
+		
+		    // Enable keyboard shortcuts for navigation
+		    keyboard: true,
+		
+		    // Enable the slide overview mode
+		    overview: true,
+		
+		    // Vertical centering of slides
+		    center: true,
+		
+		    // Enables touch navigation on devices with touch input
+		    touch: true,
+		
+		    // Loop the presentation
+		    loop: false,
+		
+		    // Change the presentation direction to be RTL
+		    rtl: false,
+		
+		    // Turns fragments on and off globally
+		    fragments: true,
+		
+		    // Flags if the presentation is running in an embedded mode,
+		    // i.e. contained within a limited portion of the screen
+		    embedded: false,
+		
+		    // Flags if we should show a help overlay when the questionmark
+		    // key is pressed
+		    help: true,
+		
+		    // Number of milliseconds between automatically proceeding to the
+		    // next slide, disabled when set to 0, this value can be overwritten
+		    // by using a data-autoslide attribute on your slides
+		    autoSlide: 0,
+		
+		    // Stop auto-sliding after user input
+		    autoSlideStoppable: true,
+		
+		    // Enable slide navigation via mouse wheel
+		    mouseWheel: false,
+		
+		    // Hides the address bar on mobile devices
+		    hideAddressBar: true,
+		
+		    // Opens links in an iframe preview overlay
+		    previewLinks: false,
+		
+		    // Transition style
+		    transition: 'default', // none/fade/slide/convex/concave/zoom
+		
+		    // Transition speed
+		    transitionSpeed: 'default', // default/fast/slow
+		
+		    // Transition style for full page slide backgrounds
+		    backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+		
+		    // Number of slides away from the current that are visible
+		    viewDistance: 3,
+		
+		    // Parallax background image
+		    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+		
+		    // Parallax background size
+		    parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+		
+		    // Amount to move parallax background (horizontal and vertical) on slide change
+		    // Number, e.g. 100
+		    parallaxBackgroundHorizontal: '',
+		    parallaxBackgroundVertical: ''
+		});
+	</script>
+
+</html>
