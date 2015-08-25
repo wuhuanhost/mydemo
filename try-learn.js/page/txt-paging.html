@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>网页阅读器实现原理测试-（txt分页的实现）</title>
@@ -16,16 +17,36 @@
 				left: 50%;
 				margin-top: -150px;
 				margin-left: -300px;
-				background-color: #EEEEEE;
+				background-color: lightgoldenrodyellow;
 				line-height: 30px;
 				letter-spacing: 0px;
 			}
-			#content span {} div宽度|字体类型|字体大小|显示的字符数(中文)|显示的字符数(英文)| 600px 宋体 16px 37个
+			button {
+				cursor: pointer;
+			}
+			#current {
+				color: orange;
+			}
+			#count {
+				color: green;
+			}
+			h3 {
+				color: #999999;
+				position:relative;
+				top:360px;
+				text-align: center;
+			}
+			#content span {
+				color: #101010;
+			}
+			div宽度|字体类型|字体大小|显示的字符数(中文)|显示的字符数(英文)| 600px 宋体 16px 37个
 		</style>
 	</head>
 
 	<body>
-		<div id="content"></div>
+		<h2 style="text-align:center">txt分页测试</h2>
+		<div id="content"></div><br />
+		<h3 ><button id="previous">上一页</button>共<-<span id='count'>1</span>->页当前第<-<span id='current'>1</span>->页<button id="next">下一页</button></h3>
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript">
 			 //txt文字字符串
@@ -47,13 +68,23 @@
 				var maxLine = $("#content").height() / parseInt($("#content").css("line-height"));
 				console.log("页面一共" + str.length + "字符");
 				console.log("每行最多显示" + lineMaxChar + "");
+				console.log("显示最大字符后右边多余"+(parseInt($("#content").width())-(lineMaxChar*parseInt($("span").width())))+"px");
 				console.log("单个字符宽度" + $("span").width() + "px");
 				console.log("页面高度" + $("#content").height() + "px");
 				console.log("页面宽度" + $("#content").width() + "px");
 				console.log("一共能显示" + maxLine + "行");
 				console.log("-----------------------------------------------------------------------------------");
-			});
 				console.log("页面最多显示" + lineMaxChar * maxLine + "字符");
+				//上一页
+				$("#previous").click(function() {
+					alert("上一页")
+				});
+				//下一页
+				$("#next").click(function() {
+					alert("下一页")
+				});
+			});
 		</script>
 	</body>
+
 </html>
