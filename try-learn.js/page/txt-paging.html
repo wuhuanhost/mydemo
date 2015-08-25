@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网页阅读器实现原理测试-（txt分页的实现）</title>
+		<style>
+			html {
+				font-family: "courier new";
+				font-size: 16px;
+			}
+			#content {
+				position: absolute;
+				width: 600px;
+				height: 300px;
+				top: 50%;
+				left: 50%;
+				margin-top: -150px;
+				margin-left: -300px;
+				background-color: #EEEEEE;
+				line-height: 30px;
+				letter-spacing: 0px;
+			}
+			#content span {} div宽度|字体类型|字体大小|显示的字符数(中文)|显示的字符数(英文)| 600px 宋体 16px 37个
+		</style>
+	</head>
+
+	<body>
+		<div id="content"></div>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript">
+			 //txt文字字符串
+			var str = "中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国";
+			 //绘制界面文字的方法
+			function drawhtml(str) {
+				var arrStr = str.split("");
+				var html = "";
+				for (var i = 0; i < arrStr.length; i++) {
+					html += "<span>" + arrStr[i] + "</span>"
+				}
+				$("#content").html(html.replace("/,/"));
+			};
+			$(document).ready(function() {
+				drawhtml(str);
+				//单行最多显示字数
+				var lineMaxChar = Math.floor($("#content").width() / $("span").width());
+				//最多显示的行数
+				var maxLine = $("#content").height() / parseInt($("#content").css("line-height"));
+				console.log("页面一共" + str.length + "字符");
+				console.log("每行最多显示" + lineMaxChar + "");
+				console.log("单个字符宽度" + $("span").width() + "px");
+				console.log("页面高度" + $("#content").height() + "px");
+				console.log("页面宽度" + $("#content").width() + "px");
+				console.log("一共能显示" + maxLine + "行");
+				console.log("-----------------------------------------------------------------------------------");
+			});
+				console.log("页面最多显示" + lineMaxChar * maxLine + "字符");
+		</script>
+	</body>
+</html>
