@@ -8,18 +8,20 @@
 			html {
 				font-family: "courier new";
 				font-size: 16px;
+				width: 100%;
 			}
 			#content {
-				position: absolute;
-				width: 600px;
-				height: 300px;
-				top: 50%;
-				left: 50%;
-				margin-top: -150px;
-				margin-left: -300px;
+				width: 320px;
+				height: 480px;
+				line-height: 30px;
+			}
+			#box {
+				width: 320px;
+				height: 480px;
 				background-color: lightgoldenrodyellow;
 				line-height: 30px;
-				letter-spacing: 0px;
+				margin: 0 auto;
+				padding-left: 10px;
 			}
 			button {
 				cursor: pointer;
@@ -33,7 +35,7 @@
 			h3 {
 				color: #999999;
 				position: relative;
-				top: 360px;
+				top: 20px;
 				text-align: center;
 			}
 			#content span {
@@ -45,13 +47,14 @@
 
 	<body>
 		<h2 style="text-align:center">txt分页测试</h2>
-		<div id="content"></div>
-		<br />
+		<div id='box'>
+			<div id="content"></div>
+		</div>
 		<h3><button id="big">放大字体</button><button id="small">缩小字体</button>共<-<span id='count'>1</span>->页当前第<-<span id='current'>1</span>->页<button id="previous">上一页</button><button id="next">下一页</button></h3>
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript">
 			 //txt文字字符串
-			var str = "第一页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国第二页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国第三页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国";
+			var str = "　　百度百科是百度公司推出的一部内容开放、自由的网络百科全书平台，其测试版于2006年4月20日上线，正式版在2008年4月21日发布，截至2014年11月收录词条数量已达1000万个。　　百度百科旨在创造一个涵盖各领域知识的中文信息收集平台。百度百科强调用户的参与和奉献精神，充分调动互联网用户的力量，汇聚上亿用户的头脑智慧，积极进行交流和分享。同时，百度百科实现与百度搜索、百度知道的结合，从不同的层次上满足用户对信息的需求。　　百度百科是百度在2006年4月20日推出第三个基于搜索平台建立的社区类产品，这是继百度贴吧、百度知道之后，百度再度深化其知识搜索体系2007年1月10日，百科首页第一次改版。新增百科任务、百科之星、上周贡献榜等栏目";
 			 //绘制界面文字的方法
 			function drawhtml(str) {
 				var arrStr = str.replace(/(.)(?=[^$])/g, "$1,").split(","); //每个字符拆分成数组
@@ -85,6 +88,7 @@
 			var pointer;
 			 //页面字体大小
 			var fontsize = parseInt($("html").css("font-size").replace(/px/));
+
 			function getInfo() {
 				console.log("页面高度" + height + "px");
 				console.log("页面宽度" + width + "px");
@@ -119,12 +123,15 @@
 				currentPage = 1;
 				//每页第一个字符的指针
 				pointer = (lineMaxChar * maxLine) * currentPage;
+				rightBlank = (parseInt(width) - (lineMaxChar * parseInt(singleCharWidth)));
 				$("#count").html(countPage);
 				$("#current").html(currentPage);
 			}
 			$(document).ready(function() {
+				getInfo();
 				drawhtml(str);
 				huizhi($("span").width());
+				fun_box_padding(rightBlank);
 				console.log(pointer + "              " + lineMaxChar * maxLine)
 					//上一页
 				$("#previous").click(function() {
@@ -133,8 +140,9 @@
 						pointer = (lineMaxChar * maxLine) * (currentPage - 1);
 						drawhtml(str.substr(pointer, lineMaxChar * maxLine));
 						$("#current").html(currentPage);
+						fun_box_padding(rightBlank);
 					}
-				});				
+				});
 				//下一页
 				$("#next").click(function() {
 					if (currentPage < countPage) {
@@ -142,6 +150,7 @@
 						pointer = (lineMaxChar * maxLine) * (currentPage - 1);
 						drawhtml(str.substr(pointer, lineMaxChar * maxLine));
 						$("#current").html(currentPage);
+						fun_box_padding(rightBlank);
 					}
 				});
 				//放大字体
@@ -149,6 +158,7 @@
 					fontsize += 2;
 					$("#content").css("font-size", "" + fontsize + "px");
 					huizhi($("span").width());
+					fun_box_padding(rightBlank);
 					return false;
 				});
 				//缩小字体
@@ -156,9 +166,19 @@
 					fontsize -= 2;
 					$("#content").css("font-size", "" + fontsize + "px");
 					huizhi($("span").width());
+					fun_box_padding(rightBlank);
 					return false;
 				});
 			});
+
+			function fun_box_padding(rightBlank) {
+				if (rightBlank === 0) {
+					$("#box").css("padding-left", "10px");
+				} else {
+					$("#box").css("padding-left", rightBlank);
+				}
+			}
 		</script>
 	</body>
+
 </html>
