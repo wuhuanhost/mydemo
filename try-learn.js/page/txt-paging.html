@@ -32,8 +32,8 @@
 			}
 			h3 {
 				color: #999999;
-				position:relative;
-				top:360px;
+				position: relative;
+				top: 360px;
 				text-align: center;
 			}
 			#content span {
@@ -45,46 +45,120 @@
 
 	<body>
 		<h2 style="text-align:center">txt分页测试</h2>
-		<div id="content"></div><br />
-		<h3 ><button id="previous">上一页</button>共<-<span id='count'>1</span>->页当前第<-<span id='current'>1</span>->页<button id="next">下一页</button></h3>
+		<div id="content"></div>
+		<br />
+		<h3><button id="big">放大字体</button><button id="small">缩小字体</button>共<-<span id='count'>1</span>->页当前第<-<span id='current'>1</span>->页<button id="previous">上一页</button><button id="next">下一页</button></h3>
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript">
 			 //txt文字字符串
-			var str = "中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国";
+			var str = "第一页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国第二页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国第三页，中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国中国";
 			 //绘制界面文字的方法
 			function drawhtml(str) {
-				var arrStr = str.split("");
+				var arrStr = str.replace(/(.)(?=[^$])/g, "$1,").split(","); //每个字符拆分成数组
 				var html = "";
 				for (var i = 0; i < arrStr.length; i++) {
 					html += "<span>" + arrStr[i] + "</span>"
 				}
 				$("#content").html(html.replace("/,/"));
 			};
+			 //单行最多显示字数
+			var lineMaxChar;
+			 //最多显示的行数
+			var maxLine;
+			 //每行显示最大字符数后右边的留白距离
+			var rightBlank;
+			 //单个字符的宽度
+			var singleCharWidth;
+			 //字符串总长度
+			var strLen;
+			 //每页最多显示的字符数
+			var pageTotalChar;
+			 //页面的宽度
+			var width = $("#content").width();
+			 //页面的高度
+			var height = $("#content").height();
+			 //总共能分多少页
+			var countPage;
+			 //当前页数
+			var currentPage;
+			 //每页第一个字符的指针
+			var pointer;
+			 //页面字体大小
+			var fontsize = parseInt($("html").css("font-size").replace(/px/));
+			function getInfo() {
+				console.log("页面高度" + height + "px");
+				console.log("页面宽度" + width + "px");
+				singleCharWidth = $("span").width();
+				console.log("单个字符宽度" + singleCharWidth + "px");
+				//单行最多显示字数
+				lineMaxChar = Math.floor(width / singleCharWidth);
+				console.log("每行最多显示" + lineMaxChar + "");
+				//最多显示的行数
+				maxLine = height / parseInt($("#content").css("line-height"));
+				console.log("一共能显示" + maxLine + "行");
+				//每行显示最大字符数后右边的留白距离
+				rightBlank = (parseInt(width) - (lineMaxChar * parseInt(singleCharWidth)));
+				console.log("显示最大字符后右边多余" + (parseInt(width) - (lineMaxChar * parseInt(singleCharWidth))) + "px");
+				strLen = str.length;
+				console.log("字符串总长度" + strLen + "字符");
+				pageTotalChar = lineMaxChar * maxLine;
+				console.log("每页页最多显示" + pageTotalChar + "字符");
+			};
+			/**
+			 *
+			 * @param {Object} spanWidth
+			 */
+			function huizhi(spanWidth) {
+				singleCharWidth = spanWidth;
+				lineMaxChar = Math.floor(width / singleCharWidth);
+				maxLine = height / parseInt($("#content").css("line-height"));
+				drawhtml(str.substr(0, lineMaxChar * maxLine));
+				//一共能分多少页
+				countPage = parseInt((str.length - 1) / (lineMaxChar * maxLine) + 1);
+				//当前页数
+				currentPage = 1;
+				//每页第一个字符的指针
+				pointer = (lineMaxChar * maxLine) * currentPage;
+				$("#count").html(countPage);
+				$("#current").html(currentPage);
+			}
 			$(document).ready(function() {
 				drawhtml(str);
-				//单行最多显示字数
-				var lineMaxChar = Math.floor($("#content").width() / $("span").width());
-				//最多显示的行数
-				var maxLine = $("#content").height() / parseInt($("#content").css("line-height"));
-				console.log("页面一共" + str.length + "字符");
-				console.log("每行最多显示" + lineMaxChar + "");
-				console.log("显示最大字符后右边多余"+(parseInt($("#content").width())-(lineMaxChar*parseInt($("span").width())))+"px");
-				console.log("单个字符宽度" + $("span").width() + "px");
-				console.log("页面高度" + $("#content").height() + "px");
-				console.log("页面宽度" + $("#content").width() + "px");
-				console.log("一共能显示" + maxLine + "行");
-				console.log("-----------------------------------------------------------------------------------");
-				console.log("页面最多显示" + lineMaxChar * maxLine + "字符");
-				//上一页
+				huizhi($("span").width());
+				console.log(pointer + "              " + lineMaxChar * maxLine)
+					//上一页
 				$("#previous").click(function() {
-					alert("上一页")
-				});
+					if (currentPage > 1) {
+						currentPage--;
+						pointer = (lineMaxChar * maxLine) * (currentPage - 1);
+						drawhtml(str.substr(pointer, lineMaxChar * maxLine));
+						$("#current").html(currentPage);
+					}
+				});				
 				//下一页
 				$("#next").click(function() {
-					alert("下一页")
+					if (currentPage < countPage) {
+						currentPage++;
+						pointer = (lineMaxChar * maxLine) * (currentPage - 1);
+						drawhtml(str.substr(pointer, lineMaxChar * maxLine));
+						$("#current").html(currentPage);
+					}
+				});
+				//放大字体
+				$("#big").on("click", function() {
+					fontsize += 2;
+					$("#content").css("font-size", "" + fontsize + "px");
+					huizhi($("span").width());
+					return false;
+				});
+				//缩小字体
+				$("#small").on("click", function() {
+					fontsize -= 2;
+					$("#content").css("font-size", "" + fontsize + "px");
+					huizhi($("span").width());
+					return false;
 				});
 			});
 		</script>
 	</body>
-
 </html>
