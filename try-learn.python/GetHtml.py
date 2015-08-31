@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
-import sys 
+import sys
 reload(sys) 
 sys.setdefaultencoding( "utf-8" ) 
 
@@ -15,8 +15,19 @@ r.encoding='utf-8'#网页编码成utf-8
 ##通过淘宝ip接口获取ip信息的方法
 def queryIP(ipstr):
     ip = requests.get('http://ip.taobao.com/service/getIpInfo.php?ip='+ipstr)
-    print ip.json()['data']['country']
+    ip.encoding='utf-8'
+    #命令行下面执行输出结果
+    print ip.json()["data"]["city"]
     pass
 
+queryIP('125.76.203.176')
 
-queryIP('114.114.123.132')
+##请求ip138的ip数据【数据需要自己分析html】
+def getIP(ipstr):
+	ip=requests.get('http://www.ip138.com/ips138.asp?ip='+ipstr);
+	ip.encoding='gbk';
+	print ip.text;
+	pass
+
+# getIP('125.76.203.176')
+
