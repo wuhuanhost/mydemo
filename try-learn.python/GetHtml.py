@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import requests
 import sys
-reload(sys) 
-sys.setdefaultencoding( "utf-8" ) 
+reload(sys)
+sys.setdefaultencoding('utf8')
+import re
+
 
 ##详细使用文档：http://cn.python-requests.org/zh_CN/latest/
 
@@ -22,7 +24,7 @@ def queryIP(ipstr):
     print ip.json()["data"]["city"]
     pass
 
-queryIP('125.76.203.176')
+# queryIP('125.76.203.176')
 
 ##请求ip138的ip数据【数据需要自己分析html】
 def getIP(ipstr):
@@ -32,4 +34,3 @@ def getIP(ipstr):
 	pass
 
 # getIP('125.76.203.176')
-
