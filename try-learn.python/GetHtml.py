@@ -4,6 +4,8 @@ import sys
 reload(sys) 
 sys.setdefaultencoding( "utf-8" ) 
 
+##详细使用文档：http://cn.python-requests.org/zh_CN/latest/
+
 #请求网页
 r = requests.get('http://www.zhidaow.com')
 #为请求到的页面进行编码
