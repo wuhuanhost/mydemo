@@ -3,12 +3,20 @@
 	<head>
 		<meta charset="utf-8">
 		<title>javascript函数式编程</title>
+		<style type="text/css">
+			code{
+				font-family: monaco;
+				font-size:12px;
+			}
+		</style>
 	</head>
+
 	<body>
-		<h3>F12查看控制台信息</h3>
-	</body>
-	<script>
-	//1、函数柯里化，柯里化就是预先将某些参数传入，得到一个简单的函数。但是预先传入的参数被保存在闭包中，因此会有一些奇特的特性
+		<h2>F12查看控制台信息</h2>
+		<h3>程序源代码</h3>
+		<pre>
+			<code>
+		//1、函数柯里化，柯里化就是预先将某些参数传入，得到一个简单的函数。但是预先传入的参数被保存在闭包中，因此会有一些奇特的特性
 		var adder = function(num) {
 			return function(y) {
 				return num + y;
@@ -23,7 +31,26 @@
 		console.log(Math.random().toString(16).substring(2))
 		
 		eval("console.log(1+2)")
-		
+			</code>
+		</pre>
+	</body>
+	<script>
+		 //1、函数柯里化，柯里化就是预先将某些参数传入，得到一个简单的函数。但是预先传入的参数被保存在闭包中，因此会有一些奇特的特性
+		var adder = function(num) {
+			return function(y) {
+				return num + y;
+			}
+		}
+		var inc = adder(1);
+		var dec = adder(-1);
+		 //inc, dec现在是两个新的函数，作用是将传入的参数值（+/-）1
+		console.log(inc(99)); //100
+		console.log(dec(101)); //100
+		console.log(Math.random().toString(16).substring(2))
+		 eval("console.log(1+2)")
 	</script>
-</html>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/zenburn.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 
+</html>

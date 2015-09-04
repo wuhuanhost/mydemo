@@ -100,14 +100,14 @@
 		$(document).ready(function() {
 			//打开抽屉菜单
 			$("#open").click(function() {
-				$("#mask-layer").fadeIn();
+				$("#mask-layer").fadeIn(300);
 				$("#nav").animate({
 					left: "0px"
 				}, 500);
 			});
 			//点击遮罩关闭抽屉菜单
 			$("#mask-layer").click(function() {
-				$("#mask-layer").fadeOut();
+				$("#mask-layer").fadeOut(1000);
 				$("#nav").animate({
 					left: "-300px"
 				}, 500);
