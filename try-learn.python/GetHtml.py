@@ -33,4 +33,4 @@ def getIP(ipstr):
 	print ip.text;
 	pass
 
-# getIP('125.76.203.176')
+getIP('125.76.203.176')
