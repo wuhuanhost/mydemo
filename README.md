@@ -1,13 +1,15 @@
-
-###sublime text3常用插件列表
+##sublime text3常用插件和主题
+###插件
 1. Emmet【快速写html、css】
 2. MarkdownPreview【markdown】
 3. ColorPicker【调色板】
 4. AllAutocomplete【增强代码提示】
 5. DocBlockr【写注释的工具】
 
+###主题
+1.Monokai Extended
 
-###sublime text3配置文件
+##sublime text3配置文件
 
 ```
 {
@@ -27,7 +29,7 @@
 }
 ```
 
-###sublime text3快捷键
+##sublime text3快捷键
 
 
 

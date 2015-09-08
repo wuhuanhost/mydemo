@@ -26,7 +26,6 @@ test="<u>　　　　　　</u>"
 ###puts  test.scan(/<u>[　]{0,200}<\/u>/)#匹配<u>和</u>标签中带有0，200个空格
 
 
-
 #demo5
 ###puts "-----------------------------demo5------------------------------------"
 test1="qwwe<u><img src='img/10_zzxx.003.jpeg' style='border-bottom:1px solid #000000;padding-bottom:10px;'/></u>eqweqweqw";
@@ -40,11 +39,9 @@ test2="dadsad123_-*&^%.png";
 
 
 
-
-
 puts "-------------------------------------------------------"
 test123="img/abcd.jpg{200,300}   img/dasdsa.jpg{400,300}img/dakdkaj.png{600,100}   img/dadadsda.gif   fjksdhfkshdfjkhjkfhkjdhfkjlhkjlh";
-a= test123.scan(/(img\/[^\.]+?.(jpg|jpeg|png|gif))|(img\/[^\.]+?.(jpg|jpeg|png|gif)\{[^\}]+?\})/);
+a= test123.scan(/(img\/[^\.]+?.(jpg|jpeg|png|gif)\{[^\}]+?\})|(img\/[^\.]+?.(jpg|jpeg|png|gif))/);
 p a
 
 
