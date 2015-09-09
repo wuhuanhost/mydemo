@@ -27,3 +27,5 @@ print dict1.get("sdaf", "key不存在");
 """
 for arg in sys.argv:
     print arg
+
+
