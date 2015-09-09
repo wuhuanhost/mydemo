@@ -35,11 +35,6 @@
 
 ##sublime text3快捷键
 
-
-
-qwewq
-
-
 [sublime text插件官网](https://packagecontrol.io/browse)
 
 [wiki](https://github.com/wuhuanhost/mydemo/wiki) 
