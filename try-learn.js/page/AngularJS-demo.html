@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular.js"></script>
+    <script type="text/javascript" src="../js/angular/controller.js"></script>
 </head>
 
-<body>
-
-<div ng-app="string">
-	
- 输入文本：<input type="text"  ng-model='yourinput'/>
-<p ng-bind="yourinput"></p>
-
-</div>
-
-
-
-
+<body ng-controller="PhoneListCtrl" ng-app="ngApp">
+    <ul>
+        <li ng-repeat="phone in phones">
+            {{phone.name}}
+            <p>{{phone.snippet}}</p>
+        </li>
+    </ul>
 </body>
 
 </html>
+<!-- 网上的min.js下载到本地的时候为什么会报错？？？？？？ -->
