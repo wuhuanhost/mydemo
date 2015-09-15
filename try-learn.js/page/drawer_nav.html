@@ -1,137 +1,144 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>jquery实现简单侧面抽屉菜单</title>
-		<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
-		<style>
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-				font-family: "微软雅黑";
-			}
-			#nav {
-				position: absolute;
-				width: 300px;
-				height: 100%;
-				left: -300px;
-				top: 0px;
-				background-color: #EEEEEE;
-				z-index: 11;
-			}
-			#mask-layer {
-				position: fixed;
-				z-index: 10;
-				width: 100%;
-				height: 100%;
-				background-color: #999999;
-				-webkit-opacity: 0.6;
-				top: 0px;
-				left: 0px;
-				display: none;
-			}
-			ul {
-				position: absolute;
-				display: block;
-				left: 0px;
-				top: 300px;
-				width: 100px;
-				-webkit-margin-before: 0em;
-				-webkit-margin-after: 0em;
-				-webkit-margin-start: 0px;
-				-webkit-margin-end: 0px;
-				-webkit-padding-start: 0px;
-			}
-			li {
-				list-style: none;
-				width: 100px;
-				height: 36px;
-				margin-top: 10px;
-				background-color: #38ade9;
-				text-align: center;
-				margin-left: 100px;
-				line-height: 36px;
-				cursor: pointer;
-				color: #EEEEEE;
-			}
-			li:hover {
-				background-color: #e5637c;
-			}
-			span {
-				display: block;
-				position: absolute;
-				width: 160px;
-				height: 160px;
-				background-color: red;
-				margin-left: 70px;
-				top: 30px;
-				border-radius: 80px;
-			}
-			#roate img {
-				width: 160px;
-				height: 160px;
-				border-radius: 80px;
-			}
-		</style>
-	</head>
-	<button id='open'>
-		打开
+<head>
+    <meta charset="UTF-8" />
+    <title>jquery实现简单侧面抽屉菜单</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "微软雅黑";
+    }
+    
+    #nav {
+        position: absolute;
+        width: 300px;
+        height: 100%;
+        left: -300px;
+        top: 0px;
+        background-color: #EEEEEE;
+        z-index: 11;
+    }
+    
+    #mask-layer {
+        position: fixed;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        background-color: #999999;
+        -webkit-opacity: 0.6;
+        top: 0px;
+        left: 0px;
+        display: none;
+    }
+    
+    ul {
+        position: absolute;
+        display: block;
+        left: 0px;
+        top: 300px;
+        width: 100px;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 0px;
+    }
+    
+    li {
+        list-style: none;
+        width: 100px;
+        height: 36px;
+        margin-top: 10px;
+        background-color: #38ade9;
+        text-align: center;
+        margin-left: 100px;
+        line-height: 36px;
+        cursor: pointer;
+        color: #EEEEEE;
+    }
+    
+    li:hover {
+        background-color: #e5637c;
+    }
+    
+    span {
+        display: block;
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        background-color: red;
+        margin-left: 70px;
+        top: 30px;
+        border-radius: 80px;
+    }
+    
+    #roate img {
+        width: 160px;
+        height: 160px;
+        border-radius: 80px;
+    }
+    </style>
+</head>
+<button id='open'>
+    打开
+</button>
 
-	</button>
+<body>
+    <div id='nav'>
+        <span id='roate'><img src="../img/hehua.jpg"></span>
+        <ul>
+            <li>关于我</li>
+            <li>归档</li>
+            <li>分类</li>
+            <li>标签</li>
+            <li>友情链接</li>
+            <li>Rss</li>
+        </ul>
+    </div>
+    <div id='mask-layer'></div>
+</body>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script>
+$(document).ready(function() {
+    //打开抽屉菜单
+    $("#open").click(function() {
+        $("#mask-layer").fadeIn(300);
+        $("#nav").animate({
+            left: "0px"
+        }, 500);
+    });
+    //点击遮罩关闭抽屉菜单
+    $("#mask-layer").click(function() {
+        $("#mask-layer").fadeOut(1000);
+        $("#nav").animate({
+            left: "-300px"
+        }, 500);
+    });
+    //旋转
+    $("#roate").click(function() {
+        if (timer != null) {
+            clearInterval(timer);
+            timer = null;
+            $('#roate img').css('-webkit-transform', 'rotate(0deg)');
+        } else {
+            loopRoate();
+        }
+    });
 
-	<body>
-		<div id='nav'>
-			<span id='roate'><img src="../img/hehua.jpg"></span>
-			<ul>
-				<li>关于我</li>
-				<li>归档</li>
-				<li>分类</li>
-				<li>标签</li>
-				<li>友情链接</li>
-				<li>Rss</li>
-			</ul>
-		</div>
-		<div id='mask-layer'></div>
-	</body>
-	<script type="text/javascript" src="../js/jquery.js"></script>
-	<script>
-		$(document).ready(function() {
-			//打开抽屉菜单
-			$("#open").click(function() {
-				$("#mask-layer").fadeIn(300);
-				$("#nav").animate({
-					left: "0px"
-				}, 500);
-			});
-			//点击遮罩关闭抽屉菜单
-			$("#mask-layer").click(function() {
-				$("#mask-layer").fadeOut(1000);
-				$("#nav").animate({
-					left: "-300px"
-				}, 500);
-			});
-			//旋转
-			$("#roate").click(function() {
-				if (timer != null) {
-					clearInterval(timer);
-					timer=null;
-					$('#roate img').css('-webkit-transform', 'rotate(0deg)');
-				} else {
-					loopRoate();
-				}
-			});
-			
-		});
-		
-		var timer = null;
-		function loopRoate() {
-			var index = 0;
-			timer = setInterval(function() {
-				index += 1;
-				$('#roate img').css('-webkit-transform', 'rotate(' + index + 'deg)');
-			}, 30);
-		}
-	</script>
+});
+
+var timer = null;
+
+function loopRoate() {
+    var index = 0;
+    timer = setInterval(function() {
+        index += 1;
+        $('#roate img').css('-webkit-transform', 'rotate(' + index + 'deg)');
+    }, 30);
+}
+</script>
 
 </html>

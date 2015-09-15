@@ -1,14 +1,14 @@
 angular.module('ngApp', []).controller('PhoneListCtrl',
     function($scope) {
         $scope.phones = [{
-            "name": "Nexus S",
-            "snippet": "Fast just got faster with Nexus S."
+            "name": "小明",
+            "phone": "（029）-12345678"
         }, {
-            "name": "Motorola XOOM™ with Wi-Fi",
-            "snippet": "The Next, Next Generation tablet."
+            "name": "李雷",
+            "phone": "13892656362"
         }, {
-            "name": "MOTOROLA XOOM™",
-            "snippet": "The Next, Next Generation tablet."
+            "name": "韩梅梅",
+            "phone": "13653265364"
         }];
     }
 );
