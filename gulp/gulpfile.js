@@ -16,12 +16,10 @@ var  gulp		=	require('gulp'),
 	 coffee		=	require('gulp-coffee');//编译coffcescript
 
 
-
 //源码目录
 var SOURCE="src/";
 //输出目录
 var DEST="dist/";
-
 
 //HTML文件
 gulp.task('html', function() {
@@ -116,5 +114,7 @@ gulp.task('clean', function() {
 gulp.task('default', ['clean','coffee','sass'], function() { 
     gulp.start('js', 'css', 'image','html');
 });
+
+ 
 
  

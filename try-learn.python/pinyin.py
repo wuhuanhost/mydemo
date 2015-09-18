@@ -18,3 +18,4 @@ rege=lazy_pinyin(hans_seg, style=TONE2)
 for sss in rege:
    print sss
 
+
