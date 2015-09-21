@@ -1,5 +1,7 @@
 ##sublime text3常用插件和主题
+
 ###插件
+
 1. Emmet【快速写html、css】
 2. MarkdownPreview【markdown】| OmniMarkupPreviewer | Markdown Editing
 3. ColorPicker【调色板】 【ctrl+shift+c】   
@@ -12,6 +14,7 @@
 10. HTML-CSS-JS Prettify【html-css-js代码美化插件】【ctrl+shift+h】
 
 ###主题
+
 1.Monokai Extended
 
 ##sublime text3配置文件
