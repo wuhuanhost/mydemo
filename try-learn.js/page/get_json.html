@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/libs/bootstarp/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/libs/bootstarp/bootstrap-theme.css">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/libs/bootstarp/bootstrap.js"></script>
+    <style type="text/css">
+    .mito {
+        margin-top: 20px;
+    }
+    
+    .glyphicon {
+        cursor: pointer;
+    }
+    body{
+    	font-family:"微软雅黑";
+    	font-size:16px;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style='text-align: center'>汉字的属性收集工具</h1>
+        <div class="mito"></div>
+        <hr>
+        <form class='form-horizontal'>
+            <div class="form-group">
+                <label for='exampleInputName2' class='col-sm-2 control-label'><span class='glyphicon glyphicon-plus' id="addClickInput"></span></label>
+                <div class='col-sm-9'>
+                    <input type="email" class="form-control" placeholder="添加一个普通输入框" id='textFiled'>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for='exampleInputName2' class='col-sm-2 control-label'><span class='glyphicon glyphicon-plus' id="addClickTextarea"></span></label>
+                <div class='col-sm-9'>
+                    <textarea type='text' class='form-control' rows='3' placeholder='添加一个文本域' id='textareaFiled'></textarea>
+                </div>
+            </div>
+            <div>
+                <div class='col-sm-2'></div>
+                <div class='col-sm-9'>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="getJson()">生成json</button>
+                </div>
+                <div class='col-sm-1'></div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+    var json = [{
+            "filed": "拼音",
+            "multi": "0"
+        }, {
+            "filed": "笔画",
+            "multi": "0"
+        }, {
+            "filed": "结构",
+            "multi": "0"
+        }, {
+            "filed": "五笔",
+            "multi": "0"
+        }, {
+            "filed": "拼音",
+            "multi": "0"
+        }, {
+            "filed": "造句",
+            "multi": "1"
+        }]
+        /**
+         * 生成界面
+         * @param  {[type]} data [description]
+         * @return {[type]}      [description]
+         */
+    function init(data) {
+        console.log(data)
+        var html = "<form class='form-horizontal' id='inputFiled'>";
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].multi == 0) {
+                html = html.concat("<div class='form-group'   id='" + i + "-c'> <label for='exampleInputName2' class='col-sm-2 control-label' id='" + i + "-label'> " + data[i].filed + " </label><div class='col-sm-9'><input type='text' class='form-control'  placeholder='" + data[i].filed + "' id='" + i + "-val'></div> <label for='exampleInputName2' class='col-sm-1 control-label'><span class='glyphicon glyphicon-remove' onclick=\"del('" + i + "')\"></span></label></div> ");
+            } else {
+                html = html.concat("<div class='form-group'   id='" + i + "-c'> <label for='exampleInputName2' class='col-sm-2 control-label' id='" + i + "-label'> " + data[i].filed + " </label><div class='col-sm-9'><textarea type='text' class='form-control' rows='3' placeholder='" + data[i].filed + "' id='" + i + "-val'></textarea></div> <label for='exampleInputName2' class='col-sm-1 control-label'><span class='glyphicon glyphicon-remove' onclick=\"del('" + i + "')\"></span></label></div> ");
+            }
+        }
+        html = html.concat("</div>")
+        $(".mito").append(html);
+    };
+    init(json)
+ 
+    var index = json.length - 1;
+    /**
+     * [description]
+     * @param  {[type]} ){                } [description]
+     * @return {[type]}     [description]
+     */
+    $(document).ready(function() {
+        //添加一个input
+        $("#addClickInput").click(function() {
+            var _text = $("#textFiled").val();
+            if (isNull(_text)) {
+                index++;
+                $("#inputFiled").append("<div class='form-group' id='" + index + "-c'> <label for='exampleInputName2' class='col-sm-2 control-label' id='" + index + "-label'> " + _text + " </label><div class='col-sm-9'><input type='text' class='form-control'  placeholder='" + _text + "' id='" + index + "-val'></div><label for='exampleInputName2' class='col-sm-1 control-label'><span class='glyphicon glyphicon-remove' onclick=\"del('" + index + "')\"></span></label></div> ");
+                $("#textFiled").val("");
+            }
+        });
+
+
+        $("#addClickTextarea").click(function() {
+            var _textarea = $("#textareaFiled").val();
+            if (isNull(_textarea)) {
+                index++;
+                $("#inputFiled").append("<div class='form-group' id='" + index + "-c'> <label for='exampleInputName2' class='col-sm-2 control-label' id='" + index + "-label'> " + _textarea + " </label><div class='col-sm-9'><textarea type='text' class='form-control' rows='3' placeholder='" + _textarea + "' id='" + index + "-val'></textarea></div><label for='exampleInputName2' class='col-sm-1 control-label'><span class='glyphicon glyphicon-remove' onclick=\"del('" + index + "')\"></span></label></div>");
+                $("#textareaFiled").val("");
+            }
+        });
+
+    });
+
+    /**
+     * [isNull description]
+     * @param  {[type]}  arg0 [description]
+     * @return {Boolean}      [description]
+     */
+    function isNull(arg0) {
+        if (arg0 == "" || arg0 == null) {
+            alert("字段不能为空！！！");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 删除当前div
+     * @param  {[type]} dom [description]
+     * @return {[type]}     [description]
+     */
+    function del(id) {
+        $("#" + id + "-c").remove();
+    }
+
+    /**
+     * [getJson description]
+
+     * @return {[type]} [description]
+     */
+    function getJson() {
+
+        var arr = [];
+        $.each($("#inputFiled >.form-group"), function() {
+            var _id = $(this).attr("id").split("-")[0];
+            console.log($("#" + _id + "-label").html());
+            console.log($("#" + _id + "-val").val().split(/\n/g));
+            var obj = {
+                "field": $("#" + _id + "-label").html().trim(),
+                "contents": $("#" + _id + "-val").val().split(/\n/g)
+            };
+            arr.push(obj);
+
+
+        })
+
+        console.log(arr)
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    </script>
+</body>
+
+</html>
