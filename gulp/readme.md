@@ -1,15 +1,15 @@
 
 
 
-###全局安装
+### 全局安装
 
 `npm install -g gulp`
 
-###安装gulp包
+### 安装gulp包
 
 `npm install gulp --save-dev  `
 
-###常用插件
+### 常用插件
 
 ```
 sass的编译                   	（gulp-ruby-sass）
@@ -26,7 +26,7 @@ js代码校验                   	（gulp-jshint）
 html压缩                     	（gulp-htmlmin）
 ```
 
-###-save和-save-dev可以省掉你手动修改package.json文件的步骤。
+### -save和-save-dev可以省掉你手动修改package.json文件的步骤。
 
 `npm install module-name -save 自动把模块和版本号添加到dependencies部分`
 `npm install module-name -save-dev 自动把模块和版本号添加到devdependencies部分`

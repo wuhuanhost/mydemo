@@ -1,27 +1,29 @@
 var  gulp		=	require('gulp'),
 	 gutil		=	require('gulp-util'),
-	 jshint		=	require('gulp-jshint'),//js´úÂëĞ£Ñé
-	 uglify		=	require('gulp-uglify'),//jsÑ¹Ëõ
-	 cssmin		=	require('gulp-minify-css'),//cssÑ¹Ëõ
-	 concat		=	require('gulp-concat'),//ÎÄ¼şºÏ²¢
-	 imagemin	=	require('gulp-imagemin'),//Í¼Æ¬Ñ¹Ëõ
+	 jshint		=	require('gulp-jshint'),//jsä»£ç æ ¡éªŒ
+	 uglify		=	require('gulp-uglify'),//jså‹ç¼©
+	 cssmin		=	require('gulp-minify-css'),//csså‹ç¼©
+	 concat		=	require('gulp-concat'),//æ–‡ä»¶åˆå¹¶
+	 imagemin	=	require('gulp-imagemin'),//å›¾ç‰‡å‹ç¼©
 	 cache		=	require('gulp-cache'),
-	 rename     =	require('gulp-rename'),//ÖØÃüÃû
-	 notify		=	require('gulp-notify'),//Í¨Öª
-	 clean		=	require('gulp-clean'),//ÇåÀíÎÄ¼ş
-	 htmlmin	=	require('gulp-htmlmin'),//htmlÑ¹Ëõ
-	 obfuscate	=	require('gulp-obfuscate'),//´úÂë»ìÏı
-	 sass		=	require('gulp-ruby-sass'),//±àÒësass
-     coffeelint =	require('gulp-coffeelint'),//Ğ£Ñécoffcescript
-	 coffee		=	require('gulp-coffee');//±àÒëcoffcescript
+	 rename     =	require('gulp-rename'),//é‡å‘½å
+	 notify		=	require('gulp-notify'),//é€šçŸ¥
+	 clean		=	require('gulp-clean'),//æ¸…ç†æ–‡ä»¶
+	 htmlmin	=	require('gulp-htmlmin'),//htmlå‹ç¼©
+	 obfuscate	=	require('gulp-obfuscate'),//ä»£ç æ··æ·†
+	 sass		=	require('gulp-ruby-sass'),//ç¼–è¯‘sass
+     coffeelint =	require('gulp-coffeelint'),//æ ¡éªŒcoffcescript
+	 coffee		=	require('gulp-coffee');//ç¼–è¯‘coffcescript
 
 
-//Ô´ÂëÄ¿Â¼
+
+//æºç ç›®å½•
 var SOURCE="src/";
-//Êä³öÄ¿Â¼
+//è¾“å‡ºç›®å½•
 var DEST="dist/";
 
-//HTMLÎÄ¼ş
+
+//HTMLæ–‡ä»¶
 gulp.task('html', function() {
    gulp.src(SOURCE+"/*.html")
         .pipe(htmlmin({collapseWhitespace: true}))
@@ -30,16 +32,16 @@ gulp.task('html', function() {
 });
 
 
-//½Å±¾ÎÄ¼ş
+//è„šæœ¬æ–‡ä»¶
 gulp.task('js', function () {
     gulp.src(SOURCE+'/js/*.js')
-		//ºÏ²¢js
+		//åˆå¹¶js
 		.pipe(concat("app.js"))
-		//Êä³öÎ´Ñ¹Ëõ°æ±¾
+		//è¾“å‡ºæœªå‹ç¼©ç‰ˆæœ¬
 		.pipe(gulp.dest(DEST+"/js"))
-		//Ñ¹Ëõ
+		//å‹ç¼©
 		.pipe(uglify())
-		//»ìÏı
+		//æ··æ·†
 		.pipe(obfuscate())
 		.pipe(rename({ extname: '.min.js' }))
         .pipe(gulp.dest(DEST+'/js/'))
@@ -47,14 +49,14 @@ gulp.task('js', function () {
 });
 
 
-//ÑùÊ½
+//æ ·å¼
 gulp.task('css', function () {
     gulp.src(SOURCE+'/css/*.css')
-		//ºÏ²¢css
+		//åˆå¹¶css
 		.pipe(concat('style.css'))
-		//Êä³öÎ´Ñ¹ËõµÄ°æ±¾
+		//è¾“å‡ºæœªå‹ç¼©çš„ç‰ˆæœ¬
 		.pipe(gulp.dest(DEST+"/css"))
-		//Ñ¹Ëõ
+		//å‹ç¼©
 		.pipe(cssmin())
         .pipe(rename({ extname: '.min.css' }))
         .pipe(gulp.dest(DEST+'/css/'))
@@ -62,7 +64,7 @@ gulp.task('css', function () {
 });
 
 
-//Í¼Æ¬
+//å›¾ç‰‡
 gulp.task('image', function() { 
   return gulp.src(SOURCE+'/images/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
@@ -72,7 +74,7 @@ gulp.task('image', function() {
 
 
 
-//±àÒësass
+//ç¼–è¯‘sass
 gulp.task('sass', function() {
   return sass(SOURCE+'/sass/*.scss', { style: 'expanded' })
 	.pipe(gulp.dest(SOURCE+'/css'))
@@ -81,7 +83,7 @@ gulp.task('sass', function() {
 
 
 
-//Ğ£Ñécoffeescript
+//æ ¡éªŒcoffeescript
 gulp.task('validate_coffee', function () {
   gulp.src(SOURCE+"/coffeescript/*.coffee")
     .pipe(coffeelint())
@@ -91,7 +93,7 @@ gulp.task('validate_coffee', function () {
 
 
 
-//±àÒëcoffcescript
+//ç¼–è¯‘coffcescript
 gulp.task('coffee', ['validate_coffee'], function() {
   gulp.src(SOURCE+"/coffeescript/*.coffee")
     .pipe(coffee({bare: true}).on('error', gutil.log))
@@ -101,7 +103,7 @@ gulp.task('coffee', ['validate_coffee'], function() {
 
 
 
-// ÇåÀí
+// æ¸…ç†
 gulp.task('clean', function() { 
   return gulp.src([DEST+'/css', DEST+'/js', DEST+'/images'], {read: false})
     .pipe(clean())
@@ -110,11 +112,9 @@ gulp.task('clean', function() {
  
 
 
-// Ô¤ÉèÈÎÎñ
+// é¢„è®¾ä»»åŠ¡
 gulp.task('default', ['clean','coffee','sass'], function() { 
     gulp.start('js', 'css', 'image','html');
 });
-
- 
 
  

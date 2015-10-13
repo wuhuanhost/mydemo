@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    canvas {
+    	position:absolute;
+        border: solid 2px red;
+        z-index:1;
+    }
+    #hanzi {
+        width: 400px;
+        height: 400px;
+        margin-left: 200px;
+        margin-top:200px;
+        position:absolute;
+    }
+    #fonts {
+    	position:absolute;
+    	font-size: 360px;
+    	width: 400px;
+    	height:400px;
+    	line-height: 400px;
+    	font-family:'楷体';
+    	text-align: center;
+    	background-color: re
+    }
+    </style>
+</head>
+
+<body onload="pageLoad();">
+    <div id="hanzi">
+        <div id="fonts">
+            国
+        </div>
+        <canvas id="can" width="400px" height="400px"></canvas>
+    </div>
+    <script type="text/javascript">
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    function pageLoad() {
+        var can = $$('can');
+        var cans = can.getContext('2d');
+        //第一条斜线
+        drawDashLine(cans, 0, 0, 400, 400, 4);
+        //第二条斜线
+        drawDashLine(cans, 0, 400, 400, 0, 4);
+        //横线
+        drawDashLine(cans, 0, 200, 400, 200, 4);
+
+        //竖线
+        drawDashLine(cans, 200, 0, 200, 400, 4);
+
+        // cans.font = "400px 楷体";
+        // cans.fillText("国", 0, 340);
+
+    }
+
+    //绘制虚线
+    function drawDashLine(ctx, x1, y1, x2, y2, dashLength) {
+        var dashLen = dashLength === undefined ? 5 : dashLength,
+            xpos = x2 - x1, //得到横向的宽度;
+            ypos = y2 - y1, //得到纵向的高度;
+            numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen);
+        //利用正切获取斜边的长度除以虚线长度，得到要分为多少段;
+        for (var i = 0; i < numDashes; i++) {
+            if (i % 2 === 0) {
+                ctx.moveTo(x1 + (xpos / numDashes) * i, y1 + (ypos / numDashes) * i);
+                //有了横向宽度和多少段，得出每一段是多长，起点 + 每段长度 * i = 要绘制的起点；
+            } else {
+                ctx.lineTo(x1 + (xpos / numDashes) * i, y1 + (ypos / numDashes) * i);
+            }
+        }
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+    }
+    </script>
+</body>
+
+</html>
