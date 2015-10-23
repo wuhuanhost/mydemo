@@ -54,7 +54,6 @@ Taxi.prototype.run = function(type) {
 }
 
 Taxi.prototype.privateFn = function() {
-
 	console.log("Taxi新增加的方法......");
 }
 
