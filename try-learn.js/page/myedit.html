@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑器</title>
+    <style type="text/css">
+    html {
+        font-size: 62.5%;
+        font-family: "微软雅黑";
+        margin: 0;
+    }
+    
+    h1 {
+        font-size: 3.6rem
+    }
+    
+    h2 {
+        font-size: 3.2rem
+    }
+    
+    h3 {
+        font-size: 2.8rem
+    }
+    
+    h4 {
+        font-size: 2.4rem
+    }
+    
+    h5 {
+        font-size: 2.0rem
+    }
+    
+    h6 {
+        font-size: 1.6rem
+    }
+    
+    button {
+        cursor: pointer;
+    }
+    
+    #container {}
+    
+    #toobar {
+        height: 36px;
+        position: fixed;
+        top: 2px;
+    }
+    
+    #toobar .button-group {
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
+    
+    #toobar .button-group button {
+        display: block;
+        float: left;
+        height: 100%;
+        text-decoration: none;
+        color: #000000;
+        background-color: #FFFFFF;
+        border: 0px solid #FFFFFF;
+        border-right: 1px solid #CCCCCC;
+        cursor: pointer;
+    }
+    
+    #toobar .button-group button:last-child {
+        border-right: 0px solid #CCCCCC;
+    }
+    
+    #toobar .button-group button:hover {
+        background-color: #EEEEEE;
+    }
+    
+    #editor {
+        border: 1px solid #21bbff;
+        height: 760px;
+        outline: none;
+        padding: 6px;
+        font-size: 1.6rem;
+        line-height: 30px;
+        letter-spacing: 0px;
+        margin-top: 36px;
+        overflow: auto;
+    }
+    /*右键菜单*/
+    
+    #edit-list {
+        position: absolute;
+        display: none;
+        width: 200px;
+        background-color: #EEEEEE;
+        z-index: 9;
+    }
+    
+    #edit-list ul {
+        width: 200px;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    #edit-list li {
+        height: 36px;
+        line-height: 36px;
+        border-top: 1px solid #ccc;
+        list-style: none;
+        margin: 0px;
+        text-align: left;
+        cursor: pointer;
+        font-weight: bold;
+        padding-left: 20px;
+        color: #999;
+        font-size: 1.4rem;
+    }
+    
+    #edit-list li:hover {
+        background-color: #38ade9;
+        color: #FFFFFF;
+    }
+    </style>
+</head>
+<!-- oncontextmenu="return false" 禁止右键菜单 -->
+
+<body oncontextmenu="return falses">
+    <!-- 编辑器容器 -->
+    <div id="container">
+        <!-- 工具条 -->
+        <div id="toobar">
+            <div class="button-group">
+                <button data-edit="Undo" style='color:blue'>Undo</button>
+                <button data-edit="bold">加粗</button>
+                <button data-edit="italic">倾斜</button>
+                <button data-edit="underline">下划线</button>
+                <button data-edit="ForeColor">变成红色</button>
+                <button data-edit="superscript">上标</button>
+                <button data-edit="subscript">下标</button>
+                <button id='img'>添加图片</button>
+            </div>
+        </div>
+        <!-- 编辑器编辑容器 -->
+        <div id="editor" contenteditable="true">
+            <h1>测试测试测试</h1>
+            <h2>测试</h2>
+            <h3>测试</h3>
+            <h4>测试</h4>
+            <h5>测试</h5>
+            <h6>测试</h6>
+            <p> 百度百科是百度公司推出的一部内容开放、自由的网络百科全书平台，其测试版于2006年4月20日上线，正式版在2008年4月21日发布，截至2014年11月收录词条数量已达1000万个。</p>
+            <h1>测试测试测试</h1>
+            <p>百度百科旨在创造一个涵盖各领域知识的中文信息收集平台。百度百科强调用户的参与和奉献精神，充分调动互联网用户的力量，汇聚上亿用户的头脑智慧，积极进行交流和分享。同时，百度百科实现与百度搜索、百度知道的结合，从不同的层次上满足用户对信息的需求。[1] </p>
+            <h1>测试测试测试</h1>
+            <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试|||喜欢你</p>
+        </div>
+    </div>
+    <div id='edit-list'>
+        <ul>
+            <li data-edit="bold">加粗</li>
+            <li data-edit="underline">下划线</li>
+            <li data-edit="superscript">上标</li>
+            <li data-edit="subscript">下标</li>
+            <li>添加图片</li>
+        </ul>
+    </div>
+    <br>
+    <button id='showHtml'>输出页面html</button>
+    <button id='showText'>输出页面html</button>
+    <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    //加粗
+    //下划线
+    //上标
+    //下标
+    //添加图片
+
+    var editor = (function() {
+
+        var editor = {};
+
+        editor.init = function(initPara) {
+            // alert(initPara)
+        };
+        return editor;
+    })();
+
+    editor.init("okay");
+
+
+
+    // 鼠标点击附近显示div
+    $(document).ready(function() {
+                $("body").mousedown(function(e) {
+                    if (e.button == 3) { //点击了鼠标右键
+                        e.preventDefault();
+                        $("#edit-list").css({
+                            top: e.pageY + 10,
+                            left: e.pageX + 10,
+                            display: "block"
+                        })
+
+                    } else {
+                        $("#edit-list").css({
+                            display: "none"
+                        })
+                    }
+
+
+                });
+
+
+
+                // $('#editor').mouseup(function() {
+                //     var s = window.getSelection();
+                //     s = s.toString();
+                //     s = s.replace(/([\'\"\<\>\[\]\/\?\.\*\+\^\$\!])/g, '\\$1');
+                //     var reg = new RegExp(s);
+                //     console.log(reg);
+                //     var h = $(this).html();
+                //     if (reg.test(h)) {
+                //         var reg1 = new RegExp('^(.*?)(' + s + ')(.*?)$');
+                //         console.log(reg1)
+                //         $(this).html(h.replace(reg1, '$1<b>$2</b>$3'));
+                //     }
+
+                // });
+                //
+    </script>
+    <script language="javascript">
+    function bold() {
+        var selObj = window.getSelection();
+        console.log(selObj.anchorNode);
+        console.log(selObj.anchorOffset);
+        console.log(selObj.focusNode);
+        console.log(selObj.focusOffset);
+        console.log(selObj.isCollapsed);
+        var abcd = selObj.anchorNode.data;
+        console.log(abcd.substr(selObj.anchorOffset, selObj.focusOffset - selObj.anchorOffset));
+
+        console.log(selObj.getRangeAt(0))
+
+        document.execCommand("ForeColor", "true", "red");
+
+        document.execCommand("Bold", "false", null);
+
+
+        // document.execCommand("InsertImage", false, "www.abc.png");
+
+    }
+
+
+    $(".button-group button").each(function() {
+        $(this).click(function() {
+            var command = $(this).attr("data-edit");
+            if (command == 'ForeColor') {
+                document.execCommand("ForeColor", "true", "red");
+            } else {
+                document.execCommand(command, "false", null);
+            }
+        });
+    });
+
+
+    //插入图片
+    $("#img").click(function() {
+        var div = document.createElement("div");
+        div.setAttribute("id", "fileImg")
+        div.setAttribute("style", "position:absolute;width:600px;height:60px;border:1px solid #999;top:36px;left:50%;top:50%;margin-left:-300px;margin-top:-200px;background-color:#EEEEEE;");
+
+        //文件加载节点
+        var img = document.createElement("input");
+        img.setAttribute("type", "file");
+        img.setAttribute("style", "margin-top:20px;margin-left:36px;display:block;width:200px;height:36px;");
+        img.setAttribute("id", "filePath");
+        div.appendChild(img);
+
+
+        img.onchange = function() {
+            var file = this.files[0];
+            //这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件 
+            if (!/image\/\w+/.test(file.type)) {
+                alert("请确保文件为图像类型");
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+
+                document.execCommand("InsertImage", false, this.result);
+                $("#fileImg").remove();
+            }
+
+        }
+
+        // //加载节点
+        // var button1 = document.createElement("button");
+        // button1.innerText = "插入图片";
+        // div.appendChild(button1);
+
+
+        // button1.onclick = function() {
+
+        //     alert($("#filePath").val());
+        //     document.execCommand("InsertImage", false, $("#filePath").val());
+
+        // }
+        //
+        $("body").append(div);
+    });
+
+
+    $("#showHtml").click(function() {
+
+        alert($("#editor").html());
+
+
+    });
+
+
+    $("#showText").click(function() {
+
+        alert($("#editor").text());
+
+
+    });
+    </script>
+</body>
+
+</html>
