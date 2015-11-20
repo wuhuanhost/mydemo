@@ -12,6 +12,8 @@
 8. SublimeCodeIntel【全功能代码提示，可以自定义代码提示】
 9. Side​Bar​Enhancements 【菜单增强插件】
 10. HTML-CSS-JS Prettify【html-css-js代码美化插件】【ctrl+shift+h】
+11. LiveReload【保存页面之后浏览器自动刷新】
+12. View Browser【浏览器中打开】【ctrl+alt+v】
 
 ###主题
 
