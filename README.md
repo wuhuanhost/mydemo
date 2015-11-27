@@ -14,6 +14,7 @@
 10. HTML-CSS-JS Prettify【html-css-js代码美化插件】【ctrl+shift+h】
 11. LiveReload【保存页面之后浏览器自动刷新】
 12. View Browser【浏览器中打开】【ctrl+alt+v】
+13. VAlign【代码中等号对齐的插件】【ctrl+\】
 
 ###主题
 
