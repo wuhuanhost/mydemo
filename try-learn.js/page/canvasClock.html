@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo" style="position:absolute; width:100px; height:100px; background:#ccc; left:0; top:0;"></div>
+    <script>
+    var demo = document.getElementById('demo');
+
+    function rander() {
+        demo.style.left = parseInt(demo.style.left) + 3 + 'px'; //每一帧向右移动1px
+    }
+
+    requestAnimationFrame(function() {
+        rander();
+        //当超过300px后才停止
+        if (parseInt(demo.style.left) <= 1000) {
+            requestAnimationFrame(arguments.callee);
+        }
+    });
+    </script>
+    <img src="http://touxiang.qqzhi.com/uploads/2012-11/1111014433865.jpg" id='bk' alt="" style='display:none;width:100%;height:100%'>
+    <canvas id="canvas" width="600px" height="600px" style="background-color: #FFFFFF;margin-top: 100px;">你的浏览器还不支持canvas</canvas>
+    <script type="text/javascript">
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var style = {
+        "width": "600",
+        "height": "600"
+    }
+
+    function drawClock() {
+        ctx.clearRect(0, 0, 600, 600)
+        var date = new Date();
+        var ss = date.getSeconds();
+        var mm = date.getMinutes();
+        //矫正分针
+        mm = mm + ss / 60;
+        var hh = date.getHours();
+        //矫正时针
+        hh = hh + mm / 60;
+        //将24进制的小时转换为12小时
+        hh = hh > 12 ? hh - 12 : hh;
+        //绘制表盘
+        ctx.beginPath();
+        ctx.arc(300, 300, 200, 0, Math.PI * 2, false);
+        ctx.lineWidth = "5"
+        ctx.strokeStyle = "#000012";
+        ctx.closePath();
+        ctx.stroke();
+
+
+        //背景图片
+        ctx.save();
+        ctx.translate(300, 300); //设置0，0点
+        ctx.beginPath();
+        var img = document.getElementById("bk");
+        var pat = ctx.createPattern(img, "no-repeat");
+        ctx.arc(0, 0, 200, 0, Math.PI * 2, false);
+        ctx.lineWidth = "5"
+        ctx.fillStyle = pat;
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+
+        //绘制时刻度
+        for (var i = 0; i < 12; i++) {
+            ctx.save();
+            ctx.lineWidth = "6"
+            ctx.strokeStyle = "#000012";
+            ctx.translate(300, 300); //设置0，0点
+            ctx.rotate(i * 30 * Math.PI / 180); //设置旋转角度
+            ctx.beginPath();
+            ctx.moveTo(0, 170);
+            ctx.lineTo(0, 190);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
+        //绘制分刻度
+        for (var i = 0; i < 60; i++) {
+            ctx.save();
+            ctx.lineWidth = "3"
+            ctx.strokeStyle = "#000012";
+            ctx.translate(300, 300); //设置0，0点
+            ctx.rotate(i * 6 * Math.PI / 180); //设置旋转角度
+            ctx.beginPath();
+            ctx.moveTo(0, 180);
+            ctx.lineTo(0, 190);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
+        //时针
+        ctx.save();
+        ctx.lineWidth = "10";
+        ctx.strokeStyle = "#cd3605";
+        ctx.translate(300, 300);
+        ctx.rotate(hh * 30 * Math.PI / 180);
+        ctx.beginPath();
+        ctx.moveTo(0, -100);
+        ctx.lineTo(0, 20);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+        //分针
+        ctx.save();
+        ctx.lineWidth = "5";
+        ctx.strokeStyle = "#44dd93";
+        ctx.translate(300, 300);
+        ctx.rotate(mm * 6 * Math.PI / 180);
+        ctx.beginPath();
+        ctx.moveTo(0, -140);
+        ctx.lineTo(0, 20);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+        //秒针
+        ctx.save();
+        ctx.lineWidth = "2";
+        ctx.fillStyle = "#38ade9";
+        ctx.translate(300, 300);
+        ctx.rotate(ss * 6 * Math.PI / 180);
+        ctx.beginPath();
+        ctx.moveTo(-20, -2);
+        ctx.lineTo(-20, 2);
+        ctx.lineTo(160, 1);
+        ctx.lineTo(160, -1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+    drawClock();
+    setInterval(drawClock, 1000);
+    // ctx.closePath();//
+    </script>
+</body>
+
+</html>

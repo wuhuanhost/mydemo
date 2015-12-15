@@ -1,84 +1,90 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<!--每三秒页面自动刷新-->
-		<!--<meta meta http-equiv="Refresh" content="3"/>-->
-		<title>目录页面</title>
-		<link rel="stylesheet" type="text/css" href="css/contents.css" />
-		<script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript">
-			 //目录结构，新添加页面在数组中添加一个新的对象
-			var list = [{
-				"title": "简单的html编辑器",
-				"href": "page/myedit.html",
-				"date": "2015-10-23"
-			},{
-				"title": "jquery动画实现抽屉导航",
-				"href": "page/drawer_nav.html",
-				"date": "2015-09-04"
-			},{
-				"title": "长字符串在div中字体放大缩小动态分页",
-				"href": "page/txt-paging.html",
-				"date": "2015-09-01"
-			},{
-				"title": "math.js多用途的javascript库试用",
-				"href": "page/math-js.html",
-				"date": "2015-08-14"
-			}, {
-				"title": "网页360度全景图片",
-				"href": "page/panorama360.html",
-				"date": "2015-08-12"
-			}, {
-				"title": "网页文字竖排的一种实现方式",
-				"href": "page/vertical_text.html",
-				"date": "2015-08-10"
-			}, {
-				"title": "网页PPT效果",
-				"href": "page/ppt.html",
-				"date": "2015-08-09"
-			}, {
-				"title": "HTML5的【contenteditable='true'】属性实现简单网页编辑器",
-				"href": "page/edit.html",
-				"date": "2015-07-30"
-			}, {
-				"title": "javascript函数式编程---函数柯里化",
-				"href": "page/functional_programming.html",
-				"date": "2015-07-20"
-			}]
-		</script>
-	</head>
-	<body>
-		<div id="content">
-			<h3>练习demo目录</h3>
-			<!--<div class='list'><span class='index'>1、</span>
+
+<head>
+    <meta charset="utf-8" />
+    <!--每三秒页面自动刷新-->
+    <!--<meta meta http-equiv="Refresh" content="3"/>-->
+    <title>目录页面</title>
+    <link rel="stylesheet" type="text/css" href="css/contents.css" />
+    <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    //目录结构，新添加页面在数组中添加一个新的对象
+    var list = [{
+        "title":"canvas绘制手表【表盘】",
+        "href":"page/canvasClock.html",
+        "date":"2015-12-15"
+    }, {
+        "title": "简单的html编辑器",
+        "href": "page/myedit.html",
+        "date": "2015-10-23"
+    }, {
+        "title": "jquery动画实现抽屉导航",
+        "href": "page/drawer_nav.html",
+        "date": "2015-09-04"
+    }, {
+        "title": "长字符串在div中字体放大缩小动态分页",
+        "href": "page/txt-paging.html",
+        "date": "2015-09-01"
+    }, {
+        "title": "math.js多用途的javascript库试用",
+        "href": "page/math-js.html",
+        "date": "2015-08-14"
+    }, {
+        "title": "网页360度全景图片",
+        "href": "page/panorama360.html",
+        "date": "2015-08-12"
+    }, {
+        "title": "网页文字竖排的一种实现方式",
+        "href": "page/vertical_text.html",
+        "date": "2015-08-10"
+    }, {
+        "title": "网页PPT效果",
+        "href": "page/ppt.html",
+        "date": "2015-08-09"
+    }, {
+        "title": "HTML5的【contenteditable='true'】属性实现简单网页编辑器",
+        "href": "page/edit.html",
+        "date": "2015-07-30"
+    }, {
+        "title": "javascript函数式编程---函数柯里化",
+        "href": "page/functional_programming.html",
+        "date": "2015-07-20"
+    }]
+    </script>
+</head>
+
+<body>
+    <div id="content">
+        <h3>练习demo目录</h3>
+        <!--<div class='list'><span class='index'>1、</span>
 				<span class='title'><a href=''>
 					dasdsad</a>
 				</span>
 				<span class='date'>qweweqweeqw</span>
 			</div>-->
+    </div>
+    <div id='footer'>©2015 mengxiangjia. All rights reserved.</div>
+</body>
+<script type="text/javascript">
+// list.reverse(); //倒叙输出
+$(window).load(function() {
+    var html = "";
+    for (var i = 0; i < list.length; i++) {
+        html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
+    }
+    html += "<div style='height:36px;'></div>"
+    $("#content").append(html);
+    console.log("%c$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", "color:red")
+    console.log("%c$$$$$$      $$$$$$$$$$$     $$$$$$$$        $$$$$$$$         $$$$", "color:orange")
+    console.log("%c$$$$   $$$$   $$$$$$$   $$$   $$$$$$   $$$$   $$$$$$   $$$$$$$$$$", "color:yellow")
+    console.log("%c$$$   $$$$$$$$$$$$$$   $$$$$   $$$$$   $$$$$   $$$$$   $$$$$$$$$$", "color:green")
+    console.log("%c$$$  $$$$$$$$$$$$$$$  $$$$$$$  $$$$$   $$$$$$  $$$$$        $$$$$", "color:indigo")
+    console.log("%c$$$   $$$$$$$$$$$$$$   $$$$$   $$$$$   $$$$$   $$$$$   $$$$$$$$$$", "color:blue")
+    console.log("%c$$$$   $$$$   $$$$$$$   $$$   $$$$$$   $$$$   $$$$$$   $$$$$$$$$$", "color:violet")
+    console.log("%c$$$$$$      $$$$$$$$$$$     $$$$$$$$        $$$$$$$$         $$$$", "color:pink")
+    console.log("%c$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", "color:red")
+});
+</script>
 
-		</div>
-		<div id='footer'>©2015 mengxiangjia. All rights reserved.</div>
-	</body>
-	<script type="text/javascript">
-		 // list.reverse(); //倒叙输出
-		$(window).load(function() {
-			var html = "";
-			for (var i = 0; i < list.length; i++) {
-				html += "<div class='list'><span class='index'>" + (i + 1) + "、</span><span class='title'><a href='" + list[i].href + "'>" + list[i].title + "</a></span><span class='date'>" + list[i].date + "</span></div><div class='clean'></div>";
-			}
-			html += "<div style='height:36px;'></div>"
-			$("#content").append(html);
-			console.log("%c$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", "color:red")
-			console.log("%c$$$$$$      $$$$$$$$$$$     $$$$$$$$        $$$$$$$$         $$$$", "color:orange")
-			console.log("%c$$$$   $$$$   $$$$$$$   $$$   $$$$$$   $$$$   $$$$$$   $$$$$$$$$$", "color:yellow")
-			console.log("%c$$$   $$$$$$$$$$$$$$   $$$$$   $$$$$   $$$$$   $$$$$   $$$$$$$$$$", "color:green")
-			console.log("%c$$$  $$$$$$$$$$$$$$$  $$$$$$$  $$$$$   $$$$$$  $$$$$        $$$$$", "color:indigo")
-			console.log("%c$$$   $$$$$$$$$$$$$$   $$$$$   $$$$$   $$$$$   $$$$$   $$$$$$$$$$", "color:blue")
-			console.log("%c$$$$   $$$$   $$$$$$$   $$$   $$$$$$   $$$$   $$$$$$   $$$$$$$$$$", "color:violet")
-			console.log("%c$$$$$$      $$$$$$$$$$$     $$$$$$$$        $$$$$$$$         $$$$", "color:pink")
-			console.log("%c$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", "color:red")
-		});
-	</script>
 </html>
