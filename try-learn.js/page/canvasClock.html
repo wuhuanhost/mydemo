@@ -3,7 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
+    <style type="text/css">
+    body {
+        margin: 0;
+        background-color: #dd514c;
+    }
+    </style>
 </head>
 
 <body>
@@ -18,20 +25,20 @@
     requestAnimationFrame(function() {
         rander();
         //当超过300px后才停止
-        if (parseInt(demo.style.left) <= 1000) {
+        if (parseInt(demo.style.left) <= 100) {
             requestAnimationFrame(arguments.callee);
         }
     });
     </script>
     <img src="http://touxiang.qqzhi.com/uploads/2012-11/1111014433865.jpg" id='bk' alt="" style='display:none;width:100%;height:100%'>
-    <canvas id="canvas" width="600px" height="600px" style="background-color: #FFFFFF;margin-top: 100px;">你的浏览器还不支持canvas</canvas>
+    <div style='width:600px;margin:0 auto;'>
+        <canvas id="canvas" width="600px" height="600px" style="background-color: #FFFFFF;margin-top: 100px;background-color: #dd514c;">你的浏览器还不支持canvas</canvas>
+    </div>
     <script type="text/javascript">
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-    var style = {
-        "width": "600",
-        "height": "600"
-    }
+
+    console.log(canvas.offsetWidth)
 
     function drawClock() {
         ctx.clearRect(0, 0, 600, 600)
@@ -48,8 +55,8 @@
         //绘制表盘
         ctx.beginPath();
         ctx.arc(300, 300, 200, 0, Math.PI * 2, false);
-        ctx.lineWidth = "5"
-        ctx.strokeStyle = "#000012";
+        ctx.lineWidth = "20"
+        ctx.strokeStyle = "#e3e3e3";
         ctx.closePath();
         ctx.stroke();
 
@@ -62,7 +69,7 @@
         var pat = ctx.createPattern(img, "no-repeat");
         ctx.arc(0, 0, 200, 0, Math.PI * 2, false);
         ctx.lineWidth = "5"
-        ctx.fillStyle = pat;
+        ctx.fillStyle = "#FFFFFF";
         ctx.closePath();
         ctx.fill();
         ctx.restore();
@@ -82,6 +89,8 @@
             ctx.stroke();
             ctx.restore();
         }
+
+
         //绘制分刻度
         for (var i = 0; i < 60; i++) {
             ctx.save();
@@ -96,6 +105,8 @@
             ctx.stroke();
             ctx.restore();
         }
+
+
         //时针
         ctx.save();
         ctx.lineWidth = "10";
@@ -108,6 +119,8 @@
         ctx.closePath();
         ctx.stroke();
         ctx.restore();
+
+
         //分针
         ctx.save();
         ctx.lineWidth = "5";
@@ -120,6 +133,8 @@
         ctx.closePath();
         ctx.stroke();
         ctx.restore();
+
+
         //秒针
         ctx.save();
         ctx.lineWidth = "2";
@@ -133,6 +148,15 @@
         ctx.lineTo(160, -1);
         ctx.closePath();
         ctx.fill();
+        ctx.restore();
+
+        //绘制logo
+        ctx.save();
+        ctx.lineWidth = "1";
+        ctx.translate(300, 300);
+        ctx.font = "20px 微软雅黑";
+        ctx.textAlign = "center";
+        ctx.fillText("Simple Time", 0, -90);
         ctx.restore();
     }
     drawClock();
