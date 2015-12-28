@@ -23,21 +23,21 @@
 ##sublime text3配置文件
 
 ```
-{
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
-	"font_face": "Monaco",
-	"font_size": 10,
-	"gutter": true,
-	"highlight_line": true,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
-	"line_numbers": true,
-	"tab_size": 4,
-	"word_warp": "auto",
-	"wrap_width": 0
-}
+	{
+		"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+		"font_face": "Monaco",
+		"font_size": 10,
+		"gutter": true,
+		"highlight_line": true,
+		"ignored_packages":
+		[
+			"Vintage"
+		],
+		"line_numbers": true,
+		"tab_size": 4,
+		"word_warp": "auto",
+		"wrap_width": 0
+	}
 ```
 
 ##sublime text3快捷键
