@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="init()">
+    <p>要使用的图像：</p>
+    <img id="tulip" src="http://www.w3school.com.cn/i/eg_tulip.jpg" style="display:none;" />
+    <p>画布：</p>
+    <div id='div' style='width:100%;min-height:600px;background:url("../img/jiqimao.jpg") no-repeat'>
+    </div>
+    </canvas>
+    <script>
+    function init() {
+
+        if (!document.getElementById("myCanvas")) {
+            var width = "";
+            var height = "";
+            var canvas = document.createElement("canvas");
+            width = document.getElementById("div").offsetWidth;
+            height = document.getElementById("div").offsetHeight;
+            canvas.setAttribute("width", width + "px");
+            canvas.setAttribute("height", height + "px");
+            canvas.setAttribute("style", "border:1px solid green");
+            canvas.id = "myCanvas";
+            document.getElementById("div").appendChild(canvas);
+        }
+
+        var cccsssss = document.getElementById("myCanvas");
+        var ctx = cccsssss.getContext("2d");
+        var img = document.getElementById("tulip");
+        ctx.drawImage(img, 0, 0, width, height);
+
+
+        var isDown = false; //鼠标是否按下
+        var pointerArr = []; //坐标数组
+        var xPointer = 0;
+        var yPointer = 0;
+        //鼠标按下
+        cccsssss.addEventListener("mousedown", function(event) {
+            isDown = true;
+            xPointer = event.pageX - this.offsetLeft;
+            yPointer = event.pageY - this.offsetTop;
+            pointerArr.push([xPointer, yPointer]);
+            circleReset(ctx);
+
+
+        });
+
+        //鼠标按下后拖动
+        cccsssss.addEventListener("mousemove", function(event) {
+            if (isDown) {
+                xPointer = event.pageX - this.offsetLeft;
+                yPointer = event.pageY - this.offsetTop;
+                pointerArr.push([xPointer, yPointer]);
+                circleReset(ctx);
+
+            }
+        });
+
+        //鼠标抬起取消事件
+        cccsssss.addEventListener("mouseup", function(event) {
+            isDown = false;
+        });
+
+        //圆形橡皮檫
+        function circleReset(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(pointerArr[0][0], pointerArr[0][1]);
+            // var img = new Image();
+            // //指定图片的URL
+            // img.src = "http://www.365mini.com/static/upload/image/info.png";
+            // var pattern = ctx.createPattern(img, "repeat");
+            // ctx.strokeStyle = pattern;
+            ctx.lineCap = "round";　　 //设置线条两端为圆弧
+            ctx.lineJoin = "round";　　 //设置线条转折为圆弧
+            ctx.lineWidth = 20;
+            ctx.globalCompositeOperation = "destination-out";
+            if (pointerArr.length == 1)
+                ctx.lineTo(pointerArr[0][0] + 1, pointerArr[0][1] + 1);
+            else {
+                var i = 1;
+                for (i in pointerArr) {
+                    ctx.lineTo(pointerArr[i][0], pointerArr[i][1]);
+                    ctx.moveTo(pointerArr[i][0], pointerArr[i][1]);
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+    }
+    </script>
+</body>
+
+</html>
