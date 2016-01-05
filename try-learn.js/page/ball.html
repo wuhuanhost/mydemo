@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="760" height="360" style='background-color: #EEEEEE;'></canvas>
+    <script type="text/javascript">
+    var balls = {
+        xPointer: 100, //小球初始x坐标
+        yPointer: 100, //小球初始y坐标
+        vx: 1, //x方向的速度
+        vy: 0.1, //y方向的速度
+        x: 1, //x轴运动方向
+        y: 1, //y轴运动方向
+        color: "blue", //小球颜色
+        radius: 10, //小球半径
+    };
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+
+    var ballList = []; //小球数组
+
+
+    //生成多个小球
+    function initBall() {
+        //循环生成100个小球
+        for (var i = 0; i < 60; i++) {
+            // console.log(getIndex() + "   " + getIndex())
+            var ball = {};
+            ball.xPointer = selectfrom(20, 740);
+            ball.yPointer = selectfrom(20, 340);
+            ball.x = getIndex();
+            ball.y = getIndex();
+            ball.vx = Math.random();
+            ball.vy = Math.random();
+            ball.radius = 3;
+            ball.color = "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+            ballList.push(ball);
+        }
+    }
+
+
+
+
+    //绘制小球
+    function draw(ctx) {
+        ctx.clearRect(0, 0, 1000, 360);
+        for (var i = 0; i < ballList.length; i++) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.fillStyle = ballList[i].color;
+            ctx.arc(ballList[i].xPointer, ballList[i].yPointer, ballList[i].radius, 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+    }
+
+
+
+    //修改小球的状态
+    function update(ballList, ctx) {
+        for (var i = 0; i < ballList.length; i++) {
+            ballList[i].xPointer += ballList[i].vx * ballList[i].x;
+            ballList[i].yPointer += ballList[i].vy * ballList[i].y;
+            //碰撞检测 X轴方向
+            if (ballList[i].xPointer + ballList[i].radius >= canvas.width || ballList[i].xPointer - ballList[i].radius <= 0) {
+                ballList[i].x = ballList[i].x * -1;
+            }
+            //碰撞检测 Y轴方向
+            if (ballList[i].yPointer + ballList[i].radius >= canvas.height || ballList[i].yPointer - ballList[i].radius <= 0) {
+                ballList[i].y = ballList[i].y * -1;
+            }
+
+
+        }
+    }
+
+
+//计算小球之间的距离然后画线
+    function drawLine(ballList, ctx) {
+        for (var i = 0; i < ballList.length; i++) {
+            for (var j = 0; j < ballList.length; j++) {
+                var xx = Math.pow((ballList[i].xPointer - ballList[j].xPointer), 2);
+                var yy = Math.pow((ballList[i].yPointer - ballList[j].yPointer), 2);
+                var zz = Math.sqrt(xx + yy);
+                if (zz <= 100&&zz>=20) {
+                	console.log(zz)
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.strokeStyle="#999999";
+                    ctx.lineWidth=0.1;
+                    // ctx.strokeStyle= "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+                    ctx.moveTo(ballList[i].xPointer, ballList[i].yPointer);
+                    ctx.lineTo(ballList[j].xPointer,ballList[j].yPointer);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+    initBall();
+
+    //实现小球运动的动画
+    setInterval(function() {
+        // console.log(selectfrom(0, 600) + "         " + selectfrom(0, 600));
+        draw(ctx);
+        update(ballList, ctx);
+        drawLine(ballList, ctx);
+
+    }, 24)
+
+
+    function getIndex() {
+        var arr = [0, 1];
+        var index = Math.floor((Math.random() * arr.length));
+        if (index == 0) {
+            index = -1;
+        }
+        return index;
+    }
+
+    //获取一个随机数
+    function selectfrom(lowValue, highValue) {
+        var choice = highValue - lowValue + 1;
+        return Math.floor(Math.random() * choice + lowValue);
+    }
+    </script>
+    <!--    <img id="tulip" src="http://www.w3school.com.cn/i/eg_tulip.jpg" style="display:none;" />
+    <div style="border:1px solid #999999;width:600px;height:600px">
+        <canvas id="myCanvas2" width="600" height="600" style="background-color: orange"></canvas>
+    </div>
+    <script type="text/javascript">
+    var c = document.getElementById("myCanvas2");
+    var ctx = c.getContext("2d");
+
+    ctx.rect(300, 200, 100, 100);
+    ctx.clip();
+
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, 0, 1000, 1000);
+
+
+
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.font = "100px Georgia";
+    ctx.strokeText("w3school.com.cn", 300, 300);
+    </script>-->
+</body>
+
+</html>
