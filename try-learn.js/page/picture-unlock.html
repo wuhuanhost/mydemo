@@ -206,7 +206,7 @@
     lockCnavs.addEventListener(tapend, function(e) {
         var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
         var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
-        drawLinePointer(x1, y1,true);
+        drawLinePointer(x1, y1,false);
         clickFlag = false;
         pointerArr = [];
         console.log(puts);
