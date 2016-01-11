@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>canvas实现九宫格解锁</title>
+    <style type="text/css" media="screen">
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    #content {
+        width: 100%;
+        height: 100%;
+        background-color: #EEEEEE;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript">
+    var width = $(document).width();
+    var height = $(document).height();
+
+    //创建画布
+    var canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    canvas.id = 'lock';
+    document.getElementById("content").appendChild(canvas);
+
+    var clickFlag = false; //鼠标没有按下
+
+    var lockCnavs = $("#lock")[0];
+    var ctx = lockCnavs.getContext("2d");
+
+    //九宫格其实就是九个点，计算9个点的坐标
+
+    var lockCicle = {
+        'x': 0,
+        'y': 0,
+        'color': '#999999',
+        'state': '1'
+    };
+
+    //计算偏移量
+    var offset = (width - height) / 2;
+
+    var arr = [];
+    console.log(width + "         " + height)
+    for (var i = 1; i <= 3; i++) { //每一行
+        for (var j = 1; j <= 3; j++) { //每一行的每一个
+            var lockCicle = {};
+            //横屏
+            if (offset > 0) {
+                lockCicle.x = height / 4 * j + Math.abs(offset);
+                lockCicle.y = height / 4 * i;
+                //竖屏	
+            } else {
+                lockCicle.x = width / 4 * j;
+                lockCicle.y = width / 4 * i + Math.abs(offset);
+
+            }
+
+            arr.push(lockCicle);
+        }
+    }
+
+
+    drawPointer();
+
+    //绘制九宫格解锁界面
+    function drawPointer() {
+        for (var i = 0; i < arr.length; i++) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.strokeStyle = "#dd514c";
+        	ctx.lineWidth = 2;
+        	ctx.lineCap = "round";
+        	ctx.lineJoin = "round";
+
+            ctx.arc(arr[i].x, arr[i].y, 22, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
+
+            //绘制数字
+            ctx.translate(arr[i].x, arr[i].y) ; 
+            ctx.font="22px 微软雅黑";                  	
+            ctx.textAlign = "center";
+            ctx.fillStyle="#dd514c";
+            ctx.fillText(i+1, 0, 6);
+
+            ctx.restore();
+
+        }
+    }
+
+    var pointerArr = [];
+    var startX, startY;
+    var puts=[];
+    //画线
+    function drawLinePointer(x, y,flag) {
+        ctx.clearRect(0, 0, width, height);
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = "#1bd6c5";
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        for (var i = 0; i < pointerArr.length; i++) {
+            if (i == 0 || i == pointerArr.length) {
+                ctx.moveTo(pointerArr[i].x, pointerArr[i].y);
+            } else {
+                ctx.lineTo(pointerArr[i].x, pointerArr[i].y);
+            }
+
+        }
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.restore();
+
+        for (var i = 0; i < arr.length; i++) {
+            ctx.save();
+            ctx.beginPath();
+
+            ctx.strokeStyle = "#dd514c";
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.arc(arr[i].x, arr[i].y, 22, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
+            //绘制数字
+            ctx.translate(arr[i].x, arr[i].y) ; 
+            ctx.font="22px 微软雅黑";                  	
+            ctx.textAlign = "center";
+            ctx.fillStyle="#dd514c";
+            ctx.fillText(i+1, 0, 6);
+            ctx.restore();
+            if (ctx.isPointInPath(x, y)) { //判断鼠标点击是否在圆中
+                pointerArr.push({
+                    'x': arr[i].x,
+                    'y': arr[i].y
+                });
+                puts.push(i);
+                startX = arr[i].x;
+                startY = arr[i].y;
+            }
+        }
+
+
+
+		if(flag){
+		            ctx.save();
+		            ctx.beginPath();
+		                        ctx.globalCompositeOperation="destination-over";
+		            ctx.strokeStyle = "#e2e0e0";
+		            ctx.lineWidth = 5;
+		            ctx.lineCap = "round";
+		            ctx.lineJoin = "round";
+		            ctx.moveTo(startX, startY);
+		            ctx.lineTo(x, y);
+		            ctx.stroke();
+		            ctx.beginPath();
+		            ctx.restore();
+		}
+
+    }
+
+
+
+	//兼容移动触摸的事件写法
+	var hastouch = "ontouchstart" in window?true:false,
+        tapstart = hastouch?"touchstart":"mousedown",
+        tapmove = hastouch?"touchmove":"mousemove",
+        tapend = hastouch?"touchend":"mouseup";
+
+
+
+    //绑定鼠标按下事件
+    lockCnavs.addEventListener(tapstart, function(e) {
+        clickFlag = true;
+        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
+        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
+        drawLinePointer(x1, y1,true);
+
+    });
+
+    lockCnavs.addEventListener(tapmove, function(e) {
+        if (clickFlag) {
+        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
+        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
+        drawLinePointer(x1, y1,true);
+        }
+    });
+
+    lockCnavs.addEventListener(tapend, function(e) {
+        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
+        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
+        drawLinePointer(x1, y1,true);
+        clickFlag = false;
+        pointerArr = [];
+        console.log(puts);
+        puts=[];
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
