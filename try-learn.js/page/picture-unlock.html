@@ -17,7 +17,7 @@
     #content {
         width: 100%;
         height: 100%;
-        background-color: #EEEEEE;
+        /*background-color: #EEEEEE;*/
         margin: 0;
     }
     </style>
@@ -25,10 +25,10 @@
 
 <body>
     <div id="content"></div>
-    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script src="jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     var width = $(document).width();
-    var height = $(document).height();
+    var height = $(document).height() - 40;
 
     //创建画布
     var canvas = document.createElement("canvas");
@@ -63,51 +63,75 @@
             if (offset > 0) {
                 lockCicle.x = height / 4 * j + Math.abs(offset);
                 lockCicle.y = height / 4 * i;
+                lockCicle.state = 0;
                 //竖屏	
             } else {
                 lockCicle.x = width / 4 * j;
                 lockCicle.y = width / 4 * i + Math.abs(offset);
-
+                lockCicle.state = 0;
             }
-
             arr.push(lockCicle);
         }
     }
 
 
-    drawPointer();
 
-    //绘制九宫格解锁界面
-    function drawPointer() {
+
+    //初始化界面的方法
+    function init() {
         for (var i = 0; i < arr.length; i++) {
-            ctx.save();
-            ctx.beginPath();
-            ctx.strokeStyle = "#dd514c";
-        	ctx.lineWidth = 2;
-        	ctx.lineCap = "round";
-        	ctx.lineJoin = "round";
-
-            ctx.arc(arr[i].x, arr[i].y, 22, 0, Math.PI * 2, false);
-            ctx.stroke();
-            ctx.closePath();
-
-            //绘制数字
-            ctx.translate(arr[i].x, arr[i].y) ; 
-            ctx.font="22px 微软雅黑";                  	
-            ctx.textAlign = "center";
-            ctx.fillStyle="#dd514c";
-            ctx.fillText(i+1, 0, 6);
-
-            ctx.restore();
-
+            drawPointer(i);
         }
     }
 
-    var pointerArr = [];
-    var startX, startY;
-    var puts=[];
+    init();
+
+    //绘制九宫格解锁界面
+    function drawPointer(i) {
+        ctx.save();
+        if (arr[i].state == 0) {
+            //绘制原点
+            ctx.beginPath();
+            ctx.fillStyle = "#dd514c";
+            ctx.arc(arr[i].x, arr[i].y, 6, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.closePath();
+            //绘制圆圈
+            ctx.beginPath();
+            ctx.strokeStyle = "#dd514c";
+            ctx.lineWidth = 1;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.arc(arr[i].x, arr[i].y, 24, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
+        } else {
+            //绘制原点
+            ctx.beginPath();
+            ctx.fillStyle = "#1bd6c5";
+            ctx.arc(arr[i].x, arr[i].y, 6, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.closePath();
+            //绘制圆圈
+            ctx.beginPath();
+            ctx.strokeStyle = "#dd514c";
+            ctx.lineWidth = 1;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.arc(arr[i].x, arr[i].y, 24, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        ctx.restore();
+    }
+
+    var pointerArr = []; //连接线点的坐标数组
+    var startX, startY; //线条起始点
+    var puts = []; //答案数组
+    var currentPointer; //当前点是否已经连接
     //画线
-    function drawLinePointer(x, y,flag) {
+    function drawLinePointer(x, y, flag) {
         ctx.clearRect(0, 0, width, height);
         ctx.save();
         ctx.beginPath();
@@ -116,114 +140,81 @@
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         for (var i = 0; i < pointerArr.length; i++) {
-            if (i == 0 || i == pointerArr.length) {
+            if (i == 0) {
                 ctx.moveTo(pointerArr[i].x, pointerArr[i].y);
             } else {
                 ctx.lineTo(pointerArr[i].x, pointerArr[i].y);
             }
-
         }
         ctx.stroke();
         ctx.closePath();
-
         ctx.restore();
 
         for (var i = 0; i < arr.length; i++) {
-            ctx.save();
-            ctx.beginPath();
-
-            ctx.strokeStyle = "#dd514c";
-            ctx.lineWidth = 2;
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
-            ctx.arc(arr[i].x, arr[i].y, 22, 0, Math.PI * 2, false);
-            ctx.stroke();
-            ctx.closePath();
-            //绘制数字
-            ctx.translate(arr[i].x, arr[i].y) ; 
-            ctx.font="22px 微软雅黑";                  	
-            ctx.textAlign = "center";
-            ctx.fillStyle="#dd514c";
-            ctx.fillText(i+1, 0, 6);
-            ctx.restore();
-            if (ctx.isPointInPath(x, y)) { //判断鼠标点击是否在圆中
+            drawPointer(i); //绘制圆圈和原点
+            if (ctx.isPointInPath(x, y) && currentPointer != i) { //判断鼠标点击是否在圆中
                 pointerArr.push({
                     'x': arr[i].x,
                     'y': arr[i].y
                 });
-                puts.push(i);
+                currentPointer = i;
+                puts.push(i + 1);
                 startX = arr[i].x;
                 startY = arr[i].y;
+                arr[i].state = 1;
             }
         }
-
-
-
-		if(flag){
-		            ctx.save();
-		            ctx.beginPath();
-		                        ctx.globalCompositeOperation="destination-over";
-		            ctx.strokeStyle = "#e2e0e0";
-		            ctx.lineWidth = 5;
-		            ctx.lineCap = "round";
-		            ctx.lineJoin = "round";
-		            ctx.moveTo(startX, startY);
-		            ctx.lineTo(x, y);
-		            ctx.stroke();
-		            ctx.beginPath();
-		            ctx.restore();
-		}
+        if (flag) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.globalCompositeOperation = "destination-over";
+            ctx.strokeStyle = "#e2e0e0";
+            ctx.lineWidth = 5;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.restore();
+        }
 
     }
 
 
 
-	//兼容移动触摸的事件写法
-	var hastouch = "ontouchstart" in window?true:false,
-        tapstart = hastouch?"touchstart":"mousedown",
-        tapmove = hastouch?"touchmove":"mousemove",
-        tapend = hastouch?"touchend":"mouseup";
+    //兼容移动触摸的事件写法
+    var hastouch = "ontouchstart" in window ? true : false,
+        tapstart = hastouch ? "touchstart" : "mousedown",
+        tapmove = hastouch ? "touchmove" : "mousemove",
+        tapend = hastouch ? "touchend" : "mouseup";
 
 
 
     //绑定鼠标按下事件
     lockCnavs.addEventListener(tapstart, function(e) {
         clickFlag = true;
-        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
-        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
-        drawLinePointer(x1, y1,true);
+        var x1 = hastouch ? e.targetTouches[0].pageX : e.clientX - canvas.offsetLeft;
+        var y1 = hastouch ? e.targetTouches[0].pageY : e.clientY - canvas.offsetTop;
+        drawLinePointer(x1, y1, true);
 
     });
 
     lockCnavs.addEventListener(tapmove, function(e) {
         if (clickFlag) {
-        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
-        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
-        drawLinePointer(x1, y1,true);
+            var x1 = hastouch ? e.targetTouches[0].pageX : e.clientX - canvas.offsetLeft;
+            var y1 = hastouch ? e.targetTouches[0].pageY : e.clientY - canvas.offsetTop;
+            drawLinePointer(x1, y1, true);
         }
     });
 
     lockCnavs.addEventListener(tapend, function(e) {
-        var x1 = hastouch?e.targetTouches[0].pageX:e.clientX-canvas.offsetLeft;
-        var y1 = hastouch?e.targetTouches[0].pageY:e.clientY-canvas.offsetTop;
-        drawLinePointer(x1, y1,false);
+        drawLinePointer(0, 0, false);
         clickFlag = false;
         pointerArr = [];
-        console.log(puts);
-        puts=[];
+        alert("你的图形密码是: [   " + puts.join("    >   ") + "   ]");
+        puts = [];
     });
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 </body>
 
