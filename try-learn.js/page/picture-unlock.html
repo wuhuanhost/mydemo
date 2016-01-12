@@ -26,7 +26,7 @@
 <body>
     <div id="content"></div>
     <script src="../js/jquery.js"></script>
-    <script type="text/javascript">
+        <script type="text/javascript">
     var width = $(document).width();
     var height = $(document).height() - 40; //减去手机状态栏的高度
 
@@ -96,16 +96,16 @@
             arr[i].state = 0; //清除绘制状态
             drawPointer(i);
         }
+
     }
 
     init();
-
     //绘制九宫格解锁界面
     function drawPointer(i) {
         ctx.save();
         var radius = 0;
         if (hastouch) {
-            radius = width / 10;
+            radius = width / 12;
         } else {
             radius = 24;
         }
@@ -131,13 +131,13 @@
             //绘制原点
 
             ctx.beginPath();
-            ctx.fillStyle = "#1bd6c5";
+            ctx.fillStyle = "#dd514c";
             ctx.arc(arr[i].x, arr[i].y, 6, 0, Math.PI * 2, false);
             ctx.fill();
             ctx.closePath();
             //绘制圆圈
             ctx.beginPath();
-            ctx.strokeStyle = "#dd514c";
+            ctx.strokeStyle = "#1bd6c5";
             ctx.lineWidth = 0.3;
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
@@ -237,6 +237,7 @@
         }
         puts = [];
     });
+
     </script>
 </body>
 
