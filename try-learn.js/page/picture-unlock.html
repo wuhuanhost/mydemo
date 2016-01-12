@@ -28,12 +28,12 @@
     <script src="../js/jquery.js"></script>
     <script type="text/javascript">
     var width = $(document).width();
-    var height = $(document).height() - 40;
+    var height = $(document).height() - 40; //减去手机状态栏的高度
 
     //创建画布
     var canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width + 0.5;
+    canvas.height = height + 0.5;
     canvas.id = 'lock';
     document.getElementById("content").appendChild(canvas);
 
@@ -50,6 +50,20 @@
         'color': '#999999',
         'state': '1'
     };
+
+
+
+    //兼容移动触摸的事件写法
+    var hastouch = "ontouchstart" in window ? true : false,
+        tapstart = hastouch ? "touchstart" : "mousedown",
+        tapmove = hastouch ? "touchmove" : "mousemove",
+        tapend = hastouch ? "touchend" : "mouseup";
+
+    var pointerArr = []; //连接线点的坐标数组
+    var startX, startY; //线条起始点
+    var puts = []; //答案数组
+    var currentPointer; //当前点是否已经连接
+
 
     //计算偏移量
     var offset = (width - height) / 2;
@@ -74,12 +88,12 @@
         }
     }
 
-
-
-
     //初始化界面的方法
     function init() {
+        ctx.clearRect(0, 0, width, height); //清空画布
+        pointerArr = []; //清楚绘制路径
         for (var i = 0; i < arr.length; i++) {
+            arr[i].state = 0; //清除绘制状态
             drawPointer(i);
         }
     }
@@ -89,8 +103,15 @@
     //绘制九宫格解锁界面
     function drawPointer(i) {
         ctx.save();
+        var radius = 0;
+        if (hastouch) {
+            radius = width / 10;
+        } else {
+            radius = 24;
+        }
         if (arr[i].state == 0) {
             //绘制原点
+
             ctx.beginPath();
             ctx.fillStyle = "#dd514c";
             ctx.arc(arr[i].x, arr[i].y, 6, 0, Math.PI * 2, false);
@@ -99,14 +120,16 @@
             //绘制圆圈
             ctx.beginPath();
             ctx.strokeStyle = "#dd514c";
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.3;
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
-            ctx.arc(arr[i].x, arr[i].y, 24, 0, Math.PI * 2, false);
+            ctx.arc(arr[i].x, arr[i].y, radius, 0, Math.PI * 2, false);
+
             ctx.stroke();
             ctx.closePath();
         } else {
             //绘制原点
+
             ctx.beginPath();
             ctx.fillStyle = "#1bd6c5";
             ctx.arc(arr[i].x, arr[i].y, 6, 0, Math.PI * 2, false);
@@ -115,10 +138,10 @@
             //绘制圆圈
             ctx.beginPath();
             ctx.strokeStyle = "#dd514c";
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.3;
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
-            ctx.arc(arr[i].x, arr[i].y, 24, 0, Math.PI * 2, false);
+            ctx.arc(arr[i].x, arr[i].y, radius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
         }
@@ -126,10 +149,7 @@
         ctx.restore();
     }
 
-    var pointerArr = []; //连接线点的坐标数组
-    var startX, startY; //线条起始点
-    var puts = []; //答案数组
-    var currentPointer; //当前点是否已经连接
+
     //画线
     function drawLinePointer(x, y, flag) {
         ctx.clearRect(0, 0, width, height);
@@ -183,11 +203,6 @@
 
 
 
-    //兼容移动触摸的事件写法
-    var hastouch = "ontouchstart" in window ? true : false,
-        tapstart = hastouch ? "touchstart" : "mousedown",
-        tapmove = hastouch ? "touchmove" : "mousemove",
-        tapend = hastouch ? "touchend" : "mouseup";
 
 
 
@@ -212,7 +227,14 @@
         drawLinePointer(0, 0, false);
         clickFlag = false;
         pointerArr = [];
-        alert("你的图形密码是: [   " + puts.join("    >   ") + "   ]");
+        if (puts.length >= 5) {
+            alert("你的图形密码是: [   " + puts.join("    >   ") + "   ]");
+        } else {
+            if (puts.length >= 1) {
+                alert("你的图形密码太简单了~~~");
+                init();
+            }
+        }
         puts = [];
     });
     </script>
