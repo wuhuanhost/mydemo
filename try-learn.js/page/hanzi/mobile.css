@@ -1,0 +1,157 @@
+#shuxing-list {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    position: relative;
+}
+
+#shuxing-list .item {
+    width: 95%;
+    height: 40px;
+    /*background-color: #EEEEEE;*/
+    margin-top: 10px;
+    line-height: 40px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#shuxing-list .item:first-child{
+
+    margin-top:20px;
+}
+
+#shuxing-list .item .title {
+    color: #000000;
+    font-weight: bold;
+    min-width: 80px;
+    display: inline-block;
+    border-right: 1px solid #CCCCCC;
+    text-align: center;
+}
+
+#shuxing-list .item .param {
+    color: #6b6b6b;
+    text-indent: 1em;
+    display: inline-block;
+}
+
+#content {
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: auto;
+    /*background-color: red;*/
+    margin: 0 auto;
+    background-color: yellow;
+
+}
+
+
+/*汉字容器*/
+
+#content #hanzi {
+    margin-top:10px;
+    top: 10px;
+    left: 0px;
+   width: 100%;
+    display: block;
+    z-index: 9;
+    background-color: #EEEEEE;
+}
+
+
+/*笔画容器*/
+
+#content #bihua {
+    width: 400px;
+    height: 200px;
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 500px;
+    display: none;
+}
+
+/*按钮容器*/
+#content #action {
+    width: 100%;
+    height: 70px;
+    display: block;
+    background-color: #EEEEEE;
+    left: 0px;
+    padding-top: 17px;
+    border-bottom: 1px solid #999999;
+    cursor: pointer;
+    top:500px;
+}
+
+
+/*属性值较短的容器*/
+
+#shuxing-content #shuxing-list-min {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+    left: 0px;
+    /*border-left: 1px solid #999999;*/
+    /*border-right: 1px solid #999999;*/
+    /*border-bottom: 1px solid #999999;*/
+}
+
+#shuxing-content #shuxing-list-min .item {
+    width: 92%;
+    height: 40px;
+    /*background-color: #EEEEEE;*/
+    margin-top: 10px;
+    line-height: 40px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#shuxing-content #shuxing-list-min .items {
+    display: block;
+    height: 40px;
+    width: 100%;
+    position: relative;
+}
+
+#shuxing-content #shuxing-list-min .item .title {
+    color: #000000;
+    font-weight: bold;
+    width: 80px;
+    display: inline-block;
+    border-right: 1px solid #CCCCCC;
+    text-align: center;
+}
+
+#shuxing-content #shuxing-list-min .item .param {
+    color: #6b6b6b;
+    text-indent: 1em;
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+#shuxing-content {
+    position: absolute;
+    top: 520px;
+    width: 100%;
+    z-index: -1;
+    height:auto;
+   
+}
+
+#hanzi-content {
+    position: fixed;
+    top: 0px;
+    width:100%;
+    background-color: #EEEEEE;
+
+}

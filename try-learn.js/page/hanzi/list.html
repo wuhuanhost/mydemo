@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>汉字列表</title>
+    <link rel="stylesheet" type="text/css" href="list.css">
+    <link rel="stylesheet" href="http://www.dowebok.com/demo/2014/98/animate.min.css">
+</head>
+
+<body>
+    <div id="content">
+        <div id="title">第一课 山中访友</div>
+        <div id="list">
+        </div>
+    </div>
+    <script>
+    var width = window.screen.width > 960 ? 960 : window.screen.width - 4; //屏幕宽度
+
+    var itemWidth = window.screen.width > 960 ? parseFloat(width * (1 / 6)) : parseFloat(width * (1 / 3)); //每个汉字容器的宽度
+    // alert(itemWidth)
+    var itemHeight = itemWidth; //每个汉字容器的高度
+
+    var rem = width * window.devicePixelRatio / 10;
+
+    var hz = "汉字是用于书写汉语的文字也借用于书写日语朝鲜语等语言汉字文化圈广泛使用的一种文字也是世界上唯一仍被广泛使用的高度发展的语素文字汉字是用于书写汉语的文字也借用于书写日语朝鲜语等语言汉字文化圈广泛使用的一种文字也是世界上唯一仍被广泛使用的高度发展的语素文字".split("");
+    // 生成汉字表格
+    function drawItemMobile() {
+        for (var i = 0; i < 30; i++) {
+            for (var j = 0; j < 3; j++) {
+                var item = document.createElement("div");
+                var left = "";
+                var top = "";
+                if (j == 0) {
+                    left = "left:" + (itemWidth * j) + "px;margin-left:" + (0) + "px";
+                } else {
+                    left = "left:" + (itemWidth * j) + "px;margin-left:" + (j) + "px;";
+                }
+                if (i > 0) {
+                    top = "margin-top:" + (i) + "px;";
+                }
+                item.setAttribute("style", "top:" + (itemHeight * i) + "px;width:" + itemWidth + "px;height:" + itemHeight + "px;line-height:" + itemHeight + "px;text-align:center;" + left + ";font-size:6rem;" + top + "");
+                item.setAttribute("class", "item");
+                item.innerHTML = hz[(i * 3) + j];
+                document.getElementById("list").appendChild(item);
+
+            }
+        }
+    }
+
+
+    function drawItemPc() {
+        for (var i = 0; i < 20; i++) {
+            for (var j = 0; j < 6; j++) {
+                var item = document.createElement("div");
+                var left = "";
+                var top = "";
+                if (j == 0) {
+                    left = "left:" + (itemWidth * j) + "px;margin-left:" + (30 / 2 - 2) + "px";
+                } else {
+                    left = "left:" + (itemWidth * j) + "px;margin-left:" + (j + (30 / 2 - 2)) + "px;";
+                }
+                if (i > 0) {
+                    top = "margin-top:" + (i) + "px;";
+                }
+                item.setAttribute("style", "top:" + (itemHeight * i) + "px;width:" + itemWidth + "px;height:" + itemHeight + "px;line-height:" + itemHeight + "px;text-align:center;" + left + ";font-size:4rem;" + top + "");
+                item.setAttribute("class", "item");
+                item.innerHTML = hz[(i * 6) + j];
+                document.getElementById("list").appendChild(item);
+                item.addEventListener("mouseover", function(e) {
+                    this.style.backgroundColor = "#f9f6e1";
+                    this.style.color = "red";
+                    this.style.cursor = "pointer";
+
+                });
+
+                item.addEventListener("mouseout", function(e) {
+                    this.style.backgroundColor = "#EEEEEE";
+                    this.style.color = "#000000";
+                    this.setAttribute("class", "item");
+                });
+
+                item.addEventListener("click", function(e) {
+
+                    this.setAttribute("class", "animated flip item");
+                    setTimeout(function(){
+                    	window.location.href="mobile.html";
+                    },2000)
+       
+                });
+
+
+            }
+        }
+
+    }
+
+    function init() {
+        if (window.screen.width >= 960) {
+            drawItemPc();
+        } else {
+            drawItemMobile();
+        }
+    }
+
+    (function() {
+        init();
+    })();
+
+
+    //监听屏幕旋转事件
+    window.addEventListener("orientationchange", function(event) {
+        // alert("okay");
+        window.location.href = "list.html"
+        init();
+    });
+    </script>
+</body>
+
+</html>

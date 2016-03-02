@@ -1,0 +1,132 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+}
+
+@font-face {
+    font-family: 'STKaiti';
+    src: url('http://youzikuwebfont.oss-cn-beijing.aliyuncs.com/webfonts/css/youziku/422/422.gif');
+    src: url('http://youzikuwebfont.oss-cn-beijing.aliyuncs.com/webfonts/css/youziku/422/422.gif?#iefix') format('embedded-opentype'), url('http://youzikuwebfont.oss-cn-beijing.aliyuncs.com/webfonts/css/youziku/422/422.bmp') format('woff'), url('http://youzikuwebfont.oss-cn-beijing.aliyuncs.com/webfonts/css/youziku/422/422.jpg') format('truetype'), url('http://youzikuwebfont.oss-cn-beijing.aliyuncs.com/webfonts/css/youziku/422/422.png#STKaiti') format('svg');
+}
+
+@media screen and (min-width:321px) and (max-width:375px) {
+    html {
+        font-size: 11px
+    }
+}
+
+@media screen and (min-width:376px) and (max-width:414px) {
+    html {
+        font-size: 12px
+    }
+}
+
+@media screen and (min-width:415px) and (max-width:639px) {
+    html {
+        font-size: 15px
+    }
+}
+
+@media screen and (min-width:640px) and (max-width:719px) {
+    html {
+        font-size: 20px
+    }
+}
+
+@media screen and (min-width:720px) and (max-width:749px) {
+    html {
+        font-size: 22.5px
+    }
+}
+
+@media screen and (min-width:750px) and (max-width:799px) {
+    html {
+        font-size: 23.5px
+    }
+}
+
+@media screen and (min-width:800px) {
+    html {
+        font-size: 25px
+    }
+}
+
+@media screen and (max-width:900px) {
+    body {
+        background-color: #f9f6e1;
+    }
+    #content {
+        position: relative;
+        top: 0;
+        margin: 0px;
+        width: 100%;
+        min-height: 700px;
+        background-color: #f9f6e1;
+    }
+    #content #title {
+        position: relative;
+        top: 0px;
+        width: 100%;
+        height: 100px;
+        background-color: #f9f6e1;
+        line-height: 100px;
+        text-align: center;
+        font-size: 3rem;
+    }
+    #content #list {
+        position: relative;
+        top: 0px;
+        width: 100%;
+        background-color: #f9f6e1;
+        min-height: 600px;
+    }
+    #content #list .item {
+        position: absolute;
+        border: 1px solid #CCCCCC;
+        margin: 0;
+        padding: 0;
+        font-family: "楷体";
+        color: #535353;
+    }
+}
+
+@media screen and (min-width:900px) {
+	body{
+		background-color: #EEEEEE;
+	}
+    #content {
+        top: 0;
+        margin: 0px;
+        width: 996px;
+        min-height: 700px;
+        background-color: #EEEEEE;
+        margin: 0 auto;
+    }
+    #content #title {
+        position: relative;
+        top: 0px;
+        width: 100%;
+        height: 100px;
+        background-color: #EEEEEE;
+        line-height: 100px;
+        text-align: center;
+        font-size: 2rem;
+    }
+    #content #list {
+        position: relative;
+        top: 0px;
+        width: 996px;
+        background-color: #EEEEEE;
+        min-height: 600px;
+        margin: 0 auto;
+    }
+    #content #list .item {
+        position: absolute;
+        border: 1px solid #999999;
+        margin: 0;
+        padding: 0;
+        font-family: "楷体";
+    }
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- <meta name="full-screen" content="true"/> -->
+    <!-- <meta name="screen-orientation" content="portrait"/> -->
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <title>新建33gg33项目</title>
+    <link rel="stylesheet" type="text/css" href="pc.css" media="screen and (min-width: 900px)">
+    <link rel="stylesheet" type="text/css" href="mobile.css" media="screen and (max-width: 900px)">
+    <style type="text/css" media="screen">
+    html,
+    body {
+        margin: 0px;
+        padding: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 外部容器 -->
+    <div id="content">
+        <!-- 汉字容器 -->
+        <div id='hanzi-content'>
+            <div id="hanzi">
+                <canvas id="canvas" width="500" height="500"></canvas>
+            </div>
+            <div id='action'>
+                <canvas id="canvas-action" width="500" height="100"></canvas>
+            </div>
+        </div>
+        <!-- 笔画容器 -->
+        <div id="bihua">
+            <canvas id="canvas-bihua" width="500" height="500"></canvas>
+        </div>
+        <!-- 字段值比较短的属性 -->
+        <div id='shuxing-content'>
+            <div id="shuxing-list-min">
+                <div class='items'>
+                    <div class='item' style="width:46%;float: left:">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                    <div class='item' style="width:46%;float:right;margin-top: -42px;">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class='items'>
+                    <div class='item' style="width:46%;float: left:">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                    <div class='item' style="width:46%;float:right;margin-top: -42px;">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class='items'>
+                    <div class='item' style="width:46%;float: left:">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                    <div class='item' style="width:46%;float:right;margin-top: -42px;">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class='items'>
+                    <div class='item' style="width:46%;float: left:">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                    <div class='item' style="width:46%;float:right;margin-top: -42px;">
+                        <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- 属性列表 -->
+            <div id='shuxing-list'>
+                <div class='item'>
+                    <span class='title'>结  构：</span><span class='param'>左右结构</span>
+                </div>
+                <div class='item'> <span class='title'>笔画数：</span><span class='param'>7</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <div class='item'> <span class='title'>偏  旁：</span><span class='param'>口</span>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script>
+    // var scale = window.screen.width > 900 ? 1 : window.screen.width / 500 / 2; //缩放比例
+    // var w = window.screen.width > 900 ? 500 : 500 * scale;
+    // var canvasHabZi = document.getElementById("canvas");
+    // canvasHabZi.width = w;
+    // canvasHabZi.height = w;
+
+    // if (window.screen.width < 900) {
+    //     canvasHabZi.setAttribute("style", "margin-left:" + (window.screen.width - w) / 2 + "px;display:block");
+    //     document.getElementById("hanzi-content").setAttribute("style", "height:" + w + "px");
+    //     document.getElementById("shuxing-content").setAttribute("style", "top:" + (w + 100) + "px");
+    // }
+
+    // if (window.screen.width > 500 && window.screen.width < 900) {
+    //     document.getElementById("canvas-action").width = 410;
+    //     document.getElementById("canvas-action").setAttribute("style", "margin-left:" + (window.screen.width - 405) / 2 + "px;display:block;")
+    // }
+    </script>
+    <script src="easeljs-0.8.2.min_edit2.js"></script>
+    <script src="1.js"></script>
+    <script>
+    function init() {
+
+
+        var scale = window.screen.width > 900 ? 1 : window.screen.width / 500 / 2; //缩放比例
+        var w = window.screen.width > 900 ? 500 : 500 * scale;
+        var canvasHabZi = document.getElementById("canvas");
+        canvasHabZi.width = w;
+        canvasHabZi.height = w;
+
+        if (window.screen.width < 900) {
+            canvasHabZi.setAttribute("style", "margin-left:" + (window.screen.width - w) / 2 + "px;display:block");
+            document.getElementById("hanzi-content").setAttribute("style", "height:" + w + "px");
+            document.getElementById("shuxing-content").setAttribute("style", "top:" + (w + 100) + "px");
+        }
+
+        if (window.screen.width >= 640 && window.screen.width < 900) {
+
+            if (window.screen.width / window.screen.height > 1) {
+                var viewport = document.getElementsByTagName('meta')[1];
+                canvasHabZi.width = 500;
+                canvasHabZi.height = 500;
+
+                canvasHabZi.setAttribute("style", "margin-left:0px;display:block");
+                document.getElementById("hanzi-content").setAttribute("style", "height:0px");
+                document.getElementById("shuxing-content").setAttribute("style", "top:500px");
+
+                viewport.content = "width=device-width,target-densitydpi=device-dpi,initial-scale="+parseFloat(window.screen.width/900).toFixed(1)+", minimum-scale="+parseFloat(window.screen.width/900).toFixed(1)+", maximum-scale="+parseFloat(window.screen.width/900).toFixed(1)+"";
+                // alert(window.screen.width);
+            } else {
+                document.getElementById("canvas-action").width = 410;
+                document.getElementById("canvas-action").setAttribute("style", "margin-left:" + (window.screen.width - 405) / 2 + "px;display:block;")
+            }
+
+        } else {
+            document.getElementById("canvas-action").setAttribute("style", "margin-left:0px;display:block;")
+        }
+        Main.main("canvas");
+    }
+
+    init();
+
+    //监听屏幕旋转事件
+    window.addEventListener("orientationchange", function(event) {
+        // alert("okay");
+        window.location.href = "mobile.html"
+        init();
+    });
+
+    //判断客户端设备类型
+    function IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"
+        ];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+    </script>
+</body>
+
+</html>
