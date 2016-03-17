@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device;inital-scale=1.0;maximum-scale=1.0;minimum-scale=1.0;user-scaleable=no">
+    <title>Document</title>
+    <style type="text/css">
+    .container {
+        position: absolute;
+        right: 600px;
+        margin-top: -100px;
+        width: 440px;
+        height: 1000px;
+        background-color: #FFFFFF;
+        padding-left: 36px;
+        font-family: "楷体";
+        border: 1px solid #999999;
+        margin-left: 100px;
+        overflow-y: scroll;
+        overflow-x:hidden;
+        -webkit-transform: rotate(90deg);
+    }
+    
+    .container .items {
+        width: 445px;
+        height: 34px;
+        /*background-color: #EEEEEE;*/
+        /*border-left: 1px solid #999999;*/
+    }
+    
+    .container .items .item {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        text-align: center;
+        line-height: 20px;
+        /*border-bottom: 1px solid #CCCCCC;*/
+    }
+    
+    .container .items .item:hover {
+        background-color: pink;
+        cursor: pointer;
+        font-size: 22px;
+    }
+    
+    .action1 {
+        width: 100px !important;
+        padding-left: 20px;
+    }
+    
+    .rotate {
+        -webkit-transform: rotate(-90deg);
+    }
+    
+    .style1 {
+        background-color: #ff6699;
+        color: #EEEEEE;
+    }
+    
+    .style2 {
+        background-color: #4c98ce;
+        color: #EEEEEE;
+    }
+    
+    #vertical div {
+        width: 1.5em;
+        float: right;
+    }
+    
+    #vertical .title {
+        font-size: xx-large;
+        font-weight: bold;
+        line-height: 1em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>&nbsp;</p>
+        <div class="items">              
+            <div class="item"></div>          
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item rotate" style="font-size:36px;font-weight:bold;">文</div>     
+            <div class="item"></div>
+            <div class="item rotate" style="font-size:36px;font-weight:bold;">字</div> 
+            <div class="item"></div>
+            <div class="item rotate" style="font-size:36px;font-weight:bold;">竖</div>
+             <div class="item"></div>   
+            <div class="item rotate" style="font-size:36px;font-weight:bold;">排</div>
+            <div class="item"></div>
+            <div class="item"></div>         
+            <div class="item"></div>
+            <p>&nbsp;</p>
+        </div>
+        <p class='action1'></p>
+    </div>
+    <div id="vertical">
+        <div class="title">水调歌头</div>
+        <div>　</div>
+        <div>苏轼</div>
+        <div>　</div>
+        <div>明月几时有</div>
+        <div>把酒问青天</div>
+        <div>不知天上宫阙</div>
+        <div>今夕是何年</div>
+        <div>我欲乘风归去</div>
+        <div>又恐琼楼玉宇</div>
+        <div>高处不胜寒</div>
+        <div>起舞弄清影</div>
+        <div>何似在人间</div>
+        <div>　</div>
+        <div>转朱阁</div>
+        <div>低绮户</div>
+        <div>照无眠</div>
+        <div>不应有恨</div>
+        <div>何事长向别时圆</div>
+        <div>人有悲欢离合</div>
+        <div>月有阴晴圆缺</div>
+        <div>此事古难全</div>
+        <div>但愿人长久</div>
+        <div>千里共婵娟</div>
+    </div>
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.2.3/jquery.js"></script>
+    <script>
+    var arr = "春眠不觉晓，处处闻啼鸟，夜来风雨声，花落知道少！从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，@未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。从机器码到汇编语言再到c语言，java等的高级语言的过程其实在不断的抽象，目的就是让人们使用起来更加的方便和简单，想象一下如果让你用0和1900来写程序会是一种什么样的体验。编程语言不断的演化，未来也越来越会趋于自然语言。ABCDEFG HIGKLMN OPQRST UVWXYZ abcdefg higklmn opqrst uvwxyz hello ......".split("");
+
+    var cHeight = $(".items").height();
+
+    var textHeight = $(".item").height();
+
+    var vCount = parseInt(cHeight / textHeight); //每列显示的字数
+
+    var textArr = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (i % 20 == 0) {
+            textArr.push({
+                "hanzi": arr[i]
+            });
+        } else {
+            textArr[textArr.length - 1].hanzi += arr[i];
+        }
+    }
+
+    var html = "";
+    for (var j = 0; j < textArr.length; j++) {
+        html += "<div class='items'>";
+        var tempArr = textArr[j].hanzi.split("");
+        console.log(tempArr)
+        for (var k = 0; k < tempArr.length; k++) {
+            if (/\d/.test(tempArr[k])) {
+                html += "<div class='item  style1'  style='display:inline'>" + tempArr[k] + "</div>";
+            } else if (/[a-zA-Z]/.test(tempArr[k])) {
+                html += "<div class='item  style2' style='display:inline'>" + tempArr[k] + "</div>";
+            }else if(/[<>《》！*(^)$%~!@#$…&%￥—+=、。，；‘’“”：·`]/.test(tempArr[k])){
+                html += "<div class='item' style='display:inline'>" + tempArr[k] + "</div>";
+            } else {
+                html += "<div class='item rotate'>" + tempArr[k] + "</div>";
+            }
+        }
+
+        html += "</div>";
+
+    }
+
+    $(".action1").after(html);
+    </script>
+</body>
+
+</html>
