@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buttons>
+    <button id="1">
+        <x>84</x>
+        <y>104</y>
+        <width>212</width>
+        <height>68</height>
+        <soundpath>page004/sound/p004001.mp3</soundpath>
+    </button>
+    <button id="2">
+        <x>125.333</x>
+        <y>182.667</y>
+        <width>137.333</width>
+        <height>34.6667</height>
+        <soundpath>page004/sound/p004002.mp3</soundpath>
+    </button>
+    <button id="3">
+        <x>244</x>
+        <y>417.333</y>
+        <width>122.667</width>
+        <height>34.6667</height>
+        <soundpath>page004/sound/p004003.mp3</soundpath>
+    </button>
+    <button id="4">
+        <x>400</x>
+        <y>204</y>
+        <width>94.6667</width>
+        <height>34.6667</height>
+        <soundpath>page004/sound/p004004.mp3</soundpath>
+    </button>
+    <button id="5">
+        <x>84</x>
+        <y>453.333</y>
+        <width>194.667</width>
+        <height>68</height>
+        <soundpath>page004/sound/p004005.mp3</soundpath>
+    </button>
+    <button id="6">
+        <x>421.333</x>
+        <y>466.667</y>
+        <width>176</width>
+        <height>52</height>
+        <soundpath>page004/sound/p004006.mp3</soundpath>
+    </button>
+    <button id="7">
+        <x>145.333</x>
+        <y>534.667</y>
+        <width>70.6667</width>
+        <height>33.3333</height>
+        <soundpath>page004/sound/p004007.mp3</soundpath>
+    </button>
+    <button id="8">
+        <x>397.333</x>
+        <y>521.333</y>
+        <width>146.667</width>
+        <height>34.6667</height>
+        <soundpath>page004/sound/p004008.mp3</soundpath>
+    </button>
+    <button id="9">
+        <x>180</x>
+        <y>722.667</y>
+        <width>158.667</width>
+        <height>34.6667</height>
+        <soundpath>page004/sound/p004009.mp3</soundpath>
+    </button>
+    <button id="10">
+        <x>409.333</x>
+        <y>720</y>
+        <width>105.333</width>
+        <height>33.3333</height>
+        <soundpath>page004/sound/p004010.mp3</soundpath>
+    </button>
+</buttons>

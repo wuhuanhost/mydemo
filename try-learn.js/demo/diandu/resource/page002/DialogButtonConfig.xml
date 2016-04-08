@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buttons>
+    <button id="1">
+        <x>36</x>
+        <y>37.3333</y>
+        <width>238.667</width>
+        <height>102.667</height>
+        <soundpath>page002/sound/p002001.mp3</soundpath>
+    </button>
+    <button id="2">
+        <x>386.667</x>
+        <y>149.333</y>
+        <width>241.333</width>
+        <height>102.667</height>
+        <soundpath>page002/sound/p002002.mp3</soundpath>
+    </button>
+    <button id="3">
+        <x>84</x>
+        <y>173.333</y>
+        <width>194.667</width>
+        <height>98.6667</height>
+        <soundpath>page002/sound/p002003.mp3</soundpath>
+    </button>
+    <button id="4">
+        <x>248</x>
+        <y>280</y>
+        <width>70.6667</width>
+        <height>34.6667</height>
+        <soundpath>page002/sound/p002004.mp3</soundpath>
+    </button>
+    <button id="5">
+        <x>425.333</x>
+        <y>290.667</y>
+        <width>57.3333</width>
+        <height>36</height>
+        <soundpath>page002/sound/p002005.mp3</soundpath>
+    </button>
+    <button id="6">
+        <x>225.333</x>
+        <y>510.667</y>
+        <width>105.333</width>
+        <height>34.6667</height>
+        <soundpath>page002/sound/p002006.mp3</soundpath>
+    </button>
+    <button id="7">
+        <x>478.667</x>
+        <y>669.333</y>
+        <width>105.333</width>
+        <height>33.3333</height>
+        <soundpath>page002/sound/p002007.mp3</soundpath>
+    </button>
+    <button id="8">
+        <x>256</x>
+        <y>729.333</y>
+        <width>146.667</width>
+        <height>33.3333</height>
+        <soundpath>page002/sound/p002008.mp3</soundpath>
+    </button>
+    <button id="9">
+        <x>465.333</x>
+        <y>892</y>
+        <width>146.667</width>
+        <height>33.3333</height>
+        <soundpath>page002/sound/p002009.mp3</soundpath>
+    </button>
+</buttons>

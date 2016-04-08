@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buttons>
+    <button id="1">
+        <x>102.667</x>
+        <y>101.333</y>
+        <width>228</width>
+        <height>73.3333</height>
+        <soundpath>page005/sound/p005001.mp3</soundpath>
+    </button>
+    <button id="2">
+        <x>294.667</x>
+        <y>186.667</y>
+        <width>150.667</width>
+        <height>40</height>
+        <soundpath>page005/sound/p005002.mp3</soundpath>
+    </button>
+    <button id="3">
+        <x>125.333</x>
+        <y>232</y>
+        <width>476</width>
+        <height>158.667</height>
+        <soundpath>page005/sound/p005003.mp3</soundpath>
+    </button>
+</buttons>

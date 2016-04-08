@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>Demo</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Demo" />
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page">
+        <!--导航条-->
+        <header class="nav">
+            <span class='nav-text-left'>
+               <a href="#">三年级下册</a>
+            </span>
+            <span class='nav-text-center'>点读</span>
+            <span class='nav-text-right'></span>
+            <div style='clear:both;'></div>
+        </header>   
+        <!--内容区-->
+        <div class="content" style="margin-top:1rem;">
+            <div class="am-panel-group" id="accordion">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">Unit 1 Hello<span style="float:right;">></span><span style="float:right;margin-right:2rem">p2-p5</span></h4>
+                    </div>
+                    <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-bd">
+                            <div class="item">
+                                <div class="title"></div>
+                                <div class="remark"><img src="images/U1act.jpg" alt="">
+                                     <div style="position:relative;">
+                                         <div style="width:50%;height:4rem;background-color:#000000;position:absolute;bottom:0rem;line-height: 4rem;opacity:0.6;cursor:pointer;color:#FFFFFF;">
+                                           <a href="page/page.html" style="color:#FFFFFF">点读</a>
+                                         </div>
+                                         <div style="width:50%;border-left:1px solid #999999;left:50%;height:4rem;background-color:#000000;position:absolute;bottom:0rem;line-height:4rem;opacity:0.6;cursor:pointer;color:#FFFFFF;">
+                                             <a href="page/video.html" style="color:#FFFFFF">视频</a>
+                                         </div>
+                                     </div>       
+                                </div>
+                                <div class="action">
+                                    <span class="left btn">Let's talk</span>
+                                    <span class="right btn">p2-p3</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="title"></div>
+                                <div class="remark">
+                                    <img src="images/U1learn.jpg" alt="">
+                                </div>
+                                <div class="action"> <span class="left btn">Let's learn</span>
+                                    <span class="right btn">p3-p3</span></div>
+                            </div>
+                            <div class="item">
+                                <div class="title"></div>
+                                <div class="remark"> <img src="images/U1say.jpg" alt=""></div>
+                                <div class="action"> <span class="left btn">Let's act</span>
+                                    <span class="right btn">p4-p4</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">单元2 hello world!!!<span style="float:right;">></span><span style="float:right;margin-right:2rem">page20</span></h4>
+                    </div>
+                    <div id="do-not-say-2" class="am-panel-collapse am-collapse">
+                        <div class="am-panel-bd">
+                            ...
+                        </div>
+                    </div>
+                </div>
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">单元3 hello world!!!<span style="float:right;">></span><span style="float:right;margin-right:2rem">page20</span></h4>
+                    </div>
+                    <div id="do-not-say-3" class="am-panel-collapse am-collapse">
+                        <div class="am-panel-bd">
+                            ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.ie8polyfill.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.widgets.helper.js"></script>
+</body>
+</html>
+
+

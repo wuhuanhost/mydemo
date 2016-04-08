@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>Demo</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Demo" />
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+</head>
+
+<body>
+    <div class="page">
+        <!--导航条-->
+        <header class="nav">
+            <span class='nav-text-left'> 
+                <a href="#">三年级下册</a>
+            </span>
+            <span class='nav-text-center'>点读</span>
+            <span class='nav-text-right'></span>
+            <div style='clear:both;'></div>
+        </header>
+        <!--内容区-->
+        <div class="content">
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!--<div class="swiper-slide">
+                        <div class="imgContent">
+                            <img src="../resource/page002/bg.jpg">
+                            <div id="mask">
+                                <div style="position:absolute;top:37.3333px;left:36px;width:238.667px;height:102.667px;background-color:blue;" onclick="play(this)"
+                                mp3='page002/sound/p002001.mp3'>qweqweqeqwe</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div>-->
+                </div>
+            </div>
+        </div>
+        <!--页脚-->
+        <div class="footer">
+            <span class="prev am-icon-chevron-left"></span>
+            <span class="start am-icon-play"></span>
+            <span class="stop am-icon-stop"></span>
+            <span class="next am-icon-chevron-right"></span>
+        </div>
+    </div>
+    <audio id="audio">
+    </audio>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.ie8polyfill.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.widgets.helper.js"></script>
+    <script>
+        var index=0;
+    var memoryData;//缓存数据
+    var bgImgWidth = 747;
+    var bgImgHeight = 1046;
+    var dpr = window.devicePixelRatio != 'undefined' ? window.devicePixelRatio : 1;
+    var windowWidth = $(window).width();
+    
+
+    var offset = windowWidth > bgImgWidth ? (windowWidth - bgImgWidth-18) / 2 : (windowWidth - bgImgWidth / dpr) / 2;
+
+
+
+   function init(){     
+                //获取xml数据
+            var xml = ["/resource/page002/DialogButtonConfig.xml", "/resource/page003/DialogButtonConfig.xml", "/resource/page004/DialogButtonConfig.xml", "/resource/page005/DialogButtonConfig.xml"];
+           
+            var bgUrl=["../resource/page002/bg.jpg","../resource/page003/bg.jpg","../resource/page004/bg.jpg","../resource/page005/bg.jpg"];
+           
+            $(xml).each(function(index,url) {
+               // alert(getXmlData(url))
+               getXmlData(url,bgUrl[index]);
+            });
+              
+   }
+
+
+init();
+
+    function getXmlData(url,bgUrl) {
+        $.get(url, function(data) {
+            var pageArr = [];
+            $(data).find("buttons").each(function() {
+                $(this).children("button").each(function() {
+                    var button = {};
+                    button.x = $(this).children("x").text();
+                    button.y = $(this).children("y").text();
+                    button.width = $(this).children("width").text();
+                    button.height = $(this).children("height").text();
+                    button.mp3 = $(this).children("soundpath").text();
+                    pageArr.push(button);                  
+                      button = null;                    
+                });
+            }); 
+             draw(pageArr,bgUrl);
+             memoryData[index]={data:pageArr,bgUrlurl:bgUrl};
+             index++;
+             if(index>=4){
+                 initPage(index);
+             }
+        });  
+    }
+
+   
+
+
+
+    function draw(datas,bgUrl) {
+        var x, y, w, h;
+        var html = "";
+        if (dpr > 1) {
+            html = "<div class='swiper-slide'><div class='imgContent'><img id='test' width='" + bgImgWidth / dpr + "' height='" + bgImgHeight / dpr + "' src='"+bgUrl+"'><div id='mask'>";
+        } else {
+            html = "<div class='swiper-slide'><div class='imgContent'><img id='test' class='imgContentImg'  src='"+bgUrl+"'><div id='mask'>";
+        }
+        
+        $(datas).each(function() {
+            x = $(this)[0].x / dpr + offset;
+            y = $(this)[0].y / dpr;
+            w = $(this)[0].width / dpr;
+            h = $(this)[0].height / dpr;
+            mp3 = $(this)[0].mp3;
+            html += " <div style='position:absolute;top:" + y.toFixed(3) + "px;left:" + x.toFixed(3) + "px;width:" + w.toFixed(3) + "px;height:" + h.toFixed(3) + "px;cursor:pointer;border:1px solid red;' onclick='play(this)' mp3='" + mp3 + "'></div>";
+        });
+        html += "</div></div></div>";
+        $(".swiper-wrapper").append(html);
+        // $("#page1").html(html);
+        // alert($("#test").height());
+    }
+
+
+    function play(dom) {
+        var src = "/resource/" + dom.getAttribute("mp3");
+        var audio = $("#audio")[0];
+        audio.load();
+        audio.setAttribute("src", src);
+        audio.play();
+
+    }
+    </script>
+    <script src="../js/swiper.min.js"></script>
+    <script>
+        function initPage(){
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            prevButton:'.prev',
+            nextButton:'.next'
+            
+        });
+        
+/**
+ * 调整浏览器窗口
+ */
+        $(window).resize(function() {
+            
+            if(memoryData.length>=1){
+            
+            
+            draw(memoryData.);
+            
+            
+            }
+            
+        })
+
+        // $('.prev').click(function() {
+ 
+        //     swiper.slidePrev();
+        // });
+
+        // $('.next').click(function() {
+        //     swiper.slideNext();
+        // });
+    }
+    </script>
+</body>
+
+</html>

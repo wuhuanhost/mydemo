@@ -1,0 +1,151 @@
+.nav{
+    background-color: #4c98ce;
+    width:100%;
+    padding:0 1.2rem;
+
+}
+.nav a{
+        color:#EEEEEE;
+}
+.nav span{
+    display:block;
+    width:33.3%;
+    float:left;
+     height:4rem;
+ font-size:2rem;
+ line-height:4rem;
+ color:#EEEEEE;
+    
+}
+.nav-text-left{
+
+}
+.nav-text-center{
+  text-align:center;
+}
+.nav-text-right{
+  text-align:right;
+}
+
+
+
+/*内容区*/
+
+.content{
+    
+}
+
+.content .item{
+
+    width:100%;
+   height:auto;
+    background-color:#EEEEFF;
+}    
+
+.item:not(:first-child){
+    margin-top:1.2rem;
+    
+}
+.item .title{
+     height:3rem; 
+     width:100%; 
+     line-height: 3rem;
+     color:#EEEEEE;
+     padding-left:1rem; 
+     background-color: #4c98ce;
+     display:none;
+}
+
+.item .remark{
+    z-index:999999999;
+    width:100%;
+
+    text-align: center;
+}
+
+.item .remark img{
+
+    width:auto;
+    height:auto;
+    max-height: 100%;
+    max-width:100%;
+}
+
+.item .action{
+     height:3rem;   
+     width:100%; 
+     line-height: 3rem;
+     cursor:pointer;
+}
+
+.item .action .btn{
+  
+    height:100%; 
+    color:#EEEEEE;
+}
+
+.item .action .left{
+    padding-left:1rem;
+    width:80%;
+    float:left;
+    background-color:#dd514c;
+    
+}.item .action .right{    
+    width:20%;
+    background-color: #3d658d;
+    float:right;
+    padding-right:1rem;
+    text-align:right;
+}
+/*页脚*/
+.footer{
+    position:fixed;
+    bottom:0px;
+    height:4rem;
+    width:100%;
+    background-color:#4c98ce;
+    z-index: 999999999;
+}
+.footer span{
+    width:25%;
+    height:100%;
+    display:block;
+    float:left;
+    color:#EEEEEE;
+    line-height: 4rem;
+    text-align: center;
+    cursor:pointer;
+    font-size:2rem;
+   
+}
+.footer span:hover{
+    background-color: #dd514c;
+}
+
+/*每一页的样式*/
+.swiper-slide{
+    margin:0px;
+}
+
+.imgContent{
+    text-align:center;
+
+
+}
+
+.imgContentImg{
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    
+}
+
+.imgContent #mask{
+    top:0rem;
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:999999999;
+    margin:0 auto;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>Demo</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Demo" />
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/1.5.21/plyr.css">
+</head>
+
+<body>
+    <div class="page">
+        <!--导航条-->
+        <header class="nav">
+            <span class='nav-text-left'> 
+                <a href="#">三年级下册</a>
+            </span>
+            <span class='nav-text-center'>点读</span>
+            <span class='nav-text-right'><a href="../index.html">返回</a></span>
+            <div style='clear:both;'></div>
+        </header>
+        <!--内容区-->
+        <div class="content">
+            <div class="plyr">
+                <video poster="../images/U1act.jpg" controls>
+                    <!-- Video files -->
+                    <source src="../video/sz01.mp4" type="video/mp4">
+       
+                    <!-- Text track file -->
+                    <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default> -->
+                    <!-- Fallback for browsers that don't support the <video> element -->
+                </video>
+            </div>
+        </div>
+    </div>
+    <audio id="audio">
+    </audio>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.ie8polyfill.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.widgets.helper.js"></script>
+    <script src="https://cdn.plyr.io/1.5.21/plyr.js"></script>
+    <script>
+    (function(d, p){
+    var a = new XMLHttpRequest(),
+        b = d.body;
+    a.open('GET', p, true);
+    a.send();
+    a.onload = function() {
+        var c = d.createElement('div');
+        c.setAttribute('hidden', '');
+        c.innerHTML = a.responseText;
+        b.insertBefore(c, b.childNodes[0]);
+    };
+})(document, 'https://cdn.plyr.io/1.5.21/sprite.svg');
+    plyr.setup();
+    </script>
+</body>
+
+</html>
