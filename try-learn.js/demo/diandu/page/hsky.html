@@ -22,6 +22,10 @@
     .currentbg {
         background-color: pink;
     }
+    
+    .am-control-nav {
+        display: none;
+    }
     </style>
 </head>
 
@@ -30,12 +34,19 @@
         <!--导航条-->
         <header class="nav">
             <span class='nav-text-left'> 
-               <a href="#"></a>
+               <a href="#">首页</a>
             </span>
             <span class='nav-text-center'>哈萨克语学习</span>
             <span class='nav-text-right'><a href="#"></a></span>
             <div style='clear:both;'></div>
         </header>
+        <!-- 滚动图片 -->
+        <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
+            <ul class="am-slides">
+                <li><img src="../images/title-hsk1.jpg" /></li>
+                <li><img src="../images/title-hsk2.jpg" /></li>
+            </ul>
+        </div>
         <!--内容区-->
         <div class="content">
         </div>
@@ -59,7 +70,8 @@
         fayin: "吾依热努",
         start: "00:03.933",
         end: "00:07.140",
-        mp3: "../mp3/hsky001.m4a"
+        mp3: "../mp3/hsky001.m4a",
+        count: 1230
 
     }, {
         hanyu: "2. 天气",
@@ -67,108 +79,112 @@
         fayin: "阿瓦莱额",
         start: "00:07.140",
         end: "00:10.228",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 365
     }, {
         hanyu: "3. 出生",
         hasakeyu: "تۋىلۋ",
         fayin: "图俄鲁",
         start: "00:10.228",
         end: "00:13.165",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 160
     }, {
         hanyu: "4. 六",
         hasakeyu: "التى",
         fayin: "阿勒特",
         start: "00:13.165",
         end: "00:15.525",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 234
     }, {
         hanyu: "5. 高兴",
         hasakeyu: "قۋانۋ ",
         fayin: "胡安吾",
         start: "00:15.525",
         end: "00:18.213",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 321
     }, {
         hanyu: "6. 书",
         hasakeyu: "كىتاپ",
         fayin: "克塔普",
         start: "00:18.213",
         end: "00:20.782",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 632
     }, {
         hanyu: "7. 电话",
         hasakeyu: "تەلەفون",
         fayin: "特烈弗恩",
         start: "00:20.782",
         end: "00:22.725",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 99
     }, {
         hanyu: "8. 同学",
         hasakeyu: "ساباقتاس",
         fayin: "萨巴赫塔斯",
         start: "00:22.725",
         end: "00:25.670",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 660
     }, {
         hanyu: "9. 谢谢",
         hasakeyu: "راقىمەت",
         fayin: "热合麦特",
         start: "00:25.670",
         end: "00:28.607",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 423
     }, {
         hanyu: "10.东西",
         hasakeyu: "نارسە",
         fayin: "纳尔斯也",
         start: "00:28.607",
         end: "00:32:00",
-        mp3: "../mp3/hsky001.m4a"
-
+        mp3: "../mp3/hsky001.m4a",
+        count: 963
     }, {
         hanyu: "1. 你现在学习什么？",
         hasakeyu: "قازىر نە ۇيرەنىپ جاتىرسىڭ؟",
         fayin: "哈子尔／聂／吾依热努普／加特尔森？",
         start: "00:02.504",
         end: "00:07.421",
-        mp3: "../mp3/hsky002.m4a"
-
+        mp3: "../mp3/hsky002.m4a",
+        count: 12356
     }, {
         hanyu: "2. 今天天气很好。",
         hasakeyu: "بۇگىن اۋا رايى وتە جاقسى.",
         fayin: "布衮／阿瓦莱额／窝铁／贾克斯。",
         start: "00:07.421",
         end: "00:12.680",
-        mp3: "../mp3/hsky002.m4a"
+        mp3: "../mp3/hsky002.m4a",
+        count: 23650
     }, {
         hanyu: "3. 我出生在新疆。",
         hasakeyu: "مەن شينجياڭدا تۋىلعانمىن.",
         fayin: "芈恩／新疆达／图勒汗门。",
         start: "00:12.680",
         end: "00:22.954",
-        mp3: "../mp3/hsky002.m4a"
+        mp3: "../mp3/hsky002.m4a",
+        count: 14526
     }, {
         hanyu: "4. 我家有六口人。",
         hasakeyu: "ۇيىمىزدە التى جان بار.",
         fayin: "吾尤米孜碟／阿勒特／占／巴尔。",
         start: "00:01.168",
         end: "00:07.849",
-        mp3: "../mp3/hsky003.m4a"
+        mp3: "../mp3/hsky003.m4a",
+        count: 22365
     }, {
         hanyu: "5. 很高兴认识您。",
         hasakeyu: "سىزبەن تانىسقانىما قۋانىشتىمىن.",
         fayin: "思孜本／塔尼斯哈努玛／胡安仕特门。",
         start: "00:07.849",
         end: "00:13.640",
-        mp3: "../mp3/hsky003.m4a"
+        mp3: "../mp3/hsky003.m4a",
+        count: 46352
 
     }, {
         hanyu: "6. 我在看书。",
@@ -176,23 +192,32 @@
         fayin: "芈恩／克塔普／窝合普／窝图尔门。",
         start: "00:13.640",
         end: "00.19.669",
-        mp3: "../mp3/hsky003.m4a"
+        mp3: "../mp3/hsky003.m4a",
+        count: 12360
     }]
+
+
+
 
     function drawPage(arr) {
         var html = "";
         $(arr).each(function(index, data) {
             html = html.concat("<div class='hsky' mp3='" + data.mp3 + "' stime='" + data.start + "' etime='" + data.end + "' style='border:1px solid #999999;height:auto;width:96%;padding:0.5rem 1rem;margin:1rem 2% 0 2%;'>");
-            html = html.concat("<p style='font-size:2rem'>【<label style='font-size:1.5rem;color:orange;'>中　　文</label>】             " + data.hanyu + "</p>");
+            html = html.concat("<p style='font-size:2rem;margin-top:1rem;'>【<label style='font-size:1.5rem;color:orange;'>中　　文</label>】             " + data.hanyu + "</p>");
             html = html.concat("<p style='font-size:2rem'>【<label style='font-size:1.5rem;color:orange;'>哈萨克语</label>】    " + data.hasakeyu + "</p>");
             html = html.concat("<p style='font-size:2rem'>【<label style='font-size:1.5rem;color:orange;'>中文音译</label>】           " + data.fayin + "</p>");
             console.log(index + "     " + arr.length)
 
-            html = html.concat("<p><a class='am-icon-btn am-success am-icon-play'  onclick=\"play('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-
-            html = html.concat("<a class='am-icon-btn am-secondary am-icon-stop' onclick='pause()'></a></p>");
+            html = html.concat("<p><a class='am-icon-btn am-success am-icon-play'  onclick=\"play('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-secondary am-icon-repeat' onclick=\"singleLoop('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-warning am-icon-stop' onclick='pause()' style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-danger am-icon-microphone' style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            var count = formatK(data.count);
+            html = html.concat("<span style='font-size:2rem;' class='am-text-primary'>播放量 : <label class='am-text-success'>" + count + "</label></span></p>");
             html = html.concat("</div>");
+
         });
+        html = html.concat("<p>&nbsp;&nbsp;&nbsp;</p>");
         $(".content").html(html);
     }
 
@@ -200,16 +225,69 @@
     drawPage(hsky);
     var audio = $("#audio")[0];
     var timer = null;
-    function play(src, stime, etime, dom) {
+    var loopTimer = null;
+
+
+    function singleLoop(src, stime, etime, dom) {
+        if (loopTimer !== null) {
+            clearInterval(loopTimer);
+            loopTimer = null;
+            audio.pause();
+            $(".hsky").removeClass("currentbg");
+            audio.src = "";
+        }
 
         audio.src = src;
-        audio.currentTime = time2time(stime);
+        audio.currentTime = parseFloat(time2time(stime));
         audio.play();
 
         // console.log($(dom).parent().parent().addClass("currentbg"));
         if (timer === null) {
             timer = setInterval(function() {
-                 console.log(audio.currentTime+"                      "+ time2time(etime));
+                console.log(audio.currentTime + "                      " + time2time(etime));
+                if (audio.currentTime >= time2time(etime)) {
+                    audio.currentTime = parseFloat(time2time(stime));
+                }
+            }, 100)
+        }
+
+    }
+
+    // 用k为单位表示播放量
+    function formatK(count) {
+        var _count = 0;
+        if (count < 1024) {
+            _count = count;
+        }
+        if (count >= 1024) {
+            _count = (count / 1024).toFixed(2)+"<span style='color:orange;'> k</span>";
+
+        }
+        return _count;
+    }
+
+
+
+
+
+    function play(src, stime, etime, dom) {
+        if (loopTimer !== null) {
+            clearInterval(loopTimer);
+            loopTimer = null;
+            audio.pause();
+            $(".hsky").removeClass("currentbg");
+            audio.src = "";
+        }
+        audio.src = src;
+        audio.currentTime = parseFloat(time2time(stime));
+        audio.play();
+
+        // console.log($(dom).parent().parent().addClass("currentbg"));
+        if (timer === null) {
+            timer = setInterval(function() {
+
+
+                console.log(audio.currentTime);
                 if (audio.currentTime >= time2time(etime)) {
                     clearInterval(timer);
                     timer = null;
@@ -227,18 +305,17 @@
         audio.src = mp3Arr[number];
         audio.play();
         findDivByAttr(mp3Arr[number], audio.currentTime);
-        if (timer === null) {
-            timer = setInterval(function() {
+        if (loopTimer === null) {
+            loopTimer = setInterval(function() {
                     findDivByAttr(mp3Arr[number], audio.currentTime);
                     if (audio.ended === true) {
                         number++;
                         if (mp3Arr[number] == undefined) {
-                            clearInterval(timer);
-                            timer = null;
+                            clearInterval(loopTimer);
+                            loopTimer = null;
                             number = 0;
                         } else {
                             audio.src = mp3Arr[number];
-                            audio.load();
                             audio.play();
                         }
                     }
@@ -250,19 +327,17 @@
 
 
     function findDivByAttr(mp3, currentTime) {
-
         $("[mp3='" + mp3 + "']").each(function(index, data) {
-
             var t1 = time2time($(data).attr("stime"));
             var t2 = time2time($(data).attr("etime"));
-            console.log(t1 + "         " + t2 + "           " + currentTime+"         "+data)
+            // console.log(t1 + "         " + t2 + "           " + currentTime + "         " + data)
             if (t1 <= currentTime && currentTime <= t2) {
                 $(data).addClass("currentbg");
             } else {
                 $(data).removeClass("currentbg");
             }
-            if(t2===NaN){
-               $(data).removeClass("currentbg");
+            if (t2 === NaN) {
+                $(data).removeClass("currentbg");
             }
 
         });
@@ -287,6 +362,10 @@
     function pause() {
         var audio = $("#audio")[0];
         audio.pause();
+        clearInterval(loopTimer);
+        loopTimer = null;
+        clearInterval(timer);
+        timer = null;
     }
 
 
@@ -296,6 +375,26 @@
         var seconds = parseInt(arr[0] * 60) + parseFloat(arr[1]);
         return seconds;
     }
+    </script>
+    <div id="doc-qrcode" class="am-text-center"></div>
+    <p class='am-text-center'>请扫描二维码进行分享</p>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+    <div style="width:256px;height:256px;border-radius:128px;background-color:orange;color:#EEEEEE;font-size:4rem;line-height:256px;margin:0 auto;cursor:pointer;" class='am-text-center'>
+        打赏
+    </div>
+    <p class='am-text-center'>如果你觉的本页内容对你有用请随意打赏</p>
+    <p>&nbsp;</p>
+    <script>
+    $(function() {
+        var $input = $('#doc-qr-text');
+        $qr = $('#doc-qrcode');
+
+        function makeCode(text) {
+            $qr.empty().qrcode(text);
+        }
+        $input.val(location.href);
+        makeCode(location.href);
+    });
     </script>
 </body>
 
