@@ -101,7 +101,7 @@
 .footer{
     position:fixed;
     bottom:0px;
-    height:4rem;
+    height:4.6rem;
     width:100%;
     background-color:#0E6EBC;
     z-index: 999999999;
@@ -112,7 +112,7 @@
     display:block;
     float:left;
     color:#EEEEEE;
-    line-height: 4rem;
+    line-height: 4.6rem;
     text-align: center;
     cursor:pointer;
     font-size:2rem;
