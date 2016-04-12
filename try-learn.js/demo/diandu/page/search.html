@@ -302,9 +302,9 @@
             html = html.concat("<a class='am-icon-btn am-secondary am-icon-repeat' onclick=\"singleLoop('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
             html = html.concat("<a class='am-icon-btn am-warning am-icon-stop' onclick='pause()' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
             html = html.concat("<a class='am-icon-btn am-danger am-icon-microphone' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;' data-am-modal=\"{target: '#my-alert'}\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-            var count = formatK(data.count);
-            html = html.concat("<span id='count' style='font-size:1.5rem;'>已有<label style='color:orange'>" + count + "</label>人学习</span></p>");
-            html = html.concat("<div style='width:100%;height:4rem;'></div>");
+            var count = data.count;
+           html = html.concat("<span id='count' style='font-size:1.2rem;line-height:0.3rem;'>已有<label style='color:orange'>" + count + "</label>人学习 <img  src='../images/icon.png'/ style='max-width:2rem;vertical-align:bottom;'/></span></p>");
+            html = html.concat("<div style=\"width:100%;height:3rem;background-image:url('../images/bottom.jpg');background-size:100% 100%\"></div>");
             html = html.concat("</div>");
 
         });
