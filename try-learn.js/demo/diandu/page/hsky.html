@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Demo" />
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/hsky.css">
     <style>
     a {
         cursor: pointer;
@@ -26,18 +26,82 @@
     .am-control-nav {
         display: none;
     }
+    
+    .nav a,
+    .nav span {
+        font-size: 1.8rem;
+    }
+    
+    p {
+        display: block;
+        -webkit-margin-before: 0.2em;
+        -webkit-margin-after: 0.2em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+    }
+    .am-offcanvas-bar {
+        background-color:#FFFFFF;
+        color:#999999;
+    }
+    .am-offcanvas-content a{
+        color:#999999;
+    }
     </style>
 </head>
 
 <body>
+    <!-- 目录 -->
+    <div id="doc-oc-demo1" class="am-offcanvas">
+        <div class="am-offcanvas-bar">
+            <div class="am-offcanvas-content">
+<!--             <p>
+                <input type='input'></input>     <span class="am-icon-search"></span>
+            </p> -->
+                <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+                    <!--列表标题-->
+                    <div class="am-list-news-hd am-cf">
+                        <!--带更多链接-->
+                <!--         <a href="##" class="">
+                            <h2>A</h2>
+                            <span class="am-list-news-more am-fr">更多 &raquo;</span>
+                        </a> -->
+                    </div>
+                    <div class="am-list-news-bd">
+                        <ul class="am-list">
+                            <li class="am-g am-list-item-dated">
+                                <a href="##" class="am-list-item-hd">我很囧，你保重....晒晒旅行中的那些囧！</a>
+                              
+                            </li>
+                            <li class="am-g am-list-item-dated">
+                                <a href="##" class="am-list-item-hd ">我最喜欢的一张画</a>
+                                
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 弹出框 -->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">对不起，此功能暂未开放！</div>
+            <div class="am-modal-bd">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
     <div class="page">
         <!--导航条-->
-        <header class="nav">
+        <header class="nav" data-am-sticky>
             <span class='nav-text-left'> 
                <a href="#">首页</a>
             </span>
             <span class='nav-text-center'>哈萨克语学习</span>
-            <span class='nav-text-right'><a href="#"></a></span>
+            <span class='nav-text-right'><a href="#doc-oc-demo1" data-am-offcanvas>目录</a></span>
             <div style='clear:both;'></div>
         </header>
         <!-- 滚动图片 -->
@@ -52,12 +116,18 @@
         </div>
         <!--页脚-->
         <div class="footer">
-            <span class="prev am-icon-chevron-left-" style="width:10%"></span>
-            <span class="start am-icon-play" style="width:40%"></span>
-            <span class="stop am-icon-stop" style="width:40%"></span>
-            <span class="next am-icon-chevron-right-" style="width:10%"></span>
+            <span class="prev am-icon-chevron-left-" style="width:20%"></span>
+            <span class="" style="width:20%"></span>
+            <span style="width:20%">
+                <div style='width:6rem;height:6rem;background-color:#4c98ce;border-radius:3rem;margin:-2rem auto;text-align:center;line-height:6rem;'>
+                    <i  class="am-icon-play" style="margin:0 auto;display:block;"></i>
+                </div>
+            </span>
+            <span class="" style="width:20%"></span>
+            <span class="next am-icon-chevron-right-" style="width:20%"></span>
         </div>
     </div>
+    <!-- 音频标签 -->
     <audio id="audio"></audio>
     <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.js"></script>
@@ -203,17 +273,17 @@
         var html = "";
         $(arr).each(function(index, data) {
             html = html.concat("<div class='hsky' mp3='" + data.mp3 + "' stime='" + data.start + "' etime='" + data.end + "' style='border:1px solid #999999;height:auto;width:96%;padding:0.5rem 1rem;margin:1rem 2% 0 2%;'>");
-            html = html.concat("<p style='font-size:2rem;margin-top:1rem;'>【<label style='font-size:1.5rem;color:orange;'>中　　文</label>】             " + data.hanyu + "</p>");
-            html = html.concat("<p style='font-size:2rem'>【<label style='font-size:1.5rem;color:orange;'>哈萨克语</label>】    " + data.hasakeyu + "</p>");
-            html = html.concat("<p style='font-size:2rem'>【<label style='font-size:1.5rem;color:orange;'>中文音译</label>】           " + data.fayin + "</p>");
+            html = html.concat("<p style='font-size:1.5rem;margin-top:1rem;'>【<label style='font-size:1.5rem;color:orange;'>中　　文</label>】             " + data.hanyu + "</p>");
+            html = html.concat("<p style='font-size:1.5rem'>【<label style='font-size:1.5rem;color:orange;'>哈萨克语</label>】    " + data.hasakeyu + "</p>");
+            html = html.concat("<p style='font-size:1.5rem'>【<label style='font-size:1.5rem;color:orange;'>中文音译</label>】           " + data.fayin + "</p>");
             console.log(index + "     " + arr.length)
 
-            html = html.concat("<p><a class='am-icon-btn am-success am-icon-play'  onclick=\"play('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-            html = html.concat("<a class='am-icon-btn am-secondary am-icon-repeat' onclick=\"singleLoop('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-            html = html.concat("<a class='am-icon-btn am-warning am-icon-stop' onclick='pause()' style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-            html = html.concat("<a class='am-icon-btn am-danger am-icon-microphone' style='width:4rem;height:4rem;line-height:4rem;font-size:2rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<p><a class='am-icon-btn am-success am-icon-play'  onclick=\"play('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-secondary am-icon-repeat' onclick=\"singleLoop('" + data.mp3 + "','" + data.start + "','" + data.end + "',this)\" style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-warning am-icon-stop' onclick='pause()' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+            html = html.concat("<a class='am-icon-btn am-danger am-icon-microphone' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;' data-am-modal=\"{target: '#my-alert'}\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
             var count = formatK(data.count);
-            html = html.concat("<span style='font-size:2rem;' class='am-text-primary'>播放量 : <label class='am-text-success'>" + count + "</label></span></p>");
+            html = html.concat("<span style='font-size:1.5rem;' class='am-text-primary'>播放量 : <label class='am-text-success'>" + count + "</label></span></p>");
             html = html.concat("</div>");
 
         });
@@ -227,7 +297,14 @@
     var timer = null;
     var loopTimer = null;
 
-
+    /**
+     * [singleLoop description]
+     * @param  {[type]} src   [description]
+     * @param  {[type]} stime [description]
+     * @param  {[type]} etime [description]
+     * @param  {[type]} dom   [description]
+     * @return {[type]}       [description]
+     */
     function singleLoop(src, stime, etime, dom) {
         if (loopTimer !== null) {
             clearInterval(loopTimer);
@@ -237,6 +314,7 @@
             audio.src = "";
         }
 
+        pause();
         audio.src = src;
         audio.currentTime = parseFloat(time2time(stime));
         audio.play();
@@ -250,7 +328,6 @@
                 }
             }, 100)
         }
-
     }
 
     // 用k为单位表示播放量
@@ -260,15 +337,10 @@
             _count = count;
         }
         if (count >= 1024) {
-            _count = (count / 1024).toFixed(2)+"<span style='color:orange;'> k</span>";
-
+            _count = (count / 1024).toFixed(2) + "<span style='color:orange;'> k</span>";
         }
         return _count;
     }
-
-
-
-
 
     function play(src, stime, etime, dom) {
         if (loopTimer !== null) {
@@ -278,6 +350,7 @@
             $(".hsky").removeClass("currentbg");
             audio.src = "";
         }
+        pause();
         audio.src = src;
         audio.currentTime = parseFloat(time2time(stime));
         audio.play();
@@ -339,12 +412,8 @@
             if (t2 === NaN) {
                 $(data).removeClass("currentbg");
             }
-
         });
-
-
     }
-
 
 
     $(".start").click(function() {
@@ -352,12 +421,10 @@
     });
 
 
-
     $(".stop").click(function() {
         audio.pause();
         $(data).removeClass("currentbg");
     });
-
 
     function pause() {
         var audio = $("#audio")[0];
@@ -367,7 +434,6 @@
         clearInterval(timer);
         timer = null;
     }
-
 
     function time2time(time) {
         var str = time;
@@ -379,10 +445,13 @@
     <div id="doc-qrcode" class="am-text-center"></div>
     <p class='am-text-center'>请扫描二维码进行分享</p>
     <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-    <div style="width:256px;height:256px;border-radius:128px;background-color:orange;color:#EEEEEE;font-size:4rem;line-height:256px;margin:0 auto;cursor:pointer;" class='am-text-center'>
+    <div data-am-modal="{target: '#my-alert'}" style="width:20rem;height:20rem;border-radius:10rem;background-color:orange;color:#EEEEEE;font-size:4rem;line-height:20rem;margin:0 auto;cursor:pointer;" class='am-text-center'>
         打赏
     </div>
     <p class='am-text-center'>如果你觉的本页内容对你有用请随意打赏</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <p>&nbsp;</p>
     <script>
     $(function() {
@@ -394,6 +463,21 @@
         }
         $input.val(location.href);
         makeCode(location.href);
+    });
+
+
+
+
+    var fullscreen = $.AMUI.fullscreen;
+
+    $('#full').on('click', function() {
+        if (fullscreen.enabled) {
+            fullscreen.request();
+        }
+    }).on(fullscreen.raw.fullscreenchange, function() {
+        // 监听图片全屏状态
+        // var text = '图片状态：' + (fullscreen.isFullscreen ? '全屏' : '非全屏');
+        // $('#doc-fs-img').html(text);
     });
     </script>
 </body>
