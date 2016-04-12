@@ -1,5 +1,5 @@
 .nav{
-    background-color: #4c98ce;
+    background-color: #0E6EBC;
     width:100%;
     padding:0 1.2rem;
 
@@ -103,7 +103,7 @@
     bottom:0px;
     height:4rem;
     width:100%;
-    background-color:#4c98ce;
+    background-color:#0E6EBC;
     z-index: 999999999;
 }
 .footer span{

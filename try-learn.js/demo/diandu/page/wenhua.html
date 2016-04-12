@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>Demo</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Demo" />
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
+    <link rel="stylesheet" href="../css/hsky.css">
+    <style>
+    body {
+        background-color: #e6f7ff;
+    }
+    
+    a {
+        cursor: pointer;
+    }
+    
+    .currentbg {
+        background-color: pink;
+    }
+    
+    .am-control-nav {
+        display: none;
+    }
+    
+    .nav a,
+    .nav span {
+        font-size: 1.8rem;
+    }
+    
+    p {
+        display: block;
+        -webkit-margin-before: 0.2em;
+        -webkit-margin-after: 0.2em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+    }
+    
+    .am-offcanvas-bar {
+        background-color: #FFFFFF;
+        color: #999999;
+    }
+    
+    .am-offcanvas-content a {
+        color: #999999;
+    }
+    
+    .hsky {
+        border: 1px solid #0E6EBC;
+        height: auto;
+        width: 96%;
+        padding: 0rem 0rem;
+        margin: 1rem 2% 0 2%;
+        background-color: #FFFFFF;
+    }
+    
+    .hsky p {
+        padding: 0.5rem 1rem;
+    }
+    
+    .hsky #count {
+        display: block;
+        float: right;
+        margin-top: 1rem;
+    }
+    
+    input {
+        outline: none;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 弹出框 -->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">对不起，此功能暂未开放！</div>
+            <div class="am-modal-bd">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容 -->
+    <div class="page" style="background-color:#e6f7ff;">
+        <!--导航条-->
+        <header class="nav" data-am-sticky>
+            <span class='nav-text-left'> 
+               <a href="hsky.html">返回</a>
+            </span>
+            <span class='nav-text-center'>文化习俗</span>
+            <!-- <span class='nav-text-right am-icon-search'></span> -->
+            <div style='clear:both;'></div>
+        </header>
+        <!--内容区-->
+        <div class="content" style='background-color:#e6f7ff'>
+            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-1
+  am-avg-md-2 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
+                <li>
+                    <div class="am-gallery-item">
+                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                            <img src="../images/banner1.jpg" alt="远方 有一个地方 那里种有我们的梦想" />
+                            <h3 class="am-gallery-title">走进哈萨克族</h3>
+                            <div class="am-gallery-desc"></div>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="am-gallery-item">
+                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
+                            <img src="../images/banner2.jpg" alt="某天 也许会相遇 相遇在这个好地方" />
+                            <h3 class="am-gallery-title">哈萨克族饮食习惯</h3>
+                            <div class="am-gallery-desc"></div>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="am-gallery-item">
+                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
+                            <img src="../images/banner3.jpg" alt="哈萨克族婚嫁文化" />
+                            <h3 class="am-gallery-title">哈萨克族婚嫁文化</h3>
+                            <div class="am-gallery-desc"></div>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="am-gallery-item">
+                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
+                            <img src="../images/banner4.jpg" alt="哈萨克族猎鹰节" />
+                            <h3 class="am-gallery-title">哈萨克族猎鹰节</h3>
+                            <div class="am-gallery-desc"></div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.ie8polyfill.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.6.0/js/amazeui.widgets.helper.js"></script>
+</body>
+
+</html>

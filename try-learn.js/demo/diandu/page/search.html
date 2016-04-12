@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.6.0/css/amazeui.css">
     <link rel="stylesheet" href="../css/hsky.css">
     <style>
+    body {
+        background-color: #e6f7ff;
+    }
+    
     a {
         cursor: pointer;
     }
@@ -65,42 +69,16 @@
     .hsky #count {
         display: block;
         float: right;
-        margin-top: 0rem;
+        margin-top: 1rem;
+    }
+    
+    input {
+        outline: none;
     }
     </style>
 </head>
 
 <body>
-    <!-- 目录 -->
-    <div id="doc-oc-demo1" class="am-offcanvas">
-        <div class="am-offcanvas-bar">
-            <div class="am-offcanvas-content">
-                <!--             <p>
-                <input type='input'></input>     <span class="am-icon-search"></span>
-            </p> -->
-                <div data-am-widget="list_news" class="am-list-news am-list-news-default">
-                    <!--列表标题-->
-                    <div class="am-list-news-hd am-cf">
-                        <!--带更多链接-->
-                        <!--         <a href="##" class="">
-                            <h2>A</h2>
-                            <span class="am-list-news-more am-fr">更多 &raquo;</span>
-                        </a> -->
-                    </div>
-                    <div class="am-list-news-bd">
-                        <ul class="am-list">
-                            <li class="am-g am-list-item-dated">
-                                <a href="##" class="am-list-item-hd">日常短语</a>
-                            </li>
-                            <li class="am-g am-list-item-dated">
-                                <a href="##" class="am-list-item-hd">歇后语（暂未开放</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- 弹出框 -->
     <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
         <div class="am-modal-dialog">
@@ -112,39 +90,31 @@
             </div>
         </div>
     </div>
+    <!-- 主体内容 -->
     <div class="page" style="background-color:#e6f7ff;">
         <!--导航条-->
         <header class="nav" data-am-sticky>
             <span class='nav-text-left'> 
-               <a href="index.html">首页</a>
+               <a href="hsky.html">返回</a>
             </span>
-            <span class='nav-text-center'>日常短语</span>
-            <a href="search.html"><span class='nav-text-right am-icon-search'></span></a>
+            <span class='nav-text-center'>搜 索</span>
+            <!-- <span class='nav-text-right am-icon-search'></span> -->
             <div style='clear:both;'></div>
         </header>
-        <!-- 滚动图片 -->
-        <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
-            <ul class="am-slides">
-                <li><img src="../images/banner1.jpg" /></li>
-                <li><img src="../images/banner2.jpg" /></li>
-                <li><img src="../images/banner3.jpg" /></li>
-                <li><img src="../images/banner4.jpg" /></li>
-            </ul>
+        <div style="height:4rem;width:90%;margin:2rem auto;">
+            <div style='width:90%;;height:4rem;float:left;'>
+                <input type="text" style='width:90%;height:100%;border-radius:4rem;border:1px solid #999999;font-size:2rem;padding:0 2rem;' id='searchText'>
+            </div>
+            <div style='width:10%;height:4rem;float:right;line-height:4rem;text-align: left;cursor:pointer;'>
+                <span class='am-icon-search am-icon-lg am-text-primary' id='searchBtn'></span>
+            </div>
         </div>
         <!--内容区-->
         <div class="content" style='background-color:#e6f7ff'>
+            <p style='text-align: center;font-size:1.5rem;' class='am-text-primary'>输入关键字搜索你要的信息......</p>
         </div>
         <!--页脚-->
-        <div class="footer">
-            <span class="am-icon-list" style="width:33.33%" data-am-offcanvas="{target: '#doc-oc-demo1', effect: 'push'}"><label style='font-size:2rem'>&nbsp;目录</label></span>
-            <span style="width:33.33%">
-                <div style='width:6rem;height:6rem;background-color:#0E6EBC;border-radius:3rem;margin:-2rem auto;text-align:center;line-height:6rem;border:0.2rem solid #dd514c'>
-                    <i class="start am-icon-play" style="margin:0 auto;display:block;"></i>
-                </div>
-            </span>
-            <a href="wenhua.html"><span class="am-icon-book" style="width:33.33%;"><label style='font-size:2rem'>&nbsp;文化习俗</label>
-            </span></a>
-        </div>
+        <p></p>
     </div>
     <!-- 音频标签 -->
     <audio id="audio"></audio>
@@ -285,14 +255,44 @@
         count: 12360
     }]
 
-    function drawPage(arr) {
-        var html = "";
+
+    $(document).ready(function() {
+
+        $("#searchBtn").click(function() {
+
+            var searchText = $("#searchText").val();
+            if (searchText === "") {
+                return;
+            }
+
+            var list = [];
+            var rege = new RegExp("" + searchText + "", "g");
+            console.log(rege)
+            for (var i = 0; len = hsky.length, i < len; i++) {
+                if (hsky[i].hanyu.match(rege)) {
+                    list.push(hsky[i]);
+                }
+            }
+            console.log(list)
+            if (list.length >= 1) {
+                drawPage(list, "和【<label style='color:red;'><b>" + searchText + "</b></label>】相关的词和句子");
+            } else {
+                drawPage(list, "暂无搜索结果");
+            }
+
+        });
+    });
+
+
+
+    function drawPage(arr, msg) {
+        console.log(arr)
+        var html = "<p style='text-align: center;font-size:1.5rem;' class='am-text-primary'>" + msg + "</p>";
         $(arr).each(function(index, data) {
+            console.log(data)
             html = html.concat("<div class='hsky' mp3='" + data.mp3 + "' stime='" + data.start + "' etime='" + data.end + "'>");
 
             html = html.concat("<div style='position:relative;'><div style='width:6rem;height:4rem;float:right;font-size:2rem;text-align:center;line-height:4rem;color:#0E6EBC'>" + (index + 1) + "/" + arr.length + "</div></div>");
-
-
 
             html = html.concat("<p style='font-size:1.5rem;margin-top:1rem;'><label style='font-size:1.5rem;color:#0E6EBC;'>【中　　文】</label>" + data.hanyu + "</p>");
             html = html.concat("<p style='font-size:1.5rem'><label style='font-size:1.5rem;color:#0E6EBC;'>【哈萨克语】</label>" + data.hasakeyu + "</p>");
@@ -303,8 +303,8 @@
             html = html.concat("<a class='am-icon-btn am-warning am-icon-stop' onclick='pause()' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;'></a>&nbsp;&nbsp;&nbsp;&nbsp;");
             html = html.concat("<a class='am-icon-btn am-danger am-icon-microphone' style='width:3rem;height:3rem;line-height:3rem;font-size:1.5rem;' data-am-modal=\"{target: '#my-alert'}\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
             var count = formatK(data.count);
-            html = html.concat("<span id='count' style='font-size:1.5rem;'>已有<label style='color:orange'>" + count + "</label>人学习<img src='../images/icon.png'/ style='vertical-align:middle;max-width:2rem'></span></p>");
-            html = html.concat("<div style=\"width:100%;height:3rem;background-image:url('../images/bottom.jpg')\"></div>");
+            html = html.concat("<span id='count' style='font-size:1.5rem;'>已有<label style='color:orange'>" + count + "</label>人学习</span></p>");
+            html = html.concat("<div style='width:100%;height:4rem;'></div>");
             html = html.concat("</div>");
 
         });
@@ -313,7 +313,7 @@
     }
 
 
-    drawPage(hsky);
+    // drawPage(hsky);
     var audio = $("#audio")[0];
     var timer = null;
     var loopTimer = null;
@@ -392,81 +392,6 @@
         }
     }
 
-    var mp3Arr = ["../mp3/hsky001.m4a", "../mp3/hsky002.m4a", "../mp3/hsky003.m4a"];
-    var number = 0;
-
-    function player() {
-        audio.src = mp3Arr[number];
-        audio.play();
-        findDivByAttr(mp3Arr[number], audio.currentTime);
-        if (loopTimer === null) {
-            loopTimer = setInterval(function() {
-                    findDivByAttr(mp3Arr[number], audio.currentTime);
-                    if (audio.ended === true) {
-                        number++;
-                        if (mp3Arr[number] == undefined) {
-                            clearInterval(loopTimer);
-                            loopTimer = null;
-                            number = 0;
-                        } else {
-                            audio.src = mp3Arr[number];
-                            audio.play();
-                        }
-                    }
-                },
-                100
-            )
-        }
-    }
-
-
-    function findDivByAttr(mp3, currentTime) {
-        $("[mp3='" + mp3 + "']").each(function(index, data) {
-            var t1 = time2time($(data).attr("stime"));
-            var t2 = time2time($(data).attr("etime"));
-            // console.log(t1 + "         " + t2 + "           " + currentTime + "         " + data)
-            if (t1 <= currentTime && currentTime <= t2) {
-                $(data).addClass("currentbg");
-            } else {
-                $(data).removeClass("currentbg");
-            }
-            if (t2 === NaN) {
-                $(data).removeClass("currentbg");
-            }
-        });
-    }
-
-
-    $(".start").click(function() {
-        if ($(this).attr("class") !== "start am-icon-play") {
-            audio.pause();
-            $(".hsky").removeClass("currentbg");
-            $(this).removeClass("am-icon-stop");
-            $(this).removeClass("stop");
-            $(this).addClass("start");
-            $(this).addClass("am-icon-play");
-        } else {
-            player();
-            $(this).removeClass("am-icon-play");
-            $(this).removeClass("start");
-            $(this).addClass("am-icon-stop");
-            $(this).addClass("stop");
-        }
-
-
-
-    });
-
-
-    $(".stop").click(function() {
-        audio.pause();
-        $(data).removeClass("currentbg");
-        $(this).removeClass("am-icon-stop");
-        $(this).removeClass("stop");
-        $(this).addClass("am-icon-play");
-        $(this).addClass("start");
-
-    });
 
     function pause() {
         var audio = $("#audio")[0];
@@ -483,44 +408,6 @@
         var seconds = parseInt(arr[0] * 60) + parseFloat(arr[1]);
         return seconds;
     }
-    </script>
-    <div id="doc-qrcode" class="am-text-center"></div>
-    <p class='am-text-center'>请扫描二维码进行分享</p>
-    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-    <div data-am-modal="{target: '#my-alert'}" style="width:20rem;height:20rem;border-radius:10rem;background-color:orange;color:#EEEEEE;font-size:4rem;line-height:20rem;margin:0 auto;cursor:pointer;" class='am-text-center'>
-        打赏
-    </div>
-    <p class='am-text-center'>如果你觉的本页内容对你有用请随意打赏</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <script>
-    $(function() {
-        var $input = $('#doc-qr-text');
-        $qr = $('#doc-qrcode');
-
-        function makeCode(text) {
-            $qr.empty().qrcode(text);
-        }
-        $input.val(location.href);
-        makeCode(location.href);
-    });
-
-
-
-
-    var fullscreen = $.AMUI.fullscreen;
-
-    $('#full').on('click', function() {
-        if (fullscreen.enabled) {
-            fullscreen.request();
-        }
-    }).on(fullscreen.raw.fullscreenchange, function() {
-        // 监听图片全屏状态
-        // var text = '图片状态：' + (fullscreen.isFullscreen ? '全屏' : '非全屏');
-        // $('#doc-fs-img').html(text);
-    });
     </script>
 </body>
 
