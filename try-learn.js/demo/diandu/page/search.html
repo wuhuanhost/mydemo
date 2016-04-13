@@ -95,20 +95,21 @@
         <!--导航条-->
         <header class="nav" data-am-sticky>
             <span class='nav-text-left'> 
-               <a href="hsky.html">返回</a>
+               <a href="hsky.html"><span class='am-icon-chevron-left'></span></a>
             </span>
             <span class='nav-text-center'>搜 索</span>
             <!-- <span class='nav-text-right am-icon-search'></span> -->
             <div style='clear:both;'></div>
         </header>
-        <div style="height:4rem;width:90%;margin:2rem auto;">
-            <div style='width:90%;;height:4rem;float:left;'>
-                <input type="text" style='width:90%;height:100%;border-radius:4rem;border:1px solid #999999;font-size:2rem;padding:0 2rem;' id='searchText'>
+        <div style="height:3rem;width:90%;margin:2rem auto;">
+            <div style='width:90%;;height:3rem;float:left;'>
+                <input type="text" style='width:98%;height:100%;border-radius:3rem;border:1px solid #999999;font-size:2rem;padding:0 2rem;' id='searchText'>
             </div>
-            <div style='width:10%;height:4rem;float:right;line-height:4rem;text-align: left;cursor:pointer;'>
+            <div style='width:10%;height:3rem;float:right;line-height:3rem;text-align: left;cursor:pointer;'>
                 <span class='am-icon-search am-icon-lg am-text-primary' id='searchBtn'></span>
             </div>
         </div>
+        <hr>
         <!--内容区-->
         <div class="content" style='background-color:#e6f7ff'>
             <p style='text-align: center;font-size:1.5rem;' class='am-text-primary'>输入关键字搜索你要的信息......</p>
@@ -255,16 +256,12 @@
         count: 12360
     }]
 
-
     $(document).ready(function() {
-
         $("#searchBtn").click(function() {
-
             var searchText = $("#searchText").val();
             if (searchText === "") {
                 return;
             }
-
             var list = [];
             var rege = new RegExp("" + searchText + "", "g");
             console.log(rege)
@@ -275,15 +272,13 @@
             }
             console.log(list)
             if (list.length >= 1) {
-                drawPage(list, "和【<label style='color:red;'><b>" + searchText + "</b></label>】相关的词和句子");
+                drawPage(list, "和【<label style='color:red;'><b>" + searchText + "</b></label>】相关的单词和句子");
             } else {
                 drawPage(list, "暂无搜索结果");
             }
 
         });
     });
-
-
 
     function drawPage(arr, msg) {
         console.log(arr)

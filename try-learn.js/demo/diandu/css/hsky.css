@@ -112,7 +112,7 @@
     display:block;
     float:left;
     color:#EEEEEE;
-    line-height: 4.6rem;
+    /*line-height: 4.6rem;*/
     text-align: center;
     cursor:pointer;
     font-size:2rem;
@@ -150,3 +150,55 @@
     z-index:999999999;
     margin:0 auto;
 }
+ a {
+        cursor: pointer;
+    }
+    
+    .currentbg {
+        background-color: pink;
+    }
+    
+    .am-control-nav {
+        display: none;
+    }
+    
+    .nav a,
+    .nav span {
+        font-size: 1.8rem;
+    }
+    
+    p {
+        display: block;
+        -webkit-margin-before: 0.2em;
+        -webkit-margin-after: 0.2em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+    }
+    
+    .am-offcanvas-bar {
+        background-color: #FFFFFF;
+        color: #999999;
+    }
+    
+    .am-offcanvas-content a {
+        color: #999999;
+    }
+    
+    .hsky {
+        border: 1px solid #0E6EBC;
+        height: auto;
+        width: 96%;
+        padding: 0rem 0rem;
+        margin: 1rem 2% 0 2%;
+        background-color: #FFFFFF;
+    }
+    
+    .hsky p {
+        padding: 0.5rem 1rem;
+    }
+    
+    .hsky #count {
+        display: block;
+        float: right;
+        margin-top: 0rem;
+    }
