@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片标注工具</title>
+    <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    div {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    #header {
+        position: fixed;
+        top: 0px;
+        height: 40px;
+        width: 100%;
+        background-color: #CCCCCC;
+        z-index: 99;
+        border-bottom: 1px solid #999999;
+        line-height: 40px;
+    }
+    
+    #header span {
+        background-color: pink;
+        height: 30px;
+        line-height: 30px;
+        width: 100px;
+        text-align: center;
+        display: inline-block;
+    }
+    
+    #footer {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        height: 40px;
+        background-color: #CCCCCC;
+        border-top: 1px solid #999999;
+        line-height: 40px;
+    }
+    
+    #container {
+        display: block;
+        width: 1280px;
+        height: 100%;
+        /*margin: 0 auto;*/
+    }
+    
+    #container #nav {
+        display: block;
+        position: fixed;
+        top: 40px;
+        left: 0;
+        float: left;
+        width: 240px;
+        height: 90.5%;
+        background-color: #EEEEEE;
+        overflow: hidden;
+        /*英文字母自动换行*/
+        word-wrap: break-word;
+        overflow: auto;
+        padding: 5px 0px 20px 0px;
+        display: none;
+    }
+    
+    #container #content {
+        display: inline-block;
+        position: relative;
+        top: 40px;
+        left: 240px;
+        float: left;
+        width: 820px;
+        height: 90%;
+        /*background-color: green;*/
+        /*英文字母自动换行*/
+        word-wrap: break-word;
+        padding: 10px;
+        /*overflow:auto;*/
+        text-align: center;
+        display: none;
+        /*background-color: red;*/
+    }
+    
+    ul {
+        list-style: none;
+        width: 100%;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 0px;
+    }
+    
+    ul li {
+        display: block;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        padding: 0 20px;
+        border-top: 1px solid #999999;
+        position: static;
+    }
+    
+    ul li:last-child {
+        border-bottom: 1px solid #999999;
+    }
+    
+    li:hover {
+        background-color: #CCCCCC;
+    }
+    
+    h3 {
+        text-align: center;
+    }
+    
+    button {
+        margin: 0 10px;
+        display: inline-block;
+        width: 150px;
+        height: 36px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    #selectDirectory {
+        width: 400px;
+        height: 60px;
+        border: 3px solid #CCCCCC;
+        border-radius: 5px;
+        margin: 0 auto;
+        display: block;
+        font-weight: bold;
+        margin-top: 300px;
+        cursor: pointer;
+        color: #333333;
+        font-size: 18px;
+    }
+    
+    #selectDirectory:hover {
+        color: red;
+    }
+
+    input{
+        width:90%;
+        height:24px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <span id='selectDirectorys'>打开目录</span>
+        <span onclick='add()'>添加标注</span>
+        <span onclick='showData()'>显示标注数据</span>
+        <span>保存当页数据</span>
+        <span>生成html</span>
+        <input style="display:none;" id="fileDialog" type="file" webkitdirectory title="点击" />
+    </div>
+    <div id="container">
+        <input type="button" value="选择需要标注图片的目录......" id="selectDirectory">
+        <div id="nav">
+            <h3>标注文件目录</h3>
+            <ul id='nav-items'>
+                <!-- 二级菜单测试 -->
+                <!-- <li onclick="showsss()">1、山中访友<span style='color:green;float:right;'>✔</span>
+                </li>
+                <script>
+                function showsss() {
+                    if (document.getElementById("test").style.display == "block") {
+                        document.getElementById("test").style.display = "none";
+                    } else {
+                        document.getElementById("test").style.display = "block";
+                    }
+                }
+                </script>
+                <ul style='display:none;background-color: pink;' id='test'>
+                    <li>第1页</li>
+                    <li>第2页</li>
+                    <li>第3页</li>
+                </ul>
+                <li style='margin-top:-1px;'>2、山中访友</li> -->
+                <li>1、山中访友<span style='color:green;float:right;'>✔</span></li>
+                <li onclick="showImg('src/1.jpg')">2、山中访友<span style='color:green;float:right;'>✔</span></li>
+                <li onclick="showImg('src/2.jpg')">3、山中访友<span style='color:green;float:right;'>✔</span></li>
+            </ul>
+        </div>
+        <div id="content">
+            <!-- 图片标记容器 -->
+            <div style='height:720px;border:1px solid red;margin:0 auto;margin-top:6px;' id='actionImgContent'>
+            </div>
+        </div>
+        <!-- 信息容器-->
+        <div style='width:236px;height:auto;left:240px;float:left;border:1px solid #999999;position: relative;top:40px;padding:0 10px;margin-top:16px;'>
+            <div id="imgInfo" style='width:100%;height:auto;line-height: 24px;font-size:14px;'>
+                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>原图大小：</b><span id='sourceSize'></span></p>
+                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>图片大小：</b><span id='actionSize'></span></p>
+                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'> <b>缩放比例：</b> <span id='scaleXY'></span></p>
+                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>标注链接地址</b></p>
+                <div id="currentLinkList" style='overflow:auto;height:547px;'>
+                </div>
+            </div>
+        </div>
+        <div style='clear: both;'></div>
+        <div id="footer" style='text-align:center;'>
+            CopyRight 2016;
+        </div>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.1/fabric.min.js'></script>
+        <script>
+        var canvas = null; //当前页的canvas对象。
+        var scaleX = 0;
+        var scaleY = 0; //原始图片和显示图片的缩放比
+        var index = 0; //当前页面标注序号
+        /**
+         * 显示当前页的标注数据
+         * @return {[type]} [description]
+         */
+        function showData() {
+            console.log(canvas);
+        }
+        /**
+         * 选择文件目录
+         * @param  {[type]} name [description]
+         * @return {[type]}      [description]
+         */
+        function chooseFile(name) {
+            var chooser = $(name);
+            chooser.unbind('change');
+            chooser.change(function(evt) {
+                // alert($(this).val());
+                  init();
+                drawMarkUi($(this).val().split(";"));
+            });
+            chooser.trigger('click');
+        }
+
+        $("#selectDirectory").click(function() {
+            chooseFile('#fileDialog');
+        });
+
+        $("#selectDirectorys").click(function() {
+
+            chooseFile('#fileDialog');
+        });
+        /**
+         * 选择文件后渲染标注界面
+         * @return {[type]} [description]
+         */
+        function drawMarkUi(listImg) {
+            $("#selectDirectory").hide();
+            $("#nav").show();
+            $("#content").show();
+            var html = "";
+            for (var i = 0; i < listImg.length; i++) {
+                var lastIndexs = listImg[i].lastIndexOf("\\");
+                var fileName = listImg[i].substring(lastIndexs + 1, listImg[i].length);
+                html += "<li onclick=\"showImg('" + listImg[i].replace(/[\\]/g, "||") + "')\">" + fileName + "<span style='color:green;float:right;'>✔</span></li>";
+            }
+            $("#nav-items").html(html);
+            showImg(listImg[0].replace(/[\\]/g, "||"));
+        }
+
+        $("#selectDirectory").hide();
+        $("#nav").show();
+        $("#content").show();
+
+        // 初始化方法
+        function init() {
+            $("canvas").remove();
+            $(".markLink").remove();
+            index = 0;
+            $("#sourceSize").html("");
+            $("#actionSize").html("");
+            $("#scaleXY").html("");
+        }
+
+        /**
+         * 点击图片名称的时候显示图片在右边
+         * @param  {[type]} imgSrc [description]
+         * @return {[type]}        [description]
+         */
+        function showImg(imgSrc) {
+            init();
+            //移除原来的图片
+            $("#actionImg").remove();
+            $("#sourceImg").remove();
+
+            var actionImg = document.createElement("img");
+            actionImg.height = "720";
+            actionImg.id = "actionImg";
+            actionImg.src = imgSrc.replace(/[||]/g, "\\");
+            var sourceImg = document.createElement("img");
+            sourceImg.id = "sourceImg";
+            sourceImg.style = "display:none";
+            sourceImg.src = imgSrc.replace(/[||]/g, "\\");
+
+            $("#actionImgContent").append(actionImg);
+            $("#actionImgContent").append(sourceImg);
+
+            //图片加载完成
+            $("#sourceImg").load(function() {
+                console.log("图片加载完成");
+
+                scaleX =  $("#actionImg").width()/$("#sourceImg").width() ;
+                scaleY = $("#actionImg").height()/$("#sourceImg").height() ;
+                console.log($("#actionImg").width() + "        " + $("#actionImg").height());
+                console.log($("#sourceImg").width() + "        " + $("#sourceImg").height());
+                console.log(scaleX + "          " + scaleY);
+
+                $("#sourceSize").html($("#sourceImg").width() + "  × " + $("#sourceImg").height());
+                $("#actionSize").html($("#actionImg").width() + "  × " + $("#actionImg").height());
+                $("#scaleXY").html(scaleX);
+
+                drawContent($("#actionImg").width()); //创建渲染容器
+            });
+        }
+
+        /**
+         * 创建渲染容器的方法
+         * @param  {[type]} width [description]
+         * @return {[type]}       [description]
+         */
+        function drawContent(width) {
+            $("#actionImgContent").width(width + 2);
+            canvas = null;
+            _this = null;
+            $("#canvas").remove();
+            $(".canvas-container").remove();
+            //创建canvsa
+            var　 _canvas = document.createElement("canvas");
+
+            _canvas.width = $("#actionImg").width();
+            _canvas.height = $("#actionImg").height();
+
+            _canvas.id = 'canvas';
+            _canvas.style = 'position:absolute;border:1px solid green;display:block;margin-left:' + (798 - width) / 2 + 'px;margin-top:-720px;';
+            $("#content").append(_canvas);
+            canvas = new fabric.Canvas('canvas');
+
+            //选中的标注添加事件
+            canvas.on('mouse:down', function(options) {
+                if (options.target) {
+                    console.log(options.target.index);
+                    $(".markLink").attr("style", "");
+                    $("#markLink-" + options.target.index).attr("style", "border:1px solid red;");
+
+                }
+            });
+        }
+
+
+        /**
+         * 添加标注元素
+         */
+        function add() {
+            canvas.add(new fabric.Rect({
+                fill: '#f55',
+                top: 10,
+                left: 10,
+                width: 300,
+                height: 40,
+                opacity: 0.6,
+                index: index
+            }));
+            canvas.item(0).set({
+                borderColor: 'gray',
+                cornerColor: 'black',
+                cornerSize: 12
+
+            });
+            canvas.setActiveObject(canvas.item(0));
+
+            $("#currentLinkList").append("<p style='text-align:center;'><input type='text' id=\"markLink-" + index + "\" class='markLink'/></p>");
+            index++;
+
+        }
+
+
+        //1.选择图片时首先清楚图片上的所有的标记
+        //2.添加标注
+        //3.保存的时候记录当前页图片上所有的标记的位置
+        </script>
+</body>
+
+</html>
