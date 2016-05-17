@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>图片标注工具</title>
+    <link rel="stylesheet" type="text/css" href="./src/Font-Awesome-3.2.1/css/font-awesome.min.css">
     <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
     <style>
     html,
@@ -25,19 +26,24 @@
         top: 0px;
         height: 40px;
         width: 100%;
-        background-color: #CCCCCC;
+        background-color: #EEEEEE;
         z-index: 99;
         border-bottom: 1px solid #999999;
         line-height: 40px;
     }
     
     #header span {
-        background-color: pink;
         height: 30px;
         line-height: 30px;
-        width: 100px;
+        min-width: 80px;
+        font-size: 14px;
         text-align: center;
         display: inline-block;
+    }
+    
+    #header span:hover {
+        background-color: pink;
+        cursor: pointer;
     }
     
     #footer {
@@ -45,7 +51,7 @@
         bottom: 0px;
         width: 100%;
         height: 40px;
-        background-color: #CCCCCC;
+        background-color: #EEEEEE;
         border-top: 1px solid #999999;
         line-height: 40px;
     }
@@ -72,6 +78,7 @@
         overflow: auto;
         padding: 5px 0px 20px 0px;
         display: none;
+        border-right: 1px solid #999999;
     }
     
     #container #content {
@@ -105,8 +112,8 @@
     ul li {
         display: block;
         padding: 0;
-        height: 40px;
-        line-height: 40px;
+        height: 30px;
+        line-height: 30px;
         cursor: pointer;
         padding: 0 20px;
         border-top: 1px solid #999999;
@@ -134,44 +141,37 @@
         cursor: pointer;
     }
     
-    #selectDirectory {
-        width: 400px;
-        height: 60px;
-        border: 3px solid #CCCCCC;
-        border-radius: 5px;
-        margin: 0 auto;
-        display: block;
-        font-weight: bold;
-        margin-top: 300px;
-        cursor: pointer;
-        color: #333333;
-        font-size: 18px;
-    }
-    
     #selectDirectory:hover {
         color: red;
     }
-
-    input{
-        width:90%;
-        height:24px;
+    
+    input {
+        width: 90%;
+        height: 24px;
+    }
+    
+    i {
+        font-size: 16px;
+        font-weight: bold;
+        padding-right: 2px;
     }
     </style>
 </head>
 
 <body>
     <div id="header">
-        <span id='selectDirectorys'>打开目录</span>
-        <span onclick='add()'>添加标注</span>
-        <span onclick='showData()'>显示标注数据</span>
-        <span>保存当页数据</span>
-        <span>生成html</span>
+        <span style='width:20px;'><i class='icon-cog'></i>菜单</span>
+        <span id='selectDirectorys'><i class='icon-folder-open'></i>选择目录</span>
+        <span onclick='add()'><i class='icon-tag'></i>添加标注</span>
+        <!-- <span onclick='showData()'><i class='icon-laptop'></i>显示标注数据</span> -->
+        <span onclick='saveData()'><i class='icon-save'></i>保存数据</span>
+        <span><i class='icon-retweet'></i>生成HTML</span>
         <input style="display:none;" id="fileDialog" type="file" webkitdirectory title="点击" />
+        <input style="display:none;" id="fileDialog1" type="file" />
     </div>
     <div id="container">
-        <input type="button" value="选择需要标注图片的目录......" id="selectDirectory">
         <div id="nav">
-            <h3>标注文件目录</h3>
+            <h3>标注文件列表</h3>
             <ul id='nav-items'>
                 <!-- 二级菜单测试 -->
                 <!-- <li onclick="showsss()">1、山中访友<span style='color:green;float:right;'>✔</span>
@@ -202,35 +202,104 @@
             </div>
         </div>
         <!-- 信息容器-->
-        <div style='width:236px;height:auto;left:240px;float:left;border:1px solid #999999;position: relative;top:40px;padding:0 10px;margin-top:16px;'>
+        <div id='infos' style='display:none;width:236px;height:auto;left:240px;float:left;border:1px solid #999999;position: relative;top:40px;padding:0 10px;margin-top:-1px;'>
             <div id="imgInfo" style='width:100%;height:auto;line-height: 24px;font-size:14px;'>
                 <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>原图大小：</b><span id='sourceSize'></span></p>
                 <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>图片大小：</b><span id='actionSize'></span></p>
                 <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'> <b>缩放比例：</b> <span id='scaleXY'></span></p>
-                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>标注链接地址</b></p>
-                <div id="currentLinkList" style='overflow:auto;height:547px;'>
+                <p style='border-bottom: 1px solid #999999;height: 24px;line-height:24px;'><b>标注链接地址</b><span style='cursor:pointer;color:#333333;float: right;margin-top:-3px;font-size:12px;color:red;' id='importUrlFile'><i class='icon-link' style='font-size:14px;'></i>导入链接文件</span></p>
+                <div id="currentLinkList" style='overflow:auto;height:590px;'>
                 </div>
             </div>
         </div>
         <div style='clear: both;'></div>
         <div id="footer" style='text-align:center;'>
-            CopyRight 2016;
+            CopyRight 2016
         </div>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.1/fabric.min.js'></script>
         <script>
-        var canvas = null; //当前页的canvas对象。
         var scaleX = 0;
         var scaleY = 0; //原始图片和显示图片的缩放比
-        var index = 0; //当前页面标注序号
+        var canvas = null; //当前页的canvas对象。
+        var scaleXY = 0; //当前页的缩放比
+        var page = 0; //当前标注第几张图片 0 表示第一张图片
+        var index = 0; //当前页面标注序号  0 表示第一个标记
+        var pageData = []; //每一页的数据
+        var totalPageData = []; //所有页的数据
+        // var data= [
+        //     [{
+        //             "left": 100,
+        //             "top": 100,
+        //             "width": 100,
+        //             "height": 100,
+        //             "url": "www.baidu.com",
+        //             "remark": "第一张图片的第一个标记",
+        //             "id":0,
+        //             "scale":1
+        //         }
+
+        //     ]
+        // ];
+        /**
+         * 标记对象
+         * @param  {[type]} left   [description]
+         * @param  {[type]} top    [description]
+         * @param  {[type]} width  [description]
+         * @param  {[type]} height [description]
+         * @param  {[type]} url    [description]
+         * @param  {[type]} remark [description]
+         * @param  {[type]} id     [description]
+         * @param  {[type]} scale  [description]
+         * @return {[type]}        [description]
+         */
+        function dataMark(left, top, width, height, url, remark, id, scale) {
+            this.left = left;
+            this.top = top;
+            this.width = width;
+            this.height = height;
+            this.url = url;
+            this.remark = remark;
+            this.id = id;
+            this.scale = scale;
+        };
+
+
         /**
          * 显示当前页的标注数据
          * @return {[type]} [description]
          */
         function showData() {
-            console.log(canvas);
+
+            console.log(canvas._objects);
+            for (var i = 0; i < canvas._objects.length; i++) {
+
+                var left = canvas._objects[i].left;
+                var top = canvas._objects[i].top;
+                var width = canvas._objects[i].width;
+                var height = canvas._objects[i].height;
+                var url = "";
+
+                var remark = (page + 1) + "   " + (index + 1);
+                var id = page + "-" + i;
+                var scaleXY = scaleXY;
+
+                var dataMarkObj = new dataMark(left, top, width, height, url, remark, id, scaleXY);
+
+                pageData[i] = dataMarkObj;
+            }
+            totalPageData.push(pageData);
+            pageData = [];
+
         }
+
+
+        function saveData() {
+            var fs = require("fs");
+            var flag = fs.writeFileSync("C:\\Users\\test\\Desktop\\nwjs-v0.14.3-win-ia32\\src\\data.json", JSON.stringify(totalPageData));
+        }
+
         /**
-         * 选择文件目录
+         * 选择图片标注目录
          * @param  {[type]} name [description]
          * @return {[type]}      [description]
          */
@@ -239,15 +308,11 @@
             chooser.unbind('change');
             chooser.change(function(evt) {
                 // alert($(this).val());
-                  init();
+                init();
                 drawMarkUi($(this).val().split(";"));
             });
             chooser.trigger('click');
         }
-
-        $("#selectDirectory").click(function() {
-            chooseFile('#fileDialog');
-        });
 
         $("#selectDirectorys").click(function() {
 
@@ -265,24 +330,31 @@
             for (var i = 0; i < listImg.length; i++) {
                 var lastIndexs = listImg[i].lastIndexOf("\\");
                 var fileName = listImg[i].substring(lastIndexs + 1, listImg[i].length);
-                html += "<li onclick=\"showImg('" + listImg[i].replace(/[\\]/g, "||") + "')\">" + fileName + "<span style='color:green;float:right;'>✔</span></li>";
+                html += "<li class='nav-item' id='file-" + i + "' onclick=\"showImg('" + listImg[i].replace(/[\\]/g, "||") + "',this)\">" + fileName + "<span style='color:green;float:right;'>✔</span></li>";
             }
             $("#nav-items").html(html);
-            showImg(listImg[0].replace(/[\\]/g, "||"));
+            showImg(listImg[0].replace(/[\\]/g, "||"), $(".nav-item")[0]);
         }
 
-        $("#selectDirectory").hide();
-        $("#nav").show();
-        $("#content").show();
+        // $("#selectDirectory").hide();
+        // $("#nav").show();
+        // $("#content").show();
 
-        // 初始化方法
+        // 标注界面初始化方法
         function init() {
-            $("canvas").remove();
-            $(".markLink").remove();
-            index = 0;
+
+            canvas = null;
+            $("canvas").remove(); //移除canvas
+            $(".markLink").remove(); //移除标注连接
+            index = 0; //当前页的标记序号设为0
             $("#sourceSize").html("");
             $("#actionSize").html("");
             $("#scaleXY").html("");
+            $("#infos").show();
+            //移除原来的图片
+            $("#actionImg").remove();
+            $("#sourceImg").remove();
+            scaleXY = '';
         }
 
         /**
@@ -290,12 +362,17 @@
          * @param  {[type]} imgSrc [description]
          * @return {[type]}        [description]
          */
-        function showImg(imgSrc) {
+        function showImg(imgSrc, dom) {
+            $(".nav-item").attr("style", "background-color:#EEEEEE");
+            $(dom).attr("style", "background-color:pink");
+            if (page == 0) {
+                console.log("第一次进入");
+            } else {
+                //获取第一个页面的标注数据
+                showData();
+            }
             init();
-            //移除原来的图片
-            $("#actionImg").remove();
-            $("#sourceImg").remove();
-
+            page++; //当前标注的图片序号加1
             var actionImg = document.createElement("img");
             actionImg.height = "720";
             actionImg.id = "actionImg";
@@ -312,8 +389,8 @@
             $("#sourceImg").load(function() {
                 console.log("图片加载完成");
 
-                scaleX =  $("#actionImg").width()/$("#sourceImg").width() ;
-                scaleY = $("#actionImg").height()/$("#sourceImg").height() ;
+                scaleX = $("#actionImg").width() / $("#sourceImg").width();
+                scaleY = $("#actionImg").height() / $("#sourceImg").height();
                 console.log($("#actionImg").width() + "        " + $("#actionImg").height());
                 console.log($("#sourceImg").width() + "        " + $("#sourceImg").height());
                 console.log(scaleX + "          " + scaleY);
@@ -377,15 +454,70 @@
                 borderColor: 'gray',
                 cornerColor: 'black',
                 cornerSize: 12
-
             });
-            canvas.setActiveObject(canvas.item(0));
+            canvas.setActiveObject(canvas.item(index));
 
-            $("#currentLinkList").append("<p style='text-align:center;'><input type='text' id=\"markLink-" + index + "\" class='markLink'/></p>");
+            $("#currentLinkList").append("<p style='text-align:center;'><input onfocus='changeMarkFouce(\"" + index + "\")' type='text' id=\"markLink-" + index + "\" class='markLink'/></p>");
             index++;
 
         }
+        /**
+         * 点击连接文本框的时候，让对应的标记获取光标
+         * @param  {[type]} index [description]
+         * @return {[type]}       [description]
+         */
+        function changeMarkFouce(index) {
+            $(".markLink").attr("style", "");
+            $("#markLink-" + index).attr("style", "border:1px solid red;");
+            canvas.setActiveObject(canvas.item(index));
+        }
 
+
+
+        /**
+         * 导入链接文件
+         */
+        function chooseFile1(name) {
+            var chooser = $(name);
+            chooser.unbind('change');
+            chooser.change(function(evt) {
+                var fs = require("fs");
+                var fileData = fs.readFileSync($(this).val()).toString();
+                var urlList = fileData.split("\n");
+                genUrlList(urlList);
+            });
+            chooser.trigger('click');
+        }
+        /**
+         * 点击导入按钮
+         * @param  {[type]} ) {                       chooseFile1('#fileDialog');        } [description]
+         * @return {[type]}   [description]
+         */
+        $("#importUrlFile").click(function() {
+            chooseFile1('#fileDialog1');
+        });
+        /**
+         * 生成列表
+         * @param  {[type]} list [description]
+         * @return {[type]}      [description]
+         */
+        function genUrlList(list) {
+            var size = $(".markLink").size();
+            if (size <= 0) {
+                alert("页面还没添加标记");
+            } else {
+                $(".markLink").each(function(index) {
+                    $(this).val(list[index]);
+                });
+            }
+
+        }
+        /**
+         * 设置当前页的标注数据
+         */
+        function setCurrentPageDate() {
+
+        }
 
         //1.选择图片时首先清楚图片上的所有的标记
         //2.添加标注
