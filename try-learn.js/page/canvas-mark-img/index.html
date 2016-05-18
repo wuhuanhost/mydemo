@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>图片标注工具</title>
-    <link rel="stylesheet" type="text/css" href="./src/Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
     <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
     <style>
     html,
@@ -166,6 +166,7 @@
         <!-- <span onclick='showData()'><i class='icon-laptop'></i>显示标注数据</span> -->
         <span onclick='saveData()'><i class='icon-save'></i>保存数据</span>
         <span><i class='icon-retweet'></i>生成HTML</span>
+        <span onclick='debug()'><i class='icon-bug'></i>打开调试窗口</span>
         <input style="display:none;" id="fileDialog" type="file" webkitdirectory title="点击" />
         <input style="display:none;" id="fileDialog1" type="file" />
     </div>
@@ -221,11 +222,12 @@
         var scaleX = 0;
         var scaleY = 0; //原始图片和显示图片的缩放比
         var canvas = null; //当前页的canvas对象。
-        var scaleXY = 0; //当前页的缩放比
+        var scaleXY = ''; //当前页的缩放比
         var page = 0; //当前标注第几张图片 0 表示第一张图片
         var index = 0; //当前页面标注序号  0 表示第一个标记
         var pageData = []; //每一页的数据
         var totalPageData = []; //所有页的数据
+        var first = true; //是否首次进入
         // var data= [
         //     [{
         //             "left": 100,
@@ -263,27 +265,37 @@
             this.scale = scale;
         };
 
+        /**
+         * 根据下表获取当前页面的url
+         * @param  {[type]} index [description]
+         * @return {[type]}       [description]
+         */
+        function getCurrentPageUrlByIndex(_index) {
+            var url = "";
+            var temp = $(".markLink").eq((_index));
+            return $(temp).val();
+
+        }
 
         /**
          * 显示当前页的标注数据
          * @return {[type]} [description]
          */
         function showData() {
-
             console.log(canvas._objects);
             for (var i = 0; i < canvas._objects.length; i++) {
-
                 var left = canvas._objects[i].left;
                 var top = canvas._objects[i].top;
                 var width = canvas._objects[i].width;
                 var height = canvas._objects[i].height;
-                var url = "";
+                var url = getCurrentPageUrlByIndex(i);
 
-                var remark = (page + 1) + "   " + (index + 1);
-                var id = page + "-" + i;
-                var scaleXY = scaleXY;
+                var remark ="" ;
+                var id = (page - 1) + "-" + i;
+                console.log(">>>>>>>>>>>>>.." + (page - 1));
+                var _scaleXY = scaleXY;
 
-                var dataMarkObj = new dataMark(left, top, width, height, url, remark, id, scaleXY);
+                var dataMarkObj = new dataMark(left, top, width, height, url, remark, id, _scaleXY);
 
                 pageData[i] = dataMarkObj;
             }
@@ -294,8 +306,9 @@
 
 
         function saveData() {
+            showData();
             var fs = require("fs");
-            var flag = fs.writeFileSync("C:\\Users\\test\\Desktop\\nwjs-v0.14.3-win-ia32\\src\\data.json", JSON.stringify(totalPageData));
+            var flag = fs.writeFileSync("E:\\DeskApp\\nwjs-sdk-v0.14.5-win-x64\\src\\data.json", JSON.stringify(totalPageData));
         }
 
         /**
@@ -330,10 +343,10 @@
             for (var i = 0; i < listImg.length; i++) {
                 var lastIndexs = listImg[i].lastIndexOf("\\");
                 var fileName = listImg[i].substring(lastIndexs + 1, listImg[i].length);
-                html += "<li class='nav-item' id='file-" + i + "' onclick=\"showImg('" + listImg[i].replace(/[\\]/g, "||") + "',this)\">" + fileName + "<span style='color:green;float:right;'>✔</span></li>";
+                html += "<li class='nav-item' id='file-" + i + "' onclick=\"showImg('" + listImg[i].replace(/[\\]/g, "||") + "',this," + i + ")\">" + fileName + "<span style='color:green;float:right;'>✔</span></li>";
             }
             $("#nav-items").html(html);
-            showImg(listImg[0].replace(/[\\]/g, "||"), $(".nav-item")[0]);
+            showImg(listImg[0].replace(/[\\]/g, "||"), $(".nav-item")[0], 0);
         }
 
         // $("#selectDirectory").hide();
@@ -342,7 +355,6 @@
 
         // 标注界面初始化方法
         function init() {
-
             canvas = null;
             $("canvas").remove(); //移除canvas
             $(".markLink").remove(); //移除标注连接
@@ -362,17 +374,19 @@
          * @param  {[type]} imgSrc [description]
          * @return {[type]}        [description]
          */
-        function showImg(imgSrc, dom) {
+        function showImg(imgSrc, dom, _page) {
+            page = _page;
+            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + page + "                 >>>>>" + _page);
             $(".nav-item").attr("style", "background-color:#EEEEEE");
             $(dom).attr("style", "background-color:pink");
-            if (page == 0) {
+            if (page == 0 && first == true) {
                 console.log("第一次进入");
+                first = false;
             } else {
                 //获取第一个页面的标注数据
                 showData();
             }
             init();
-            page++; //当前标注的图片序号加1
             var actionImg = document.createElement("img");
             actionImg.height = "720";
             actionImg.id = "actionImg";
@@ -394,7 +408,7 @@
                 console.log($("#actionImg").width() + "        " + $("#actionImg").height());
                 console.log($("#sourceImg").width() + "        " + $("#sourceImg").height());
                 console.log(scaleX + "          " + scaleY);
-
+                scaleXY=$("#actionImg").width()/$("#sourceImg").width()+","+$("#actionImg").height()/$("#sourceImg").height();
                 $("#sourceSize").html($("#sourceImg").width() + "  × " + $("#sourceImg").height());
                 $("#actionSize").html($("#actionImg").width() + "  × " + $("#actionImg").height());
                 $("#scaleXY").html(scaleX);
@@ -484,6 +498,7 @@
                 var fs = require("fs");
                 var fileData = fs.readFileSync($(this).val()).toString();
                 var urlList = fileData.split("\n");
+                console.log(urlList)
                 genUrlList(urlList);
             });
             chooser.trigger('click');
@@ -517,6 +532,11 @@
          */
         function setCurrentPageDate() {
 
+        }
+
+
+        function debug() {
+            require('nw.gui').Window.get().showDevTools();
         }
 
         //1.选择图片时首先清楚图片上的所有的标记
