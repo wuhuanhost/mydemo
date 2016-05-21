@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>markdown实时预览测试</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <style>
+    #container {
+        width: 100%;
+        height: 100%;
+        font-size: '微软雅黑';
+    }
+    /**/
+    
+    #header {
+        width: 100%;
+        height: 40px;
+        background-color: #EEEEEE;
+        border-bottom: 1px solid #999999;
+    }
+    /**/
+    
+    #footer {
+        /*width: 100%;*/
+        height: 40px;
+        background-color: #EEEEEE;
+        border-bottom: 1px solid #999999;
+    }
+    /**/
+    
+    #content {
+        /*width: 100%;*/
+        height: 600px;
+        background-color: #FFFFFF;
+        border-bottom: 1px solid #999999;
+    }
+    
+    #content-edit-markdown {
+        border-right: 1px solid #999999;
+        float: left;
+        line-height: 24px;
+        font-size: 14px;
+    }
+    
+    #content-edit-html {
+        background-color: pink;
+        float: left;
+        line-height: 24px;
+        font-size: 16px;
+    }
+    
+    .content-edit-block {
+        width: 50%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: auto;
+        outline: none;
+        padding: 20px;
+    }
+    
+    .clear-float {
+        clear: both;
+    }
+    </style>
+</head>
+<!-- 最外层容器 -->
+<div id="container">
+    <!-- header -->
+    <div id="header">
+        工具条
+    </div>
+    <!-- content -->
+    <div id="content">
+        <!-- <div id="content-edit-tool"></div> -->
+        <div id="content-edit-markdown" class="content-edit-block" contenteditable="true"></div>
+        <div id="content-edit-html" class="content-edit-block"></div>
+        <div class="clear-float"></div>
+    </div>
+    <!-- footer -->
+    <div id="footer"></div>
+</div>
+
+<body>
+    <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.js"></script>
+    <script>
+    var md = new Remarkable({
+        html: false, // Enable HTML tags in source
+        xhtmlOut: false, // Use '/' to close single tags (<br />)
+        breaks: false, // Convert '\n' in paragraphs into <br>
+        langPrefix: 'language-', // CSS language prefix for fenced blocks
+        linkify: false, // Autoconvert URL-like text to links
+
+        // Enable some language-neutral replacement + quotes beautification
+        typographer: false,
+
+        // Double + single quotes replacement pairs, when typographer enabled,
+        // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
+        quotes: '“”‘’',
+
+        // Highlighter function. Should return escaped HTML,
+        // or '' if the source string is not changed
+        highlight: function( /*str, lang*/ ) {
+            return '';
+        }
+    });
+
+    var dataLine = [];
+    (function() {
+        var timer = setInterval(function() {
+            var content_edit_markdown = $("#content-edit-markdown").html();
+            dataLine = content_edit_markdown.split("<div>");
+            drawHtml(dataLine);
+        }, 1000);
+    })();
+
+    function drawHtml(data) {
+        console.log(dataLine)
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+            var temp = data[i].replace("</div>", "").replace("<br>", "");
+            html += md.render(temp);
+        }
+        $("#content-edit-html").html(html);
+    }
+
+
+    window.onresize = function() {
+        resize();
+
+    }
+
+    function resize() {
+        var height = $(window).height();
+        $("#content").height(height - 83);
+    }
+    resize();
+    </script>
+</body>
+
+</html>
