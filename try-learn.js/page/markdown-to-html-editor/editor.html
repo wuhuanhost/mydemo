@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 参考demo 
+	1.http://jonschlinkert.github.io/remarkable/demo/ 
+	2.http://cxcgzx.cn:88/test/mathtest.php
+-->
 <head>
     <meta charset="UTF-8">
     <title>markdown实时预览测试</title>
@@ -44,7 +47,6 @@
     }
     
     #content-edit-html {
-        background-color: pink;
         float: left;
         line-height: 24px;
         font-size: 16px;
@@ -62,13 +64,20 @@
     .clear-float {
         clear: both;
     }
+
+    /*markdown样式*/
+    blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
     </style>
 </head>
 <!-- 最外层容器 -->
 <div id="container">
     <!-- header -->
     <div id="header">
-        工具条
+        <span onclick="debug()">测试按钮</span>
     </div>
     <!-- content -->
     <div id="content">
@@ -107,6 +116,7 @@
     });
 
     var dataLine = [];
+
     (function() {
         var timer = setInterval(function() {
             var content_edit_markdown = $("#content-edit-markdown").html();
@@ -116,10 +126,11 @@
     })();
 
     function drawHtml(data) {
-        console.log(dataLine)
+
         var html = "";
         for (var i = 0; i < data.length; i++) {
-            var temp = data[i].replace("</div>", "").replace("<br>", "");
+            console.log(data[i]);
+            var temp = data[i].replace("</div>", "").replace("<br>", "").replace(/&gt;/gi,">");
             html += md.render(temp);
         }
         $("#content-edit-html").html(html);
@@ -136,6 +147,18 @@
         $("#content").height(height - 83);
     }
     resize();
+
+    /**
+     * 测试方法
+     * @return {[type]} [description]
+     */
+    function debug() {
+        var content_edit_markdown = $("#content-edit-markdown").text();
+        console.log(content_edit_markdown);
+        dataLine = content_edit_markdown.split("<div>");
+        drawHtml(dataLine);
+
+    }
     </script>
 </body>
 
