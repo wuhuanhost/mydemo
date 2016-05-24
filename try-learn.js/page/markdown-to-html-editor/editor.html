@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- 参考demo 
-	1.http://jonschlinkert.github.io/remarkable/demo/ 
-	2.http://cxcgzx.cn:88/test/mathtest.php
--->
+<!-- 参考demo http://jonschlinkert.github.io/remarkable/demo/ -->
+
 <head>
     <meta charset="UTF-8">
     <title>markdown实时预览测试</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
     <style>
-    #container {
+        #container {
         width: 100%;
         height: 100%;
         font-size: '微软雅黑';
@@ -44,12 +45,14 @@
         float: left;
         line-height: 24px;
         font-size: 14px;
+        word-wrap: break-word;
+        word-break:break-all;
     }
     
-    #content-edit-html {
+    #content-edit-preview {
         float: left;
-        line-height: 24px;
-        font-size: 16px;
+        /*        line-height: 24px;
+        font-size: 16px;*/
     }
     
     .content-edit-block {
@@ -64,35 +67,36 @@
     .clear-float {
         clear: both;
     }
-
     /*markdown样式*/
+    
     blockquote {
-    padding: 10px 20px;
-    margin: 0 0 20px;
-    font-size: 17.5px;
-    border-left: 5px solid #eee;
+        padding: 10px 20px;
+        margin: 0 0 20px;
+        font-size: 17.5px;
+        border-left: 5px solid #eee;
     </style>
 </head>
-<!-- 最外层容器 -->
-<div id="container">
-    <!-- header -->
-    <div id="header">
-        <span onclick="debug()">测试按钮</span>
-    </div>
-    <!-- content -->
-    <div id="content">
-        <!-- <div id="content-edit-tool"></div> -->
-        <div id="content-edit-markdown" class="content-edit-block" contenteditable="true"></div>
-        <div id="content-edit-html" class="content-edit-block"></div>
-        <div class="clear-float"></div>
-    </div>
-    <!-- footer -->
-    <div id="footer"></div>
-</div>
 
 <body>
+    <!-- 最外层容器 -->
+    <div id="container">
+        <!-- header -->
+        <div id="header">
+            <span onclick="debug()">测试按钮</span>
+        </div>
+        <!-- content -->
+        <div id="content">
+            <!-- <div id="content-edit-tool"></div> -->
+            <div id="content-edit-markdown" class="content-edit-block" contenteditable="true" spellcheck="true"></div>
+            <div id="content-edit-preview" class="content-edit-block markdown-body"></div>
+            <div class="clear-float"></div>
+        </div>
+        <!-- footer -->
+        <div id="footer"></div>
+    </div>
     <script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script>
     var md = new Remarkable({
         html: false, // Enable HTML tags in source
@@ -115,25 +119,42 @@
         }
     });
 
-    var dataLine = [];
 
     (function() {
         var timer = setInterval(function() {
+            var dataLine = [];
             var content_edit_markdown = $("#content-edit-markdown").html();
-            dataLine = content_edit_markdown.split("<div>");
-            drawHtml(dataLine);
+            //不包含第一行的所有行
+            var everyLine = content_edit_markdown.match(/<div>.*?<\/div>/gi);
+            if (everyLine == null) {
+                everyLine = [];
+            }
+            //第一行
+            dataLine[0] = content_edit_markdown.replace(/<div>.*<\/div>/gi, "");
+            for (var i = 0; i < everyLine.length; i++) {
+                dataLine[i + 1] = everyLine[i].replace(/<.*?>/gi, "");
+            }
+            console.log(dataLine);
+            previewHtml(dataLine);
         }, 1000);
     })();
 
-    function drawHtml(data) {
+    function previewHtml(data) {
 
         var html = "";
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-            var temp = data[i].replace("</div>", "").replace("<br>", "").replace(/&gt;/gi,">");
-            html += md.render(temp);
+            if (data[i].match(/\$\$.*?\$\$/gi)) {
+                html += data[i].replace(/\$\$.*?\$\$/gi, function(str) {
+                    str = str.replace(/\$\$/gi, "");
+                    return katex.renderToString(str);
+                });
+                html += "<br>";
+            } else {
+                html += md.render(data[i].replace("&gt;", ">"));
+                html += "<br>";
+            }
         }
-        $("#content-edit-html").html(html);
+        $("#content-edit-preview").html(html);
     }
 
 
@@ -159,6 +180,13 @@
         drawHtml(dataLine);
 
     }
+
+    // var element = document.getElementById("content-edit-preview")
+    // katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, {
+    //     displayMode: true
+    // });
+    // 
+    // var html=katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
     </script>
 </body>
 
