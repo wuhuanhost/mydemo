@@ -1,0 +1,18 @@
+{
+  "name": "textflow",
+  "description": "文本流，长文本分页显示",
+  "main": "index.html",
+  "authors": [
+    "will"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
