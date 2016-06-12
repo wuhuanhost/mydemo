@@ -14,5 +14,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "jquery": "1.12"
+  }
 }
