@@ -5,13 +5,14 @@ html,body{
 
 #textflow{
 	width:600px;
-	height:600px;
+	height:auto;
 	border:1px solid red;
 	margin:100px auto;
-	overflow: auto;
+
 }
 
 #textflow p{
 	text-align:justify;
 	padding: 0 20px 0 20px; 
+
 }
