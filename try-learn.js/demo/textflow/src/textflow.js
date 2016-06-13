@@ -68,6 +68,7 @@ var textflow = (function() {
 
     //测试方法
     tf.draw = function(data) {
+        this.tfc.html("");
         var pageList = [];
         for (var i = 0; i < data.length; i++) {
             var span = document.createElement("span");
@@ -77,14 +78,13 @@ var textflow = (function() {
             for (var j = 0; j < data[i].length; j++) {
                 var p = document.createElement("p");
                 p.setAttribute("id", "p-" + i + "-" + j);
-                if (j === 0&&data[i][j]!="") {
+                if (j === 0 && data[i][j] != "") {
                     p.innerHTML = "&nbsp;&nbsp;" + data[i][j];
                 } else {
                     p.innerHTML = data[i][j];
                 }
                 //分页的开始，一旦存放文本的div的高度超过设定的值的时候，说明这一页的内容放满了。
                 if (this.tfc.height() < 600) {
-                    console.log(data[i][j])
                     $("#block-" + i).append(p);
                     lineArr.push(data[i][j]);
                 } else {
@@ -99,13 +99,16 @@ var textflow = (function() {
         }
 
     };
-    tf.process = function(i,j) {
-   // while (tf.textFlowData.length > 0) {
-   //      		console.log(tf.textFlowData.length+"???????????????????????????????????")
-            tf.textFlowData = delArrByIndex(tf.textFlowData, i, j)
-            tf.draw(tf.textFlowData);
+    tf.process = function(i, j) {
+        // while (tf.textFlowData.length > 0) {
+        //      		console.log(tf.textFlowData.length+"???????????????????????????????????")
+        tf.textFlowData = delArrByIndex(tf.textFlowData, i, j)
+        tf.draw(tf.textFlowData);
         // }
-     
+        console.log("还未分析的数据===================" + tf.textFlowData.length);
+        console.log(tf.textFlowData);
+        console.log("分析完成的数据===================" + tf.pageList.length);
+        console.log(tf.pageList);
     }
 
 
@@ -208,7 +211,7 @@ function delArrByIndex(arr, oda_index, tda_index) {
         if (i == oda_index) {
             var obj = [];
             for (j = tda_index; j < arr[i].length; j++) {
-            	obj.push([])
+                obj.push([])
                 obj.push(arr[i][j]);
             }
             data.push(obj);
