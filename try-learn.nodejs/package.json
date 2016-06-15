@@ -1,0 +1,16 @@
+{
+  "name": "try-learn.nodejs",
+  "version": "1.0.0",
+  "description": "Node.Js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "will",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "cheerio": "^0.20.0",
+    "request": "^2.72.0"
+  }
+}
