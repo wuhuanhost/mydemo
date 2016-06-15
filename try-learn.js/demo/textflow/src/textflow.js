@@ -10,11 +10,13 @@ var textflow = (function() {
     //容器高度
     tf.conHeight = 600;
     //每一行的字数
-    tf.lineWordSize = 35;
+    tf.lineWordSize ={
+    	p:35,
+    	h1:15,
+    	h2:20
+    };
     //textflowdata对象
     tf.textFlowData = [];
-    //分页标志
-    tf.pagingFlag = [];
     //分析完成的页面数据，可以直接用于渲染
     tf.pageLists = [];
     //正则表达式对象
@@ -88,13 +90,13 @@ var textflow = (function() {
             for (var j = 0; j < this.everyBlock[i].length; j++) {
                 var temp = "";
                 var start = sliceIndex;
-                var end = sliceIndex + tf.lineWordSize;
+                var end = sliceIndex + tf.lineWordSize.p;
                 if (j === 0) { //如果是第一行，首字缩进2个中文字符的宽度
-                    temp = getSliceStr(this.everyBlock[i], true, start, end - 2, tf.lineWordSize);
-                    sliceIndex = sliceIndex + tf.lineWordSize - 2;
+                    temp = getSliceStr(this.everyBlock[i], true, start, end - 2, tf.lineWordSize.p);
+                    sliceIndex = sliceIndex + tf.lineWordSize.p - 2;
                 } else {
-                    temp = getSliceStr(this.everyBlock[i], false, start, end, tf.lineWordSize);
-                    sliceIndex = sliceIndex + tf.lineWordSize;
+                    temp = getSliceStr(this.everyBlock[i], false, start, end, tf.lineWordSize.p);
+                    sliceIndex = sliceIndex + tf.lineWordSize.p;
                 }
                 if (temp !== "") {
                     everyLine.push(temp);
@@ -187,6 +189,8 @@ function getSliceStr(dataStr, isFirstLine, start, end, arrSize) {
     }
     return rstr;
 }
+
+
 
 /**
  * 数组转换为字符串
