@@ -116,52 +116,54 @@ var Book = (function() {
         var flowText = ""; //溢出的文本字符串
         for (var i = 0; i < data.length; i++) {
             var flag = this.txtParseRule.h1.rege.test(data[i]) || this.txtParseRule.h2.rege.test(data[i]) || this.txtParseRule.text.rege.test(data[i]);
-            //#h1 开头
-            if (this.txtParseRule.h1.rege.test(data[i]) && currentFlowText == "") {
-                currentTxtType = "h1";
-                currentClass = this.txtParseRule.h1.class;
-                currentRege = this.txtParseRule.h1.rege;
-                //1、向容器中添加一个H1标签
-                //2、判断容器的的高度是否超过了设置的最大高度
-                h = this.getElement("h1", this.txtParseRule.h1.class, data[i], this.txtParseRule.h1.rege, this.param.containerId, i);
-                this.checkHeight(h, data[i]);
-                //#h2 开头
-            } else if (this.txtParseRule.h2.rege.test(data[i]) && currentFlowText == "") {
-                currentTxtType = "h2";
-                currentClass = this.txtParseRule.h2.class;
-                currentRege = this.txtParseRule.h2.rege;
-                h = this.getElement("h2", this.txtParseRule.h2.class, data[i], this.txtParseRule.h2.rege, this.param.containerId, i);
-                this.checkHeight(h, data[i]);
-                //#text 开头
-            } else if (this.txtParseRule.text.rege.test(data[i]) && currentFlowText == "") {
-                currentTxtType = "p";
-                currentClass = this.txtParseRule.text.class;
-                currentRege = this.txtParseRule.text.rege;
-                h = this.getElement("p", this.txtParseRule.text.class, data[i], this.txtParseRule.text.rege, this.param.containerId, i);
-                this.checkHeight(h, data[i]);
-            }
-            //不以# 开头的字符串
-            if (!flag && currentFlowText == "") {
-                h = this.getElement(currentTxtType, currentClass, data[i], currentRege, this.param.containerId, i);
-                var b = this.checkHeight(h, data[i]);
-                if (b) {
-                    currentFlowText = data[i];
-                }
-            }
             //currentFlowText不为空
             if (currentFlowText != "") {
-
                 var index = 1;
-                for (index; index < currentFlowText.length; i++) {
+                for (index; index < currentFlowText.length; index++) {
                     var obj = delStr(currentFlowText, index);
                     console.log(obj)
-                    // h = this.getElement(currentTxtType, currentClass, obj.leftStr, currentRege, this.param.containerId, i);
-                    // this.checkHeight(h, obj.leftStr);
-
+                    h = this.getElement(currentTxtType, currentClass, obj.leftStr, currentRege, this.param.containerId, i);
+                    if(this.checkHeight(h, obj.leftStr,i)){
+                        continue;
+                    };
+                }
+                console.log(currentFlowText)
+            } else {
+                //#h1 开头
+                if (this.txtParseRule.h1.rege.test(data[i]) && currentFlowText == "") {
+                    currentTxtType = "h1";
+                    currentClass = this.txtParseRule.h1.class;
+                    currentRege = this.txtParseRule.h1.rege;
+                    //1、向容器中添加一个H1标签
+                    //2、判断容器的的高度是否超过了设置的最大高度
+                    h = this.getElement("h1", this.txtParseRule.h1.class, data[i], this.txtParseRule.h1.rege, this.param.containerId, i);
+                    this.checkHeight(h, data[i],i);
+                    //#h2 开头
+                } else if (this.txtParseRule.h2.rege.test(data[i]) && currentFlowText == "") {
+                    currentTxtType = "h2";
+                    currentClass = this.txtParseRule.h2.class;
+                    currentRege = this.txtParseRule.h2.rege;
+                    h = this.getElement("h2", this.txtParseRule.h2.class, data[i], this.txtParseRule.h2.rege, this.param.containerId, i);
+                    this.checkHeight(h, data[i],i);
+                    //#text 开头
+                } else if (this.txtParseRule.text.rege.test(data[i]) && currentFlowText == "") {
+                    currentTxtType = "p";
+                    currentClass = this.txtParseRule.text.class;
+                    currentRege = this.txtParseRule.text.rege;
+                    h = this.getElement("p", this.txtParseRule.text.class, data[i], this.txtParseRule.text.rege, this.param.containerId, i);
+                    this.checkHeight(h, data[i],i);
+                }
+                //不以# 开头的字符串
+                if (!flag && currentFlowText == "") {
+                    h = this.getElement(currentTxtType, currentClass, data[i], currentRege, this.param.containerId, i);
+                    var b = this.checkHeight(h, data[i],i);
+                    if (b) {
+                        currentFlowText = data[i];
+                    }
                 }
             }
         }
-
+        console.log(this.pagingArr)
     };
 
     /**
@@ -169,13 +171,14 @@ var Book = (function() {
      * @param  {[type]} h [description]
      * @return {[type]}   [description]
      */
-    book.prototype.checkHeight = function(h, data) {
+    book.prototype.checkHeight = function(h, data,i) {
         var flag = false; //是否超出
         //高度小于设置的高度
         if (h < this.param.height) {
             //数据添加到分页数组中
             this.pagingArr.push(data);
         } else {
+            $("#"+i).remove();
             flag = true;
         }
         return flag;
@@ -195,6 +198,7 @@ var Book = (function() {
         var height = 0;
         var element = document.createElement(elementType);
         element.setAttribute("class", elementClass);
+        element.setAttribute("id",index);
         element.innerHTML = elementText.replace(rege, "");
         $("#" + containerId).append(element);
         height = $("#" + containerId).height();
