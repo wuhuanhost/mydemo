@@ -1,20 +1,31 @@
 /**
- * 像素转毫米
- * @return {[type]} [description]
- */
-function px2mm(px) {
-    return px / 25.4;
+*从字符串的末尾每次删除一个字符
+**/
+function delStr(str,sum){
+	var arr=_.toArray(str);
+	var delArrByRight=_.dropRight(arr,sum);
+	var rightStr=_.slice(arr,(arr.length-sum),arr.length);
+	var param={
+		"str":str,
+		"leftStr":_.toString(delArrByRight).replace(/,/g,""),
+		"rightRight":_.toString(rightStr).replace(/,/g,""),
+		"sum":sum
+	}
+	return param;
 
 }
 
 
-/**
- * 毫米转像素
- * @param  {[type]} mm [description]
- * @return {[type]}    [description]
- */
-function mm2px(mm) {
 
-    return 25.4 * mm;
+function del(str){
+	var b=true;
+	var index=1;
+
+		delStr("123456",index);
+		index++;
+
+	
 
 }
+
+del("123456");

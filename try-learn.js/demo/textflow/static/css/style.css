@@ -1,31 +1,31 @@
-html,body{
-	padding:0;
-	margin:0;
+html,
+body {
+    padding: 0;
+    margin: 0;
 }
 
-#textflow{
-	width:600px;
-	height:auto;
-	border:1px solid red;
-	margin:100px auto;
-    display:none;
+#textflow {
+    width: 600px;
+    height: auto;
+    border: 1px solid red;
+    margin: 100px auto;
+    display: none;
 }
 
-#textflow p{
-	text-align:justify;
-	padding: 0 20px 0 20px; 
+#textflow p {
+    text-align: justify;
+    padding: 0 20px 0 20px;
 }
 
-
-div{
-	display:block;
-	width:600px;
-	height:600px;
-	border:1px solid red;
-	margin:100px auto;
+div {
+    display: block;
+    width: 600px;
+    height: 600px;
+    border: 1px solid red;
+    margin: 100px auto;
 }
 
-div p{
-		text-align:justify;
-	padding: 0 20px 0 20px; 
+div p {
+    text-align: justify;
+    padding: 0 20px 0 20px;
 }
