@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>javascript实现依赖注入</title>
+</head>
+
+<body>
+<p>javascript实现依赖注入</p>
+    <script type="text/javascript">
+    var
+    // 假设已定义好某些Service
+        services = {
+            abc: 123,
+            def: 456,
+            ghi: 789
+        },
+
+        // 获取func的参数列表(依赖列表)
+        getFuncParams = function(func) {
+            var matches = func.toString().match(/^function\s*[^\(]*\(\s*([^\)]*)\)/m);
+            if (matches && matches.length > 1)
+                return matches[1].replace(/\s+/, '').split(',');
+            return [];
+        },
+
+        // 根据参数列表(依赖列表)填充参数(依赖项)
+        setFuncParams = function(params) {
+            for (var i in params) {
+                params[i] = services[params[i]];
+            }
+            return params;
+        };
+
+    // 激活器
+    function Activitor(func) {
+        var obj = {};
+        func.apply(obj, setFuncParams(getFuncParams(func)));
+
+        return obj;
+    }
+
+    // 定义新Service
+    function Service(abc, ghi) {
+        this.write = function() {
+            console.log(abc);
+            console.log(ghi);
+        }
+    }
+
+    // 实例化Service并调用方法
+    var service = Activitor(Service);
+    console.log(service);
+    service.write();
+
+    console.log("===========================分割线===============================");
+    var service = function() {
+        return {
+            name: 'Service'
+        };
+    };
+    var router = function() {
+        return {
+            name: 'Router'
+        }
+    };
+    var injector = {
+        dependencies: {},
+        register: function(key, value) {
+            this.dependencies[key] = value;
+        },
+        resolve: function(deps, func, scope) {
+            var args = [];
+            scope = scope || {};
+
+            for (var i = 0; i < deps.length, d = deps[i]; i++) {
+            	console.log(this)
+                if (this.dependencies[d]) {
+                    scope[d] = this.dependencies[d];
+                } else {
+                    throw new Error('Can\'t resolve ');
+                }
+            }
+            return function() {
+                func.apply(scope || {}, Array.prototype.slice.call(arguments, 0));
+            }
+        }
+    }
+
+	injector.register('service', service);
+    injector.register('router', router);
+
+    var doSomething = injector.resolve(['service', 'router'], function(other) {
+        console.log(this.service().name);
+        console.log(this.router().name);
+        console.log(other);
+    });
+    doSomething("Other");
+    </script>
+</body>
+
+</html>
