@@ -166,6 +166,8 @@ var Book = (function() {
         console.log(this.pagingArr)
     };
 
+
+
     /**
      * 每添加一个元素后检查高度是否超过了设定的值
      * @param  {[type]} h [description]

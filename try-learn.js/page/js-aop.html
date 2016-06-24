@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript中实现aop</title>
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+/**
+ * 方法一
+ * @type {[type]}
+ */
+aop = window.aop || {};
+
+aop = {
+    doBefore: function(ins, methodName, callback) {
+        if (typeof ins[methodName] != "undefined") {
+            var method = ins[methodName];      //获取源对象的obj.run()方法
+        }
+        ins[methodName] = function() {         //重写obj.run()方法提升到全局,覆盖原obj.run()方法
+            callback.apply(ins, arguments);
+            return method.apply(ins, arguments);
+        }
+    },
+    doAfter: function(ins, methodName, callback) {
+        if (typeof ins[methodName] != "undefined") {
+            var method = ins[methodName];
+        }
+        ins[methodName] = function() {
+            var ret = method.apply(ins, arguments),
+                callret = callback.apply(ins, arguments);
+            return typeof callret == "undefined" ? ret : callret;
+        }
+    }
+}
+
+
+var obj = {
+    run: function(a, b, c) {
+        console.log("run");
+    },
+    init: function(name) {
+        console.log("arguments : " + name);
+        return "info";
+    }
+};
+
+
+aop.doBefore(obj, "run", function() {
+    console.log("run before");
+});
+aop.doAfter(obj, "run", function() {
+    console.log("run after");
+});
+console.log("<!-----json对象--------->");
+obj.run();
+obj.init("test");
+
+/**
+ * 方法二
+ * @param  {[type]} window [description]
+ * @return {[type]}        [description]
+ */
+(function(window) {
+    window.AOP = {
+        before: function(ns, fnName, beforefn) {
+            var ori = ns[fnName];
+            ns[fnName] = function() {
+                beforefn();
+                ori();
+            }
+
+        }
+    };
+})(this);
+// 使用
+var ns = {
+    foo: function() {
+        console.log('foo...');
+    }
+};
+var bar = function() {
+    console.log('bar...');
+};
+
+// // 现在使用AOP在ns.foo函数执行前，切入新逻辑bar()
+// AOP.before(ns, 'foo', bar);
+// // 执行ns.foo
+
+// ns.foo();
+// 
+// 
+// 
+// 
+
+
+var abcdef = {
+    tests: function() {
+        var abc = "测试函数执行";
+        fun = function() {
+            alert(abc);
+        }
+    }
+};
+abcdef.tests();
+fun();
+
+</script>
+
+</html>
