@@ -15,7 +15,10 @@ var jsLazySingletondsdf =(function(){
     return {
         getInstance :function(){
             //如果instance存在则返回，不存在则调用init()
-            return instance || instance = init();
+            if(!instance){
+            	instance=init();
+            }
+            return instance;
         }
     }
 
