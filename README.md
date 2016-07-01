@@ -22,7 +22,7 @@
 
 ##sublime text3配置文件
 
-```
+```json
 	{
 		"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 		"font_face": "Monaco",
