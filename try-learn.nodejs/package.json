@@ -11,6 +11,8 @@
   "dependencies": {
     "bluebird": "^3.4.0",
     "cheerio": "^0.20.0",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "mammoth": "^1.0.4",
+    "xml2js": "^0.4.16"
   }
 }

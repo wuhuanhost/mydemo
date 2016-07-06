@@ -1,0 +1,7 @@
+{
+	"input": "E:\\渲染引擎\\工具集\\新建文件夹\\BestCloud.exe",
+	"output": "E:\\渲染引擎\\工具集\\新建文件夹\\BestCloud_boxed.exe",
+	"resource": "E:\\渲染引擎\\工具集\\新建文件夹",
+	"conf_url": "E:\\渲染引擎\\工具集\\打包配置文件生成\\conf.xml",
+	"enigma":"D:\\Program Files (x86)\\Enigma Virtual Box\\"
+}
