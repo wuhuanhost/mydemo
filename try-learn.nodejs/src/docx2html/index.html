@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>docx转html工具</title>
+    <style>
+    body {
+        overflow: auto;
+    }
+    
+    html,
+    body,
+    input,
+    button {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: 0;
+    }
+    
+    header {
+        position: fixed;
+        display: block;
+        height: 130px;
+        width: 960px;
+        background-color: #EEEEEE;
+        top: 0px;
+    }
+    
+    .input-output-item {
+        height: 30px;
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 20px;
+        line-height: 30px;
+    }
+    
+    .input-output-item div {
+        height: inherit;
+        width: 436px;
+        display: inline-block;
+        float: left;
+        border: 1px solid #999999;
+    }
+    
+    .input-output-item div input {
+        height: inherit;
+        width: 436px;
+        display: block;
+        font-size: 16px;
+        text-indent: 1em;
+        font-style: italic;
+        font-family: "微软雅黑"
+    }
+    
+    .input-output-item span {
+        display: inline-block;
+        float: right;
+        width: 120px;
+        height: inherit;
+        line-height: inherit;
+        border: 1px solid #999999;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    #active-output:after {
+        clear: both;
+    }
+    
+    #container {
+        position: relative;
+        top: 130px;
+        width: 960px;
+        height: 360px;
+        background-color: #EEEEEE;
+        display: flex;
+        border-top: 1px solid #333333;
+    }
+    
+    #input-left {
+        float: left;
+        width: 50%;
+        height: inherit;
+        overflow: auto;
+        margin-left: 20px;
+    }
+    
+    #output-right {
+        height: inherit;
+        float: right;
+        width: 50%;
+        overflow: auto;
+        margin-left: 20px;
+    }
+    
+    #container:after {
+        clear: both;
+    }
+    
+    footer {
+        border-top: 1px solid #333333;
+        width: 960px;
+        height: 130px;
+        background-color: #EEEEEE;
+        position: relative;
+        top: 126px;
+    }
+    
+    footer #active {
+        position: absolute;
+        display: block;
+        width: 100px;
+        height: 40px;
+        background-color: #EEEEEE;
+        border: 1px solid #999999;
+        border-radius: 5px;
+        right: 100px;
+        top: 30px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="input" class="input-output-item">
+            <div>
+                <input type="text" id="inputDir" placeholder="选择docx所在目录" />
+            </div><span id="active-input">浏览目录</span>
+        </div>
+        <div id="output" class="input-output-item">
+            <div>
+                <input type="text" id="outputDir" placeholder="选择输出目录" />
+            </div><span id="active-output">输出目录</span>
+        </div>
+    </header>
+    <div id="container">
+        <div id="input-left">
+        </div>
+        <div id="output-right">
+        </div>
+    </div>
+    <footer>
+        <button id="active">开始转换</button>
+    </footer>
+    <script>
+    var outputDir = "";
+    const ipcRenderer = require('electron').ipcRenderer;
+    var inputDir = "";
+    var mammoth = require("mammoth");
+    var fs = require('fs');
+    var exec = require('child_process').exec;
+
+    /**
+     * 浏览docx目录
+     * @param  {[type]} ){} [description]
+     * @return {[type]}       [description]
+     */
+    $("#active-input").addEventListener("click", function() {
+
+        inputDir = ipcRenderer.sendSync('synchronous-message', 'open-directory');
+        console.log(inputDir); // prints "pong"
+        $("#inputDir").value = inputDir[0];
+
+    });
+    /**
+     * 浏览输出目录
+     * @param  {[type]} ){} [description]
+     * @return {[type]}       [description]
+     */
+    $("#active-output").addEventListener("click", function() {
+
+        outputDir = ipcRenderer.sendSync('synchronous-message', 'open-directory');
+        console.log(outputDir); // prints "pong"
+        $("#outputDir").value = outputDir[0];
+    });
+
+    var fileCount = 0;
+    /**
+     * 转换
+     * @param  {[type]} ){} [description]
+     * @return {[type]}       [description]
+     */
+    $("#active").addEventListener("click", function() {
+        $("#active").innerText = "正在转换";
+        $("#active").style = "color:red;border:1px solid red;";
+        //发送同步消息
+        if (!inputDir || !outputDir) {
+            alert("选择输出目录和输入目录");
+        } else {
+            var inputPath = inputDir[0];
+            var outputPath = outputDir[0];
+            clearOutput(outputPath);
+
+            var list = fs.readdirSync(inputPath);
+
+            //统计文件夹下的文件个数
+            list.forEach(function(item, index) {
+                var _input = inputPath + "\\" + item;
+                if (fs.statSync(_input).isFile()) {
+                    fileCount++;
+                }
+            });
+            $("#output-right").innerHTML = "";
+            $("#input-left").innerHTML = "";
+            list.forEach(function(item, index) {
+                var _input = inputPath + "\\" + item;
+
+                $("#input-left").appendChild(createElement("p", _input));
+                var _output = outputPath + "\\" + item.replace(".docx", ".html")
+                if (fs.statSync(_input).isFile()) {
+                    convertToHtml(_input, _output, outputPath, item);
+                }
+            });
+        }
+    });
+
+
+    function createElement(type, content) {
+        var element = document.createElement(type);
+        element.innerHTML = content;
+        return element;
+
+    }
+
+    /**
+     * 获取dom
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    function $(id) {
+        return document.querySelector(id);;
+    }
+
+
+
+
+
+
+    var options = {
+        convertImage: mammoth.images.imgElement(function(image) {
+            return image.read("base64").then(function(imageBuffer) {
+                return {
+                    src: "data:" + image.contentType + ";base64," + imageBuffer
+                };
+            });
+        })
+    }
+
+    function convertToHtml(input, output, outputPath, fileName) {
+        mammoth.convertToHtml({
+                path: input
+            }, options)
+            .then(function(result) {
+
+                var html = result.value; // The generated HTML 
+
+                var documentStr = "<!DOCTYPE html><html lang='zh_CN'><head><meta charset='UTF-8'><title>Document</title><style>table,table td,table th{border:1px solid;border-collapse: collapse;}</style></head><body>";
+
+                documentStr += html;
+
+                documentStr += "</body></html>";
+                var imgBaseSrc = outputPath + "\\" + fileName;
+                fs.mkdirSync(imgBaseSrc);
+                var random = 0;
+                fs.writeFileSync(output, documentStr.replace(/<img.*?\/>/gi, function(reg) {
+                    random++;
+                    var base64Data = new RegExp(/src=\".+?\"/gi).exec(reg);
+                    var base64 = base64Data[0].split(",");
+
+                    base64_decode(base64[1].replace("\"", ""), imgBaseSrc + "\\" + random + ".jpg");
+
+                    var altText = new RegExp(/alt=\".+?\"/gi).exec(reg);
+                    var alt = altText[0].replace("alt=\"", "").split("#")[0];
+
+                    var width = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[0];
+                    var height = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[1];
+
+                    console.log(alt + " " + width + " " + height);
+
+                    return reg.replace(/<img.*?\/>/gi, "<img src='.\\" + fileName + "\\" + random + ".jpg' width='" + emu2px(width) + "px'  height='" + emu2px(height) + "px' alt='" + alt + "'/>");
+                }));
+
+                $("#output-right").appendChild(createElement("p", output));
+                var messages = result.messages; // Any messages, such as warnings during conversion 
+
+            })
+            .done(function() {
+                fileCount--;
+                if (fileCount == 0) {
+                    $("#active").innerText = "开始转换";
+                    $("#active").style = "color:#000000;border:1px solid #999999;";
+                    alert("处理完成");
+                    exec("explorer " + outputDir[0] + "");
+                }
+            });
+    }
+
+    /**
+     * 使用该系统命令清空输出目录
+     * @param  {[type]} dir [description]
+     * @return {[type]}     [description]
+     */
+    function clearOutput(dir) {
+        exec("rm -rf *", {
+            cwd: dir + "\\"
+        }, function(err, stdout, stderr) {
+            if (err) {
+                console.log(stderr);
+            } else {
+                console.log(stdout);
+            }
+        });
+    }
+
+
+
+    /**
+     **base64字符串转为图片
+     **/
+    function base64_decode(base64str, file) {
+
+        var bitmap = new Buffer(base64str, 'base64');
+
+        fs.writeFileSync(file, bitmap);
+    }
+
+
+    /**
+     **EMU单位转像素单位
+     **/
+    function emu2px(num) {
+
+        return Math.round(num / 360000 * 96 / 2.54);
+
+    }
+    </script>
+</body>
+
+</html>

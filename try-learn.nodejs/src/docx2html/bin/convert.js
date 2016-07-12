@@ -27,6 +27,7 @@ function convertToHtml(input,output){
 			
 					return reg.replace(/\\/g,"");
 			}));
+
 			var messages = result.messages; // Any messages, such as warnings during conversion 
 
 		})
@@ -36,7 +37,7 @@ function convertToHtml(input,output){
 var input=process.argv[2];
 var output=process.argv[3];
 var path="";
-if(input!==""||input!==undefined){
+if(input!==""&&input!==undefined){
 	path=input;
 	//读取docx目录
 	var list=fs.readdirSync(path);
@@ -47,6 +48,8 @@ if(input!==""||input!==undefined){
 		    convertToHtml(_input,_output);
 		}
 	});
+}else{
+	console.log("缺少参数");
 }
 
 
