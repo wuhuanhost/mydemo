@@ -201,21 +201,29 @@
             //统计文件夹下的文件个数
             list.forEach(function(item, index) {
                 var _input = inputPath + "\\" + item;
-                if (fs.statSync(_input).isFile()) {
-                    fileCount++;
+                var ignoreFile=!/^~.*?.ht[ml]$/.test(item);
+                if (fs.statSync(_input).isFile()&&ignoreFile) {
+                    fileCount++;						
                 }
             });
             $("#output-right").innerHTML = "";
             $("#input-left").innerHTML = "";
             list.forEach(function(item, index) {
+
                 var _input = inputPath + "\\" + item;
 
-                $("#input-left").appendChild(createElement("p", _input));
+                //排除运行时产生的临时文件，类似【~$k1_1.htm】
+
+				var ignoreFile=!/^~.*?.ht[ml]$/.test(item);
+
                 var _output = outputPath + "\\" + item.replace(".docx", ".html")
-                if (fs.statSync(_input).isFile()) {
-                    convertToHtml(_input, _output, outputPath, item);
+                if (fs.statSync(_input).isFile()&&ignoreFile) {
+					$("#input-left").appendChild(createElement("p", _input));				
+					convertToHtml(_input, _output, outputPath, item);
+				 
                 }
             });
+			
         }
     });
 
@@ -264,40 +272,75 @@
                 documentStr += html;
 
                 documentStr += "</body></html>";
+                
                 var imgBaseSrc = outputPath + "\\" + fileName;
+
                 fs.mkdirSync(imgBaseSrc);
+
                 var random = 0;
+
                 fs.writeFileSync(output, documentStr.replace(/<img.*?\/>/gi, function(reg) {
+                  
                     random++;
-                    var base64Data = new RegExp(/src=\".+?\"/gi).exec(reg);
-                    var base64 = base64Data[0].split(",");
 
-                    base64_decode(base64[1].replace("\"", ""), imgBaseSrc + "\\" + random + ".jpg");
+					console.log(random);
+                    
+					//获取img标签里面的所有的属性
+                    var imgObj=getImgAttribute(reg);
 
-                    var altText = new RegExp(/alt=\".+?\"/gi).exec(reg);
-                    var alt = altText[0].replace("alt=\"", "").split("#")[0];
+                    //base64字符串转图片，保存到指定的目录。
+					base64_decode(imgObj.imgData, imgBaseSrc + "\\" + random + "."+imgObj.imgType+"");
 
-                    var width = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[0];
-                    var height = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[1];
+                    var alt =imgObj.alt;
 
-                    console.log(alt + " " + width + " " + height);
+                    var width = imgObj.width;
 
-                    return reg.replace(/<img.*?\/>/gi, "<img src='.\\" + fileName + "\\" + random + ".jpg' width='" + emu2px(width) + "px'  height='" + emu2px(height) + "px' alt='" + alt + "'/>");
+                    var height =imgObj.height;
+
+                    var returnStr=reg.replace(/<img.*?\/>/gi, "<img src='.\\" + fileName + "\\" + random + "."+imgObj.imgType+"' width='" + emu2px(width) + "px'  height='" + emu2px(height) + "px' alt='" + alt + "'/>");
+
+                    return returnStr;
                 }));
 
-                $("#output-right").appendChild(createElement("p", output));
+               $("#output-right").appendChild(createElement("p", output));
                 var messages = result.messages; // Any messages, such as warnings during conversion 
 
             })
             .done(function() {
+				console.log("success!!!");
                 fileCount--;
                 if (fileCount == 0) {
                     $("#active").innerText = "开始转换";
                     $("#active").style = "color:#000000;border:1px solid #999999;";
-                    alert("处理完成");
                     exec("explorer " + outputDir[0] + "");
                 }
             });
+    }
+    /**
+     **提取图片的属性
+     **/
+    function getImgAttribute(reg) {
+
+        var obj = {};
+
+        var base64Data = new RegExp(/src=\".+?\"/gi).exec(reg);
+        var base64 = base64Data[0].split(",");
+        var imgType = base64[0].split("\/")[1].replace(";base64", "");
+
+        var altText = new RegExp(/alt=\".+?\"/gi).exec(reg);
+        var alt = altText[0].replace("alt=\"", "").split("#")[0];
+
+        var width = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[0];
+        var height = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[1];
+
+        obj.imgType = imgType;
+        obj.imgData = base64[1].replace("\"", "");
+        obj.alt = alt;
+        obj.width = width;
+        obj.height = height;
+
+        return obj;
+
     }
 
     /**
@@ -338,7 +381,29 @@
         return Math.round(num / 360000 * 96 / 2.54);
 
     }
+
+
+
+
+                    //     random++;
+                    // var base64Data = new RegExp(/src=\".+?\"/gi).exec(reg);
+                    // var base64 = base64Data[0].split(",");
+                    // var imgType=base64[0].split("\/")[1].replace(";base64","");
+                    // base64_decode(base64[1].replace("\"", ""), imgBaseSrc + "\\" + random + "."+imgType+"");
+
+                    // var altText = new RegExp(/alt=\".+?\"/gi).exec(reg);
+                    // var alt = altText[0].replace("alt=\"", "").split("#")[0];
+
+                    // var width = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[0];
+                    // var height = altText[0].replace("alt=\"", "").split("#")[1].replace("\"", "").split(",")[1];
+
+                    // console.log(alt + " " + width + " " + height);
+
+                    // return reg.replace(/<img.*?\/>/gi, "<img src='.\\" + fileName + "\\" + random + ".jpg' width='" + emu2px(width) + "px'  height='" + emu2px(height) + "px' alt='" + alt + "'/>");
     </script>
 </body>
 
 </html>
+
+
+
