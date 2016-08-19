@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>电子课本制作工具</title>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./lib/codemirror/codemirror-5.17.0/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/dtree.css">
+    <link rel="stylesheet" type="text/css" href="./lib/Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <link href="./lib/icheck/skins/flat/red.css" rel="stylesheet">
+    <script src='./lib/dtree.js'></script>
+    <script src="./src/nav.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="file-tool">
+            <span id="action-txtInput" class='btn'><i class="icon-reorder"></i> 选择目录</span>
+            <span id="action-save" class="btn"><i class="icon-save"></i> 保存</span>
+            <span id="action-view" class="btn"><i class="icon-columns"></i> 预览</span>
+            <span id="action-setup" class="btn"><i class="icon-cogs"></i> 设置</span>
+        </div>
+        <div id="view-tool">
+            <span><input type="radio" name="radio" id='edit-result-view'/> 编辑预览(左/右)</span>
+            <span><input type="radio" name="radio" id='edit-result-view-vertical'/> 编辑预览(上/下)</span>
+            <span><input type="radio" name="radio" id='edit-view'/> 编辑视图</span>
+            <span><input type="radio" name="radio" id='result-view'/> 预览视图</span>
+        </div>
+    </header>
+    <div id="container">
+        <aside id="mulu">
+            <div class="dtree" id="dtree-view" style="overflow-y: auto;margin-top:0px;">
+            </div>
+        </aside>
+        <section id="line-one" class='line'>
+        </section>
+        <article id="txt">
+            <textarea name="" id="textArea">
+                <!-- 编辑区域 -->
+            </textarea>
+        </article>
+        <section id="line-two" class='line'>
+            <div id="line">
+            </div>
+        </section>
+        <article id="html">
+            <!-- 预览区域 -->
+        </article>
+    </div>
+    <div id="mask">
+    </div>
+    <!-- 设置面板 -->
+    <div id="setup" class="panel">
+        <h3 style="text-align:center;">设置</h3>
+        <hr>
+        <!-- 设置面板导航 -->
+        <div id="left-nav">
+            <ul>
+                <li class="btn setting-btn" id="primary-setting-btn">基本设置</li>
+                <li class="btn setting-btn" id="shortcut-key-btn">快捷键</li>
+                <li class="btn setting-btn" id="program-info-btn">软件信息</li>
+                <li class="btn setting-btn">占位按钮</li>
+                <li class="btn setting-btn">占位按钮</li>
+                <li class="btn setting-btn">占位按钮</li>
+            </ul>
+        </div>
+        <!--设置内容容器-->
+        <div id="setup-content">
+            <div class="setup-panel" id="primary-setting-panel">
+                <b>基本设置</b>
+                <hr>
+                <p>暂无设置</p>
+            </div>
+            <div class="setup-panel" id="shortcut-key-panel"><b>快捷键</b>
+                <hr>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">s</mark> =
+                    <mark class="btn">保存</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">e</mark> =
+                    <mark class="btn">预览</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">d</mark> =
+                    <mark class="btn">debug面板</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">q</mark> =
+                    <mark class="btn">设置面板</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">F1</mark>=
+                    <mark class="btn">编辑预览（左右分栏）</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">F2</mark> =
+                    <mark class="btn">编辑预览（上下分栏）</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">F3</mark> =
+                    <mark class="btn">编辑模式</mark>
+                </p>
+                <p>
+                    <mark class="btn">ctrl</mark> +
+                    <mark class="btn">F4</mark> =
+                    <mark class="btn">预览模式</mark>
+                </p>
+            </div>
+            <div class="setup-panel" id="program-info-panel"><b>版本信息</b>
+                <hr>
+                <p>Beta v0.0.9</p>
+            </div>
+        </div>
+        <div id="close-setup" class="btn" style="position:absolute;bottom:20px;right:20px;">关闭</div>
+    </div>
+    <!-- debug面板 -->
+    <div id="debug" class="panel">
+        <div id="debug-info">
+        </div>
+        <div id="close-debug" class="btn" style="position:absolute;bottom:10px;right:20px;">关闭</div>
+    </div>
+    <footer>
+        <div id="footer-left">
+        </div>
+        <div id="footer-right">
+            <marquee behavior="" direction="">maso-net 出品</marquee>
+        </div>
+    </footer>
+    <!-- <script src="./lib/jquery-1.11.2.min.js"></script> -->
+    <script>
+    const ipcRenderer = require('electron').ipcRenderer;
+    var fs = require('fs');
+    var children = require("child_process");
+    var path = require("path");
+    window.$ = window.jQuery = require('jquery');
+
+    var baseDir = ""; //电子课本的根目录
+    var txtDir = ""; //txt文本目录
+    var imgDir = ""; //图片片目录
+    var currentView = "editResultView"; //当前视图
+    var currentLesson = ""; //当前编辑的课时
+    var headerHeight = 40; //header的高度
+    var aslidWidth = 300; //目录的宽度
+    var containerHeight = 0; //contentHeight高度，动态计算
+    var footerHeight = 20; //footer的高度
+    var infoSrc = ""; //日志文件目录
+    var currentDayDubug = ""; //当天日志文件名
+
+    /**
+     * 判断鼠标的图形，并返回字符串
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    function cursorFlag(id) {
+        var direction = "leftright";
+        if ($("#" + id + "").css("cursor") === "row-resize") {
+            direction = "updown";
+        } else {
+            direction === "leftright"
+        }
+        return direction;
+    }
+
+    $(function() {
+        var flag = false;
+        var startX, offsetX, startY, offsetY;
+        var currentLine, currentDivTxt, currentDivHtml;
+        var direction = "leftright"; //拖动方向
+        $("#line-two").mousedown(function(e) {
+            flag = true;
+            startX = e.pageX;
+            startY = e.pageY;
+            direction = cursorFlag("line-two");
+            //水平拖动
+            if (direction === "leftright") {
+                currentLine = parseInt($("#line-two").css("left"));
+                currentDivTxt = parseInt($("#txt").css("width"));
+                currentDivHtml = parseInt($("#html").css("width"));
+            } else if (direction === "updown") {
+                //垂直拖动
+                currentLine = parseInt($("#line-two").css("top"));
+                currentDivTxt = parseInt($("#txt").css("height"));
+                currentDivHtml = parseInt($("#html").css("height"));
+            }
+        });
+        $(document).mousemove(function(e) {
+            direction = cursorFlag("line-two");
+            e.stopPropagation();
+            e.preventDefault();
+
+            if (flag) {
+                offsetX = e.pageX - startX;
+                offsetY = e.pageY - startY;            console.log(offsetY)
+                if (direction === "leftright") {
+                    $("body").css("cursor", "col-resize");
+                    $("#line-two").css("left", currentLine + offsetX);
+                    $("#txt").css("width", currentDivTxt + offsetX);
+                    $("#html").css("width", currentDivHtml - offsetX);
+                    $("#html").css("left", aslidWidth + 8 + currentDivTxt + offsetX);
+                } else if (direction === "updown")  {
+                    $("body").css("cursor", "row-resize");
+                    $("#line-two").css("top", currentLine + offsetY);
+                    $("#txt").css("height", currentDivTxt - offsetY);
+                    $("#html").css("height", currentDivHtml + offsetY);
+                    $("#txt").css("top", currentDivHtml + offsetY + 8);
+                }
+            }
+        }).mouseup(function() {
+            flag = false;
+            $("body").css("cursor", "auto");
+        });
+
+    });
+
+
+    //为nav中的连接绑定事件
+    function addEventToNavHref() {
+        $(".node").each(function() {
+            $(this).hover(function() {
+                $(this).css("cursor", "pointer");
+            });
+            $(this).click(function() {
+                var lessonTitle = $(this).attr("hrefs").replace(/\.html/, ".txt");
+                currentLesson = txtDir + "/" + lessonTitle;
+                try {
+                    var txt = fs.readFileSync(currentLesson, "utf8");
+                    // $("#textArea").val(txt);
+                    editor.setValue(txt); //codemirror插件为文本域赋值
+                    processLessonTxtToJson(currentLesson);
+                } catch (e) {
+                    processInfo(e.message);
+                }
+            });
+        });
+    }
+
+    /**
+     * 加载电子书目录
+     * @param  {[type]} ){} [description]
+     * @return {[type]}       [description]
+     */
+    $("#action-txtInput").click(function() {
+        baseDir = ipcRenderer.sendSync('synchronous-message', 'open-directory')[0];
+        txtDir = path.join(baseDir, "\\txt");
+        if (fs.existsSync(txtDir) && fs.existsSync(txtDir + "\\nav.txt")) {
+            navToJson(txtDir + "\\nav.txt");
+            processInfo("加载txt目录 " + txtDir + " Success!");
+        } else {
+            processInfo("txt目录 " + txtDir + "不存在，或者");
+            processInfo("nav.txt文件 " + txtDir + "\\nav.txt 不存在");
+        }
+        imgDir = path.join(baseDir, "\\img");
+        if (fs.existsSync(imgDir)) {
+            processInfo("加载图片目录 " + imgDir + " Success!");
+        } else {
+            processInfo("图片目录 " + imgDir + " 不存在！");
+        }
+    });
+
+    // 预览
+    $("#action-view").click(function() {
+        processLessonTxtToJson(currentLesson);
+
+    });
+
+    // 保存
+    $("#action-save").click(function() {
+        saveData();
+    });
+
+    // 保存
+    $("#action-setup").click(function() {
+        openSetup();
+    });
+
+    //关闭help面板
+    $("#close-help").click(function() {
+        closeHelp();
+    })
+
+    //关闭help面板
+    $("#close-debug").click(function() {
+        closeDebug();
+    })
+
+    //关闭help面板
+    $("#close-setup").click(function() {
+        closeSetup();
+    })
+
+    /**
+     * 保存数据
+     * @return {[type]} [description]
+     */
+    function saveData() {
+        // var data = $("#textArea").val();
+        var data = editor.getValue();
+        fs.writeFileSync(currentLesson, data);
+    }
+
+    /**
+     * 监听键盘事件
+     * @param  {[type]} e) {                   if (e.ctrlKey && e.which [description]
+     * @return {[type]}    [description]
+     */
+    $(document).keydown(function(e) {
+
+        //ctrl+s  保存
+        if (e.ctrlKey && e.which == 83) {
+            saveData();
+            //ctrl+e  预览    
+        } else if (e.ctrlKey && e.which == 69) {
+            processLessonTxtToJson(currentLesson);
+            //ctrl+d  调试面板
+        } else if (e.ctrlKey && e.which == 68) {
+            closeSetup();
+            if ($("#debug").css("display") === "none") {
+                openDebug();
+            } else {
+                closeDebug();
+            }
+        } else if (e.which == 123) {
+            //ipcRenderer.sendSync('synchronous-message', 'debug');
+        } else if (e.ctrlKey && e.which == 81) {
+            if ($("#setup").css("display") === "none") {
+                openSetup();
+            } else {
+                closeSetup();
+            }
+            //ctrl+F1
+        } else if (e.ctrlKey && e.which == 112) {
+            currentView = "editResultView";
+            winInit();
+            $("#edit-result-view").iCheck("check");
+            //ctrl+F2
+        } else if (e.ctrlKey && e.which == 113) {
+            currentView = "editResultViewVertical";
+            winInit();
+            $("#edit-result-view-vertical").iCheck("check");
+            //ctrl+F3
+        } else if (e.ctrlKey && e.which == 114) {
+            currentView = "editView";
+            winInit();
+            $("#edit-view").iCheck("check");
+            //ctrl+F4
+        } else if (e.ctrlKey && e.which == 115) {
+            currentView = "resultView";
+            winInit();
+            $("#result-view").iCheck("check");
+        }
+    })
+
+    /**
+     * 打开调试面板
+     * @return {[type]} [description]
+     */
+    function openDebug() {
+        $("#mask").show(0.6);
+        $("#debug").show(0.9);
+
+        $("#debug-info").html(getProcessInfo().toString().replace(/\r\n/gi, "<br>").replace(/Success!/gi, "<label style='color:green;'>Success</label>"))
+    }
+
+    /**
+     * 关闭调试面板
+     * @return {[type]} [description]
+     */
+    function closeDebug() {
+        $("#mask").hide(0.9);
+        $("#debug").hide(0.6);
+
+
+    }
+
+    // 设置面板
+    function openSetup() {
+        $("#mask").show(0.6);
+        $("#setup").show(0.9);
+    }
+
+    function closeSetup() {
+        $("#mask").hide(0.9);
+        $("#setup").hide(0.6);
+    }
+    //window大小发生变化的时候,响应的事件
+    $(window).resize(function() {
+        winInit();
+        winInit();
+    });
+
+
+    /**
+     * 编辑视图界面
+     */
+    function editView(_height, _width) {
+
+        //container的高度
+        if (!$("footer").is(":visible")) {
+            containerHeight = _height - headerHeight;
+        } else {
+            containerHeight = _height - headerHeight - footerHeight;
+        }
+        $("#container").height(containerHeight);
+
+        var w = _width - aslidWidth - 1;
+        // alert(_width+"  "+(_width-aslidWidth)+"  "+(_width-aslidWidth)/2)
+        //计算目录，编辑区域和预览区域的宽度
+        $("#container #mulu").css("width", aslidWidth);
+        $("#container #line-one").css("left", aslidWidth + "px");
+        $("#container #txt").css("width", w + "px");
+        $("#container #txt").css("height", containerHeight + "px");
+        $("#container #txt").css("top", "0px");
+        $("#container #txt").css("left", (aslidWidth + 1) + "px");
+
+        $("#txt").show();
+        $("#line-two").hide();
+        $("#html").hide();
+    }
+    /**
+     * 预览视图
+     * @return {[type]} [description]
+     */
+    function resultView(_height, _width) {
+        //container的高度
+        if (!$("footer").is(":visible")) {
+            containerHeight = _height - headerHeight;
+        } else {
+            containerHeight = _height - headerHeight - footerHeight;
+        }
+        $("#container").height(containerHeight);
+
+        var w = _width - aslidWidth - 1;
+        // alert(_width+"  "+(_width-aslidWidth)+"  "+(_width-aslidWidth)/2)
+        //计算目录，编辑区域和预览区域的宽度
+        $("#container #mulu").css("width", aslidWidth);
+        $("#container #line-one").css("left", aslidWidth + "px");
+        $("#container #html").css("width", w + "px");
+        $("#container #html").css("height", containerHeight + "px");
+        $("#container #html").css("left", (aslidWidth + 1) + "px");
+        $("#html").show();
+        $("#txt").hide();
+        $("#line-two").hide();
+
+        // var tempJson = $("#txt").html().replace(/<br>/gi, "\r\n");
+
+        // console.log(tempJson)
+
+        // processLessonTxtToJson();
+
+    }
+
+    /**
+     * 上下分栏
+     * @param  {[type]} _height [description]
+     * @param  {[type]} _width  [description]
+     * @return {[type]}         [description]
+     */
+    function editResultViewVertical(_height, _width) {
+        var h;
+        var w = _width - aslidWidth;
+
+        if (!$("footer").is(":visible")) {
+            containerHeight = _height - headerHeight;
+        } else {
+            containerHeight = _height - headerHeight - footerHeight;
+        }
+        $("#container").height(containerHeight);
+        h = containerHeight - 8;
+        $("#html").attr("style", "top:0px;width:" + w + "px;height:" + (h / 2) + "px;left:" + (aslidWidth + 1) + "px");
+        $("#txt").attr("style", "top:" + (h / 2 + 8) + "px;width:" + w + "px;height:" + (h / 2) + "px;left:" + (aslidWidth + 1) + "px");
+        $("#line-two").attr("style", "width:" + w + "px;height:8px;left:" + (aslidWidth + 1) + "px;top:" + (h / 2) + "px;cursor:row-resize;");
+        $("#line-two #line").attr("style", "height:1px;border-top:1px solid #999999;margin-top:4px;");
+
+    }
+
+
+    /**
+     * 编辑预览视图，左右分栏
+     * @return {[type]} [description]
+     */
+    function editResultView(_height, _width) {
+
+        $("#txt").show();
+        $("#html").show();
+        $("#line-two").show();
+
+        //container的高度
+        if (!$("footer").is(":visible")) {
+            containerHeight = _height - headerHeight;
+        } else {
+            containerHeight = _height - headerHeight - footerHeight;
+        }
+        $("#container").height(containerHeight);
+
+        var w = _width - aslidWidth - 9;
+        // alert(_width+"  "+(_width-aslidWidth)+"  "+(_width-aslidWidth)/2)
+        //计算目录，编辑区域和预览区域的宽度
+
+        $("#container #mulu").css("width", aslidWidth);
+
+        $("#container #line-one").css("left", aslidWidth + "px");
+
+        $("#container #txt").css("width", (w / 2) + "px");
+        $("#container #txt").css("left", (aslidWidth + 1) + "px");
+        $("#container #txt").css("height", containerHeight + "px");
+        $("#container #txt").css("top", "0px");
+
+        $("#container #html").css("width", (w / 2) + "px");
+        $("#container #html").css("left", (aslidWidth + 1 + 8 + (w / 2)) + "px");
+        $("#container #html").css("height", containerHeight + "px");
+
+
+        $("#line-two").attr("style", "width:8px;height:100%;left:" + (aslidWidth + 1 + (w / 2)) + "px")
+        $("#line-two #line").attr("style", "height:100%;border-left:1px solid #999999;margin-left:4px;width:1px;")
+
+
+    }
+
+    /**
+     * 界面初始化
+     * @return {[type]} [description]
+     */
+    function winInit() {
+        var _height = $(window).height();
+        var _width = $(window).width();
+        if (currentView === "editResultView") {
+            editResultView(_height, _width);
+        } else if (currentView === "editView") {
+            editView(_height, _width);
+        } else if (currentView === "resultView") {
+            resultView(_height, _width);
+        } else if (currentView === "editResultViewVertical") {
+            editResultViewVertical(_height, _width);
+        }
+        $("#footer-right").width(_width - 301);
+    }
+
+    /**
+     * 处理debug信息
+     * @param  {[type]} info [description]
+     * @return {[type]}      [description]
+     */
+    function processInfo(info) {
+        var infoSrc = path.join(baseDir, "\\debug");
+        if (!fs.existsSync(infoSrc)) {
+            //创建debug目录
+            fs.mkdirSync(infoSrc);
+            processInfo("debug目录" + infoSrc + "创建！Success!");
+        }
+        var time = getCurrentTime(true);
+        var debugInfo = time + " --->: " + info.toString() + "\r\n";
+        currentDayDubug = path.join(infoSrc, "\\" + getCurrentTime(false) + ".txt");
+        if (fs.existsSync(currentDayDubug)) {
+            //追加方式写文件
+            fs.appendFileSync(currentDayDubug, debugInfo, {
+                encoding: 'utf8',
+                mode: 438,
+                flag: 'a+'
+            });
+        } else {
+            fs.writeFileSync(currentDayDubug, debugInfo, {
+                encoding: 'utf8',
+                mode: 438,
+                flag: 'w+'
+            });
+        }
+    }
+
+    /**
+     * 获取debuginfo
+     * @return {[type]} [description]
+     */
+    function getProcessInfo() {
+        var str = fs.readFileSync(currentDayDubug);
+        return str;
+    }
+
+    /**
+     * 获取当前时间并且格式化
+     * @return {[type]} [description]
+     */
+    function getCurrentTime(Full) {
+        var date = new Date();
+        var timeStr = "";
+        var year = date.getFullYear();
+        var mouth = date.getMonth() + 1;
+        if (parseInt(mouth) < 10) {
+            mouth = "0" + mouth;
+        }
+        var day = date.getDate();
+        if (parseInt(day) < 10) {
+            day = "0" + day;
+        }
+        var hours = date.getHours();
+        if (parseInt(hours) < 10) {
+            hours = "0" + hours;
+        }
+        var minutes = date.getMinutes();
+        if (parseInt(minutes) < 10) {
+            minutes = "0" + minutes;
+        }
+        var seconds = date.getSeconds();
+        if (parseInt(seconds) < 10) {
+            seconds = "0" + seconds;
+        }
+        if (Full) {
+            timeStr = year + "-" + mouth + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+        } else {
+            timeStr = year + "-" + mouth + "-" + day;
+        }
+        return timeStr;
+    }
+    </script>
+    <script type="text/javascript" src="./src/render/re.js"></script>
+    <script type="text/javascript" src="./src/render/text.js"></script>
+    <script type="text/javascript" src="./src/render/jiaohu.js"></script>
+    <script type="text/javascript" src="./src/render/timu.js"></script>
+    <script type="text/javascript" src="./src/render/talk.js"></script>
+    <script type="text/javascript" src="./src/render/controller.js"></script>
+    <script type="text/javascript" src='./lib/icheck/icheck.min.js'></script>
+    <script src="./lib/codemirror/codemirror-5.17.0/lib/codemirror.js"></script>
+    <!-- <script type="text/javascript" src="./src/render/result.js"></script> -->
+    <script>
+    winInit(); //界面初始化
+    $("#edit-result-view").iCheck("check"); //选中当前视图
+
+    // 初始化icheckbox插件
+    $(document).ready(function() {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red',
+            increaseArea: '20%' // optional
+        });
+    });
+
+    //view绑定事件
+    $('input').on('ifChecked', function(event) {
+        if (this.id === "edit-view") {
+            currentView = "editView";
+        } else if (this.id === "result-view") {
+            currentView = "resultView";
+        } else if (this.id === "edit-result-view") {
+            currentView = "editResultView";
+        } else {
+            currentView = "editResultViewVertical";
+        }
+        winInit();
+    });
+    </script>
+    <script type="text/javascript">
+    // 数据处理
+    /**
+     * 目录转json
+     * @param  {[type]} navTxt [description]
+     * @return {[type]}        [description]
+     */
+    function navToJson(navTxt) {
+        console.log(__dirname)
+        var navStr = "";
+        var nav = children.spawn("makeNav.exe", ["json", navTxt, ""], {
+            "cwd": path.join(__dirname, "/bin")
+        });
+
+        nav.stderr.on("data", function(data) {
+
+            console.log("stderr:" + data);
+            processInfo("stderr:" + data);
+
+        });
+
+        nav.stdout.on("data", function(data) {
+            navStr += data.toString();
+            if (navStr.match(/######/)) {
+                var navJson = JSON.parse(navStr.replace("######", ""));
+                //创建目录
+                makeNav(navJson);
+                //目录连接添加事件
+                addEventToNavHref();
+
+            }
+        });
+
+
+        nav.on("exit", function(code) {
+            console.log("nav create exit......")
+
+        })
+
+    }
+
+
+    /**
+     * 调用exe将txt转换为json,进行预览
+     * @return {[type]} [description]
+     */
+    function processLessonTxtToJson(txt) {
+        $("#html").html("");
+        var temp = "";
+        console.log("------------------------"+path.resolve(__dirname,"../../"));
+        var lesson = children.spawn("lesson.exe", [txt, "json"], {
+            "cwd": path.join(__dirname, "/bin")
+        });
+
+        lesson.stderr.on('data', function(data) {
+            $("#html").html(data);
+            processInfo("stderr:" + data);
+        });
+
+        lesson.stdout.on('data', function(data) {
+            temp += data.toString();
+            if (temp.match("######")) {
+                console.log("+++++++++++++++++++++++++++++++++++++++");
+                var t = temp.replace(/img\//gi, path.join(imgDir, "\/")).replace("######", "");
+                console.log(t.replace(/\\\"/gi, "@@").replace(/\\/gi, "/").replace(/@@/gi, "\\\""));
+                var jsonData = JSON.parse(t.replace(/\\\"/gi, "@@").replace(/\\/gi, "/").replace(/@@/gi, "\\\""));
+                controller.init(jsonData);
+
+            }
+
+        });
+
+        lesson.on('exit', function(code) {
+            console.log('child process exited with code ' + code);
+        });
+
+    }
+    </script>
+    <script>
+    // 编辑器设置
+    var editor = CodeMirror.fromTextArea(document.getElementById("textArea"), {
+        lineNumbers: true,
+        mode: "text/html",
+        matchBrackets: true,
+        lineWrapping: true
+    });
+    </script>
+    <script type="text/javascript">
+    // 控制面板设置
+    $(".setting-btn").each(function() {
+        $(this).click(function() {
+            var _id = $(this).attr("id").split("-");
+            $(".setup-panel").hide();
+            $("#" + _id[0] + "-" + _id[1] + "-panel").show();
+        });
+    });
+    </script>
+</body>
+
+</html>

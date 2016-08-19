@@ -1,0 +1,386 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+h3 {}
+
+#dtree-view p {
+    display: block;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+    box-sizing: border-box;
+    background-color: #EEEEEE;
+}
+
+div {
+    outline: none;
+}
+
+header {
+    height: 39px;
+    background-color: #EEEEEE;
+    width: 100%;
+    border-bottom: 1px solid #999999;
+    box-sizing: border-box;
+    letter-spacing: .1rem;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+header #view-tool {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+
+header #file-tool {
+    width: 300px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 39px;
+    border-right: 1px solid #999999;
+}
+
+header #file-tool .btn:first-child {
+    margin-left: 6px;
+}
+
+.btn {
+    border: 1px solid #000000;
+    min-width: 40px;
+    height: 24px;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 7px;
+    cursor: pointer;
+    padding: 0px 5px;
+    margin-left: 1px;
+    /*background-color: #0A64A4;*/
+    color: #000000;
+}
+
+.btn:hover {
+    border: 1px solid #FD7279;
+    min-width: 40px;
+    height: 24px;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 7px;
+    cursor: pointer;
+    background-color: #EEEEEE;
+    color: #FD7279;
+}
+
+#container {
+    position: relative;
+    overflow: hidden;
+    font-size: 1.4rem;
+    top: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+
+#container #mulu {
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    background-color: #EEEEEE;
+    overflow-y: auto;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+#container #txt {
+    height: 100%;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 0px solid #FFFFFF;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#textArea {
+    resize: none;
+    outline: none;
+    border: 0px solid #FFFFFF;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+#container #html {
+    display: block;
+    height: 100%;
+    width: 0px;
+    position: absolute;
+    background-color: #FFFFFF;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#container #line-one {
+    height: 100%;
+    position: absolute;
+    border-left: 1px solid #999999;
+    z-index: 100;
+}
+
+.panel hr {
+    height: 1px;
+    border: none;
+    border-top: 1px solid #555555;
+}
+
+#container #line-two {
+    height: 100%;
+    position: absolute;
+    width: 8px;
+    z-index: 200;
+    background-color: #CCE6FF;
+    opacity: 0.6;
+}
+
+#container #line-two:hover {
+    cursor: col-resize;
+    background-color: #D9B3FF;
+}
+
+footer {
+    z-index: 999;
+    width: 100%;
+    height: 20px;
+    background-color: #EEEEEE;
+    position: relative;
+    top: -1px;
+    display: block;
+    font-size: 1.2rem;
+    border-top: 1px solid #999999;
+    overflow: hidden;
+}
+
+footer #footer-left {
+    position: absolute;
+    width: 300px;
+    height: 20px;
+    border-right: 1px solid #999999;
+    overflow: hidden;
+}
+
+footer #footer-right {
+    position: absolute;
+    width: 0px;
+    height: 20px;
+    left: 301px;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+    line-height: 20px;
+}
+
+#mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: hide;
+    background-color: #000000;
+    opacity: 0.6;
+    display: none;
+}
+
+#help {
+    display: none;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    border: 2px solid pink;
+    z-index: 100000;
+    overflow: hide;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    opacity: 1;
+    font-size: 1.6rem;
+}
+
+#setup {
+    display: none;
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -300px;
+    border: 2px solid pink;
+    z-index: 100000;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    opacity: 1;
+    font-size: 1.6rem;
+}
+
+#setup #left-nav {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 460px;
+    /*border: 1px solid #999999;*/
+    box-sizing: border-box;
+    padding-left: 0;
+}
+
+#setup #setup-content {
+    display: block;
+    position: absolute;
+    width: 456px;
+    height: 436px;
+    box-sizing: border-box;
+    left: 120px;
+    margin-top: 8px;
+    overflow-y: auto;
+}
+
+.setup-panel {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding:10px;
+    box-sizing: border-box;
+    display:none;
+}
+
+#setup #left-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+#setup #left-nav ul li:first-child {
+    margin: 20px 0px 6px 0px;
+}
+
+#primary-setting-panel{
+    display: block;
+}
+
+
+#setup #left-nav ul li {
+    text-align: center;
+    width: 80%;
+    height: 32px;
+    line-height: 32px;
+    box-sizing: border-box;
+    margin: 12px 0px 6px 0px;
+    font-family: "微软雅黑";
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#debug {
+    display: none;
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -300px;
+    border: 2px solid pink;
+    z-index: 100000;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    opacity: 1;
+    font-size: 1.6rem;
+}
+
+#debug-info {
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    height: 96%;
+    margin: 0 auto;
+    line-height: 2rem;
+    word-break: break-all;
+    font-family: Arial;
+    font-size: 1.2rem;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #EEEEEE;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+
+/*两个滚动条交界的方块颜色*/
+
+::-webkit-scrollbar-corner {
+    background-color: #EEEEEE;
+}
+
+
+/*鼠标移上滚动条时候的颜色*/
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #CCE6FF;
+}
+
+
+/*滚动条的显示颜色*/
+
+::-webkit-scrollbar-thumb {
+    background-color: pink;
+    border-radius: 5px;
+}
+
+
+/*滚动条的滑轨背景颜色 */
+
+::-webkit-scrollbar-track {
+    background-color: #EEEEEE;
+}
+
+
+/* 滑轨两头的监听按钮颜色 */
+
+::-webkit-scrollbar-button {
+    background-color: #EEEEEE;
+}

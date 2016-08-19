@@ -1,0 +1,194 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+}
+
+
+/*ÕÚÕÖ²ã*/
+
+#task {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.36;
+    z-index: 9;
+    top: 0px;
+    cursor: pointer;
+    display: none;
+}
+
+#nav {
+    position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 25%;
+	background-color: #eeeeee;
+	height: 100%;
+	overflow:auto;
+}
+
+#contents{
+	position:fixed;
+	width:75%;
+	height:100%;
+	left:25%;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+#content {
+    background-color: #FFFFFF;
+    width: 800px;
+	margin-left:50px;
+}
+
+#title {
+    background-color: #38ade9;
+    height: 160px;
+    text-align: center;
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    color: #EEEEEE;
+}
+
+#title #title-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.block {
+    width: 100%;
+    background-color: #FFFFFF;
+    /*    min-height: 200px;*/
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+
+/*°´Å¥ÑùÊ½ */
+
+.button {
+    min-width: 80px;
+    height: 20px;
+    border-radius: 2px;
+    line-height: 20px;
+	vertical-align: middle;
+}
+
+
+
+.button:hover {
+    background-color: #5dbf86;
+    border: 1px solid #29a55d;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+
+.button-default-hudongketang {
+    display: inline-block;
+    background-color: #EEEEEE;
+    border: 1px solid #E849FF;
+    text-align: center;
+    background-color: #E849FF;
+    color: #EEEEEE;
+    margin-left: 20px;
+}
+
+
+
+.button-default {
+    display: inline-block;
+    background-color: #EEEEEE;
+    border: 1px solid #999999;
+    text-align: center;
+}
+
+.button-default-showAll {
+    display: inline-block;
+    background-color: #EEEEEE;
+    border: 1px solid #3195c9;
+    text-align: center;
+    background-color: #38ade9;
+    color: #EEEEEE;
+    margin-left: 20px;
+}
+
+.button-default-hideAll {
+    display: inline-block;
+    background-color: #EEEEEE;
+    border: 1px solid #f05183;
+    text-align: center;
+    background-color: #e5637c;
+    color: #EEEEEE;
+    margin-left: 20px;
+}
+
+
+
+
+#html span {
+    display: inline-block;   
+}
+
+.jiaohuText {
+    color: #e5637c;
+    cursor: pointer;
+    /* vertical-align: middle; */
+}
+.jiaohuTexts {
+    color: #e5637c;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/*小贴士标题*/
+
+.xiaotieshi-title {
+    font-size: 16px;
+    color: blue;
+    font-family: "宋体";
+    font-weight: bold;
+}
+
+
+/*小贴士*/
+
+.xiaotieshi {
+    border: 1px dashed orange;
+    width: 680px;
+    margin: 0 auto;
+    line-height: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: "楷体"
+}
+
+
+/*回顾反思*/
+
+.huigufansiContent {
+    background-color: #EDF6EF;
+    border: 1px solid #5A9A74;
+    border-radius: 10px;
+    line-height: 30px;
+    padding: 20px;
+    font-family: "楷体"
+}
+
+img {
+    vertical-align: middle;
+}
+
+hr {
+    height: 0px;
+    border-top: 1px solid #EEEEEE;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-left: 0px;
+    width: 100%;
+}
