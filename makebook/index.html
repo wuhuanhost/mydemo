@@ -51,6 +51,99 @@
     </div>
     <div id="mask">
     </div>
+    <!--  -->
+    <div id="tips">
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">~</span>
+        <span class="tip-btn btn">!</span>
+        <span class="tip-btn btn">@</span>
+        <span class="tip-btn btn">#</span>
+        <span class="tip-btn btn">$</span>
+        <span class="tip-btn btn">%</span>
+        <span class="tip-btn btn">^</span>
+        <span class="tip-btn btn">&</span>
+        <span class="tip-btn btn">*</span>
+        <span class="tip-btn btn">(</span>
+        <span class="tip-btn btn">)</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">~</span>
+        <span class="tip-btn btn">!</span>
+        <span class="tip-btn btn">@</span>
+        <span class="tip-btn btn">#</span>
+        <span class="tip-btn btn">$</span>
+        <span class="tip-btn btn">%</span>
+        <span class="tip-btn btn">^</span>
+        <span class="tip-btn btn">&</span>
+        <span class="tip-btn btn">*</span>
+        <span class="tip-btn btn">(</span>
+        <span class="tip-btn btn">)</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">~</span>
+        <span class="tip-btn btn">!</span>
+        <span class="tip-btn btn">@</span>
+        <span class="tip-btn btn">#</span>
+        <span class="tip-btn btn">$</span>
+        <span class="tip-btn btn">%</span>
+        <span class="tip-btn btn">^</span>
+        <span class="tip-btn btn">&</span>
+        <span class="tip-btn btn">*</span>
+        <span class="tip-btn btn">(</span>
+        <span class="tip-btn btn">)</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">~</span>
+        <span class="tip-btn btn">!</span>
+        <span class="tip-btn btn">@</span>
+        <span class="tip-btn btn">#</span>
+        <span class="tip-btn btn">$</span>
+        <span class="tip-btn btn">%</span>
+        <span class="tip-btn btn">^</span>
+        <span class="tip-btn btn">&</span>
+        <span class="tip-btn btn">*</span>
+        <span class="tip-btn btn">(</span>
+        <span class="tip-btn btn">)</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">~</span>
+        <span class="tip-btn btn">!</span>
+        <span class="tip-btn btn">@</span>
+        <span class="tip-btn btn">#</span>
+        <span class="tip-btn btn">$</span>
+        <span class="tip-btn btn">%</span>
+        <span class="tip-btn btn">^</span>
+        <span class="tip-btn btn">&</span>
+        <span class="tip-btn btn">*</span>
+        <span class="tip-btn btn">(</span>
+        <span class="tip-btn btn">)</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+        <span class="tip-btn btn">?</span>
+    </div>
     <!-- 设置面板 -->
     <div id="setup" class="panel">
         <h3 style="text-align:center;">设置</h3>
@@ -75,6 +168,11 @@
             </div>
             <div class="setup-panel" id="shortcut-key-panel"><b>快捷键</b>
                 <hr>
+                <p>
+                    <mark class="btn">alt</mark> +
+                    <mark class="btn">/</mark> =
+                    <mark class="btn">输入提示</mark>
+                </p>
                 <p>
                     <mark class="btn">ctrl</mark> +
                     <mark class="btn">s</mark> =
@@ -200,14 +298,15 @@
 
             if (flag) {
                 offsetX = e.pageX - startX;
-                offsetY = e.pageY - startY;            console.log(offsetY)
+                offsetY = e.pageY - startY;
+                console.log(offsetY)
                 if (direction === "leftright") {
                     $("body").css("cursor", "col-resize");
                     $("#line-two").css("left", currentLine + offsetX);
                     $("#txt").css("width", currentDivTxt + offsetX);
                     $("#html").css("width", currentDivHtml - offsetX);
                     $("#html").css("left", aslidWidth + 8 + currentDivTxt + offsetX);
-                } else if (direction === "updown")  {
+                } else if (direction === "updown") {
                     $("body").css("cursor", "row-resize");
                     $("#line-two").css("top", currentLine + offsetY);
                     $("#txt").css("height", currentDivTxt - offsetY);
@@ -267,6 +366,16 @@
         }
     });
 
+
+    // 为tips里的按钮绑定事件
+    $(".tip-btn").each(function(index, dom) {
+        $(this).click(function() {
+            var text=$(this).text();
+            addTipsToText(text);
+        });
+    });
+
+
     // 预览
     $("#action-view").click(function() {
         processLessonTxtToJson(currentLesson);
@@ -314,8 +423,9 @@
      * @return {[type]}    [description]
      */
     $(document).keydown(function(e) {
-
-        //ctrl+s  保存
+        console.log(e.altKey && e.which == 229)
+        console.log(e.altKey + " " + e.which)
+            //ctrl+s  保存
         if (e.ctrlKey && e.which == 83) {
             saveData();
             //ctrl+e  预览    
@@ -357,8 +467,27 @@
             currentView = "resultView";
             winInit();
             $("#result-view").iCheck("check");
+        } else if (e.altKey && e.which == 191) { //alt+/ 打开提示面板
+            if ($("#tips").css("display") === "none") {
+                openTips();
+            } else {
+                closeTips();
+            }
         }
-    })
+    });
+
+
+    function openTips() {
+        $("#task").show(0.6);
+        $("#tips").show(0.9);
+
+    }
+
+    function closeTips() {
+        $("#task").hide(0.9);
+        $("#tips").hide(0.6);
+
+    }
 
     /**
      * 打开调试面板
@@ -706,7 +835,7 @@
     function processLessonTxtToJson(txt) {
         $("#html").html("");
         var temp = "";
-        console.log("------------------------"+path.resolve(__dirname,"../../"));
+        console.log("------------------------" + path.resolve(__dirname, "../../"));
         var lesson = children.spawn("lesson.exe", [txt, "json"], {
             "cwd": path.join(__dirname, "/bin")
         });
@@ -743,6 +872,57 @@
         matchBrackets: true,
         lineWrapping: true
     });
+
+    var line = 0;
+    var ch = 0;
+    editor.on("blur", function(editor) {
+        var currentCursor = editor.getCursor("");
+        line = currentCursor.line;
+        ch = currentCursor.ch;
+        console.log(line + " " + ch);
+    })
+
+    function addTipsToText(text){
+        var startCH = ch;
+        ch=ch + 1 + text.length;
+        var endCH =ch;
+        editor.focus();//编辑器获取焦点
+        console.log(startCH+"  "+endCH);
+        editor.replaceRange(text, {
+            "line": line,
+            "ch": startCH
+        }, {
+            "line": line,
+            "ch": endCH
+        }, "");
+        editor.setCursor({
+            "line": line,
+            "ch": endCH+1
+        });
+    }
+
+/**
+    editor.on("inputRead", function(editor, obj) {
+        // console.log(JSON.stringify(obj));
+        var currentCursor = editor.getCursor("");
+        var line = currentCursor.line;
+        var ch = currentCursor.ch;
+        var replaceStr = "你好中国！";
+        var startCH = ch - 1;
+        var endCH = ch - 1 + replaceStr.length;
+        editor.replaceRange(replaceStr, {
+            "line": line,
+            "ch": startCH
+        }, {
+            "line": line,
+            "ch": endCH
+        }, "");
+        editor.setCursor({
+            "line": line,
+            "ch": endCH
+        });
+
+    });**/
     </script>
     <script type="text/javascript">
     // 控制面板设置
