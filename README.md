@@ -1,6 +1,6 @@
-##sublime text3常用插件和主题
+## sublime text3常用插件和主题
 
-###插件
+### 插件
 
 1. Emmet【快速写html、css】
 2. MarkdownPreview【markdown】| OmniMarkupPreviewer | Markdown Editing
@@ -16,11 +16,11 @@
 12. View Browser【浏览器中打开】【ctrl+alt+v】
 13. VAlign【代码中等号对齐的插件】【ctrl+\】
 
-###主题
+### 主题
 
 1.Monokai Extended
 
-##sublime text3配置文件
+## sublime text3配置文件
 
 ```json
 	{
@@ -40,7 +40,7 @@
 	}
 ```
 
-##sublime text3快捷键
+## sublime text3快捷键
 
 [sublime text插件官网](https://packagecontrol.io/browse)
 
