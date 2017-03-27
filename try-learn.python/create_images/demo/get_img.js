@@ -4,7 +4,7 @@ function genPic(cb){
 	var cmdArr = [];
 	cmdArr.push("python");
 	cmdArr.push("process_img.py");
-	cmdArr.push("admin");
+	cmdArr.push("李明");
 	cmdArr.push("avatar.jpg");
 	cmdArr.push("100");
 	cmdArr.push("qrcode.jpg");

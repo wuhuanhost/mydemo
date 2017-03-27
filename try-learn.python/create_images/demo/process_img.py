@@ -5,13 +5,16 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
 nickname=sys.argv[1]
 avatarImg=sys.argv[2]
 studyTime=sys.argv[3]
 qrcodeUrl=sys.argv[4]
 
 print nickname+" "+studyTime+" "+qrcodeUrl
+
+# cmd命令行编码为gbk,所以中文必须先解码为gbk编码然后在编码为utf-8
+nickname=nickname.decode("gbk").encode("utf-8")
+
 
 def genImg():
 	startTime=time.time()
