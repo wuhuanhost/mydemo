@@ -8,6 +8,8 @@ function genPic(cb){
 	cmdArr.push("avatar.jpg");
 	cmdArr.push("100");
 	cmdArr.push("qrcode.jpg");
+	cmdArr.push("template.jpg");
+	cmdArr.push("output.jpg");
 	var cmd = cmdArr.join(" ");
 	exec(cmd,function(err,stdout,stderr){
 		if(err){
@@ -19,6 +21,7 @@ function genPic(cb){
 	});
 }
 
+//调用
 genPic(function(err,result){
 	if(err){
 		console.error(err);

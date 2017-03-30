@@ -9,17 +9,18 @@ nickname=sys.argv[1]
 avatarImg=sys.argv[2]
 studyTime=sys.argv[3]
 qrcodeUrl=sys.argv[4]
+templateUrl=sys.argv[5]
+outPutUrl=sys.argv[6]
 
 print nickname+" "+studyTime+" "+qrcodeUrl
 
 # cmd命令行编码为gbk,所以中文必须先解码为gbk编码然后在编码为utf-8
 nickname=nickname.decode("gbk").encode("utf-8")
 
-
 def genImg():
 	startTime=time.time()
 	#加载背景图片
-	background=Image.open(ur"template.jpg")
+	background=Image.open(templateUrl,"r")
 	#加载头像图片
 	avatar = Image.open(avatarImg,"r")
 	qrcode_img = Image.open(qrcodeUrl,"r")
@@ -53,12 +54,12 @@ def genImg():
 	drawImage.text((560, 113), unicode("分钟","utf-8"), font=font4)
 
 	#保存图片到文件
-	back_img.save("output.jpg") #保存图片
+	back_img.save(outPutUrl) #保存图片
 	endTime=time.time()
 
-	print endTime-startTime
+	#print endTime-startTime
 
-	#print "output.jpg"
+	print outPutUrl
 
 
 
