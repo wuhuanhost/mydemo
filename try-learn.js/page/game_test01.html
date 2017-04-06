@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>碰撞检测demo</title>
+    <style type="text/css" media="screen">
+    .demo1 {
+        width: 100%;
+        height: 200px;
+        border: 1px solid red;
+    }
+    
+    .demo2 {
+        width: 100%;
+        height: 200px;
+        border: 1px solid green;
+    }
+    
+    .demo3 {
+        width: 100%;
+        height: 200px;
+        border: 1px solid blue;
+    }
+    
+    div {
+        margin-top: 20px;
+    }
+    
+    .rect {
+        width: 30px;
+        height: 40px;
+        background-color: red;
+    }
+    
+    .circle {
+        width: 20px;
+        height: 20px;
+        background-color: blue;
+        border-radius: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>矩形和矩形之间的碰撞</h3>
+    <div class="demo1">
+        <div class="demo1-rect1 rect"></div>
+        <div class="demo1-rect2 rect"></div>
+    </div>
+    <h3>圆形和圆形之间的碰撞</h3>
+    <div class="demo2">
+        <div class="demo2-circle1 circle"></div>
+        <div class="demo2-circle2 circle"></div>
+    </div>
+    <h3>矩形和圆形之间的碰撞</h3>
+    <div class="demo3">
+        <div class="demo3-rect rect"></div>
+        <div class="demo3-circle circle"></div>
+    </div>
+</body>
+
+</html>
