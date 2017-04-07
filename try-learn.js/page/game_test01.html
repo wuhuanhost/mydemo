@@ -9,22 +9,21 @@
         width: 100%;
         height: 200px;
         border: 1px solid red;
+        position: relative;
     }
     
     .demo2 {
         width: 100%;
         height: 200px;
         border: 1px solid green;
+        position: relative;
     }
     
     .demo3 {
         width: 100%;
         height: 200px;
         border: 1px solid blue;
-    }
-    
-    div {
-        margin-top: 20px;
+        position: relative;
     }
     
     .rect {
@@ -38,6 +37,24 @@
         height: 20px;
         background-color: blue;
         border-radius: 10px;
+    }
+    
+    .demo1-rect1 {
+        position: absolute;
+        width: 40px;
+        height: 60px;
+        background-color: pink;
+        top: 30px;
+        left: 100px;
+    }
+    
+    .demo1-rect2 {
+        position: absolute;
+        top: 20px;
+        left: 200px;
+        width: 40px;
+        height: 40px;
+        background-color: green;
     }
     </style>
 </head>
@@ -58,6 +75,91 @@
         <div class="demo3-rect rect"></div>
         <div class="demo3-circle circle"></div>
     </div>
+    <script>
+    /**
+     * 创建可拖动的div
+     * @return {[type]} [description]
+     */
+    var flag = false; //拖动标志
+    var divX, divY;
+
+/**
+ * [createMoveDiv description]
+ * @param  {Function} cb [description]
+ * @return {[type]}      [description]
+ */
+    function createMoveDiv(selector,cb) {
+        var startX, startY, currentX, currentY;
+        var dom = document.querySelector(selector);
+        dom.onmousedown = function(event) {
+            flag = true;
+            startX = event.clientX;
+            startY = event.clientY;
+            divX = dom.style.left || dom.offsetLeft;
+            divY = dom.style.top || dom.offsetTop;
+        };
+        document.onmouseup = function(event) {
+            flag = false;
+        };
+        document.onmousemove = function(event) {
+            currentX = event.clientX;
+            currentY = event.clientY;
+            offsetX = currentX - startX;
+            offsetY = currentY - startY;
+            if (flag) {
+                console.log(startX + "  " + startY + "   " + currentX + "    " + currentY);
+                dom.style.left = (parseInt(divX) + parseInt(offsetX)) + "px";
+                dom.style.top = (parseInt(divY) + parseInt(offsetY)) + "px";
+                cb(parseInt(divX) + offsetX, parseInt(divY) + offsetY);
+            }
+        }
+    }
+
+    //创建可移动的div去碰撞固定位置的div
+    createMoveDiv(".demo1-rect1",function(x1, y1) {
+        var w1 = 40;
+        var h1 = 60;
+        var x2 = 200;
+        var y2 = 20;
+        var w2 = 40;
+        var h2 = 40;
+        var boolean = rectTest(x1, y1, w1, h1, x2, y2, w2, h2);
+        console.log(boolean + "  " + x1 + "  " + y1);
+        if (boolean) {
+            flag = false;
+            alert("你碰到我了！");
+        }
+    });
+
+    /**
+     * 两个矩形之间的碰撞检测方法
+     * @param  {[type]} x1 矩形1的x坐标
+     * @param  {[type]} y1 矩形1的y坐标
+     * @param  {[type]} w1 矩形1的宽度
+     * @param  {[type]} h1 矩形1的高度
+     * @param  {[type]} x2 矩形2的x坐标
+     * @param  {[type]} y2 矩形2的y坐标
+     * @param  {[type]} w2 矩形2的宽度
+     * @param  {[type]} h2 矩形2的高度
+     * @return {[type]}    [description]
+     */
+    function rectTest(x1, y1, w1, h1, x2, y2, w2, h2) {
+        if (x1 > x2 && x1 > x2 + w2) {
+            console.log("1111111")
+            return false;
+        } else if (x2 > x1 && x2 > x1 + w1) {
+            console.log("22222222")
+            return false;
+        } else if (y2 > y1 && y2 > y1 + h1) {
+            console.log("333333333")
+            return false;
+        } else if (y1 > y2 && y1 > y2 + h2) {
+            console.log("444444444")
+            return false;
+        }
+        return true;
+    };
+    </script>
 </body>
 
 </html>
