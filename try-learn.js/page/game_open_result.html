@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>开奖路单demo</title>
+    <link rel="stylesheet" href="http://cdn.code.baidu.com/normalize.css">
+</head>
+<style>
+body {
+    background: #3d658d;
+}
+
+.container {
+    width: 600px;
+    height: 187px;
+    /*border: 1px solid #cccccc;*/
+    margin: 200px;
+    position: relative;
+}
+
+.row {
+    position: absolute;
+    border: 1px solid #cccccc;
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.column-odd {
+    background: #eeeeee;
+}
+.column-even {
+    background: #ffffff;
+}
+.column {
+    position: absolute;
+    width: 30px;
+    height: 187px;
+}
+
+.grid {
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-big {
+    color: red;
+}
+
+.grid-small {
+    color: green;
+}
+</style>
+
+<body>
+    <div class="container">
+    </div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+//路单结构
+var list = [{
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "小" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "小" //大小单双奇偶
+}, {
+    issue: 1, //期号
+    result: "大" //大小单双奇偶
+}]
+
+console.log(list.length)
+
+$(document).ready(function() {
+
+    initTable(20, 6);
+    drawResult();
+
+});
+
+
+//表格初始化
+function initTable(rows, columns) {
+    var table = "";
+    for (var i = 0; i < rows; i++) {
+        if (i % 2 === 0) {
+            table += "<div class='column column-odd column-" + i + "' style='margin-left:" + parseInt(i * 30 ) + "px;'>";
+        } else {
+            table += "<div class='column column-even column-" + i + "' style='margin-left:" + parseInt(i * 30 ) + "px;'>";
+        }
+        for (var j = 0; j < columns; j++) {
+            table += "<div class='row col-" + i + " row-" + j + "' style='margin-top:" + parseInt(j * 30 + j) + "px;'></div>";
+        }
+        table += "</div>";
+    }
+    $(".container").html(table);
+};
+
+
+
+var lastResult = null; //缓存上一次的结果
+var lastCol = 0; //缓存上一列
+var lastRow = 0; //缓存上一行
+var maxSameResult = 0; //连续开一样的结果有多少期
+
+//绘制路单
+function drawResult() {
+    for (var i = 0; i < list.length; i++) {
+        if (lastResult !== null) {
+            if (lastResult.result === list[i].result) { //eg:上一次开大本次也开大
+                if (maxSameResult >= 6) { //跨列显示路单
+                    lastCol = lastCol + 1;
+                    lastRow = 5;
+                } else { //在同一列
+                    lastRow = lastRow + 1; //同一列行数加1
+                }
+                maxSameResult = maxSameResult + 1;
+            } else { //上一次和本次开的结果不一样，在新列上显示路单
+
+                if (maxSameResult > 6) { //跨列显示路单
+                    lastCol = lastCol + 1 - (maxSameResult - 6);
+                    lastRow = 0;
+                    maxSameResult = 0
+                } else {
+                    lastCol = lastCol + 1;
+                    lastRow = 0;
+                }
+            }
+        } else { //第一个格子
+            lastCol = 0;
+            lastRow = 0;
+            maxSameResult = 1;
+        }
+        lastResult = list[i];
+        $(".col-" + lastCol + ".row-" + lastRow + "").html("<div class='grid grid-" + cnToEn(list[i].result) + "'>" + list[i].result + "</div>");
+        console.log(lastCol + "   " + lastRow + "  " + maxSameResult)
+    }
+}
+
+
+
+
+function getNewRequest(data) {
+    if (lastResult !== null) {
+        if (lastResult.result === data.result) { //eg:上一次开大本次也开大
+            // if (maxSameResult >= 6) { //跨列显示路单
+            //     lastCol = lastCol + 1;
+            //     lastRow = 5;
+            // } else { //在同一列
+            //     lastRow = lastRow + 1; //同一列行数加1
+            // }
+            if (checkNextGridIsInsert(lastCol, lastRow + 1)) {
+                lastRow = lastRow + 1; //同一列行数加1
+            } else {
+                lastCol = lastCol + 1;
+                lastRow = lastRow;
+            }
+            maxSameResult = maxSameResult + 1;
+        } else { //上一次和本次开的结果不一样，在新列上显示路单
+
+            if (maxSameResult >= 6) { //跨列显示路单
+                lastCol = lastCol - (maxSameResult - 6);
+                lastRow = 0;
+                maxSameResult = 0
+            } else {
+                lastCol = lastCol + 1;
+                lastRow = 0;
+            }
+        }
+    } else { //第一个格子
+        lastCol = 0;
+        lastRow = 0;
+        maxSameResult = 1;
+    }
+    lastResult = data;
+    $(".col-" + lastCol + ".row-" + lastRow + "").html("<div class='grid grid-" + cnToEn(data.result) + "'>" + data.result + "</div>");
+    console.log(lastCol + "   " + lastRow + "  " + maxSameResult)
+}
+
+
+
+
+
+
+//检查指定格子是否能插入数据
+function checkNextGridIsInsert(col, row) {
+    var html = $(".col-" + col + ".row-" + row + "").html();
+    console.log(html)
+    if (html === "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function cnToEn(str) {
+    var enArr = {
+        "大": "big",
+        "小": "small"
+    };
+    return enArr[str];
+}
+</script>
+
+</html>
