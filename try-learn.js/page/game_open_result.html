@@ -26,14 +26,14 @@ body {
     height: 30px;
 }
 
-
-
 .column-odd {
     background: #eeeeee;
 }
+
 .column-even {
     background: #ffffff;
 }
+
 .column {
     position: absolute;
     width: 30px;
@@ -119,9 +119,9 @@ function initTable(rows, columns) {
     var table = "";
     for (var i = 0; i < rows; i++) {
         if (i % 2 === 0) {
-            table += "<div class='column column-odd column-" + i + "' style='margin-left:" + parseInt(i * 30 ) + "px;'>";
+            table += "<div class='column column-odd column-" + i + "' style='margin-left:" + parseInt(i * 30) + "px;'>";
         } else {
-            table += "<div class='column column-even column-" + i + "' style='margin-left:" + parseInt(i * 30 ) + "px;'>";
+            table += "<div class='column column-even column-" + i + "' style='margin-left:" + parseInt(i * 30) + "px;'>";
         }
         for (var j = 0; j < columns; j++) {
             table += "<div class='row col-" + i + " row-" + j + "' style='margin-top:" + parseInt(j * 30 + j) + "px;'></div>";
@@ -137,6 +137,8 @@ var lastResult = null; //缓存上一次的结果
 var lastCol = 0; //缓存上一列
 var lastRow = 0; //缓存上一行
 var maxSameResult = 0; //连续开一样的结果有多少期
+var turnCol = 0; //记录长注单拐弯时候的列值
+var turnRow = 0; //记录长注单拐弯时候的行
 
 //绘制路单
 function drawResult() {
@@ -184,22 +186,28 @@ function getNewRequest(data) {
             // } else { //在同一列
             //     lastRow = lastRow + 1; //同一列行数加1
             // }
-            if (checkNextGridIsInsert(lastCol, lastRow + 1)) {
+            if (checkNextGridIsInsert(lastCol, lastRow + 1) && !turnCol) {
                 lastRow = lastRow + 1; //同一列行数加1
             } else {
                 lastCol = lastCol + 1;
                 lastRow = lastRow;
+                if (!turnCol || turnRow !== lastRow) { //路单拐点变化
+                    turnCol = lastCol;
+                    turnRow = lastRow;
+                }
             }
             maxSameResult = maxSameResult + 1;
         } else { //上一次和本次开的结果不一样，在新列上显示路单
 
-            if (maxSameResult >= 6) { //跨列显示路单
-                lastCol = lastCol - (maxSameResult - 6);
+            if (turnCol) { //跨列显示路单,路单存在拐点
+                lastCol = turnCol;
                 lastRow = 0;
-                maxSameResult = 0
+                maxSameResult = 0;
+                turnCol = "";
             } else {
                 lastCol = lastCol + 1;
                 lastRow = 0;
+
             }
         }
     } else { //第一个格子
@@ -209,11 +217,8 @@ function getNewRequest(data) {
     }
     lastResult = data;
     $(".col-" + lastCol + ".row-" + lastRow + "").html("<div class='grid grid-" + cnToEn(data.result) + "'>" + data.result + "</div>");
-    console.log(lastCol + "   " + lastRow + "  " + maxSameResult)
+    console.log("列：" + lastCol + "   行：" + lastRow + "  point：" + turnCol + "         " + maxSameResult)
 }
-
-
-
 
 
 
