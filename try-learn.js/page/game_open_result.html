@@ -8,24 +8,27 @@
     <link rel="stylesheet" href="http://cdn.code.baidu.com/normalize.css">
 </head>
 <style>
+html,
 body {
     background: #3d658d;
+    height: 100%;
 }
 
 .container {
     width: 7.5rem;
-    height: 1.8rem;
+    height: 100%;
     /*border: 1px solid #cccccc;*/
     margin: 0 auto;
     position: relative;
-    background: red;
+    /*background: red;*/
+    padding: 0.2rem;
 }
 
 .row {
     position: absolute;
     border: 1px solid #cccccc;
-    width: 0.3rem;
-    height: 0.3rem;
+    width: 0.38rem;
+    height: 0.38rem;
 }
 
 .column-odd {
@@ -38,15 +41,16 @@ body {
 
 .column {
     position: absolute;
-    width: 0.3rem;
-    height: 1.8rem;
+    width: 0.38rem;
+    /*height: 1.8rem;*/
 }
 
 .grid {
     text-align: center;
-    line-height: 0.3rem;
+    line-height: 0.38rem;
     width: 100%;
     height: 100%;
+    font-size: 0.2rem;
 }
 
 .grid-big {
@@ -58,16 +62,17 @@ body {
 }
 
 .grid-block {
-    width: 100%;
-    height: 1.8rem;
+    width: 7.1rem;
+    height: 2.28rem;
     /*background-color:blue;*/
     display: flex;
     flex-direction: row;
 }
 
 .grid-block .tab {
-    width: 1.19rem;
+    width: 1.03rem;
     height: 100%;
+    background: pink;
 }
 
 .grid-block .tab-content {
@@ -92,9 +97,10 @@ body {
     width: 100%;
     /*height: 0.59rem;*/
     display: inline-block;
-    line-height: 0.59rem;
+    line-height: 0.75rem;
     text-align: center;
     border-bottom: 1px solid #eeeeee;
+    box-sizing: border-box;
 }
 
 
@@ -143,7 +149,7 @@ body {
         <div class="grid-block">
             <div class="tab">
                 <ul>
-                    <li value="1">1</li>
+                    <li value="1" retina-border rt-bd-all>1</li>
                     <li value="2">2</li>
                     <li value="3">3</li>
                 </ul>
@@ -213,7 +219,7 @@ $(document).ready(function() {
     document.querySelector("html").style.fontSize = zoom * 100 + "px";
     document.querySelector("html").style.height = "100%";
 
-    initTable(21, 6);
+    initTable(16, 6);
     drawResult();
 
 
@@ -243,8 +249,8 @@ $(document).ready(function() {
 
         // console.log(e.currentTarget)   
         console.log(moveEndY / zoom1 + "rem")
-        var arcWith = parseInt(1.16 * zoom1);
-        var acrHeight = parseInt(1.87 * zoom1);
+        var arcWith = parseInt(1.03 * zoom1);
+        var acrHeight = parseInt(2.28 * zoom1);
         console.log(arcWith + "   " + acrHeight + "  " + moveEndY);
         var index = 0;
         if (0 <= moveEndY && moveEndY < acrHeight / 3) {
@@ -277,9 +283,9 @@ function initTable(rows, columns) {
     var table = "";
     for (var i = 0; i < rows; i++) {
         if (i % 2 === 0) {
-            table += "<div class='column column-odd column-" + i + "' style='margin-left:" + parseFloat(i * 0.3) + "rem;'>";
+            table += "<div class='column column-odd column-" + i + "' style='margin-left:" + parseFloat(i * 0.38) + "rem;'>";
         } else {
-            table += "<div class='column column-even column-" + i + "' style='margin-left:" + parseFloat(i * 0.3) + "rem;'>";
+            table += "<div class='column column-even column-" + i + "' style='margin-left:" + parseFloat(i * 0.38) + "rem;'>";
         }
         for (var j = 0; j < columns; j++) {
             table += "<div class='row col-" + i + " row-" + j + " retina-border rt-bd-all' style='margin-top:" + parseFloat(j * 0.3 * 0 + 0 * j * 0.01) + "rem;'></div>";
@@ -296,7 +302,7 @@ var lastRow = 0; //缓存上一行
 var maxSameResult = 0; //连续开一样的结果有多少期
 var turnCol = 0; //记录长注单拐弯时候的列值
 var turnRow = 0; //记录长注单拐弯时候的行
-
+var colWidth = 0.38; //列的宽度,单位rem
 //绘制路单
 function drawResult() {
     for (var i = 0; i < list.length; i++) {
@@ -346,8 +352,26 @@ function getNewRequest(data) {
             if (checkNextGridIsInsert(lastCol, lastRow + 1) && !turnCol) {
                 lastRow = lastRow + 1; //同一列行数加1
             } else {
-                lastCol = lastCol + 1;
-                lastRow = lastRow;
+                console.log("======")
+                console.log(checkNextGridIsInsert(lastCol + 1, lastRow) + " " + (lastCol + 1) + "   " + lastRow);
+
+                if (checkNextGridIsInsert(lastCol + 1, lastRow)) { //同行的下一列可以插入数据，水平向右
+                    lastCol = lastCol + 1;
+                    lastRow = lastRow;
+                } else { //不能插入
+                    //创建新的一列
+                    //删除第一列
+                    //平移所有列
+                    createNewColumn(maxColumn);
+
+                }
+
+                if ($(".column:last").attr("class")) {
+                    maxColumn = $(".column:last").attr("class").split(" ")[2].replace("column-", "");
+                }
+
+                console.log()
+
                 if (!turnCol || turnRow !== lastRow) { //路单拐点变化
                     turnCol = lastCol;
                     turnRow = lastRow;
@@ -356,7 +380,7 @@ function getNewRequest(data) {
             maxSameResult = maxSameResult + 1;
         } else { //上一次和本次开的结果不一样，在新列上显示路单
 
-            if (turnCol) { //跨列显示路单,路单存在拐点
+            if (turnCol) { //路单存在拐点,在拐点的列的第一个位置插入新的结果
                 lastCol = turnCol;
                 lastRow = 0;
                 maxSameResult = 0;
@@ -378,11 +402,34 @@ function getNewRequest(data) {
 }
 
 
+var indexdasdas = 1;
+//创建新列
+function createNewColumn(colNumber) {
+    var isOddOrEven = colNumber % 2 == 0 ? "even" : "odd";
+    var marginLeft = colNumber * colWidth;
+    colNumber = parseInt(colNumber) + 1;
+    var newColumnHtml = '<div class="column column-' + isOddOrEven + ' column-' + colNumber + '" style="margin-left:' + marginLeft + 'rem;">\
+    <div class="row col-9 row-0 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    <div class="row col-9 row-1 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    <div class="row col-9 row-2 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    <div class="row col-9 row-3 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    <div class="row col-9 row-4 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    <div class="row col-9 row-5 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
+    </div>';
+    $("#content1").append(newColumnHtml);
+
+    $.each($(".column"), function(i, n) {
+        console.log($(this).css("margin-left", (i - indexdasdas) * colWidth + "rem"));
+
+    });
+    indexdasdas = indexdasdas + 1;
+}
+
+
 
 //检查指定格子是否能插入数据
 function checkNextGridIsInsert(col, row) {
     var html = $(".col-" + col + ".row-" + row + "").html();
-    console.log(html)
     if (html === "") {
         return true;
     } else {
