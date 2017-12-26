@@ -1,0 +1,61 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+<style type="text/css">
+body{
+	margin:0px;
+}
+
+#div{
+	position:absolute;
+	width:50%;
+    height:100%;
+	background-color:#ebebeb;
+	margin-left: -49%;
+
+}
+#divNav{
+	position:absolute;
+	width: 200px;
+	height: 200px;
+	right: 0px;
+	background-color: #00b98d;
+	line-height: 200px;
+	text-align: center;
+	color: #eeeeee;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
+<script type="text/javascript">
+
+	       function clicks(){       
+		       var div=document.getElementById('div');
+
+ 			   div.style.marginLeft=(parseInt(document.body.offsetWidth)*49/-100)+"px";
+ 
+			   var timers= setInterval(function(){
+					 div.style.marginLeft=(parseInt(div.style.marginLeft)+66)+"px";
+					 if(parseInt(div.style.marginLeft)>=0){
+					  div.style.marginLeft="0px";
+					  clearInterval(timers);
+					}
+
+			    },10);
+
+
+	       }
+
+</script>
+</head>
+<body>
+	
+<div id="div">
+<div id="divNav" onclick="clicks()">点击</div>
+</div>
+</body>
+</html>

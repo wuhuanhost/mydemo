@@ -340,8 +340,6 @@ var list4 = [{
   result: "大" //大小单双奇偶
 }]
 
-
-
 var zoom1 = 0;
 $(document).ready(function () {
   var width1 = document.documentElement.clientWidth;

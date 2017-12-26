@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh_CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+<script type="text/javascript"  src="wind-core-0.7.0.min.js"></script>
+<script type="text/javascript"  src="wind-compiler-0.7.2.js"></script>
+<script type="text/javascript"  src="wind-builderbase-0.7.0.min.js"></script>
+<script type="text/javascript"  src="wind-async-0.7.1.min.js"></script>
+<script type="text/javascript"  src="wind-promise-0.7.0.min.js"></script>
+<script type="text/javascript">
+
+
+/**var Task =  Wind.Async.Task;
+
+var A = eval(Wind.compile("async", function () {
+    console.log("Start A");
+    $await(Wind.Async.sleep(3000));
+    console.log("Finish A");
+}));
+
+var B = eval(Wind.compile("async", function () {
+    console.log("Start B");
+    $await(Wind.Async.sleep(5000));
+    console.log("Finish B");
+}));
+
+var C = eval(Wind.compile("async", function () {
+    console.log("Start C");
+    console.log("Finish C");
+}));
+
+var task = eval(Wind.compile("async", function () {
+    $await(Task.whenAll(A(),B()));
+	$await(C());
+	console.log('-------------------------')
+	$await(A());
+	$await(B());
+    $await(C());
+
+}));
+
+task().start();
+
+**/
+
+
+
+function f1(callback){
+
+	setTimeout (function () {
+
+		console.log("F1开始执行");
+
+		for(var i=0;i<1000;i++){
+		 
+			console.log(i); 
+		
+		}
+		console.log("F1执行结束"); 
+
+		callback();
+
+	},5000);
+
+
+console.log("a结束执行");
+
+
+}
+
+
+function f2(){
+
+   console.log("F2开始执行");
+   console.log(10+2);
+   console.log("F2执行结束");
+
+}
+
+
+f1(f2);
+
+
+
+
+
+
+
+
+
+//wind.js使用参考：http://blog.fens.me/nodejs-async-windjs/
+
+</script>
+</head>
+<body>
+</html>

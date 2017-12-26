@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh_CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+<script type="text/javascript"  src="wind-core-0.7.0.min.js"></script>
+<script type="text/javascript"  src="wind-compiler-0.7.2.js"></script>
+<script type="text/javascript"  src="wind-builderbase-0.7.0.min.js"></script>
+<script type="text/javascript"  src="wind-async-0.7.1.min.js"></script>
+<script type="text/javascript"  src="wind-promise-0.7.0.min.js"></script>
+
+</head>
+<body>
+<canvas id="myCanvas" width="480" height="300" style="border:1px solid #c3c3c3;"> 
+</body>
+
+<script type="text/javascript">
+
+
+var c = document.getElementById("myCanvas"); 
+    var cxt = c.getContext("2d"); 
+	cxt.strokeStyle="red";
+    var x = 150; 
+    var y = 150; 
+    var r = 100; 
+    var drawAsync = eval(Wind.compile("async", function () { 
+        cxt.moveTo(x - r, y); 
+        for (var i = x - r; i < x + r + 1; i++) { 
+            $await(Wind.Async.sleep(10)); 
+            var tempY = Math.pow(r * r - (x - i) * (x - i), 1 / 2); 
+            cxt.lineTo(i, y + tempY); 
+            cxt.stroke(); 
+        } 
+        cxt.moveTo(x - r, y); 
+        for (var i = x - r; i < x + r + 1; i++) { 
+            $await(Wind.Async.sleep(10)); 
+            var tempY = Math.pow(r * r - (x - i) * (x - i), 1 / 2); 
+            cxt.lineTo(i, y - tempY); 
+            cxt.stroke(); 
+        }      
+    })); 
+    drawAsync().start(); 
+
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh_CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+</head>
+<body>
+	<div id="output"></div>
+
+<button onclick="updateSync ()">Run Sync</button>
+
+<button onclick="updateAsync ()">Run Async</button>
+
+<script>
+
+function updateSync() {
+    for (var i = 0; i < 1000; i++) {
+        document.getElementById('output').innerHTML = i;
+    }
+}
+
+function updateAsync() {
+    var i = 0;
+
+    function updateLater() {
+        document.getElementById('output').innerHTML = (i++);
+        if (i < 1000) {
+            setTimeout(updateLater, 10);
+        }
+    }
+
+    updateLater();
+}
+</script>
+</body>
+</html>

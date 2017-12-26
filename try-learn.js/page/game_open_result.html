@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>开奖路单demo</title>
     <link rel="stylesheet" href="http://cdn.code.baidu.com/normalize.css">
+    <link rel="stylesheet" href="./game.css">
 </head>
 <style>
 html,
@@ -142,6 +143,18 @@ body {
 .row:last-child.rt-bd-all:after {
     border-bottom-width: 1px !important;
 }
+
+table td {
+    width: 0.34rem;
+    height: 0.34rem;
+}
+
+table,
+table th,
+table td {
+    border: 1px solid #999;
+    border-collapse: collapse;
+}
 </style>
 
 <body>
@@ -158,6 +171,21 @@ body {
                 <div class="content" id="content1" style="display:block;"></div>
                 <div class="content" id="content2">1231</div>
                 <div class="content" id="content3">12323</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="grid-block">
+            <div class="tab">
+                <ul>
+                    <li value="11" retina-border rt-bd-all>1</li>
+                    <li value="22">2</li>
+                    <li value="33">3</li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="content" id="content11" style="display:block;"></div>
+                <div class="content" id="content22">1231</div>
+                <div class="content" id="content33">12323</div>
             </div>
         </div>
     </div>
@@ -270,11 +298,6 @@ $(document).ready(function() {
 
     })
 
-
-
-
-
-
 });
 
 
@@ -296,81 +319,148 @@ function initTable(rows, columns) {
 };
 
 
+
+//获取数组最后16个元素
+function getArr() {
+    var _arr = [];
+    for (var k = 0; k < arr.length; k++) {
+        var _col = [];
+        var dasdsa=arr[k].length-16;
+        for (var m = 0; m <arr[k].length; m++) {
+            if (m>=dasdsa) {
+                _col.push(arr[k][m]);
+            }
+        }
+        _arr.push(_col)
+    }
+    return _arr;
+}
+
+
+
+function initTable123() {
+    var _arr = getArr();
+    console.log(_arr)
+    var table = "<table>";
+    for (var i = 0; i < _arr.length; i++) {
+        table += "<tr>";
+        for (var j = 0; j < _arr[i].length; j++) {
+            if (_arr[i][j].result !== undefined) {
+                table += "<td>" + _arr[i][j].result + "</td>";
+            } else {
+                table += "<td></td>";
+            }
+        }
+        table += "<tr>";
+    }
+    table += "</table>"
+    $("#content11").html(table);
+};
+
+
+
+
 var lastResult = null; //缓存上一次的结果
 var lastCol = 0; //缓存上一列
 var lastRow = 0; //缓存上一行
 var maxSameResult = 0; //连续开一样的结果有多少期
 var turnCol = 0; //记录长注单拐弯时候的列值
 var turnRow = 0; //记录长注单拐弯时候的行
+var maxCol = 15; //最大列为16（0-15）
+var maxRow = 5; //最大行为6（0-5）
 var colWidth = 0.38; //列的宽度,单位rem
+var arr = []; //路单坐标数据
+
+
+//在内存中绘制表格
+function drawTableInMemory() {
+    for (var i = 0; i <= maxRow; i++) {
+        var rows = [];
+        for (var j = 0; j <= maxCol; j++) {
+            rows.push({
+                row: i,
+                col: j
+            });
+        }
+        arr.push(rows);
+    }
+    console.log(arr);
+}
+
+
+drawTableInMemory();
+
 //绘制路单
 function drawResult() {
     for (var i = 0; i < list.length; i++) {
-        if (lastResult !== null) {
-            if (lastResult.result === list[i].result) { //eg:上一次开大本次也开大
-                if (maxSameResult >= 6) { //跨列显示路单
-                    lastCol = lastCol + 1;
-                    lastRow = 5;
-                } else { //在同一列
-                    lastRow = lastRow + 1; //同一列行数加1
-                }
-                maxSameResult = maxSameResult + 1;
-            } else { //上一次和本次开的结果不一样，在新列上显示路单
-
-                if (maxSameResult > 6) { //跨列显示路单
-                    lastCol = lastCol + 1 - (maxSameResult - 6);
-                    lastRow = 0;
-                    maxSameResult = 0
-                } else {
-                    lastCol = lastCol + 1;
-                    lastRow = 0;
-                }
-            }
-        } else { //第一个格子
-            lastCol = 0;
-            lastRow = 0;
-            maxSameResult = 1;
-        }
-        lastResult = list[i];
-        $(".col-" + lastCol + ".row-" + lastRow + "").html("<div class='grid grid-" + cnToEn(list[i].result) + "'>" + list[i].result + "</div>");
-        console.log(lastCol + "   " + lastRow + "  " + maxSameResult)
+        console.log(list[i])
+        newRequest(list[i]);
     }
 }
 
 
 
+//创建新列
+function createNewColumn(_arr, currentCol, maxCol, data) {
+    console.log("???????????????????????" + currentCol + "  " + maxCol)
+        // console.log(_arr)
+    for (var i = 0; i < _arr.length; i++) {
+        _arr[i].push({
+            row: i,
+            col: currentCol + 1
+        });
+    }
+    console.log(_arr)
+    return _arr;
+}
 
-function getNewRequest(data) {
+
+
+//检查指定格子是否能插入数据
+function checkNextGridIsInsertInArr(row, col) {
+    var flag = false;
+    var object;
+    try {
+        object = arr[row][col];
+        flag = true;
+    } catch (e) {
+        console.log("err")
+        flag = false;
+    }
+    console.log(object);
+    console.log("row:=" + row + "   col:=" + col + "  该位置可以插入数据>>>:" + flag);
+    if (flag && object != undefined&&object.result===undefined) {
+        return true;
+    } else {
+        return false
+    }
+
+}
+
+
+function newRequest(data) {
     if (lastResult !== null) {
         if (lastResult.result === data.result) { //eg:上一次开大本次也开大
-            // if (maxSameResult >= 6) { //跨列显示路单
-            //     lastCol = lastCol + 1;
-            //     lastRow = 5;
-            // } else { //在同一列
-            //     lastRow = lastRow + 1; //同一列行数加1
-            // }
-            if (checkNextGridIsInsert(lastCol, lastRow + 1) && !turnCol) {
+            if (checkNextGridIsInsertInArr(lastRow + 1, lastCol) && !turnCol) {
                 lastRow = lastRow + 1; //同一列行数加1
             } else {
-                console.log("======")
-                console.log(checkNextGridIsInsert(lastCol + 1, lastRow) + " " + (lastCol + 1) + "   " + lastRow);
+                console.log("===========================================")
+                    //console.log(checkNextGridIsInsertInArr(lastRow, lastCol + 1) + " " + (lastCol + 1) + "   " + lastRow);
 
-                if (checkNextGridIsInsert(lastCol + 1, lastRow)) { //同行的下一列可以插入数据，水平向右
+                if (checkNextGridIsInsertInArr(lastRow, lastCol + 1)) { //同行的下一列可以插入数据，水平向右
                     lastCol = lastCol + 1;
                     lastRow = lastRow;
                 } else { //不能插入
                     //创建新的一列
                     //删除第一列
                     //平移所有列
-                    createNewColumn(maxColumn);
+                    console.log("不能插入数据.............")
+                    arr = createNewColumn(arr, lastCol, maxCol, data);
+                    arr[lastRow][lastCol + 1].result = data.result;
+                    lastCol=lastCol+1;
+                    //重新绘制
 
                 }
-
-                if ($(".column:last").attr("class")) {
-                    maxColumn = $(".column:last").attr("class").split(" ")[2].replace("column-", "");
-                }
-
-                console.log()
 
                 if (!turnCol || turnRow !== lastRow) { //路单拐点变化
                     turnCol = lastCol;
@@ -395,47 +485,27 @@ function getNewRequest(data) {
         lastCol = 0;
         lastRow = 0;
         maxSameResult = 1;
-    }
+    }  
+
+
+
+
     lastResult = data;
+    if (checkNextGridIsInsertInArr(lastRow, lastCol)) {
+        arr[lastRow][lastCol].result = data.result;
+    }
+                    initTable123();
     $(".col-" + lastCol + ".row-" + lastRow + "").html("<div class='grid grid-" + cnToEn(data.result) + "'>" + data.result + "</div>");
     console.log("列：" + lastCol + "   行：" + lastRow + "  point：" + turnCol + "         " + maxSameResult)
 }
 
 
-var indexdasdas = 1;
-//创建新列
-function createNewColumn(colNumber) {
-    var isOddOrEven = colNumber % 2 == 0 ? "even" : "odd";
-    var marginLeft = colNumber * colWidth;
-    colNumber = parseInt(colNumber) + 1;
-    var newColumnHtml = '<div class="column column-' + isOddOrEven + ' column-' + colNumber + '" style="margin-left:' + marginLeft + 'rem;">\
-    <div class="row col-9 row-0 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    <div class="row col-9 row-1 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    <div class="row col-9 row-2 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    <div class="row col-9 row-3 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    <div class="row col-9 row-4 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    <div class="row col-9 row-5 retina-border rt-bd-all" style="margin-top:0rem;"></div>\
-    </div>';
-    $("#content1").append(newColumnHtml);
-
-    $.each($(".column"), function(i, n) {
-        console.log($(this).css("margin-left", (i - indexdasdas) * colWidth + "rem"));
-
-    });
-    indexdasdas = indexdasdas + 1;
-}
 
 
 
-//检查指定格子是否能插入数据
-function checkNextGridIsInsert(col, row) {
-    var html = $(".col-" + col + ".row-" + row + "").html();
-    if (html === "") {
-        return true;
-    } else {
-        return false;
-    }
-}
+
+
+
 
 
 

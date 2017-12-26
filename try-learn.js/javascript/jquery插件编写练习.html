@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+<script type="text/javascript" src="jquery1.83.js"></script>
+<script type="text/javascript" src="myJqueryPlugin.js"></script>
+<style type="text/css">
+.evenRowa{background-color:#f0f0f0;}
+.oddRowa{background-color:#ff7d54}
+.activeRowa{background-color:#3ac574;}
+</style>
+<script type="text/javascript">
+	$().ready(function(){
+		$(".table_solid").myJqueryPlugin({
+		
+		'evenRowClass':'evenRowa',
+		'oddRowClass':'oddRowa',
+		'activeRowClass':'activeRowa'	
+		
+		});
+	})
+
+var abc=function(){
+
+  this.a='aaa';
+  this.b='bbb';
+  this.c={ 
+	    'color': 'red',
+        'fontSize': '12px',
+        'textDecoration':'none'
+  };
+  /**
+  **对象中直接定义方法
+  **/
+  this.d=function(){
+    alert(this.a+"     "+this.b+"      "+this.c.color)
+  }
+}
+
+/**
+**通过prototype为对象定义多个方法
+**/
+abc.prototype={
+  beautiful:function(){
+    alert("进入美化的方法！！！")
+  },
+  error:function(){
+	alert("进入异常的方法");
+  }
+};
+
+/**
+**通过prototype为对象定义单个方法
+**/
+abc.prototype.success=function(){
+    alert("进入成功的方法");
+
+}
+
+
+var test=new abc();
+test.d();//调用d方法
+test.success();//调用success方法
+
+</script>
+</head>
+<body>
+	
+
+	<table border="1px" class="table_solid" width="100%" >
+		<tr>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>3</td>
+		</tr>
+	</table>
+</body>
+</html>
