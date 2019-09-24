@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Eagle+Lake|Rationale);
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #app {
+                width: 300px;
+                height: 300px;
+                border: 1px solid #eee;
+                display: flex;
+                flex-direction: column;
+                margin: 200px auto;
+            }
+            #app .top {
+                height: 100px;
+                padding: 0 20px;
+                font-weight: 600;
+                /* background: red; */
+            }
+
+            #app .top .title {
+                margin-bottom: 0;
+                margin-block-end: 0.4em !important;
+                font-size: 18px;
+            }
+
+            #app .top .icon {
+                margin-bottom: 0;
+                margin-block-start: 0.4em !important;
+                font-size: 15px;
+                color: #6e6e6e;
+                font-weight: 200;
+                font-size: 14px;
+            }
+            #app .middle {
+                height: 140px;
+                /* background: pink; */
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            #app .middle .clock {
+                height: 100px;
+                width: 260px;
+                border: 2px solid #6e6e6e;
+                line-height: 100px;
+                text-align: center;
+                font-size: 49px;
+                border-radius: 2px;
+                font-family: "Rationale", sans-serif;
+            }
+
+            #app .bottom {
+                flex: 1;
+
+                /* background: blue; */
+            }
+            #app .button {
+                width: 90px;
+                height: 30px;
+                background: #3e3e3e;
+                border-radius: 5px;
+                color: #eee;
+                text-align: center;
+                line-height: 30px;
+                margin: 10px auto;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="top">
+                <p class="title">今日完成番茄数量<span class="today-count"></span></p>
+                <p class="icon"></p>
+            </div>
+            <div class="middle">
+                <div class="clock" id="clock">
+                    25:00
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="button" id="start-reset-btn">开 始</div>
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var timer = null;
+                var minute = 1;
+                $("#app #clock").text(minute + ":" + "00");
+                drawTodayPomodoro();
+                //倒计时方法
+                function timerFun(action, cb) {
+                    var second = minute * 60;
+                    if (timer === null) {
+                        timer = setInterval(function() {
+                            second = second - 1;
+                            var _minute = parseInt(second / 60);
+                            var _second = second % 60;
+                            if (second <= 0) {
+                                cb("done");
+                            } else {
+                                console.log(_minute);
+                                cb((_minute >= 10 ? _minute : "0" + _minute) + ":" + (_second >= 10 ? _second : "0" + _second));
+                            }
+                        }, 1000);
+                    }
+                    if (action === "clear") {
+                        clearInterval(timer);
+                        timer = null;
+                        cb(minute + ":" + "00");
+                    }
+                }
+
+                //开始、重置按钮事件绑定
+                $("#start-reset-btn").click(function() {
+                    var btnText = $(this).text();
+                    var _this = this;
+                    if (btnText === "开 始") {
+                        $(this).text("重 置");
+                        timerFun("", function(time) {
+                            if (time === "done") {
+                                clearInterval(timer);
+                                timer = null;
+                                $(_this).text("开 始");
+                                time = minute + ":" + "00";
+                                var todayCount = parseInt(localStorage.getItem("today-count") || 0);
+                                todayCount++;
+                                localStorage.setItem("today-count", todayCount);
+                                drawTodayPomodoro();
+                                alert("恭喜你！你已经完成了一个番茄钟了，休息一下吧！");
+                            }
+                            $("#app #clock").text(time);
+                        });
+                    } else {
+                        $(this).text("开 始");
+                        timerFun("clear", function(time) {
+                            $("#app #clock").text(time);
+                        });
+                    }
+                });
+
+                //渲染今日完成番茄数量
+                function drawTodayPomodoro() {
+                    var todayCount = parseInt(localStorage.getItem("today-count") || 0);
+                    var pomodoroStr = "";
+                    for (var i = 0; i < todayCount; i++) {
+                        pomodoroStr += "🍅";
+                    }
+                    if (todayCount <= 0) {
+                        pomodoroStr = "今日完成0个番茄，加油！";
+                    } else {
+                        $("#app .top .today-count").text("(" + todayCount + ")");
+                    }
+                    $("#app .top .icon").text(pomodoroStr);
+                }
+            });
+        </script>
+    </body>
+</html>
